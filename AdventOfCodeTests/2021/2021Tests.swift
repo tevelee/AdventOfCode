@@ -38,10 +38,10 @@ final class AoC_2021_Tests: XCTestCase {
     func test_day3() async throws {
         let problem = try AoC_2021_Day3(Resources.url(for: "2021_day3"))
         let part1 = try await problem.solvePart1()
-        XCTAssertEqual(part1, 0)
+        XCTAssertEqual(part1, 3277364)
         print("Day3 / Part1 solution: \(part1)")
         let part2 = try await problem.solvePart2()
-        XCTAssertEqual(part2, 0)
+        XCTAssertEqual(part2, 5736383)
         print("Day3 / Part2 solution: \(part2)")
     }
 }
