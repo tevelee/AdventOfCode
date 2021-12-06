@@ -15,39 +15,25 @@ public final class AoC_2021_Day6 {
         try solve(until: 256)
     }
 
-    private func solve(until upperBound: Int) throws -> Int {
-        var numbers = try String(contentsOf: inputFileURL)
+    private func solve(until days: Int) throws -> Int {
+        let numbers = try String(contentsOf: inputFileURL)
             .trimmingCharacters(in: .newlines)
             .split(separator: ",")
             .map(String.init)
             .compactMap(Int.init)
-        //let count = numbers.count
-        var index = 0
-        while index < numbers.count {
-            defer { index += 1 }
-            let number = numbers[index]
-            if number <= upperBound {
-                let initial = number + 1
-                let numberOfIterations = Int((upperBound - initial) / 7)
-                let newColumns = (0 ... numberOfIterations).map { initial + $0 * 7 + 8 }.filter { $0 - upperBound <= 8 }
-                numbers.append(contentsOf: newColumns)
+        var births: [Int: Int] = [:]
+        for number in numbers {
+            for day in stride(from: number, to: days, by: 7) {
+                births[day, default: 0] += 1
             }
         }
-        //debugPrint(numbers: numbers, originalCount: count, upperBound: upperBound)
-        return numbers.count
-    }
-
-    private func debugPrint(numbers: [Int], originalCount count: Int, upperBound: Int) {
-        let numbersToPrint = numbers[..<count] + numbers[count...].sorted()
-        for day in 0 ... upperBound {
-            print(String(day).padding(toLength: 2, withPad: " ", startingAt: 0), " | ", numbersToPrint
-                .map { number -> Int in
-                    if number > day { return number - day }
-                    let mod = (number - day) % 7
-                    return mod < 0 ? mod + 7 : mod
-                }
-                .map { String($0).padding(toLength: 2, withPad: " ", startingAt: 0) }
-                .joined(separator: " "))
+        var count = numbers.count
+        for day in 1 ..< days {
+            count += births[day, default: 0]
+            for followingDay in stride(from: day + 9, to: days, by: 7) {
+                births[followingDay, default: 0] += births[day, default: 0]
+            }
         }
+        return count
     }
 }

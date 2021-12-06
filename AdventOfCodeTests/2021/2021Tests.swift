@@ -71,7 +71,7 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part1, 352195)
         print("Day6 / Part1 solution: \(part1)")
         let part2 = try await problem.solvePart2()
-        XCTAssertEqual(part2, 0)
+        XCTAssertEqual(part2, 1600306001288)
         print("Day6 / Part2 solution: \(part2)")
     }
 }
