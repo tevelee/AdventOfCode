@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F6313FE275D4FD1008346AA /* AoC_2021_Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6313FD275D4FD1008346AA /* AoC_2021_Day4.swift */; };
+		8F631400275D8326008346AA /* AoC_2021_Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6313FF275D8326008346AA /* AoC_2021_Day5.swift */; };
 		8F9A09482757C9F300FFB165 /* Parsing in Frameworks */ = {isa = PBXBuildFile; productRef = 8F9A09472757C9F300FFB165 /* Parsing */; };
 		8F9A0A252759092B00FFB165 /* AoC_2020_Day14.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A0A082759092B00FFB165 /* AoC_2020_Day14.swift */; };
 		8F9A0A262759092B00FFB165 /* AoC_2020_Day16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9A0A092759092B00FFB165 /* AoC_2020_Day16.swift */; };
@@ -114,6 +115,7 @@
 
 /* Begin PBXFileReference section */
 		8F6313FD275D4FD1008346AA /* AoC_2021_Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day4.swift; sourceTree = "<group>"; };
+		8F6313FF275D8326008346AA /* AoC_2021_Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day5.swift; sourceTree = "<group>"; };
 		8F9A0A082759092B00FFB165 /* AoC_2020_Day14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AoC_2020_Day14.swift; sourceTree = "<group>"; };
 		8F9A0A092759092B00FFB165 /* AoC_2020_Day16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AoC_2020_Day16.swift; sourceTree = "<group>"; };
 		8F9A0A0A2759092B00FFB165 /* AoC_2020_Day8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AoC_2020_Day8.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				8F9A0A242759092B00FFB165 /* AoC_2021_Day2.swift */,
 				8F9A0A222759092B00FFB165 /* AoC_2021_Day3.swift */,
 				8F6313FD275D4FD1008346AA /* AoC_2021_Day4.swift */,
+				8F6313FF275D8326008346AA /* AoC_2021_Day5.swift */,
 			);
 			path = 2021;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				8F9A0A302759092B00FFB165 /* AoC_2020_Day5.swift in Sources */,
 				8F9A0A2D2759092B00FFB165 /* AoC_2020_Day9.swift in Sources */,
 				8F9A0A392759092B00FFB165 /* AoC_2020_Day23.swift in Sources */,
+				8F631400275D8326008346AA /* AoC_2021_Day5.swift in Sources */,
 				8F9A0A3C2759092B00FFB165 /* AoC_2020_Day18.swift in Sources */,
 				8F9A0A3D2759092B00FFB165 /* AoC_2020_Day2.swift in Sources */,
 				8F9A0A2B2759092B00FFB165 /* AoC_2020_Day15.swift in Sources */,
