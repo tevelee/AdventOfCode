@@ -2,10 +2,14 @@ import Foundation
 import Parsing
 
 public final class AoC_2021_Day5 {
-    let inputFileURL: URL
+    let lines: Lines
 
     public init(_ inputFileURL: URL) {
-        self.inputFileURL = inputFileURL
+        lines = inputFileURL.lines.eraseToAnyAsyncSequence()
+    }
+
+    public init(_ input: String) {
+        lines = input.lines.async.eraseToAnyAsyncSequence()
     }
 
     struct Point: Hashable {
@@ -52,7 +56,7 @@ public final class AoC_2021_Day5 {
 
     private func solve(shouldConsiderDiagonal: Bool) async throws -> Int {
         var touchPoints: [Point: Int] = [:]
-        for try await inputLine in inputFileURL.lines {
+        for try await inputLine in lines {
             let segments = inputLine.split(separator: " ").map { $0.split(separator: ",").map(String.init).compactMap(Int.init) }
             let line = Line(p1: .init(x: segments[0][0], y: segments[0][1]),
                             p2: .init(x: segments[2][0], y: segments[2][1]))

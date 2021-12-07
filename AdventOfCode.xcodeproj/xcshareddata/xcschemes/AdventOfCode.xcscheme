@@ -37,44 +37,6 @@
                BlueprintName = "AdventOfCodeTests"
                ReferencedContainer = "container:AdventOfCode.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day1()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day2()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day3()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day4()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day5()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2020_Tests/test_day6()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day1()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day2()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day3()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day4()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day5()">
-               </Test>
-               <Test
-                  Identifier = "AoC_2021_Tests/test_day6()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

@@ -19,7 +19,7 @@ public final class AoC_2020_Day4 {
     public func solve(validate: @escaping ([String: String]) -> Bool) async throws -> Int {
         var count = 0
         var passport: [String: String] = [:]
-        for line in try String(contentsOf: inputFileURL).split(separator: "\n", omittingEmptySubsequences: false) {
+        for line in try String(contentsOf: inputFileURL).lines(includeEmptyLines: true) {
             if line.isEmpty {
                 if validate(passport) {
                     count += 1

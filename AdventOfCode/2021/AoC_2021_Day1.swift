@@ -2,14 +2,18 @@ import Foundation
 import Algorithms
 
 public final class AoC_2021_Day1 {
-    let inputFileURL: URL
+    let lines: Lines
 
     public init(_ inputFileURL: URL) {
-        self.inputFileURL = inputFileURL
+        lines = inputFileURL.lines.eraseToAnyAsyncSequence()
+    }
+
+    public init(_ input: String) {
+        lines = input.lines.async.eraseToAnyAsyncSequence()
     }
 
     public func solvePart1_functional() async throws -> Int {
-        try await inputFileURL.lines
+        try await lines
             .compactMap(Int.init)
             .collect()
             .adjacentPairs()
@@ -22,7 +26,7 @@ public final class AoC_2021_Day1 {
             var count = 0
             var previous: Int?
         }
-        return try await inputFileURL.lines
+        return try await lines
             .compactMap(Int.init)
             .reduce(into: Iteration()) { result, current in
                 if let previous = result.previous, current > previous {
@@ -36,7 +40,7 @@ public final class AoC_2021_Day1 {
     public func solvePart1_imperative() async throws -> Int {
         var previous: Int?
         var count = 0
-        for try await current in inputFileURL.lines.compactMap(Int.init) {
+        for try await current in lines.compactMap(Int.init) {
             if let previous = previous, current > previous {
                 count += 1
             }
@@ -49,7 +53,7 @@ public final class AoC_2021_Day1 {
         var count = 0
 
         var previous: Int?
-        let lines = try await inputFileURL.lines.compactMap(Int.init).collect()
+        let lines = try await lines.compactMap(Int.init).collect()
 
         for i in 2 ..< lines.count {
             let current = lines[i-2] + lines[i-1] + lines[i]
@@ -67,7 +71,7 @@ public final class AoC_2021_Day1 {
         var previous1: Int?
         var previous2: Int?
         var previousSum: Int?
-        for try await current in inputFileURL.lines.compactMap(Int.init) {
+        for try await current in lines.compactMap(Int.init) {
             guard let prev1 = previous1 else {
                 previous1 = current
                 continue
@@ -96,7 +100,7 @@ public final class AoC_2021_Day1 {
             var previous1: Int?
             var previous2: Int?
         }
-        return try await inputFileURL.lines
+        return try await lines
             .compactMap(Int.init)
             .reduce(into: Iteration()) { result, current in
                 guard let previous2 = result.previous2 else {

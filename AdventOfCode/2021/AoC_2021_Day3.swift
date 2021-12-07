@@ -2,16 +2,20 @@ import Foundation
 import Parsing
 
 public final class AoC_2021_Day3 {
-    let inputFileURL: URL
+    let lines: Lines
 
     public init(_ inputFileURL: URL) {
-        self.inputFileURL = inputFileURL
+        lines = inputFileURL.lines.eraseToAnyAsyncSequence()
+    }
+
+    public init(_ input: String) {
+        lines = input.lines.async.eraseToAnyAsyncSequence()
     }
 
     public func solvePart1() async throws -> Int {
         var bits: [Int] = []
         var count = 0
-        for try await line in inputFileURL.lines {
+        for try await line in lines {
             if bits.isEmpty {
                 bits = Array(repeating: 0, count: line.count)
             }
@@ -26,7 +30,7 @@ public final class AoC_2021_Day3 {
     }
 
     public func solvePart2() async throws -> Int {
-        let allNumbers = try await inputFileURL.lines.collect()
+        let allNumbers = try await lines.collect()
         let mostCommon = partition(allNumbers, by: >)
         let leastCommon = partition(allNumbers, by: <=)
         return binary(from: mostCommon) * binary(from: leastCommon)

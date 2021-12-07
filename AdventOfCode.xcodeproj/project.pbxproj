@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8F5C604D275F687700AC61A8 /* AoC_2021_Day7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5C604C275F687700AC61A8 /* AoC_2021_Day7.swift */; };
+		8F5C604F275F755000AC61A8 /* Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5C604E275F755000AC61A8 /* Lines.swift */; };
 		8F6313FE275D4FD1008346AA /* AoC_2021_Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6313FD275D4FD1008346AA /* AoC_2021_Day4.swift */; };
 		8F631400275D8326008346AA /* AoC_2021_Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6313FF275D8326008346AA /* AoC_2021_Day5.swift */; };
 		8F631402275D8B97008346AA /* AoC_2021_Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F631401275D8B97008346AA /* AoC_2021_Day6.swift */; };
@@ -117,6 +118,7 @@
 
 /* Begin PBXFileReference section */
 		8F5C604C275F687700AC61A8 /* AoC_2021_Day7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day7.swift; sourceTree = "<group>"; };
+		8F5C604E275F755000AC61A8 /* Lines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lines.swift; sourceTree = "<group>"; };
 		8F6313FD275D4FD1008346AA /* AoC_2021_Day4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day4.swift; sourceTree = "<group>"; };
 		8F6313FF275D8326008346AA /* AoC_2021_Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day5.swift; sourceTree = "<group>"; };
 		8F631401275D8B97008346AA /* AoC_2021_Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day6.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 			children = (
 				8FF2090B2757723700416651 /* AdventOfCodeApp.swift */,
 				8FF2090D2757723700416651 /* ContentView.swift */,
+				8F5C604E275F755000AC61A8 /* Lines.swift */,
 				8F9A0A072759092B00FFB165 /* 2020 */,
 				8F9A0A212759092B00FFB165 /* 2021 */,
 				8FF2090F2757723C00416651 /* Assets.xcassets */,
@@ -592,6 +595,7 @@
 				8F9A0A3B2759092B00FFB165 /* AoC_2020_Day25.swift in Sources */,
 				8F9A0A292759092B00FFB165 /* AoC_2020_Day10.swift in Sources */,
 				8F9A0A262759092B00FFB165 /* AoC_2020_Day16.swift in Sources */,
+				8F5C604F275F755000AC61A8 /* Lines.swift in Sources */,
 				8F9A0A382759092B00FFB165 /* AoC_2020_Day21.swift in Sources */,
 				8F9A0A362759092B00FFB165 /* AoC_2020_Day1.swift in Sources */,
 				8F9A0A3E2759092B00FFB165 /* AoC_2021_Day3.swift in Sources */,

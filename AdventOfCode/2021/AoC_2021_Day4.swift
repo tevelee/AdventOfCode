@@ -2,16 +2,30 @@ import Foundation
 import Parsing
 
 public final class AoC_2021_Day4 {
-    let inputFileURL: URL
+    let numbers: [Int]
+    let boards: [[Cell]]
 
-    public init(_ inputFileURL: URL) {
-        self.inputFileURL = inputFileURL
+    public convenience init(_ inputFileURL: URL) throws {
+        self.init(try String(contentsOf: inputFileURL))
+    }
+
+    public init(_ content: String) {
+        let segments = content.paragraphs
+        numbers = segments[0][0].split(separator: ",").map(String.init).compactMap(Int.init)
+        boards = segments.dropFirst().map {
+            $0.flatMap {
+                $0.split(separator: " ")
+                    .map(String.init)
+                    .compactMap(Int.init)
+                    .map { ($0, false) }
+            }
+        }
     }
 
     typealias Cell = (value: Int, marked: Bool)
 
     public func solvePart1() throws -> Int {
-        var (numbers, boards) = try parse()
+        var boards = boards
         for number in numbers {
             for (boardIndex, board) in boards.enumerated() {
                 if let index = board.firstIndex(where: { $0.value == number }) {
@@ -28,7 +42,7 @@ public final class AoC_2021_Day4 {
 
 
     public func solvePart2() throws -> Int {
-        var (numbers, boards) = try parse()
+        var boards = boards
         var winner: (number: Int, board: [Cell])?
         for number in numbers {
             var boardsToRemove: Set<Int> = []
@@ -48,22 +62,6 @@ public final class AoC_2021_Day4 {
         }
         guard let winner = winner else { return 0 }
         return winner.board.filter(!\.marked).map(\.value).reduce(0, +) * winner.number
-    }
-
-    private func parse() throws -> (numbers: [Int], boards: [[Cell]]) {
-        let segments = try String(contentsOf: inputFileURL)
-            .split(separator: "\n", omittingEmptySubsequences: false)
-            .split(separator: "")
-        let numbers = segments[0][0].split(separator: ",").map(String.init).compactMap(Int.init)
-        let boards: [[Cell]] = segments.dropFirst().map {
-            $0.flatMap {
-                $0.split(separator: " ")
-                    .map(String.init)
-                    .compactMap(Int.init)
-                    .map { ($0, false) }
-            }
-        }
-        return (numbers, boards)
     }
 
     private let range = 0 ..< 5

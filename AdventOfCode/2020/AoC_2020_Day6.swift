@@ -9,8 +9,7 @@ public final class AoC_2020_Day6 {
 
     public func solvePart1() async throws -> Int {
         try String(contentsOf: inputFileURL)
-            .split(separator: "\n", omittingEmptySubsequences: false)
-            .split(separator: "")
+            .paragraphs
             .map { group in
                 Set(group.flatMap(Array.init)).count
             }
@@ -19,8 +18,7 @@ public final class AoC_2020_Day6 {
 
     public func solvePart2() async throws -> Int {
         try String(contentsOf: inputFileURL)
-            .split(separator: "\n", omittingEmptySubsequences: false)
-            .split(separator: "")
+            .paragraphs
             .map { group in
                 let sets = group.map(Array.init).map(Set.init)
                 return sets.reduce(into: sets[0]) { result, item in
