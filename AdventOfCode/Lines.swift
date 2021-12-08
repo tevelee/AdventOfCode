@@ -52,6 +52,16 @@ extension String {
     var paragraphs: [[String]] {
         split(separator: "\n", omittingEmptySubsequences: false).split(separator: "").map { $0.map(String.init) }
     }
+
+    var words: [String] {
+        split(separator: " ", omittingEmptySubsequences: true).map { String($0) }
+    }
+}
+
+extension Substring {
+    var words: [String] {
+        split(separator: " ", omittingEmptySubsequences: true).map { String($0) }
+    }
 }
 
 extension Sequence {

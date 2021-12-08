@@ -198,4 +198,33 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 92676646)
         print("Day7 / Part2 solution: \(part2)")
     }
+
+    func test_day8_intro() async throws {
+        let problem = AoC_2021_Day8("""
+        be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+        edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
+        fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
+        fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
+        aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea
+        fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb
+        dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
+        bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
+        egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
+        gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
+        """)
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 26)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 61229)
+    }
+
+    func test_day8() async throws {
+        let problem = try AoC_2021_Day8(Resources.url(for: "2021_day8"))
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 303)
+        print("Day8 / Part1 solution: \(part1)")
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 961734)
+        print("Day8 / Part2 solution: \(part2)")
+    }
 }
