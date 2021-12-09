@@ -1,25 +1,28 @@
 import Foundation
-import Parsing
 
 public final class AoC_2020_Day4 {
-    let inputFileURL: URL
+    let input: String
 
-    public init(_ inputFileURL: URL) {
-        self.inputFileURL = inputFileURL
+    public convenience init(_ inputFileURL: URL) throws {
+        self.init(try String(contentsOf: inputFileURL))
     }
 
-    public func solvePart1() async throws -> Int {
-        try await solve(validate: { ["byr", "iyr", "eyr", "hcl", "ecl", "pid", "hgt"].allSatisfy($0.keys.contains) })
+    public init(_ input: String) {
+        self.input = input.appending("\n")
     }
 
-    public func solvePart2() async throws -> Int {
-        try await solve(validate: validate)
+    public func solvePart1() -> Int {
+        solve(validate: { ["byr", "iyr", "eyr", "hcl", "ecl", "pid", "hgt"].allSatisfy($0.keys.contains) })
     }
 
-    public func solve(validate: @escaping ([String: String]) -> Bool) async throws -> Int {
+    public func solvePart2() -> Int {
+        solve(validate: validate)
+    }
+
+    public func solve(validate: @escaping ([String: String]) -> Bool) -> Int {
         var count = 0
         var passport: [String: String] = [:]
-        for line in try String(contentsOf: inputFileURL).lines(includeEmptyLines: true) {
+        for line in input.lines(includeEmptyLines: true) {
             if line.isEmpty {
                 if validate(passport) {
                     count += 1
@@ -35,23 +38,45 @@ public final class AoC_2020_Day4 {
         return count
     }
 
-    func validate(_ passport: [String: String]) -> Bool {
-        let requiredFields = ["byr", "iyr", "eyr", "hcl", "ecl", "pid", "hgt"]
-        guard (passport.keys.count == 7 && requiredFields.allSatisfy(passport.keys.contains)) ||
-                (passport.keys.count == 8 && passport.keys.contains("cid")) else { return false }
+    private func validate(_ passport: [String: String]) -> Bool {
+        guard ["byr", "iyr", "eyr", "hcl", "ecl", "pid", "hgt"].allSatisfy(passport.keys.contains) else { return false }
+        if passport.count == 8, !passport.keys.contains("cid") { return false }
+        return passport.allSatisfy(validate)
+    }
 
-        let string = passport.map { "\($0.key):\($0.value)" }.joined(separator: " ")[...]
-        let hex = Prefix(2).pipe(UInt8.parser(of: Substring.self, isSigned: false, radix: 16).skip(End()))
+    private func validate(field: String, value: String) -> Bool {
+        switch field {
+            case "byr":
+                return value.isYear(between: 1920...2002)
+            case "iyr":
+                return value.isYear(between: 2010...2020)
+            case "eyr":
+                return value.isYear(between: 2020...2030)
+            case "hcl":
+                return value.count == 7 && value.hasPrefix("#") && value.dropFirst().allSatisfy("abcdef0123456789".contains)
+            case "ecl":
+                return value.count == 3 && ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].contains(value)
+            case "pid":
+                return value.count == 9 && value.allSatisfy(\.isNumber)
+            case "hgt":
+                if value.hasSuffix("cm"), let index = value.firstIndex(of: "c"), let number = Int(value[..<index]) {
+                    return (150...193).contains(number)
+                }
+                if value.hasSuffix("in"), let index = value.firstIndex(of: "i"), let number = Int(value[..<index]) {
+                    return (59...76).contains(number)
+                }
+                return false
+            case "cid":
+                return true
+            default:
+                return false
+        }
+    }
+}
 
-        let byr = StartsWith("byr").skip(":").skip(Prefix(4).pipe(Int.parser().filter((1920...2002).contains))).eraseToAnyParser().map { _ in "byr" }
-        let iyr = StartsWith("iyr").skip(":").skip(Prefix(4).pipe(Int.parser().filter((2010...2020).contains))).eraseToAnyParser().map { _ in "iyr" }
-        let eyr = StartsWith("eyr").skip(":").skip(Prefix(4).pipe(Int.parser().filter((2020...2030).contains))).eraseToAnyParser().map { _ in "eyr" }
-        let hcl = StartsWith("hcl").skip(":#").skip(hex).skip(hex).skip(hex).eraseToAnyParser().map { _ in "hcl" }
-        let ecl = StartsWith("ecl").skip(":").skip(OneOfMany("amb", "blu", "brn", "gry", "grn", "hzl", "oth")).eraseToAnyParser().map { _ in "ecl" }
-        let pid = StartsWith("pid").skip(":").skip(Prefix(9).filter { $0.allSatisfy(\.isNumber) }).eraseToAnyParser().map { _ in "pid" }
-        let hgt = StartsWith("hgt").skip(":").skip(Int.parser().skip("cm").filter((150...193).contains).orElse(Int.parser().skip("in").filter((59...76).contains))).eraseToAnyParser().map { _ in "hgt" }
-        let cid = StartsWith("cid").skip(":").skip(Int.parser()).eraseToAnyParser().map { _ in "cid" }
-        let parser = Many(OneOfMany(byr, iyr, eyr, hcl, ecl, pid, hgt, cid), atLeast: 7, atMost: 8, separator: " ")
-        return parser.parse(string) != nil
+private extension String {
+    func isYear(between range: ClosedRange<Int>) -> Bool {
+        guard count == 4, let int = Int(self) else { return false }
+        return range.contains(int)
     }
 }
