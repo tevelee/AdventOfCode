@@ -34,10 +34,3 @@ public final class AoC_2020_Day3 {
         return count
     }
 }
-
-private extension String {
-    subscript(_ i: Int) -> Character? {
-        guard i < count else { return nil }
-        return self[index(startIndex, offsetBy: i)]
-    }
-}

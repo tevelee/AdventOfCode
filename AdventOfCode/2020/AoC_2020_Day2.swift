@@ -39,10 +39,3 @@ public final class AoC_2020_Day2 {
         return (min, max, character[0]!, input)
     }
 }
-
-private extension Substring {
-    subscript(_ i: Int) -> Character? {
-        guard i < count else { return nil }
-        return self[index(startIndex, offsetBy: i)]
-    }
-}

@@ -64,16 +64,3 @@ public final class AoC_2021_Day2 {
         case up, down, forward
     }
 }
-
-private extension AsyncSequence {
-    func collect() async rethrows -> [Element] {
-        try await reduce(into: [Element]()) { $0.append($1) }
-    }
-}
-
-private extension Substring {
-    subscript(index i: Int) -> Character? {
-        guard i < count else { return nil }
-        return self[index(startIndex, offsetBy: i)]
-    }
-}

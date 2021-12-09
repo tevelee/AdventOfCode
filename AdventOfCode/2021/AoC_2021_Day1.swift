@@ -124,9 +124,6 @@ public final class AoC_2021_Day1 {
 }
 
 private extension AsyncSequence {
-    func collect() async rethrows -> [Element] {
-        try await reduce(into: [Element]()) { $0.append($1) }
-    }
     var count: Int {
         get async throws {
             try await reduce(0) { result, _ in result + 1 }

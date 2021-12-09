@@ -67,16 +67,3 @@ public final class AoC_2021_Day3 {
         }
     }
 }
-
-private extension AsyncSequence {
-    func collect() async rethrows -> [Element] {
-        try await reduce(into: [Element]()) { $0.append($1) }
-    }
-}
-
-private extension String {
-    subscript(_ i: Int) -> Character? {
-        guard i < count else { return nil }
-        return self[index(startIndex, offsetBy: i)]
-    }
-}
