@@ -97,6 +97,7 @@
 		8F9A0AB6275909A200FFB165 /* 2021_day25.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8F9A0A7B275909A100FFB165 /* 2021_day25.txt */; };
 		8F9A0AB7275909A200FFB165 /* 2021_day24.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8F9A0A7C275909A100FFB165 /* 2021_day24.txt */; };
 		8F9A0AB8275909A200FFB165 /* 2021_day18.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8F9A0A7D275909A100FFB165 /* 2021_day18.txt */; };
+		8FCBCDDB276352A4009311F1 /* AoC_2021_Day10.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCBCDDA276352A4009311F1 /* AoC_2021_Day10.swift */; };
 		8FF2090C2757723700416651 /* AdventOfCodeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2090B2757723700416651 /* AdventOfCodeApp.swift */; };
 		8FF2090E2757723700416651 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF2090D2757723700416651 /* ContentView.swift */; };
 		8FF209102757723C00416651 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8FF2090F2757723C00416651 /* Assets.xcassets */; };
@@ -209,6 +210,7 @@
 		8F9A0A7B275909A100FFB165 /* 2021_day25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021_day25.txt; sourceTree = "<group>"; };
 		8F9A0A7C275909A100FFB165 /* 2021_day24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021_day24.txt; sourceTree = "<group>"; };
 		8F9A0A7D275909A100FFB165 /* 2021_day18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2021_day18.txt; sourceTree = "<group>"; };
+		8FCBCDDA276352A4009311F1 /* AoC_2021_Day10.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day10.swift; sourceTree = "<group>"; };
 		8FF209082757723700416651 /* AdventOfCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdventOfCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FF2090B2757723700416651 /* AdventOfCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdventOfCodeApp.swift; sourceTree = "<group>"; };
 		8FF2090D2757723700416651 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				8F5C604C275F687700AC61A8 /* AoC_2021_Day7.swift */,
 				8F5C60502760A7C200AC61A8 /* AoC_2021_Day8.swift */,
 				8F5C60522762068400AC61A8 /* AoC_2021_Day9.swift */,
+				8FCBCDDA276352A4009311F1 /* AoC_2021_Day10.swift */,
 			);
 			path = 2021;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				8F9A0A2D2759092B00FFB165 /* AoC_2020_Day9.swift in Sources */,
 				8F9A0A392759092B00FFB165 /* AoC_2020_Day23.swift in Sources */,
 				8F631400275D8326008346AA /* AoC_2021_Day5.swift in Sources */,
+				8FCBCDDB276352A4009311F1 /* AoC_2021_Day10.swift in Sources */,
 				8F5C60532762068400AC61A8 /* AoC_2021_Day9.swift in Sources */,
 				8F9A0A3C2759092B00FFB165 /* AoC_2020_Day18.swift in Sources */,
 				8F9A0A3D2759092B00FFB165 /* AoC_2020_Day2.swift in Sources */,

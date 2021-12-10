@@ -251,4 +251,33 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 1564640)
         print("Day9 / Part2 solution: \(part2)")
     }
+
+    func test_day10_intro() async throws {
+        let problem = AoC_2021_Day10("""
+        [({(<(())[]>[[{[]{<()<>>
+        [(()[<>])]({[<{<<[]>>(
+        {([(<{}[<>[]}>{[]{[(<()>
+        (((({<>}<{<{<>}{[]{[]{}
+        [[<[([]))<([[{}[[()]]]
+        [{[{({}]{}}([{[{{{}}([]
+        {<[[]]>}<{[{[{[]{()[[[]
+        [<(<(<(<{}))><([]([]()
+        <{([([[(<>()){}]>(<<{{
+        <{([{{}}[<[[[<>{}]]]>[]]
+        """)
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 26397)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 288957)
+    }
+
+    func test_day10() async throws {
+        let problem = try AoC_2021_Day10(Resources.url(for: "2021_day10"))
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 268845)
+        print("Day10 / Part1 solution: \(part1)")
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 4038824534)
+        print("Day10 / Part2 solution: \(part2)")
+    }
 }
