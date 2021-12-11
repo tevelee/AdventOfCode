@@ -280,4 +280,95 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 4038824534)
         print("Day10 / Part2 solution: \(part2)")
     }
+
+
+    func test_day11_intro() {
+        let problem = AoC_2021_Day11("""
+        5483143223
+        2745854711
+        5264556173
+        6141336146
+        6357385478
+        4167524645
+        2176841721
+        6882881134
+        4846848554
+        5283751526
+        """)
+        XCTAssertEqual(problem.solvePart1(), 1656)
+        XCTAssertEqual(problem.solvePart2(), 195)
+    }
+
+    func test_day11_intro_steps() {
+        let problem = AoC_2021_Day11("""
+        5483143223
+        2745854711
+        5264556173
+        6141336146
+        6357385478
+        4167524645
+        2176841721
+        6882881134
+        4846848554
+        5283751526
+        """)
+        XCTAssertEqual(problem.iterations { $0.count == 1 }.levels, """
+        6594254334
+        3856965822
+        6375667284
+        7252447257
+        7468496589
+        5278635756
+        3287952832
+        7993992245
+        5957959665
+        6394862637
+        """)
+        XCTAssertEqual(problem.iterations { $0.count == 10 }.levels, """
+        0481112976
+        0031112009
+        0041112504
+        0081111406
+        0099111306
+        0093511233
+        0442361130
+        5532252350
+        0532250600
+        0032240000
+        """)
+        XCTAssertEqual(problem.iterations { $0.count == 100 }.levels, """
+        0397666866
+        0749766918
+        0053976933
+        0004297822
+        0004229892
+        0053222877
+        0532222966
+        9322228966
+        7922286866
+        6789998766
+        """)
+        XCTAssertEqual(problem.iterations { $0.count == 195 }.levels, """
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        0000000000
+        """)
+    }
+
+    func test_day11() throws {
+        let problem = try AoC_2021_Day11(Resources.url(for: "2021_day11"))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 1683)
+        print("Day11 / Part1 solution: \(part1)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 788)
+        print("Day11 / Part2 solution: \(part2)")
+    }
 }
