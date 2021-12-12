@@ -281,7 +281,6 @@ final class AoC_2021_Tests: XCTestCase {
         print("Day10 / Part2 solution: \(part2)")
     }
 
-
     func test_day11_intro() {
         let problem = AoC_2021_Day11("""
         5483143223
@@ -370,5 +369,72 @@ final class AoC_2021_Tests: XCTestCase {
         let part2 = problem.solvePart2()
         XCTAssertEqual(part2, 788)
         print("Day11 / Part2 solution: \(part2)")
+    }
+
+    func test_day12_intro1() {
+        let problem = AoC_2021_Day12("""
+        start-A
+        start-b
+        A-c
+        A-b
+        b-d
+        A-end
+        b-end
+        """)
+        XCTAssertEqual(problem.solvePart1(), 10)
+        XCTAssertEqual(problem.solvePart2(), 36)
+    }
+
+    func test_day12_intro2() {
+        let problem = AoC_2021_Day12("""
+        dc-end
+        HN-start
+        start-kj
+        dc-start
+        dc-HN
+        LN-dc
+        HN-end
+        kj-sa
+        kj-HN
+        kj-dc
+        """)
+        XCTAssertEqual(problem.solvePart1(), 19)
+        XCTAssertEqual(problem.solvePart2(), 103)
+    }
+
+
+    func test_day12_intro3() {
+        let problem = AoC_2021_Day12("""
+        fs-end
+        he-DX
+        fs-he
+        start-DX
+        pj-DX
+        end-zg
+        zg-sl
+        zg-pj
+        pj-he
+        RW-he
+        fs-DX
+        pj-RW
+        zg-RW
+        start-pj
+        he-WI
+        zg-he
+        pj-fs
+        start-RW
+        """)
+        XCTAssertEqual(problem.solvePart1(), 226)
+        XCTAssertEqual(problem.solvePart2(), 3509)
+    }
+
+    func test_day12() throws {
+        let problem = try AoC_2021_Day12(Resources.url(for: "2021_day12"))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 3761)
+        print("Day12 / Part1 solution: \(part1)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 99138)
+        print("Day12 / Part2 solution: \(part2)")
     }
 }
