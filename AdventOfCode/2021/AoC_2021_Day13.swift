@@ -52,6 +52,17 @@ public final class AoC_2021_Day13 {
         return String(pointsByCharacters(in: dots).map(draw).compactMap { characterMap[$0] })
     }
 
+    private func fold(dots: Set<Point>,
+                      width: Int,
+                      height: Int,
+                      instruction fold: (axis: String, value: Int)) -> (width: Int, height: Int, dots: Set<Point>) {
+        if fold.axis == "x" {
+            return (fold.value, height, Set(dots.map { $0.x < fold.value ? $0 : Point(x: width - 1 - $0.x, y: $0.y) }))
+        } else {
+            return (width, fold.value, Set(dots.map { $0.y < fold.value ? $0 : Point(x: $0.x, y: height - 1 - $0.y) }))
+        }
+    }
+
     private func pointsByCharacters(in dots: Set<Point>) -> [Set<Point>] {
         (0 ..< 8).map { index -> Set<Point> in
             let range = (index * 5) ..< (index + 1) * 5
@@ -77,47 +88,12 @@ public final class AoC_2021_Day13 {
                 } else if let fold = fold, fold.axis == "y", y == fold.value {
                     print("--", terminator: "")
                 } else {
-                    print(dots.contains(Point(x: x, y: y)) ? "🔴" : "⚪️", terminator: "")
+                    print(dots.contains(Point(x: x, y: y)) ? "##" : "  ", terminator: "")
                 }
             }
             print()
         }
         print()
-    }
-
-    private func fold(dots: Set<Point>,
-                      width: Int,
-                      height: Int,
-                      instruction fold: (axis: String, value: Int)) -> (width: Int, height: Int, dots: Set<Point>) {
-        if fold.axis == "x" {
-            return self.foldLeft(dots: dots, column: fold.value, width: width, height: height)
-        } else {
-            return self.foldUp(dots: dots, row: fold.value, width: width, height: height)
-        }
-    }
-
-    private func foldUp(dots: Set<Point>, row: Int, width: Int, height: Int) -> (width: Int, height: Int, dots: Set<Point>) {
-        var result: Set<Point> = []
-        for point in dots {
-            if point.y < row {
-                result.insert(point)
-            } else if point.y > row {
-                result.insert(Point(x: point.x, y: height - 1 - point.y))
-            }
-        }
-        return (width, row, result)
-    }
-
-    private func foldLeft(dots: Set<Point>, column: Int, width: Int, height: Int) -> (width: Int, height: Int, dots: Set<Point>) {
-        var result: Set<Point> = []
-        for point in dots {
-            if point.x < column {
-                result.insert(point)
-            } else if point.x > column {
-                result.insert(Point(x: width - 1 - point.x, y: point.y))
-            }
-        }
-        return (column, height, result)
     }
 
     private let characterMap: [String: Character] = [
