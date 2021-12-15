@@ -28,4 +28,12 @@ extension Collection {
     subscript (safe index: Index) -> Element? {
         indices.contains(index) ? self[index] : nil
     }
+
+    func sorted<T>(by selector: (Element) -> T) -> [Element] where T: Comparable {
+        sorted(by: selector, comparator: <)
+    }
+
+    func sorted<T>(by selector: (Element) -> T, comparator: (T, T) -> Bool) -> [Element] where T: Comparable {
+        sorted { comparator(selector($0), selector($1)) }
+    }
 }

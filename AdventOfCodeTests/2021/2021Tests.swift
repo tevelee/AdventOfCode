@@ -509,4 +509,31 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 4704817645083)
         print("Day14 / Part2 solution: \(part2)")
     }
+
+    func test_day15_intro() {
+        let problem = AoC_2021_Day15("""
+        1163751742
+        1381373672
+        2136511328
+        3694931569
+        7463417111
+        1319128137
+        1359912421
+        3125421639
+        1293138521
+        2311944581
+        """)
+        XCTAssertEqual(problem.solvePart1(), 40)
+        XCTAssertEqual(problem.solvePart2(), 0)
+    }
+
+    func test_day15() throws {
+        let problem = try AoC_2021_Day15(Resources.url(for: "2021_day15"))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 417)
+        print("Day15 / Part1 solution: \(part1)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 0)
+        print("Day15 / Part2 solution: \(part2)")
+    }
 }

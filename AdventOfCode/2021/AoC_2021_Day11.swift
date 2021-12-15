@@ -66,11 +66,6 @@ public final class AoC_2021_Day11 {
     }
 }
 
-private struct Position: Equatable {
-    let row: Int
-    let column: Int
-}
-
 extension BidirectionalCollection {
     var fullRange: ClosedRange<Index> {
         startIndex ... index(before: endIndex)
@@ -81,6 +76,11 @@ extension Int {
     func range(padding: Int) -> ClosedRange<Int> {
         self - padding ... self + padding
     }
+}
+
+private struct Position: Equatable {
+    let row: Int
+    let column: Int
 }
 
 private extension Array where Element == [Int] {
