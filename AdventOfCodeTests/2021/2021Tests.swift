@@ -536,4 +536,35 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 2864)
         print("Day15 / Part2 solution: \(part2)")
     }
+
+    func test_day16_intro() {
+        let part1: (String) -> Int = { AoC_2021_Day16($0).solvePart1() }
+        XCTAssertEqual(part1("D2FE28"), 6)
+        XCTAssertEqual(part1("38006F45291200"), 9)
+        XCTAssertEqual(part1("EE00D40C823060"), 14)
+        XCTAssertEqual(part1("8A004A801A8002F478"), 16)
+        XCTAssertEqual(part1("620080001611562C8802118E34"), 12)
+        XCTAssertEqual(part1("C0015000016115A2E0802F182340"), 23)
+        XCTAssertEqual(part1("A0016C880162017C3686B18A3D4780"), 31)
+
+        let part2: (String) -> Int = { AoC_2021_Day16($0).solvePart2() }
+        XCTAssertEqual(part2("C200B40A82"), 3)
+        XCTAssertEqual(part2("04005AC33890"), 54)
+        XCTAssertEqual(part2("880086C3E88112"), 7)
+        XCTAssertEqual(part2("CE00C43D881120"), 9)
+        XCTAssertEqual(part2("D8005AC2A8F0"), 1)
+        XCTAssertEqual(part2("F600BC2D8F"), 0)
+        XCTAssertEqual(part2("9C005AC2F8F0"), 0)
+        XCTAssertEqual(part2("9C0141080250320F1802104A08"), 1)
+    }
+
+    func test_day16() throws {
+        let problem = try AoC_2021_Day16(Resources.url(for: "2021_day16"))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 1007)
+        print("Day16 / Part1 solution: \(part1)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 834151779165)
+        print("Day16 / Part2 solution: \(part2)")
+    }
 }
