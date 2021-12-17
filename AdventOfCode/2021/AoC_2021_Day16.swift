@@ -90,23 +90,24 @@ public final class AoC_2021_Day16 {
             return (.literal(version: version, value: result.binary), input)
         } else {
             let typeID = input.scan(1)
-            let exitCondition: () -> Bool
+            let condition: () -> Bool
             var subpackets: [Value] = []
 
             if typeID == "0" {
                 let bodyLength = input.scan(15).binary
                 let finalLength = input.count - bodyLength
-                exitCondition = { input.count > finalLength }
+                condition = { input.count > finalLength }
             } else {
                 let packetCount = input.scan(11).binary
-                exitCondition = { subpackets.count < packetCount }
+                condition = { subpackets.count < packetCount }
             }
 
-            while exitCondition() {
+            while condition() {
                 let result = parse(input)
                 subpackets.append(result.value)
                 input = result.remainder
             }
+
             return (.operator(type: Operator(rawValue: id)!, version: version, content: subpackets), input)
         }
     }
