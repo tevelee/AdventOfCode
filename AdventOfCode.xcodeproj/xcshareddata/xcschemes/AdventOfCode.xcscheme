@@ -44,6 +44,9 @@
                <Test
                   Identifier = "AoC_2021_Tests/test_day17()">
                </Test>
+               <Test
+                  Identifier = "AoC_2021_Tests/test_day19()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>
