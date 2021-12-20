@@ -767,4 +767,36 @@ final class AoC_2021_Tests: XCTestCase {
         XCTAssertEqual(part2, 12226)
         print("Day19 / Part2 solution: \(part2)")
     }
+
+    func test_day20_intro() async throws {
+        let problem = AoC_2021_Day20("""
+        ..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..##
+        #..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###
+        .######.###.####...#.##.##..#..#..#####.....#.#....###..#.##......#.....#.
+        .#..#..##..#...##.######.####.####.#.#...#.......#..#.#.#...####.##.#.....
+        .#..#...##.#.##..#...##.#.##..###.#......#.#.......#.#.#.####.###.##...#..
+        ...####.#..#..#.##.#....##..#.####....##...##..#...#......#.#.......#.....
+        ..##..####..#...#.#.#...##..#.#..###..#####........#..####......#..#
+
+        #..#.
+        #....
+        ##..#
+        ..#..
+        ..###
+        """)
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 35)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 3351)
+    }
+
+    func test_day20() async throws {
+        let problem = try AoC_2021_Day20(Resources.url(for: "2021_day20"))
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 5044)
+        print("Day20 / Part1 solution: \(part1)")
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 18074)
+        print("Day20 / Part2 solution: \(part2)")
+    }
 }

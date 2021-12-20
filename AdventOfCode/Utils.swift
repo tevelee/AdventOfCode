@@ -50,6 +50,21 @@ extension Sequence {
         let tail = IteratorSequence(iterator)
         return (head, tail)
     }
+
+    @inlinable func reduce(_ nextPartialResult: (Element, Element) throws -> Element) rethrows -> Element? {
+        var iterator = makeIterator()
+        return try iterator.next().map { first in
+            try IteratorSequence(iterator).reduce(first, nextPartialResult)
+        }
+    }
+
+    func dictionary<Key: Hashable>(by keySelector: (Element) -> Key) -> [Key: [Element]] {
+        .init(grouping: self, by: keySelector)
+    }
+
+    func dictionary<Key: Hashable>(byUniqueKey keySelector: (Element) -> Key) -> [Key: Element] {
+        Dictionary(grouping: self, by: keySelector).compactMapValues(\.first)
+    }
 }
 
 extension Array where Element: Hashable {
