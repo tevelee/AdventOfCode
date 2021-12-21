@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F023C25277234A9007EAAA3 /* AoC_2121_Day21.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F023C24277234A9007EAAA3 /* AoC_2121_Day21.swift */; };
 		8F053EE2276C8EC50054CDA0 /* AoC_2021_Day17.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F053EE1276C8EC50054CDA0 /* AoC_2021_Day17.swift */; };
 		8F053EE4276E01550054CDA0 /* AoC_2021_Day18.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F053EE3276E01550054CDA0 /* AoC_2021_Day18.swift */; };
 		8F053EE6276E17C40054CDA0 /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F053EE5276E17C40054CDA0 /* Reduce.swift */; };
@@ -132,6 +133,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F023C24277234A9007EAAA3 /* AoC_2121_Day21.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2121_Day21.swift; sourceTree = "<group>"; };
 		8F053EE1276C8EC50054CDA0 /* AoC_2021_Day17.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day17.swift; sourceTree = "<group>"; };
 		8F053EE3276E01550054CDA0 /* AoC_2021_Day18.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2021_Day18.swift; sourceTree = "<group>"; };
 		8F053EE5276E17C40054CDA0 /* Reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reduce.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				8F053EE3276E01550054CDA0 /* AoC_2021_Day18.swift */,
 				8F053EE7276F4D0C0054CDA0 /* AoC_2021_Day19.swift */,
 				8F053EE9277090F90054CDA0 /* AoC_2021_Day20.swift */,
+				8F023C24277234A9007EAAA3 /* AoC_2121_Day21.swift */,
 			);
 			path = 2021;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				8F053EEA277090F90054CDA0 /* AoC_2021_Day20.swift in Sources */,
 				8F9A0A332759092B00FFB165 /* AoC_2020_Day19.swift in Sources */,
 				8F053EE8276F4D0C0054CDA0 /* AoC_2021_Day19.swift in Sources */,
+				8F023C25277234A9007EAAA3 /* AoC_2121_Day21.swift in Sources */,
 				8F9A0A3B2759092B00FFB165 /* AoC_2020_Day25.swift in Sources */,
 				8F9A0A292759092B00FFB165 /* AoC_2020_Day10.swift in Sources */,
 				8F9A0A262759092B00FFB165 /* AoC_2020_Day16.swift in Sources */,
