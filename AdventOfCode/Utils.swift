@@ -1,3 +1,4 @@
+import Algorithms
 import Foundation
 
 extension AsyncSequence {
@@ -74,5 +75,12 @@ extension Array where Element: Hashable {
         return filter {
             addedDict.updateValue(true, forKey: $0) == nil
         }
+    }
+}
+
+func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Element, C.Element)] {
+    product(product(c1, c2), c3).map { p, z in
+        let (x,y) = p
+        return (x,y,z)
     }
 }

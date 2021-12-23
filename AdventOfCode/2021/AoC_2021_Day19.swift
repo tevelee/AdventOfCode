@@ -133,15 +133,11 @@ public final class AoC_2021_Day19 {
 
     private lazy var rotationMatrices: [simd_double3x3] = {
         let angles = Array(stride(from: 0, to: 360, by: 90))
-        return product3(angles).map(rotationMatrix).removingDuplicates()
+        return product3(angles, angles, angles)
+            .map(SIMD3<Int>.init(x:y:z:))
+            .map(rotationMatrix)
+            .removingDuplicates()
     }()
-
-    private func product3<C: Collection>(_ c: C) -> [SIMD3<C.Element>] {
-        product(product(c, c), c).map { p, z -> SIMD3<C.Element> in
-            let (x,y) = p
-            return SIMD3(x: x, y: y, z: z)
-        }
-    }
 
     private func rotationMatrix(_ v: SIMD3<Int>) -> simd_double3x3 {
         double3x3(rows: [

@@ -43,40 +43,29 @@ public final class AoC_2021_Day21 {
     public func solvePart2() async throws -> Int {
         let players = [Player(position: player1), Player(position: player2)]
         var results: [Int: Int] = [:]
-        var winnerStates: [State: Int] = [:]
-        spawnUniverses(for: players, into: &results, winnerStates: &winnerStates)
+        spawnUniverses(for: players, results: &results)
         return results.values.max()!
     }
 
-    private func spawnUniverses(for players: [Player], on round: Int = 0, into results: inout [Int: Int], winnerStates: inout [State: Int]) {
+    private func spawnUniverses(for players: [Player], multiplier: Int = 1, on round: Int = 0, results: inout [Int: Int]) {
         for (sum, occurences) in sums {
-            play(round: round, multiplier: occurences, sum: sum, players: players, results: &results, winnerStates: &winnerStates)
+            play(round: round, multiplier: occurences * multiplier, sum: sum, players: players, results: &results)
         }
     }
 
-    private func play(round: Int, multiplier: Int, sum: Int, players: [Player], results: inout [Int: Int], winnerStates: inout [State: Int]) {
+    private func play(round: Int, multiplier: Int, sum: Int, players: [Player], results: inout [Int: Int]) {
         let playerIndex = round % players.count
-//        let player = players[playerIndex]
-//        let state = State(playerIndex: playerIndex, sum: sum, players: players)
-//        if let value = winnerStates[state] {
-//            results[playerIndex, default: 0] += value * multiplier
-//            return
-//        }
-        var mutatedPayers = players
-        mutatedPayers[playerIndex].move(by: sum, on: board)
-        if mutatedPayers[playerIndex].score >= 21 {
+        var mutatedPlayers = players
+        mutatedPlayers[playerIndex].move(by: sum, on: board)
+        if mutatedPlayers[playerIndex].score >= 21 {
             results[playerIndex, default: 0] += multiplier
-//            winnerStates[state] = multiplier
             return
         }
-        spawnUniverses(for: mutatedPayers, on: round + 1, into: &results, winnerStates: &winnerStates)
+        spawnUniverses(for: mutatedPlayers, multiplier: multiplier, on: round + 1, results: &results)
     }
 
     private func sumOfNextRolls(in range: ClosedRange<Int>) -> [Int] {
-        product(product(range, range), range).map { p, c -> Int in
-            let (a,b) = p
-            return a+b+c
-        }
+        product3(range, range, range).map { $0 + $1 + $2 }
     }
 
     private struct State: Hashable {
