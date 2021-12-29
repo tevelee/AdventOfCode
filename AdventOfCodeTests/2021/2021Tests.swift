@@ -951,16 +951,16 @@ final class AoC_2021_Tests: XCTestCase {
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 12521)
         let part2 = try await problem.solvePart2()
-        XCTAssertEqual(part2, 0)
+        XCTAssertEqual(part2, 44169)
     }
 
     func test_day23() async throws {
         let problem = try AoC_2021_Day23(Resources.url(for: "2021_day23"))
         let part1 = try await problem.solvePart1()
-        XCTAssertEqual(part1, 0)
+        XCTAssertEqual(part1, 19160)
         print("Day21 / Part1 solution: \(part1)")
         let part2 = try await problem.solvePart2()
-        XCTAssertEqual(part2, 0)
+        XCTAssertEqual(part2, 47232)
         print("Day21 / Part2 solution: \(part2)")
     }
 
