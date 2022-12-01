@@ -152,6 +152,7 @@
 		A793FDDC29395447009BAE23 /* 2022_day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC329395447009BAE23 /* 2022_day10.txt */; };
 		A793FDDD29395447009BAE23 /* 2022_day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC429395447009BAE23 /* 2022_day12.txt */; };
 		A793FDDE29395447009BAE23 /* 2022_day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC529395447009BAE23 /* 2022_day13.txt */; };
+		A793FDE029396239009BAE23 /* InputReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793FDDF29396239009BAE23 /* InputReader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -304,6 +305,7 @@
 		A793FDC329395447009BAE23 /* 2022_day10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day10.txt; sourceTree = "<group>"; };
 		A793FDC429395447009BAE23 /* 2022_day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day12.txt; sourceTree = "<group>"; };
 		A793FDC529395447009BAE23 /* 2022_day13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day13.txt; sourceTree = "<group>"; };
+		A793FDDF29396239009BAE23 /* InputReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputReader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +506,7 @@
 				8F5C604E275F755000AC61A8 /* Lines.swift */,
 				8F053EE5276E17C40054CDA0 /* Reduce.swift */,
 				8F5C60542762099000AC61A8 /* Utils.swift */,
+				A793FDDF29396239009BAE23 /* InputReader.swift */,
 				8F9A0A072759092B00FFB165 /* 2020 */,
 				8F9A0A212759092B00FFB165 /* 2021 */,
 				A793FDA6293917C3009BAE23 /* 2022 */,
@@ -797,6 +800,7 @@
 				8F053EE8276F4D0C0054CDA0 /* AoC_2021_Day19.swift in Sources */,
 				8F023C25277234A9007EAAA3 /* AoC_2021_Day21.swift in Sources */,
 				8F9A0A3B2759092B00FFB165 /* AoC_2020_Day25.swift in Sources */,
+				A793FDE029396239009BAE23 /* InputReader.swift in Sources */,
 				8F9A0A292759092B00FFB165 /* AoC_2020_Day10.swift in Sources */,
 				8F9A0A262759092B00FFB165 /* AoC_2020_Day16.swift in Sources */,
 				8F5C60552762099000AC61A8 /* Utils.swift in Sources */,

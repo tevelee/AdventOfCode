@@ -1,26 +1,21 @@
 import Foundation
 import Algorithms
-import AsyncAlgorithms
 
 public final class AoC_2022_Day1 {
-    let input: String
+    let input: Input
 
-    public init(_ inputFileURL: URL) throws {
-        input = try String(contentsOf: inputFileURL)
-    }
-
-    public init(_ input: String) {
+    public init(_ input: Input) {
         self.input = input
     }
 
-    public func solvePart1() -> Int {
-        input.paragraphs
+    public func solvePart1() throws -> Int {
+        try input.wholeInput.paragraphs
             .map { $0.compactMap(Int.init).sum() }
             .max() ?? 0
     }
 
-    public func solvePart2() -> Int {
-        input.paragraphs
+    public func solvePart2() throws -> Int {
+        try input.wholeInput.paragraphs
             .map { $0.compactMap(Int.init).sum() }
             .max(count: 3)
             .sum()

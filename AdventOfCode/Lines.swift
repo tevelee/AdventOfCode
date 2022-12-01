@@ -7,33 +7,33 @@ extension AsyncSequence {
     }
 }
 
-struct AnyAsyncSequence<Element>: AsyncSequence {
-    typealias AsyncIterator = AnyAsyncIterator<Element>
+public struct AnyAsyncSequence<Element>: AsyncSequence {
+    public typealias AsyncIterator = AnyAsyncIterator<Element>
 
     let _makeIterator: () -> AnyAsyncIterator<Element>
 
-    init<S: AsyncSequence>(_ sequence: S) where S.Element == Element {
+    public init<S: AsyncSequence>(_ sequence: S) where S.Element == Element {
         _makeIterator = {
             AnyAsyncIterator(sequence.makeAsyncIterator)
         }
     }
 
-    func makeAsyncIterator() -> AnyAsyncIterator<Element> {
+    public func makeAsyncIterator() -> AnyAsyncIterator<Element> {
         _makeIterator()
     }
 }
 
-struct AnyAsyncIterator<Element>: AsyncIteratorProtocol {
+public struct AnyAsyncIterator<Element>: AsyncIteratorProtocol {
     let _next: () async throws -> Element?
 
-    init<I: AsyncIteratorProtocol>(_ iteratorFactory: () -> I) where I.Element == Element {
+    public init<I: AsyncIteratorProtocol>(_ iteratorFactory: () -> I) where I.Element == Element {
         var iterator = iteratorFactory()
         _next = {
             try await iterator.next()
         }
     }
 
-    mutating func next() async throws -> Element? {
+    public mutating func next() async throws -> Element? {
         try await _next()
     }
 }
