@@ -1,0 +1,42 @@
+import Foundation
+import AdventOfCode
+import XCTest
+
+final class AoC_2022_Tests: XCTestCase {
+    func test_day1_intro() async throws {
+        let problem = AoC_2022_Day1("""
+        1000
+        2000
+        3000
+
+        4000
+
+        5000
+        6000
+
+        7000
+        8000
+        9000
+
+        10000
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 24000)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 45000)
+    }
+
+    func test_day1() async throws {
+        let problem = try AoC_2022_Day1(Resources.url(for: "2022_day1"))
+
+        var answer = 68802
+        var result = problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day1 / Part1 solution: \(answer)")
+
+        answer = 205370
+        result = problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day1 / Part2 solution: \(answer)")
+    }
+}

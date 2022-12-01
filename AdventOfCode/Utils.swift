@@ -84,3 +84,9 @@ func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Elemen
         return (x,y,z)
     }
 }
+
+extension Array where Element == Int {
+    func sum() -> Int {
+        reduce(into: 0, +=)
+    }
+}

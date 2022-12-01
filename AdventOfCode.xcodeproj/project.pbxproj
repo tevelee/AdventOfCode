@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -124,6 +124,34 @@
 		8FF20945275777C500416651 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF20944275777C500416651 /* OrderedCollections */; };
 		8FF20948275777E000416651 /* Numerics in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF20947275777E000416651 /* Numerics */; };
 		8FF2094A275777E100416651 /* RealModule in Frameworks */ = {isa = PBXBuildFile; productRef = 8FF20949275777E000416651 /* RealModule */; };
+		A793FDA429391772009BAE23 /* 2022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793FD8729390F51009BAE23 /* 2022Tests.swift */; };
+		A793FDA8293917C3009BAE23 /* AoC_2022_Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793FDA7293917C3009BAE23 /* AoC_2022_Day1.swift */; };
+		A793FDAB29391804009BAE23 /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = A793FDAA29391804009BAE23 /* AsyncAlgorithms */; };
+		A793FDC629395447009BAE23 /* 2022_day22.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDAD29395447009BAE23 /* 2022_day22.txt */; };
+		A793FDC729395447009BAE23 /* 2022_day23.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDAE29395447009BAE23 /* 2022_day23.txt */; };
+		A793FDC829395447009BAE23 /* 2022_day21.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDAF29395447009BAE23 /* 2022_day21.txt */; };
+		A793FDC929395447009BAE23 /* 2022_day20.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB029395447009BAE23 /* 2022_day20.txt */; };
+		A793FDCA29395447009BAE23 /* 2022_day18.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB129395447009BAE23 /* 2022_day18.txt */; };
+		A793FDCB29395447009BAE23 /* 2022_day24.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB229395447009BAE23 /* 2022_day24.txt */; };
+		A793FDCC29395447009BAE23 /* 2022_day25.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB329395447009BAE23 /* 2022_day25.txt */; };
+		A793FDCD29395447009BAE23 /* 2022_day19.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB429395447009BAE23 /* 2022_day19.txt */; };
+		A793FDCE29395447009BAE23 /* 2022_day9.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB529395447009BAE23 /* 2022_day9.txt */; };
+		A793FDCF29395447009BAE23 /* 2022_day8.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB629395447009BAE23 /* 2022_day8.txt */; };
+		A793FDD029395447009BAE23 /* 2022_day6.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB729395447009BAE23 /* 2022_day6.txt */; };
+		A793FDD129395447009BAE23 /* 2022_day7.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB829395447009BAE23 /* 2022_day7.txt */; };
+		A793FDD229395447009BAE23 /* 2022_day5.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDB929395447009BAE23 /* 2022_day5.txt */; };
+		A793FDD329395447009BAE23 /* 2022_day4.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBA29395447009BAE23 /* 2022_day4.txt */; };
+		A793FDD429395447009BAE23 /* 2022_day1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBB29395447009BAE23 /* 2022_day1.txt */; };
+		A793FDD529395447009BAE23 /* 2022_day3.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBC29395447009BAE23 /* 2022_day3.txt */; };
+		A793FDD629395447009BAE23 /* 2022_day2.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBD29395447009BAE23 /* 2022_day2.txt */; };
+		A793FDD729395447009BAE23 /* 2022_day17.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBE29395447009BAE23 /* 2022_day17.txt */; };
+		A793FDD829395447009BAE23 /* 2022_day16.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDBF29395447009BAE23 /* 2022_day16.txt */; };
+		A793FDD929395447009BAE23 /* 2022_day14.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC029395447009BAE23 /* 2022_day14.txt */; };
+		A793FDDA29395447009BAE23 /* 2022_day15.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC129395447009BAE23 /* 2022_day15.txt */; };
+		A793FDDB29395447009BAE23 /* 2022_day11.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC229395447009BAE23 /* 2022_day11.txt */; };
+		A793FDDC29395447009BAE23 /* 2022_day10.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC329395447009BAE23 /* 2022_day10.txt */; };
+		A793FDDD29395447009BAE23 /* 2022_day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC429395447009BAE23 /* 2022_day12.txt */; };
+		A793FDDE29395447009BAE23 /* 2022_day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC529395447009BAE23 /* 2022_day13.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +277,33 @@
 		8FF2090F2757723C00416651 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FF209122757723C00416651 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8FF209182757723D00416651 /* AdventOfCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdventOfCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A793FD8729390F51009BAE23 /* 2022Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 2022Tests.swift; sourceTree = "<group>"; };
+		A793FDA7293917C3009BAE23 /* AoC_2022_Day1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AoC_2022_Day1.swift; sourceTree = "<group>"; };
+		A793FDAD29395447009BAE23 /* 2022_day22.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day22.txt; sourceTree = "<group>"; };
+		A793FDAE29395447009BAE23 /* 2022_day23.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day23.txt; sourceTree = "<group>"; };
+		A793FDAF29395447009BAE23 /* 2022_day21.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day21.txt; sourceTree = "<group>"; };
+		A793FDB029395447009BAE23 /* 2022_day20.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day20.txt; sourceTree = "<group>"; };
+		A793FDB129395447009BAE23 /* 2022_day18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day18.txt; sourceTree = "<group>"; };
+		A793FDB229395447009BAE23 /* 2022_day24.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day24.txt; sourceTree = "<group>"; };
+		A793FDB329395447009BAE23 /* 2022_day25.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day25.txt; sourceTree = "<group>"; };
+		A793FDB429395447009BAE23 /* 2022_day19.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day19.txt; sourceTree = "<group>"; };
+		A793FDB529395447009BAE23 /* 2022_day9.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day9.txt; sourceTree = "<group>"; };
+		A793FDB629395447009BAE23 /* 2022_day8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day8.txt; sourceTree = "<group>"; };
+		A793FDB729395447009BAE23 /* 2022_day6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day6.txt; sourceTree = "<group>"; };
+		A793FDB829395447009BAE23 /* 2022_day7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day7.txt; sourceTree = "<group>"; };
+		A793FDB929395447009BAE23 /* 2022_day5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day5.txt; sourceTree = "<group>"; };
+		A793FDBA29395447009BAE23 /* 2022_day4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day4.txt; sourceTree = "<group>"; };
+		A793FDBB29395447009BAE23 /* 2022_day1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day1.txt; sourceTree = "<group>"; };
+		A793FDBC29395447009BAE23 /* 2022_day3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day3.txt; sourceTree = "<group>"; };
+		A793FDBD29395447009BAE23 /* 2022_day2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day2.txt; sourceTree = "<group>"; };
+		A793FDBE29395447009BAE23 /* 2022_day17.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day17.txt; sourceTree = "<group>"; };
+		A793FDBF29395447009BAE23 /* 2022_day16.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day16.txt; sourceTree = "<group>"; };
+		A793FDC029395447009BAE23 /* 2022_day14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day14.txt; sourceTree = "<group>"; };
+		A793FDC129395447009BAE23 /* 2022_day15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day15.txt; sourceTree = "<group>"; };
+		A793FDC229395447009BAE23 /* 2022_day11.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day11.txt; sourceTree = "<group>"; };
+		A793FDC329395447009BAE23 /* 2022_day10.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day10.txt; sourceTree = "<group>"; };
+		A793FDC429395447009BAE23 /* 2022_day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day12.txt; sourceTree = "<group>"; };
+		A793FDC529395447009BAE23 /* 2022_day13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day13.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +318,7 @@
 				8FF20945275777C500416651 /* OrderedCollections in Frameworks */,
 				8FF20943275777C500416651 /* DequeModule in Frameworks */,
 				8FF20948275777E000416651 /* Numerics in Frameworks */,
+				A793FDAB29391804009BAE23 /* AsyncAlgorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +506,7 @@
 				8F5C60542762099000AC61A8 /* Utils.swift */,
 				8F9A0A072759092B00FFB165 /* 2020 */,
 				8F9A0A212759092B00FFB165 /* 2021 */,
+				A793FDA6293917C3009BAE23 /* 2022 */,
 				8FF2090F2757723C00416651 /* Assets.xcassets */,
 				8FF209112757723C00416651 /* Preview Content */,
 			);
@@ -470,8 +527,58 @@
 				8F9A0A73275909A100FFB165 /* Resources.swift */,
 				8F9A0A41275909A100FFB165 /* 2020 */,
 				8F9A0A5C275909A100FFB165 /* 2021 */,
+				A793FD8629390F44009BAE23 /* 2022 */,
 			);
 			path = AdventOfCodeTests;
+			sourceTree = "<group>";
+		};
+		A793FD8629390F44009BAE23 /* 2022 */ = {
+			isa = PBXGroup;
+			children = (
+				A793FD8729390F51009BAE23 /* 2022Tests.swift */,
+				A793FDAC29395447009BAE23 /* Resources */,
+			);
+			path = 2022;
+			sourceTree = "<group>";
+		};
+		A793FDA6293917C3009BAE23 /* 2022 */ = {
+			isa = PBXGroup;
+			children = (
+				A793FDA7293917C3009BAE23 /* AoC_2022_Day1.swift */,
+			);
+			path = 2022;
+			sourceTree = "<group>";
+		};
+		A793FDAC29395447009BAE23 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A793FDAD29395447009BAE23 /* 2022_day22.txt */,
+				A793FDAE29395447009BAE23 /* 2022_day23.txt */,
+				A793FDAF29395447009BAE23 /* 2022_day21.txt */,
+				A793FDB029395447009BAE23 /* 2022_day20.txt */,
+				A793FDB129395447009BAE23 /* 2022_day18.txt */,
+				A793FDB229395447009BAE23 /* 2022_day24.txt */,
+				A793FDB329395447009BAE23 /* 2022_day25.txt */,
+				A793FDB429395447009BAE23 /* 2022_day19.txt */,
+				A793FDB529395447009BAE23 /* 2022_day9.txt */,
+				A793FDB629395447009BAE23 /* 2022_day8.txt */,
+				A793FDB729395447009BAE23 /* 2022_day6.txt */,
+				A793FDB829395447009BAE23 /* 2022_day7.txt */,
+				A793FDB929395447009BAE23 /* 2022_day5.txt */,
+				A793FDBA29395447009BAE23 /* 2022_day4.txt */,
+				A793FDBB29395447009BAE23 /* 2022_day1.txt */,
+				A793FDBC29395447009BAE23 /* 2022_day3.txt */,
+				A793FDBD29395447009BAE23 /* 2022_day2.txt */,
+				A793FDBE29395447009BAE23 /* 2022_day17.txt */,
+				A793FDBF29395447009BAE23 /* 2022_day16.txt */,
+				A793FDC029395447009BAE23 /* 2022_day14.txt */,
+				A793FDC129395447009BAE23 /* 2022_day15.txt */,
+				A793FDC229395447009BAE23 /* 2022_day11.txt */,
+				A793FDC329395447009BAE23 /* 2022_day10.txt */,
+				A793FDC429395447009BAE23 /* 2022_day12.txt */,
+				A793FDC529395447009BAE23 /* 2022_day13.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +605,7 @@
 				8FF20947275777E000416651 /* Numerics */,
 				8FF20949275777E000416651 /* RealModule */,
 				8F9A09472757C9F300FFB165 /* Parsing */,
+				A793FDAA29391804009BAE23 /* AsyncAlgorithms */,
 			);
 			productName = AdventOfCode;
 			productReference = 8FF209082757723700416651 /* AdventOfCode.app */;
@@ -541,7 +649,7 @@
 				};
 			};
 			buildConfigurationList = 8FF209032757723700416651 /* Build configuration list for PBXProject "AdventOfCode" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -554,6 +662,7 @@
 				8FF2093F275777C500416651 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				8FF20946275777E000416651 /* XCRemoteSwiftPackageReference "swift-numerics" */,
 				8F9A09462757C9F300FFB165 /* XCRemoteSwiftPackageReference "swift-parsing" */,
+				A793FDA929391804009BAE23 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 			);
 			productRefGroup = 8FF209092757723700416651 /* Products */;
 			projectDirPath = "";
@@ -580,24 +689,37 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F9A0AAF275909A200FFB165 /* 2021_day9.txt in Resources */,
+				A793FDC629395447009BAE23 /* 2022_day22.txt in Resources */,
+				A793FDCF29395447009BAE23 /* 2022_day8.txt in Resources */,
 				8F9A0AB2275909A200FFB165 /* 2021_day21.txt in Resources */,
 				8F9A0A92275909A200FFB165 /* 2020_day25.txt in Resources */,
+				A793FDD829395447009BAE23 /* 2022_day16.txt in Resources */,
+				A793FDCA29395447009BAE23 /* 2022_day18.txt in Resources */,
+				A793FDC729395447009BAE23 /* 2022_day23.txt in Resources */,
 				8F9A0A8D275909A200FFB165 /* 2020_day12.txt in Resources */,
 				8F9A0AB5275909A200FFB165 /* 2021_day19.txt in Resources */,
 				8F9A0A83275909A100FFB165 /* 2020_day4.txt in Resources */,
 				8F9A0A9E275909A200FFB165 /* 2021_day14.txt in Resources */,
+				A793FDD229395447009BAE23 /* 2022_day5.txt in Resources */,
 				8F9A0A8E275909A200FFB165 /* 2020_day23.txt in Resources */,
 				8F9A0A9F275909A200FFB165 /* 2021_day1.txt in Resources */,
 				8F9A0A90275909A200FFB165 /* 2020_day20.txt in Resources */,
+				A793FDCC29395447009BAE23 /* 2022_day25.txt in Resources */,
 				8F9A0A7F275909A100FFB165 /* 2020_day2.txt in Resources */,
+				A793FDCD29395447009BAE23 /* 2022_day19.txt in Resources */,
 				8F9A0AA6275909A200FFB165 /* 2021_day12.txt in Resources */,
 				8F9A0AA3275909A200FFB165 /* 2021_day4.txt in Resources */,
 				8F9A0A8A275909A100FFB165 /* 2020_day10.txt in Resources */,
+				A793FDDD29395447009BAE23 /* 2022_day12.txt in Resources */,
 				8F9A0AB8275909A200FFB165 /* 2021_day18.txt in Resources */,
 				8F9A0A8C275909A100FFB165 /* 2020_day13.txt in Resources */,
 				8F9A0AB7275909A200FFB165 /* 2021_day24.txt in Resources */,
+				A793FDDB29395447009BAE23 /* 2022_day11.txt in Resources */,
 				8F9A0A98275909A200FFB165 /* 2021_day3.txt in Resources */,
 				8F9A0A8B275909A100FFB165 /* 2020_day11.txt in Resources */,
+				A793FDDA29395447009BAE23 /* 2022_day15.txt in Resources */,
+				A793FDD629395447009BAE23 /* 2022_day2.txt in Resources */,
+				A793FDD729395447009BAE23 /* 2022_day17.txt in Resources */,
 				8F9A0AB1275909A200FFB165 /* 2021_day20.txt in Resources */,
 				8F9A0A9D275909A200FFB165 /* 2021_day15.txt in Resources */,
 				8F9A0A85275909A100FFB165 /* 2020_day7.txt in Resources */,
@@ -608,23 +730,35 @@
 				8F9A0AAC275909A200FFB165 /* 2021_day23.txt in Resources */,
 				8F9A0A95275909A200FFB165 /* 2020_day24.txt in Resources */,
 				8F9A0A86275909A100FFB165 /* 2020_day16.txt in Resources */,
+				A793FDCE29395447009BAE23 /* 2022_day9.txt in Resources */,
 				8F9A0AA1275909A200FFB165 /* 2021_day10.txt in Resources */,
+				A793FDDE29395447009BAE23 /* 2022_day13.txt in Resources */,
 				8F9A0AA2275909A200FFB165 /* 2021_day11.txt in Resources */,
+				A793FDC929395447009BAE23 /* 2022_day20.txt in Resources */,
 				8F9A0A96275909A200FFB165 /* 2020_day9.txt in Resources */,
+				A793FDD929395447009BAE23 /* 2022_day14.txt in Resources */,
 				8F9A0AA0275909A200FFB165 /* 2021_day5.txt in Resources */,
 				8F9A0A94275909A200FFB165 /* 2020_day18.txt in Resources */,
 				8F9A0A88275909A100FFB165 /* 2020_day15.txt in Resources */,
+				A793FDD029395447009BAE23 /* 2022_day6.txt in Resources */,
 				8F9A0A89275909A100FFB165 /* 2020_day14.txt in Resources */,
+				A793FDC829395447009BAE23 /* 2022_day21.txt in Resources */,
 				8F9A0AAD275909A200FFB165 /* 2021_day22.txt in Resources */,
 				8F9A0A97275909A200FFB165 /* 2020_day8.txt in Resources */,
 				8F9A0AA7275909A200FFB165 /* 2021_day7.txt in Resources */,
+				A793FDD329395447009BAE23 /* 2022_day4.txt in Resources */,
 				8F9A0A9B275909A200FFB165 /* 2021_day2.txt in Resources */,
+				A793FDCB29395447009BAE23 /* 2022_day24.txt in Resources */,
 				8F9A0A93275909A200FFB165 /* 2020_day19.txt in Resources */,
 				8F9A0A80275909A100FFB165 /* 2020_day1.txt in Resources */,
 				8F9A0AB6275909A200FFB165 /* 2021_day25.txt in Resources */,
+				A793FDD429395447009BAE23 /* 2022_day1.txt in Resources */,
 				8F9A0A8F275909A200FFB165 /* 2020_day22.txt in Resources */,
 				8F9A0AA5275909A200FFB165 /* 2021_day13.txt in Resources */,
+				A793FDDC29395447009BAE23 /* 2022_day10.txt in Resources */,
+				A793FDD529395447009BAE23 /* 2022_day3.txt in Resources */,
 				8F9A0A91275909A200FFB165 /* 2020_day21.txt in Resources */,
+				A793FDD129395447009BAE23 /* 2022_day7.txt in Resources */,
 				8F9A0A84275909A100FFB165 /* 2020_day6.txt in Resources */,
 				8F9A0A87275909A100FFB165 /* 2020_day17.txt in Resources */,
 				8F9A0A9A275909A200FFB165 /* 2021_day17.txt in Resources */,
@@ -683,6 +817,7 @@
 				8FCBCDDB276352A4009311F1 /* AoC_2021_Day10.swift in Sources */,
 				8F5C60532762068400AC61A8 /* AoC_2021_Day9.swift in Sources */,
 				8F9A0A3C2759092B00FFB165 /* AoC_2020_Day18.swift in Sources */,
+				A793FDA8293917C3009BAE23 /* AoC_2022_Day1.swift in Sources */,
 				8F79AA3F276B5F4E0000AB86 /* AoC_2021_Day16.swift in Sources */,
 				8F9A0A3D2759092B00FFB165 /* AoC_2020_Day2.swift in Sources */,
 				8F9A0A2B2759092B00FFB165 /* AoC_2020_Day15.swift in Sources */,
@@ -704,6 +839,7 @@
 				8F9A0AA9275909A200FFB165 /* 2021Tests.swift in Sources */,
 				8F9A0A82275909A100FFB165 /* 2020Tests.swift in Sources */,
 				8F9A0AAE275909A200FFB165 /* Resources.swift in Sources */,
+				A793FDA429391772009BAE23 /* 2022Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,7 +905,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -824,7 +961,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -839,6 +977,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AdventOfCode/Preview Content\"";
@@ -850,17 +989,21 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com..laszloteveli.AdventOfCode;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laszloteveli.AdventOfCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -869,6 +1012,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AdventOfCode/Preview Content\"";
@@ -880,17 +1024,21 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com..laszloteveli.AdventOfCode;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laszloteveli.AdventOfCode;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -899,23 +1047,28 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F582GLX86W;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com..laszloteveli.AdventOfCodeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laszloteveli.AdventOfCodeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdventOfCode.app/AdventOfCode";
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdventOfCode.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdventOfCode";
 			};
 			name = Debug;
 		};
@@ -924,23 +1077,28 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F582GLX86W;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com..laszloteveli.AdventOfCodeTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.laszloteveli.AdventOfCodeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdventOfCode.app/AdventOfCode";
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdventOfCode.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AdventOfCode";
 			};
 			name = Release;
 		};
@@ -1009,6 +1167,14 @@
 				minimumVersion = 0.1.0;
 			};
 		};
+		A793FDA929391804009BAE23 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-async-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1046,6 +1212,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8FF20946275777E000416651 /* XCRemoteSwiftPackageReference "swift-numerics" */;
 			productName = RealModule;
+		};
+		A793FDAA29391804009BAE23 /* AsyncAlgorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A793FDA929391804009BAE23 /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;
+			productName = AsyncAlgorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
