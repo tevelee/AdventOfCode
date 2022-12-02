@@ -153,6 +153,7 @@
 		A793FDDD29395447009BAE23 /* 2022_day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC429395447009BAE23 /* 2022_day12.txt */; };
 		A793FDDE29395447009BAE23 /* 2022_day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC529395447009BAE23 /* 2022_day13.txt */; };
 		A793FDE029396239009BAE23 /* InputReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793FDDF29396239009BAE23 /* InputReader.swift */; };
+		A7CB1E8F293A59EC0031C8F4 /* AoC_2022_Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +307,7 @@
 		A793FDC429395447009BAE23 /* 2022_day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day12.txt; sourceTree = "<group>"; };
 		A793FDC529395447009BAE23 /* 2022_day13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day13.txt; sourceTree = "<group>"; };
 		A793FDDF29396239009BAE23 /* InputReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputReader.swift; sourceTree = "<group>"; };
+		A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2022_Day2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				A793FDA7293917C3009BAE23 /* AoC_2022_Day1.swift */,
+				A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */,
 			);
 			path = 2022;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				8F9A0A3F2759092B00FFB165 /* AoC_2021_Day1.swift in Sources */,
 				8F9A0A322759092B00FFB165 /* AoC_2020_Day20.swift in Sources */,
 				8F053EEA277090F90054CDA0 /* AoC_2021_Day20.swift in Sources */,
+				A7CB1E8F293A59EC0031C8F4 /* AoC_2022_Day2.swift in Sources */,
 				8F9A0A332759092B00FFB165 /* AoC_2020_Day19.swift in Sources */,
 				8F023C2727752D83007EAAA3 /* AoC_2021_Day22.swift in Sources */,
 				8F053EE8276F4D0C0054CDA0 /* AoC_2021_Day19.swift in Sources */,

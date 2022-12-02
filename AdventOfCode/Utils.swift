@@ -90,3 +90,9 @@ extension Array where Element == Int {
         reduce(into: 0, +=)
     }
 }
+
+extension AsyncSequence where Element == Int {
+    func sum() async throws -> Int {
+        try await reduce(into: 0, +=)
+    }
+}
