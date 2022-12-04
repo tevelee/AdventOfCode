@@ -153,6 +153,7 @@
 		A793FDDD29395447009BAE23 /* 2022_day12.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC429395447009BAE23 /* 2022_day12.txt */; };
 		A793FDDE29395447009BAE23 /* 2022_day13.txt in Resources */ = {isa = PBXBuildFile; fileRef = A793FDC529395447009BAE23 /* 2022_day13.txt */; };
 		A793FDE029396239009BAE23 /* InputReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A793FDDF29396239009BAE23 /* InputReader.swift */; };
+		A7A3FA60293D235F000BCDD0 /* AoC_2022_Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7A3FA5F293D235F000BCDD0 /* AoC_2022_Day3.swift */; };
 		A7CB1E8F293A59EC0031C8F4 /* AoC_2022_Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */; };
 /* End PBXBuildFile section */
 
@@ -307,6 +308,7 @@
 		A793FDC429395447009BAE23 /* 2022_day12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day12.txt; sourceTree = "<group>"; };
 		A793FDC529395447009BAE23 /* 2022_day13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2022_day13.txt; sourceTree = "<group>"; };
 		A793FDDF29396239009BAE23 /* InputReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputReader.swift; sourceTree = "<group>"; };
+		A7A3FA5F293D235F000BCDD0 /* AoC_2022_Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2022_Day3.swift; sourceTree = "<group>"; };
 		A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AoC_2022_Day2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -551,6 +553,7 @@
 			children = (
 				A793FDA7293917C3009BAE23 /* AoC_2022_Day1.swift */,
 				A7CB1E8E293A59EC0031C8F4 /* AoC_2022_Day2.swift */,
+				A7A3FA5F293D235F000BCDD0 /* AoC_2022_Day3.swift */,
 			);
 			path = 2022;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				8F9A0A2D2759092B00FFB165 /* AoC_2020_Day9.swift in Sources */,
 				8F053EE6276E17C40054CDA0 /* Reduce.swift in Sources */,
 				8F023C2B277687FF007EAAA3 /* AoC_2021_Day24.swift in Sources */,
+				A7A3FA60293D235F000BCDD0 /* AoC_2022_Day3.swift in Sources */,
 				8F9A0A392759092B00FFB165 /* AoC_2020_Day23.swift in Sources */,
 				8F053EE2276C8EC50054CDA0 /* AoC_2021_Day17.swift in Sources */,
 				8F631400275D8326008346AA /* AoC_2021_Day5.swift in Sources */,

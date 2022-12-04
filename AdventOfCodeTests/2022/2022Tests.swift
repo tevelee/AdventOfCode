@@ -2,6 +2,7 @@ import Foundation
 import AdventOfCode
 import XCTest
 
+@available(macOS 13.0, iOS 14.0, *)
 final class AoC_2022_Tests: XCTestCase {
     func test_day1_intro() throws {
         let problem = AoC_2022_Day1(.string("""
@@ -40,7 +41,6 @@ final class AoC_2022_Tests: XCTestCase {
         print("Day1 / Part2 solution: \(answer)")
     }
 
-    @available(macOS 13.0, *)
     func test_day2_intro() async throws {
         let problem = AoC_2022_Day2(.string("""
         A Y
@@ -53,7 +53,6 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(part2, 12)
     }
 
-    @available(macOS 13.0, *)
     func test_day2() async throws {
         let problem = try AoC_2022_Day2(.url(Resources.url(for: "2022_day2")))
 
@@ -63,6 +62,35 @@ final class AoC_2022_Tests: XCTestCase {
         print("Day2 / Part1 solution: \(answer)")
 
         answer = 12014
+        result = try await problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day2 / Part2 solution: \(answer)")
+    }
+
+    func test_day3_intro() async throws {
+        let problem = AoC_2022_Day3(.string("""
+        vJrwpWtwJgWrhcsFMMfFFhFp
+        jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
+        PmmdzqPrVvPwwTWBwg
+        wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
+        ttgJtRGJQctTZtZT
+        CrZsJsPPZsGzwwsLwLmpwMDw
+        """))
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 157)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 70)
+    }
+
+    func test_day3() async throws {
+        let problem = try AoC_2022_Day3(.url(Resources.url(for: "2022_day3")))
+
+        var answer = 7763
+        var result = try await problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day2 / Part1 solution: \(answer)")
+
+        answer = 2569
         result = try await problem.solvePart2()
         XCTAssertEqual(result, answer)
         print("Day2 / Part2 solution: \(answer)")
