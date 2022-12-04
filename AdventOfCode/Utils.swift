@@ -96,3 +96,11 @@ extension AsyncSequence where Element == Int {
         try await reduce(into: 0, +=)
     }
 }
+
+extension AsyncSequence {
+    var count: Int {
+        get async throws {
+            try await reduce(0) { result, _ in result + 1 }
+        }
+    }
+}

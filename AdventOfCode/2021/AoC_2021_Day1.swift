@@ -124,11 +124,6 @@ public final class AoC_2021_Day1 {
 }
 
 private extension AsyncSequence {
-    var count: Int {
-        get async throws {
-            try await reduce(0) { result, _ in result + 1 }
-        }
-    }
     func enumerated() -> EnumeratedAsyncSequence<Self> {
         EnumeratedAsyncSequence(base: self)
     }
