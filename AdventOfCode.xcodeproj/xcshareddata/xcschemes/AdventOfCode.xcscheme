@@ -39,6 +39,12 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "AoC_2020_Tests">
+               </Test>
+               <Test
+                  Identifier = "AoC_2021_Tests">
+               </Test>
+               <Test
                   Identifier = "AoC_2021_Tests/test_day15()">
                </Test>
                <Test

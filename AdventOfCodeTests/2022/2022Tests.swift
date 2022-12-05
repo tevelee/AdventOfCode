@@ -124,4 +124,36 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day4 / Part2 solution: \(answer)")
     }
+
+    func test_day5_intro() throws {
+        let problem = AoC_2022_Day5(.string("""
+            [D]
+        [N] [C]
+        [Z] [M] [P]
+         1   2   3
+
+        move 1 from 2 to 1
+        move 3 from 1 to 3
+        move 2 from 2 to 1
+        move 1 from 1 to 2
+        """))
+        let part1 = try problem.solvePart1()
+        XCTAssertEqual(part1, "CMZ")
+        let part2 = try problem.solvePart2()
+        XCTAssertEqual(part2, "MCD")
+    }
+
+    func test_day5() throws {
+        let problem = try AoC_2022_Day5(.url(Resources.url(for: "2022_day5")))
+
+        var answer = "WHTLRMZRC"
+        var result = try problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day5 / Part1 solution: \(answer)")
+
+        answer = "GMPMLWNMG"
+        result = try problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day5 / Part2 solution: \(answer)")
+    }
 }
