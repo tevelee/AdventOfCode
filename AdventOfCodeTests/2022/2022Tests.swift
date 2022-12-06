@@ -156,4 +156,32 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day5 / Part2 solution: \(answer)")
     }
+
+    func test_day6_intro() throws {
+        try XCTAssertEqual(AoC_2022_Day6(.string("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).solvePart1(), 7)
+        try XCTAssertEqual(AoC_2022_Day6(.string("bvwbjplbgvbhsrlpgdmjqwftvncz")).solvePart1(), 5)
+        try XCTAssertEqual(AoC_2022_Day6(.string("nppdvjthqldpwncqszvftbrmjlhg")).solvePart1(), 6)
+        try XCTAssertEqual(AoC_2022_Day6(.string("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg")).solvePart1(), 10)
+        try XCTAssertEqual(AoC_2022_Day6(.string("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).solvePart1(), 11)
+
+        try XCTAssertEqual(AoC_2022_Day6(.string("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).solvePart2(), 19)
+        try XCTAssertEqual(AoC_2022_Day6(.string("bvwbjplbgvbhsrlpgdmjqwftvncz")).solvePart2(), 23)
+        try XCTAssertEqual(AoC_2022_Day6(.string("nppdvjthqldpwncqszvftbrmjlhg")).solvePart2(), 23)
+        try XCTAssertEqual(AoC_2022_Day6(.string("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg")).solvePart2(), 29)
+        try XCTAssertEqual(AoC_2022_Day6(.string("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).solvePart2(), 26)
+    }
+
+    func test_day6() throws {
+        let problem = try AoC_2022_Day6(.url(Resources.url(for: "2022_day6")))
+
+        var answer = 1920
+        var result = try problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day6 / Part1 solution: \(answer)")
+
+        answer = 2334
+        result = try problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day6 / Part2 solution: \(answer)")
+    }
 }
