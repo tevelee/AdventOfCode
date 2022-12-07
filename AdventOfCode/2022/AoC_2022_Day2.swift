@@ -17,10 +17,9 @@ public final class AoC_2022_Day2 {
                 }
                 return (opponentsMove, myMove)
             }
-            .map { opponentsMove, myMove in
+            .sum { opponentsMove, myMove in
                 myMove.score(against: opponentsMove)
             }
-            .sum()
     }
 
     public func solvePart2() async throws -> Int {
@@ -32,11 +31,10 @@ public final class AoC_2022_Day2 {
                 }
                 return (opponentsMove, outcome)
             }
-            .map { opponentsMove, outcome in
+            .sum { opponentsMove, outcome in
                 let myMove = opponentsMove.move(for: outcome)
                 return myMove.score(against: opponentsMove)
             }
-            .sum()
     }
 
     private func entries() -> AnyAsyncSequence<(Character, Character)> {

@@ -12,16 +12,14 @@ public final class AoC_2022_Day3 {
         try await input.lines
             .map(split)
             .compactMap(commonCharacter)
-            .map(score)
-            .sum()
+            .sum(of: score)
     }
 
     public func solvePart2() async throws -> Int {
         try await input.lines
             .chunks(ofCount: 3)
             .compactMap(commonCharacter)
-            .map(score)
-            .sum()
+            .sum(of: score)
     }
 
     private lazy var scores: [Character: Int] = {

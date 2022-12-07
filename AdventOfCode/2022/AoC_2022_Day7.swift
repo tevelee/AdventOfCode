@@ -14,8 +14,7 @@ public final class AoC_2022_Day7 {
         let tree = try buildTree(from: folders)
         return tree.directories
             .filter { $0.size <= 100_000 }
-            .map(\.size)
-            .sum()
+            .sum(of: \.size)
     }
 
     public func solvePart2() throws -> Int {
@@ -65,7 +64,7 @@ private func buildTree(root: URL = URL(filePath: "./"), from folders: [URL: [Str
         throw ParseError()
     }
     return try .directory(name: root.lastPathComponent, contents: contents.map { content in
-        if let folderName = try /dir (.*)/.firstMatch(in: content)?.output.1 {
+        if let folderName = try /dir (?<name>.*)/.firstMatch(in: content)?.output.name {
             return try buildTree(root: root.appending(component: String(folderName)), from: folders)
         } else if let file = try /(?<size>\d+) (?<name>.*)/.firstMatch(in: content)?.output, let size = Int(file.size) {
             return .file(name: String(file.name), size: size)
@@ -93,7 +92,7 @@ private enum FileTree: CustomStringConvertible {
         case .file(_, let size):
             return size
         case .directory(_, let contents):
-            return contents.map(\.size).sum()
+            return contents.sum(of: \.size)
         }
     }
 

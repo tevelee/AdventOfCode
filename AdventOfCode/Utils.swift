@@ -85,15 +85,27 @@ func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Elemen
     }
 }
 
-extension Array where Element == Int {
-    func sum() -> Int {
-        reduce(into: 0, +=)
+extension Sequence {
+    func sum<T: Numeric>(of property: (Element) -> T) -> T {
+        reduce(into: 0) { $0 += property($1) }
     }
 }
 
-extension AsyncSequence where Element == Int {
-    func sum() async throws -> Int {
-        try await reduce(into: 0, +=)
+extension Sequence where Element: Numeric {
+    func sum() -> Element {
+        sum { $0 }
+    }
+}
+
+extension AsyncSequence {
+    func sum<T: Numeric>(of property: (Element) -> T) async throws -> T {
+        try await reduce(into: 0) { $0 += property($1) }
+    }
+}
+
+extension AsyncSequence where Element: Numeric {
+    func sum() async throws -> Element {
+        try await sum { $0 }
     }
 }
 
