@@ -84,6 +84,10 @@ public extension Sequence {
     func sum<T: Numeric>(of property: (Element) -> T) -> T {
         reduce(into: 0) { $0 += property($1) }
     }
+
+    func count(where condition: (Element) throws -> Bool) rethrows -> Int {
+        try filter(condition).count
+    }
 }
 
 public extension Sequence where Element: Numeric {
