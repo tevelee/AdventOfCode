@@ -8,12 +8,17 @@ let package = Package(
         .macOS(.v13),
         .iOS(.v16)
     ],
+    products: [
+        .executable(name: "FetchEvents", targets: ["FetchEvents"]),
+    ],
     dependencies: [
          .package(url: "https://github.com/apple/swift-algorithms.git", from: "0.2.1"),
          .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "0.0.3"),
 //         .package(url: "https://github.com/apple/swift-collections.git", from: "0.0.7"),
 //         .package(url: "https://github.com/apple/swift-numerics.git", from: "0.1.0"),
          .package(url: "https://github.com/pointfreeco/swift-parsing.git", from: "0.3.1"),
+         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
+         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
     ],
     targets: [
         .target(name: "AoC-2022",
@@ -57,5 +62,11 @@ let package = Package(
                 dependencies: [
                     .product(name: "Algorithms", package: "swift-algorithms")
                 ]),
+
+        .executableTarget(name: "FetchEvents",
+                          dependencies: [
+                            .product(name: "SwiftSoup", package: "SwiftSoup"),
+                            .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                          ]),
     ]
 )
