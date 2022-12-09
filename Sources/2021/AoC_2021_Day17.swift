@@ -41,8 +41,11 @@ public final class AoC_2021_Day17 {
             number
             ".."
             number
+            Optionally {
+                One(.newlineSequence)
+            }
         }
-        let dimensions = try! regex.firstMatch(in: input)!.output
+        let dimensions = input.wholeMatch(of: regex)!.output
         targetArea = TargetArea(x: dimensions.1 ... dimensions.2, y: dimensions.3 ... dimensions.4)
     }
 

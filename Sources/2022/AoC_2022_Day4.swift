@@ -1,4 +1,5 @@
 import RegexBuilder
+import Utils
 
 public final class AoC_2022_Day4 {
     let input: Input
@@ -26,24 +27,16 @@ public final class AoC_2022_Day4 {
     private func ranges() -> AnyAsyncSequence<(ClosedRange<Int>, ClosedRange<Int>)> {
         input.lines
             .compactMap { line -> (ClosedRange<Int>, ClosedRange<Int>)? in
-                let number = Regex {
-                    TryCapture {
-                        OneOrMore(.digit)
-                    } transform: {
-                        Int($0)
-                    }
-                }
-                let range = Regex {
-                    number
-                    "-"
-                    number
-                }
                 let ranges = Regex {
-                    range
+                    Capture(.integer)
+                    "-"
+                    Capture(.integer)
                     ","
-                    range
+                    Capture(.integer)
+                    "-"
+                    Capture(.integer)
                 }
-                guard let values = try ranges.wholeMatch(in: line)?.output else {
+                guard let values = line.wholeMatch(of: ranges)?.output else {
                     return nil
                 }
                 return (values.1...values.2, values.3...values.4)

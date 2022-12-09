@@ -37,7 +37,7 @@ public final class AoC_2022_Day2 {
     private func entries() -> AnyAsyncSequence<(Character, Character)> {
         input.lines
             .compactMap { line in
-                guard let components = try? /(\w) (\w)/.firstMatch(in: line)?.output,
+                guard let components = line.wholeMatch(of: /(\w) (\w)/)?.output,
                       let firstSymbol = components.1.first,
                       let secondSymbol = components.2.first else {
                     return nil

@@ -1,4 +1,5 @@
 import RegexBuilder
+import Utils
 
 public final class AoC_2022_Day5 {
     private let input: Input
@@ -86,23 +87,11 @@ private extension Instruction {
         let destination = Reference<Int>()
         let regex = Regex {
             "move "
-            TryCapture(as: count) {
-                OneOrMore(.digit)
-            } transform: {
-                Int($0)
-            }
+            Capture(.integer, as: count)
             " from "
-            TryCapture(as: origin) {
-                OneOrMore(.digit)
-            } transform: {
-                Int($0)
-            }
+            Capture(.integer, as: origin)
             " to "
-            TryCapture(as: destination) {
-                OneOrMore(.digit)
-            } transform: {
-                Int($0)
-            }
+            Capture(.integer, as: destination)
         }
 
         guard let values = try regex.wholeMatch(in: line) else {

@@ -1,4 +1,5 @@
 import RegexBuilder
+import Utils
 
 public final class AoC_2022_Day9 {
     let input: Input
@@ -105,13 +106,9 @@ private func parse(line: String) throws -> (direction: Direction, steps: Int) {
             $0.first.flatMap(Direction.init)
         }
         " "
-        TryCapture {
-            OneOrMore(.digit)
-        } transform: {
-            Int($0)
-        }
+        Capture(.integer)
     }
-    guard let output = try regex.firstMatch(in: line)?.output else {
+    guard let output = line.wholeMatch(of: regex)?.output else {
         throw ParseError()
     }
     return (direction: output.1, steps: output.2)

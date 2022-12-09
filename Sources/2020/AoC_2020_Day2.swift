@@ -37,17 +37,9 @@ public final class AoC_2020_Day2 {
 
     private func parse(line: String) throws -> (min: Int, max: Int, character: Character, input: Substring) {
         let regex = Regex {
-            TryCapture {
-                OneOrMore(.digit)
-            } transform: {
-                Int($0)
-            }
+            Capture(.integer)
             "-"
-            TryCapture {
-                OneOrMore(.digit)
-            } transform: {
-                Int($0)
-            }
+            Capture(.integer)
             " "
             TryCapture {
                 One(.word)
@@ -59,7 +51,7 @@ public final class AoC_2020_Day2 {
                 ZeroOrMore(.any)
             }
         }
-        guard let values = try regex.firstMatch(in: line)?.output else {
+        guard let values = line.wholeMatch(of: regex)?.output else {
             throw ParsingError()
         }
         return (values.1, values.2, values.3, values.4)

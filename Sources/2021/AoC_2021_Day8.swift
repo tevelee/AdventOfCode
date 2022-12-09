@@ -32,7 +32,7 @@ public final class AoC_2021_Day8 {
                 .compactMap { digit in self.digits[Set(digit)] }
             return String(numbers)
         }
-        .compactMap(Int.init)
+        .compactMap { Int($0) }
         .reduce(0, +)
     }
 

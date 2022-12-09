@@ -25,7 +25,7 @@ public final class AoC_2021_Day22 {
         var on: [Cuboid] = []
         var off: [Cuboid] = []
 
-        for try await line in lines.compactMap(parse) where line.ranges.overlaps(bounds) {
+        for try await line in lines.compactMap({ try self.parse(line: $0) }) where line.ranges.overlaps(bounds) {
             let cuboid = line.ranges.clamped(to: bounds)
             let originalOff = off
             if line.isOn {
@@ -82,7 +82,7 @@ public final class AoC_2021_Day22 {
             ".."
             number
         }
-        guard let output = try regex.firstMatch(in: line)?.output else {
+        guard let output = line.wholeMatch(of: regex)?.output else {
             throw ParsingError()
         }
         return (output.1, Cuboid(x: output.2...output.3,

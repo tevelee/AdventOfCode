@@ -13,7 +13,7 @@ public final class AoC_2021_Day10 {
 
     public func solvePart1() async throws -> Int {
         try await lines
-            .compactMap(invalidCharacter)
+            .compactMap { self.invalidCharacter(in: $0) }
             .map(\.part1Score)
             .reduce(0, +)
     }

@@ -19,11 +19,11 @@ public final class AoC_2021_Day18 {
     }
 
     public func solvePart1() async throws -> Int {
-        try await lines.map(parse).reduce(add)!.magnitude
+        try await lines.map { self.parse(line: $0) }.reduce(add)!.magnitude
     }
 
     public func solvePart2() async throws -> Int {
-        let values = try await lines.map(parse).collect()
+        let values = try await lines.map { self.parse(line: $0) }.collect()
         return product(values, values)
             .lazy
             .filter { $0 != $1 }

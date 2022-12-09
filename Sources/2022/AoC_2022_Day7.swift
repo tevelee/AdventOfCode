@@ -39,7 +39,7 @@ private func parse(_ lines: some Sequence<String>) throws -> [URL: [String]] {
     for line in lines {
         if line.hasPrefix("$") {
             currentCommand = line
-            if let folderName = try? (/\$ cd (.*)/.firstMatch(in: line)?.output.1).map(String.init) {
+            if let folderName = (line.wholeMatch(of: /\$ cd (.*)/)?.output.1).map(String.init) {
                 if folderName == ".." {
                     pwd.deleteLastPathComponent()
                 } else if folderName == "/" {
@@ -63,9 +63,9 @@ private func buildTree(root: URL = URL(filePath: "./"), from folders: [URL: [Str
         throw ParseError()
     }
     return try .directory(name: root.lastPathComponent, contents: contents.map { content in
-        if let folderName = try /dir (?<name>.*)/.firstMatch(in: content)?.output.name {
+        if let folderName = content.wholeMatch(of: /dir (?<name>.*)/)?.output.name {
             return try buildTree(root: root.appending(component: String(folderName)), from: folders)
-        } else if let file = try /(?<size>\d+) (?<name>.*)/.firstMatch(in: content)?.output, let size = Int(file.size) {
+        } else if let file = content.wholeMatch(of: /(?<size>\d+) (?<name>.*)/)?.output, let size = Int(file.size) {
             return .file(name: String(file.name), size: size)
         } else {
             throw ParseError()

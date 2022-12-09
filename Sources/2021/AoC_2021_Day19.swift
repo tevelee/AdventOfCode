@@ -14,26 +14,18 @@ public final class AoC_2021_Day19 {
     }
 
     public init(_ input: String) {
-        let number = TryCapture {
-            Optionally {
-                "-"
-            }
-            OneOrMore(.digit)
-        } transform: {
-            Int($0)
-        }
         let regex = Regex {
-            number
+            Capture(.integer)
             ","
-            number
+            Capture(.integer)
             ","
-            number
+            Capture(.integer)
         }
         let raw = input.paragraphs.map { lines -> (scanner: Int, beacons: Set<Point>) in
             let headAndTail = lines.headAndTail!
-            let scanner = Int(try! /--- scanner (\d+) ---/.firstMatch(in: headAndTail.head)!.output.1)!
+            let scanner = Int(headAndTail.head.wholeMatch(of: /--- scanner (\d+) ---/)!.output.1)!
             let beacons = Set(headAndTail.tail.map { line -> Point in
-                let numbers = try! regex.firstMatch(in: line)!.output
+                let numbers = line.wholeMatch(of: regex)!.output
                 return Point(x: Double(numbers.1), y: Double(numbers.2), z: Double(numbers.3))
             })
             return (scanner, beacons)
