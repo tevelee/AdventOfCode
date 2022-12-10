@@ -1,4 +1,5 @@
 import Algorithms
+import Utils
 
 public final class AoC_2021_Day13 {
     struct Point: Hashable {
@@ -48,7 +49,7 @@ public final class AoC_2021_Day13 {
             (width, height, dots) = fold(dots: dots, width: width, height: height, instruction: instruction)
         }
         debugPrint(dots, width: width, height: height)
-        return String(pointsByCharacters(in: dots).map(draw).compactMap { characterMap[$0] })
+        return String(pointsByCharacters(in: dots).map(draw).map { characters4x6[$0] ?? "?" })
     }
 
     private func fold(dots: Set<Point>,
@@ -73,7 +74,7 @@ public final class AoC_2021_Day13 {
         (0 ..< 6).map { y in
             (0 ..< 4)
                 .map { Point(x: $0, y: y) }
-                .map { pixels.contains($0) ? "X" : " " }
+                .map { pixels.contains($0) ? "#" : "." }
                 .joined(separator: "")
                 .trimTrailingWhitespaces()
         }.joined(separator: "\n")
@@ -94,73 +95,6 @@ public final class AoC_2021_Day13 {
         }
         print()
     }
-
-    private let characterMap: [String: Character] = [
-        "R": """
-        XXX
-        X  X
-        X  X
-        XXX
-        X X
-        X  X
-        """,
-        "G": """
-         XX
-        X  X
-        X
-        X XX
-        X  X
-         XXX
-        """,
-        "B": """
-        XXX
-        X  X
-        XXX
-        X  X
-        X  X
-        XXX
-        """,
-        "P": """
-        XXX
-        X  X
-        X  X
-        XXX
-        X
-        X
-        """,
-        "F": """
-        XXXX
-        X
-        XXX
-        X
-        X
-        X
-        """,
-        "H": """
-        X  X
-        X  X
-        XXXX
-        X  X
-        X  X
-        X  X
-        """,
-        "L": """
-        X
-        X
-        X
-        X
-        X
-        XXXX
-        """,
-        "Z": """
-        XXXX
-           X
-          X
-         X
-        X
-        XXXX
-        """,
-    ].flipped
 }
 
 private extension String {

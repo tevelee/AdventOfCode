@@ -115,3 +115,9 @@ public extension AsyncSequence {
         }
     }
 }
+
+public extension Dictionary where Value: Hashable {
+    var flipped: [Value: Key] {
+        Dictionary<Value, [Key]>(grouping: keys, by: { self[$0]! }).compactMapValues(\.first)
+    }
+}
