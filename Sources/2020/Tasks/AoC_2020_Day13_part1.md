@@ -13,13 +13,16 @@ To save time once you arrive, your goal is to figure out **the earliest bus you 
  
 For example, suppose you have the following notes:
  
+
 ```
 939
 7,13,x,x,59,x,31,19
 ```
+
  
 Here, the earliest timestamp you could depart is `939`, and the bus IDs in service are `7`, `13`, `59`, `31`, and `19`. Near timestamp `939`, these bus IDs depart at the times marked `D`:
  
+
 ```
 time   bus 7   bus 13  bus 59  bus 31  bus 19
 929      .       .       .       .       .
@@ -44,6 +47,7 @@ time   bus 7   bus 13  bus 59  bus 31  bus 19
 948      .       .       .       .       .
 949      .       D       .       .       .
 ```
+
  
 The earliest bus you could take is bus ID `59`. It doesn't depart until timestamp `944`, so you would need to wait `944 - 939 = 5` minutes before it departs. Multiplying the bus ID by the number of minutes you'd need to wait gives **295**.
  

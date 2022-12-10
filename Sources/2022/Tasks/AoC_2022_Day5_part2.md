@@ -7,24 +7,29 @@ The CrateMover 9001 is notable for many new and exciting features: air condition
  
 Again considering the example above, the crates begin in the same configuration:
  
+
 ```
 [D]    
 [N] [C]    
 [Z] [M] [P]
  1   2   3
 ```
+
  
 Moving a single crate from stack 2 to stack 1 behaves the same as before:
  
+
 ```
 [D]        
 [N] [C]    
 [Z] [M] [P]
  1   2   3
 ```
+
  
 However, the action of moving three crates from stack 1 to stack 3 means that those three moved crates **stay in the same order**, resulting in this new configuration:
  
+
 ```
 [D]
         [N]
@@ -32,9 +37,11 @@ However, the action of moving three crates from stack 1 to stack 3 means that th
     [M] [P]
  1   2   3
 ```
+
  
 Next, as both crates are moved from stack 2 to stack 1, they **retain their order** as well:
  
+
 ```
 [D]
         [N]
@@ -42,9 +49,11 @@ Next, as both crates are moved from stack 2 to stack 1, they **retain their orde
 [M]     [P]
  1   2   3
 ```
+
  
 Finally, a single crate is still moved from stack 1 to stack 2, but now it's crate `C` that gets moved:
  
+
 ```
 [D]
         [N]
@@ -52,6 +61,7 @@ Finally, a single crate is still moved from stack 1 to stack 2, but now it's cra
 [M] [C] [P]
  1   2   3
 ```
+
  
 In this example, the CrateMover 9001 has put the crates in a totally different order: `MCD`.
  

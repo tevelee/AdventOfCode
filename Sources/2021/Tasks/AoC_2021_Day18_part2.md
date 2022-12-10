@@ -3,10 +3,11 @@ You notice a second question on the back of the homework assignment:
  
 What is the largest magnitude you can get from adding only two of the snailfish numbers?
  
-Note that snailfish addition is not [commutative](https://en.wikipedia.org/wiki/Commutative_property - that is, `x + y` and `y + x` can produce different results.
+Note that snailfish addition is not [commutative](https://en.wikipedia.org/wiki/Commutative_property) - that is, `x + y` and `y + x` can produce different results.
  
 Again considering the last example homework assignment above:
  
+
 ```
 [[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]
 [[[5,[2,8]],4],[5,[[9,9],0]]]
@@ -19,6 +20,7 @@ Again considering the last example homework assignment above:
 [[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]
 [[[[5,2],5],[8,[3,7]]],[[5,[7,5]],[4,4]]]
 ```
+
  
 The largest magnitude of the sum of any two snailfish numbers in this list is `3993`. This is the magnitude of `[[2,[[7,7],7]],[[5,8],[[9,3],[0,2]]]]` + `[[[0,[5,8]],[[1,7],[9,6]]],[[4,[1,2]],[[1,4],2]]]`, which reduces to `[[[[7,8],[6,6]],[[6,0],[7,7]]],[[[7,8],[8,8]],[[7,9],[0,6]]]]`.
  

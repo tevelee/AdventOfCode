@@ -1,11 +1,13 @@
 ## --- Part Two ---
 Suddenly, the experimental antenna control console lights up:
  
+
 ```
 Sleigh keys detected!
 ```
+
  
-According to the console, the keys are **directly under the submarine**. You landed right on them! Using a robotic arm on the submarine, you move the sleigh keys into the airlock.
+According to the console, the keys are **directly under the submarine**. You landed<!--- Thanks to the deep-sea marine biologist, who apparently works at the Biham-Middleton-Levine oceanic research institute. --> right on them! Using a robotic arm on the submarine, you move the sleigh keys into the airlock.
  
 Now, you just need to get them to Santa in time to save Christmas! You check your clock - it **is** Christmas. There's no way you can get them back to the surface in time.
  
@@ -13,9 +15,11 @@ Just as you start to lose hope, you notice a button on the sleigh keys: **remote
  
 The experimental antenna control console lights up again:
  
+
 ```
 Energy source detected. Integrating energy source from device "sleigh keys"...done. Installing device drivers...done. Recalibrating experimental antenna...done. Boost strength due to matching signal phase: 1 star
 ```
+
  
 Only ***49 stars*** to go.
  

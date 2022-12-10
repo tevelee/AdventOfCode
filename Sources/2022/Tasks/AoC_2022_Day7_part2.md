@@ -7,10 +7,15 @@ In the example above, the total size of the outermost directory (and thus the to
  
 To achieve this, you have the following options:
  
+ 
 - Delete directory `e`, which would increase unused space by `584`.
+ 
 - Delete directory `a`, which would increase unused space by `94853`.
+ 
 - Delete directory `d`, which would increase unused space by `24933642`.
+ 
 - Delete directory `/`, which would increase unused space by `48381165`.
+ 
  
 Directories `e` and `a` are both too small; deleting them would not free up enough space. However, directories `d` and `/` are both big enough! Between these, choose the **smallest**: `d`, increasing unused space by `24933642`.
  

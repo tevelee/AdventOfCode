@@ -5,6 +5,7 @@ To get the best idea of what your options are for launching the probe, you need 
  
 In the above example, there are `112` different initial velocity values that meet these criteria:
  
+
 ```
 23,-10  25,-9   27,-5   29,-6   22,-6   21,-7   9,0     27,-7   24,-5
 25,-7   26,-6   25,-5   6,8     11,-2   20,-5   29,-10  6,3     28,-7
@@ -20,6 +21,7 @@ In the above example, there are `112` different initial velocity values that mee
 27,-10  7,2     30,-9   21,-8   22,-7   24,-9   20,-6   6,9     29,-5
 8,-2    27,-8   30,-5   24,-7
 ```
+
  
 **How many distinct initial velocity values cause the probe to be within the target area after any step?**
  

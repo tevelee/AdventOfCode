@@ -1,16 +1,18 @@
 ## --- Day 24: Immune System Simulator 20XX ---
-After [a weird buzzing noise](https://www.youtube.com/watch?v=NDVjLt_QHL8&t=7, you appear back at the man's cottage. He seems relieved to see his friend, but quickly notices that the little reindeer caught some kind of cold while out exploring.
+After [a weird buzzing noise](https://www.youtube.com/watch?v=NDVjLt_QHL8&t=7), you appear back at the man's cottage. He seems relieved to see his friend, but quickly notices that the little reindeer caught some kind of cold while out exploring.
  
 The portly man explains that this reindeer's immune system isn't similar to regular reindeer immune systems:
  
-The **immune system** and the **infection** each have an army made up of several **groups**; each **group** consists of one or more identical **units**. The armies repeatedly **fight** until only one army has units remaining.
+The **immune system** and the **infection** each have an army<!--- On second thought, it's pretty similar to regular reindeer immune systems. --> made up of several **groups**; each **group** consists of one or more identical **units**. The armies repeatedly **fight** until only one army has units remaining.
  
 **Units** within a group all have the same **hit points** (amount of damage a unit can take before it is destroyed), **attack damage** (the amount of damage each unit deals), an **attack type**, an **initiative** (higher initiative units attack first and win ties), and sometimes **weaknesses** or **immunities**. Here is an example group:
  
+
 ```
 18 units each with 729 hit points (weak to fire; immune to cold, slashing)
  with an attack that does 8 radiation damage at initiative 10
 ```
+
  
 Each group also has an **effective power**: the number of units in that group multiplied by their attack damage. The above group has an effective power of `18 * 8 = 144`. Groups never have zero or negative units; instead, the group is removed from combat.
  
@@ -32,6 +34,7 @@ After the fight is over, if both armies still contain units, a new fight begins;
  
 For example, consider the following armies:
  
+
 ```
 Immune System:
 17 units each with 5390 hit points (weak to radiation, bludgeoning) with
@@ -45,9 +48,11 @@ Infection:
 4485 units each with 2961 hit points (immune to radiation; weak to fire,
  cold) with an attack that does 12 slashing damage at initiative 4
 ```
+
  
 If these armies were to enter combat, the following fights, including details during the target selection and attacking phases, would take place:
  
+
 ```
 Immune System:
 Group 1 contains 17 units
@@ -68,7 +73,9 @@ Immune System group 2 attacks defending group 1, killing 4 units
 Immune System group 1 attacks defending group 2, killing 51 units
 Infection group 1 attacks defending group 1, killing 17 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 905 units
@@ -83,7 +90,9 @@ Immune System group 2 would deal defending group 2 22625 damage
 Immune System group 2 attacks defending group 1, killing 4 units
 Infection group 1 attacks defending group 2, killing 144 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 761 units
@@ -98,7 +107,9 @@ Immune System group 2 would deal defending group 2 19025 damage
 Immune System group 2 attacks defending group 1, killing 4 units
 Infection group 1 attacks defending group 2, killing 143 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 618 units
@@ -113,7 +124,9 @@ Immune System group 2 would deal defending group 2 15450 damage
 Immune System group 2 attacks defending group 1, killing 3 units
 Infection group 1 attacks defending group 2, killing 143 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 475 units
@@ -128,7 +141,9 @@ Immune System group 2 would deal defending group 2 11875 damage
 Immune System group 2 attacks defending group 1, killing 2 units
 Infection group 1 attacks defending group 2, killing 142 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 333 units
@@ -143,7 +158,9 @@ Immune System group 2 would deal defending group 2 8325 damage
 Immune System group 2 attacks defending group 1, killing 1 unit
 Infection group 1 attacks defending group 2, killing 142 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 191 units
@@ -158,7 +175,9 @@ Immune System group 2 would deal defending group 2 4775 damage
 Immune System group 2 attacks defending group 1, killing 1 unit
 Infection group 1 attacks defending group 2, killing 142 units
 ```
+
  
+
 ```
 Immune System:
 Group 2 contains 49 units
@@ -173,7 +192,9 @@ Immune System group 2 would deal defending group 2 1225 damage
 Immune System group 2 attacks defending group 1, killing 0 units
 Infection group 1 attacks defending group 2, killing 49 units
 ```
+
  
+
 ```
 Immune System:
 No groups remain.
@@ -181,6 +202,7 @@ Infection:
 Group 1 contains 782 units
 Group 2 contains 4434 units
 ```
+
  
 In the example above, the winning army ends up with `782 + 4434 = 5216` units.
  

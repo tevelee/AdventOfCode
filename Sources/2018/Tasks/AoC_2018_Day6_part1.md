@@ -1,16 +1,17 @@
 ## --- Day 6: Chronal Coordinates ---
 The device on your wrist beeps several times, and once again you feel like you're falling.
  
-"Situation critical," the device announces. "Destination indeterminate. Chronal interference detected. Please specify new target coordinates."
+"Situation critical<!--- Why is the situation always critical? Why can't the situation just be boring for once? -->," the device announces. "Destination indeterminate. Chronal interference detected. Please specify new target coordinates."
  
 The device then produces a list of coordinates (your puzzle input). Are they places it thinks are safe or dangerous? It recommends you check manual page 729. The Elves did not give you a manual.
  
 **If they're dangerous,** maybe you can minimize the danger by finding the coordinate that gives the largest distance from the other points.
  
-Using only the [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry, determine the **area** around each coordinate by counting the number of [integer](https://en.wikipedia.org/wiki/Integer X,Y locations that are **closest** to that coordinate (and aren't **tied in distance** to any other coordinate).
+Using only the [Manhattan distance](https://en.wikipedia.org/wiki/Taxicab_geometry), determine the **area** around each coordinate by counting the number of [integer](https://en.wikipedia.org/wiki/Integer) X,Y locations that are **closest** to that coordinate (and aren't **tied in distance** to any other coordinate).
  
 Your goal is to find the size of the **largest area** that isn't infinite. For example, consider the following list of coordinates:
  
+
 ```
 1, 1
 1, 6
@@ -19,9 +20,11 @@ Your goal is to find the size of the **largest area** that isn't infinite. For e
 5, 5
 8, 9
 ```
+
  
 If we name these coordinates `A` through `F`, we can draw them on a grid, putting `0,0` at the top left:
  
+
 ```
 ..........
 .A........
@@ -34,9 +37,11 @@ If we name these coordinates `A` through `F`, we can draw them on a grid, puttin
 ..........
 ........F.
 ```
+
  
 This view is partial - the actual grid extends infinitely in all directions. Using the Manhattan distance, each location's closest coordinate can be determined, shown here in lowercase:
  
+
 ```
 aaaaa.cccc
 aAaaa.cccc
@@ -49,6 +54,7 @@ bbb.eeefff
 bbb.eeffff
 bbb.ffffFf
 ```
+
  
 Locations shown as `.` are equally far from two or more coordinates, and so they don't count as being closest to any.
  

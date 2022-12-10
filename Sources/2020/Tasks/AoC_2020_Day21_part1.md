@@ -1,7 +1,7 @@
 ## --- Day 21: Allergen Assessment ---
 You reach the train's last stop and the closest you can get to your vacation island without getting wet. There aren't even any boats here, but nothing can stop you now: you build a raft. You just need a few days' worth of food for your journey.
  
-You don't speak the local language, so you can't read any ingredients lists. However, sometimes, allergens are listed in a language you **do** understand. You should be able to use this information to determine which ingredient contains which allergen and work out which foods are safe to take with you on your trip.
+You don't speak the local language, so you can't read any ingredients lists. However, sometimes, allergens are listed in a language you **do** understand. You should be able to use this information to determine which ingredient contains which allergen and work out which foods are safe<!--- I actually considered doing this once. I do not recommend it. --> to take with you on your trip.
  
 You start by compiling a list of foods (your puzzle input), one food per line. Each line includes that food's **ingredients list** followed by some or all of the allergens the food contains.
  
@@ -9,12 +9,14 @@ Each allergen is found in exactly one ingredient. Each ingredient contains zero 
  
 For example, consider the following list of foods:
  
+
 ```
 mxmxvkd kfcds sqjhc nhms (contains dairy, fish)
 trh fvjkl sbzzf mxmxvkd (contains dairy)
 sqjhc fvjkl (contains soy)
 sqjhc mxmxvkd sbzzf (contains fish)
 ```
+
  
 The first food in the list has four ingredients (written in a language you don't understand): `mxmxvkd`, `kfcds`, `sqjhc`, and `nhms`. While the food might contain other allergens, a few allergens the food definitely contains are listed afterward: `dairy` and `fish`.
  

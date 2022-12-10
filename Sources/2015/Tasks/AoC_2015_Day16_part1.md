@@ -7,16 +7,25 @@ So, to avoid sending the card to the wrong person, you need to figure out which 
  
 The My First Crime Scene Analysis Machine (MFCSAM for short) can detect a few specific compounds in a given sample, as well as how many distinct kinds of those compounds there are. According to the instructions, these are what the MFCSAM can detect:
  
+ 
 - `children`, by human DNA age analysis.
+ 
 - `cats`. It doesn't differentiate individual breeds.
-- Several seemingly random breeds of dog: `samoyeds`, `pomeranians`, `akitas`, and `vizslas`.
+ 
+- Several seemingly random breeds of dog<!--- It can tell them apart by their distinct Dog Residue. -->: `samoyeds`, `pomeranians`, `akitas`, and `vizslas`.
+ 
 - `goldfish`. No other kinds of fish.
+ 
 - `trees`, all in one group.
+ 
 - `cars`, presumably by exhaust or gasoline or something.
+ 
 - `perfumes`, which is handy, since many of your Aunts Sue wear a few kinds.
  
-In fact, many of your Aunts Sue have many of these. You put the wrapping from the gift into the MFCSAM. It beeps inquisitively at you a few times and then prints out a message on [ticker tape](https://en.wikipedia.org/wiki/Ticker_tape:
  
+In fact, many of your Aunts Sue have many of these. You put the wrapping from the gift into the MFCSAM. It beeps inquisitively at you a few times and then prints out a message on [ticker tape](https://en.wikipedia.org/wiki/Ticker_tape):
+ 
+
 ```
 children: 3
 cats: 7
@@ -29,6 +38,7 @@ trees: 3
 cars: 2
 perfumes: 1
 ```
+
  
 You make a list of the things you can remember about each Aunt Sue. Things missing from your list aren't zero - you simply don't remember the value.
  

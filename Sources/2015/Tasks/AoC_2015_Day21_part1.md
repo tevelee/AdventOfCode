@@ -1,5 +1,5 @@
 ## --- Day 21: RPG Simulator 20XX ---
-Little Henry Case got a new video game for Christmas. It's an [RPG](https://en.wikipedia.org/wiki/Role-playing_video_game, and he's stuck on a boss. He needs to know what equipment to buy at the shop. He hands you the [controller](https://en.wikipedia.org/wiki/Game_controller.
+Little Henry Case<!--- The sky above the battle is the color of television, tuned to a dead channel. --> got a new video game for Christmas. It's an [RPG](https://en.wikipedia.org/wiki/Role-playing_video_game), and he's stuck on a boss. He needs to know what equipment to buy at the shop. He hands you the [controller](https://en.wikipedia.org/wiki/Game_controller).
  
 In this game, the player (you) and the enemy (the boss) take turns attacking. The player always goes first. Each attack reduces the opponent's hit points by at least `1`. The first character at or below `0` hit points loses.
  
@@ -9,6 +9,7 @@ Your damage score and armor score both start at zero. They can be increased by b
  
 Here is what the item shop is selling:
  
+
 ```
 Weapons:    Cost  Damage  Armor
 Dagger        8     4       0
@@ -32,18 +33,27 @@ Defense +1   20     0       1
 Defense +2   40     0       2
 Defense +3   80     0       3
 ```
+
  
 You must buy exactly one weapon; no dual-wielding. Armor is optional, but you can't use more than one. You can buy 0-2 rings (at most one for each hand). You must use any items you buy. The shop only has one of each item, so you can't buy, for example, two rings of Damage +3.
  
 For example, suppose you have `8` hit points, `5` damage, and `5` armor, and that the boss has `12` hit points, `7` damage, and `2` armor:
  
+ 
 - The player deals `5-2 = 3` damage; the boss goes down to 9 hit points.
+ 
 - The boss deals `7-5 = 2` damage; the player goes down to 6 hit points.
+ 
 - The player deals `5-2 = 3` damage; the boss goes down to 6 hit points.
+ 
 - The boss deals `7-5 = 2` damage; the player goes down to 4 hit points.
+ 
 - The player deals `5-2 = 3` damage; the boss goes down to 3 hit points.
+ 
 - The boss deals `7-5 = 2` damage; the player goes down to 2 hit points.
+ 
 - The player deals `5-2 = 3` damage; the boss goes down to 0 hit points.
+ 
  
 In this scenario, the player wins! (Barely.)
  

@@ -5,6 +5,7 @@ When you get back the image from the scanners, it seems to just be random noise.
  
 For example:
  
+
 ```
 ..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..##
 #..######.###...####..#..#####..##..#.#####...##.#.#..#.##..#.#......#.###
@@ -20,6 +21,7 @@ For example:
 ..#..
 ..###
 ```
+
  
 The first section is the **image enhancement algorithm**. It is normally given on a single line, but it has been wrapped to multiple lines in this example for legibility. The second section is the **input image**, a two-dimensional grid of **light pixels** (`#`) and **dark pixels** (`.`).
  
@@ -27,6 +29,7 @@ The image enhancement algorithm describes how to enhance an image by **simultane
  
 For example, to determine the output pixel that corresponds to the very middle pixel of the input image, the nine pixels marked by `[...]` would need to be considered:
  
+
 ```
 # . . # .
 #[. . .].
@@ -34,16 +37,19 @@ For example, to determine the output pixel that corresponds to the very middle p
 .[. # .].
 . . # # #
 ```
+
  
 Starting from the top-left and reading across each row, these pixels are `...`, then `#..`, then `.#.`; combining these forms `...#...#.`. By turning dark pixels (`.`) into `0` and light pixels (`#`) into `1`, the binary number `000100010` can be formed, which is `34` in decimal.
  
 The image enhancement algorithm string is exactly 512 characters long, enough to match every possible 9-bit binary number. The first few characters of the string (numbered starting from zero) are as follows:
  
+
 ```
 0         10        20        30  34    40        50        60        70
 |         |         |         |   |     |         |         |         |
 ..#.#..#####.#.#.#.###.##.....###.##.#..###.####..#####..#....#..#..##..##
 ```
+
  
 In the middle of this first group of characters, the character at index 34 can be found: `#`. So, the output pixel in the center of the output image should be `#`, a **light pixel**.
  
@@ -53,6 +59,7 @@ Through advances in imaging technology, the images being operated on here are **
  
 The starting input image, therefore, looks something like this, with more dark pixels (`.`) extending forever in every direction not shown here:
  
+
 ```
 ...............
 ...............
@@ -70,9 +77,11 @@ The starting input image, therefore, looks something like this, with more dark p
 ...............
 ...............
 ```
+
  
 By applying the image enhancement algorithm to every pixel simultaneously, the following output image can be obtained:
  
+
 ```
 ...............
 ...............
@@ -90,9 +99,11 @@ By applying the image enhancement algorithm to every pixel simultaneously, the f
 ...............
 ...............
 ```
+
  
 Through further advances in imaging technology, the above output image can also be used as an input image! This allows it to be enhanced **a second time**:
  
+
 ```
 ...............
 ...............
@@ -110,6 +121,7 @@ Through further advances in imaging technology, the above output image can also 
 ...............
 ...............
 ```
+
  
 Truly incredible - now the small details are really starting to come through. After enhancing the original input image twice, `35` pixels are lit.
  

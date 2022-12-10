@@ -1,5 +1,5 @@
 ## --- Day 10: The Stars Align ---
-It's no use; your navigation system simply isn't capable of providing walking directions in the arctic circle, and certainly not in 1018.
+It's no use; your navigation system simply isn't capable of providing walking directions<!--- At the iceberg, use any lane to turn left. Then, swim for eight thousand miles. --> in the arctic circle, and certainly not in 1018.
  
 The Elves suggest an alternative. In times like these, North Pole rescue operations will arrange points of light in the sky to guide missing Elves back to base. Unfortunately, the message is easy to miss: the points move slowly enough that it takes hours to align them, but have so much momentum that they only stay aligned for a second. If you blink at the wrong time, it might be hours before another message appears.
  
@@ -9,6 +9,7 @@ Rather than wait, you decide to fast-forward the process and calculate what the 
  
 For example, suppose you note the following points:
  
+
 ```
 position=< 9,  1> velocity=< 0,  2>
 position=< 7,  0> velocity=<-1,  0>
@@ -42,6 +43,7 @@ position=< 5,  9> velocity=< 1, -2>
 position=<14,  7> velocity=<-2,  0>
 position=<-3,  6> velocity=< 2, -1>
 ```
+
  
 Each line represents one point. Positions are given as `<X, Y>` pairs: X represents how far left (negative) or right (positive) the point appears, while Y represents how far up (negative) or down (positive) the point appears.
  
@@ -49,6 +51,7 @@ At `0` seconds, each point has the position given. Each second, each point's vel
  
 Over time, the points listed above would move like this:
  
+
 ```
 Initially:
 ........#.............
@@ -140,6 +143,7 @@ After 4 seconds:
 ......................
 ......................
 ```
+
  
 After 3 seconds, the message appeared briefly: `HI`. Of course, your message will be much longer and will take many more seconds to appear.
  

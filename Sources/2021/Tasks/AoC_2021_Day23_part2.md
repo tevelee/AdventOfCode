@@ -3,13 +3,16 @@ As you prepare to give the amphipods your solution, you notice that the diagram 
  
 Between the first and second lines of text that contain amphipod starting positions, insert the following lines:
  
+
 ```
 #D#C#B#A#
   #D#B#A#C#
 ```
+
  
 So, the above example now becomes:
  
+
 ```
 #############
 #...........#
@@ -18,9 +21,11 @@ So, the above example now becomes:
   #A#D#C#A#
   #########
 ```
+
  
 The amphipods still want to be organized into rooms similar to before:
  
+
 ```
 #############
 #...........#
@@ -30,9 +35,11 @@ The amphipods still want to be organized into rooms similar to before:
   #A#B#C#D#
   #########
 ```
+
  
 In this updated example, the least energy required to organize these amphipods is `44169`:
  
+
 ```
 #############
 #...........#
@@ -226,6 +233,7 @@ In this updated example, the least energy required to organize these amphipods i
   #A#B#C#D#
   #########
 ```
+
  
 Using the initial configuration from the full diagram, **what is the least energy required to organize the amphipods?**
  

@@ -1,10 +1,11 @@
 ## --- Day 20: Donut Maze ---
 You notice a strange pattern on the surface of Pluto and land nearby to get a closer look. Upon closer inspection, you realize you've come across one of the famous space-warping mazes of the long-lost Pluto civilization!
  
-Because there isn't much space on Pluto, the civilization that used to live here thrived by inventing a method for folding spacetime. Although the technology is no longer understood, mazes like this one provide a small glimpse into the daily life of an ancient Pluto citizen.
+Because there isn't much space on Pluto, the civilization that used to live here thrived by inventing a method for folding spacetime. Although the technology is no longer understood, mazes like this one provide a small glimpse into the daily life of an ancient Pluto citizen<!--- So really, this puzzle is more archaeology than math, right? -->.
  
-This maze is shaped like a [donut](https://en.wikipedia.org/wiki/Torus. Portals along the inner and outer edge of the donut can instantly teleport you from one side to the other. For example:
+This maze is shaped like a [donut](https://en.wikipedia.org/wiki/Torus). Portals along the inner and outer edge of the donut can instantly teleport you from one side to the other. For example:
  
+
 ```
 A           
          A           
@@ -26,6 +27,7 @@ FG..#########.....#
              Z       
              Z
 ```
+
  
 This map of the maze shows solid walls (`#`) and open passages (`.`). Every maze on Pluto has a start (the open tile next to `AA`) and an end (the open tile next to `ZZ`). Mazes on Pluto also have portals; this maze has three pairs of portals: `BC`, `DE`, and `FG`. When on an open tile next to one of these labels, a single step can take you to the other tile with the same label. (You can only walk on `.` tiles; labels and empty space are not traversable.)
  
@@ -35,6 +37,7 @@ However, there is a shorter path: You could walk from `AA` to the inner `BC` por
  
 Here is a larger example:
  
+
 ```
 A               
                    A               
@@ -74,6 +77,7 @@ YN......#               VT..#....QG
            B   J   C               
            U   P   P
 ```
+
  
 Here, `AA` has no direct path to `ZZ`, but it does connect to `AS` and `CP`. By passing through `AS`, `QG`, `BU`, and `JO`, you can reach `ZZ` in **58** steps.
  

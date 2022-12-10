@@ -5,6 +5,7 @@ Starting with all cubes **off**, run all of the **reboot steps** for all cubes i
  
 Consider the following reboot steps:
  
+
 ```
 on x=-5..47,y=-31..22,z=-19..33
 on x=-44..5,y=-27..21,z=-14..35
@@ -67,8 +68,9 @@ off x=-70369..-16548,y=22648..78696,z=-1892..86821
 on x=-53470..21291,y=-120233..-33476,z=-44150..38147
 off x=-93533..-4276,y=-16170..68771,z=-104985..-24507
 ```
+
  
-After running the above reboot steps, `2758514936282235` cubes are **on**. (Just for fun, `474140` of those are also in the initialization procedure region.)
+After running the above reboot steps, `2758514936282235` cubes are **on**. (Just for fun<!--- Well, *I* think it's fun. -->, `474140` of those are also in the initialization procedure region.)
  
 Starting again with all cubes **off**, execute all reboot steps. Afterward, considering all cubes, **how many cubes are on?**
  

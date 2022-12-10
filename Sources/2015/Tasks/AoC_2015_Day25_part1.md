@@ -1,7 +1,7 @@
 ## --- Day 25: Let It Snow ---
-Merry Christmas! Santa is booting up his weather machine; looks like you might get a [white Christmas](1 after all.
+Merry Christmas! Santa is booting up his weather machine; looks like you might get a [white Christmas](1) after all.
  
-The weather machine beeps! On the console of the machine is a copy protection message asking you to [enter a code from the instruction manual](https://en.wikipedia.org/wiki/Copy_protection#Early_video_games. Apparently, it refuses to run unless you give it that code. No problem; you'll just look up the code in the--
+The weather machine beeps! On the console of the machine is a copy protection message asking you to [enter a code from the instruction manual](https://en.wikipedia.org/wiki/Copy_protection#Early_video_games). Apparently, it refuses to run unless you give it that code. No problem; you'll just look up the code in the--
  
 "Ho ho ho", Santa ponders aloud. "I can't seem to find the manual."
  
@@ -11,8 +11,9 @@ You look up the support number for the manufacturer and give them a call. Good t
  
 After putting you on hold for twenty minutes (your call is **very** important to them, it reminded you repeatedly), they finally find an engineer that remembers how the code system works.
  
-The codes are printed on an infinite sheet of paper, starting in the top-left corner. The codes are filled in by diagonals: starting with the first row with an empty first box, the codes are filled in diagonally up and to the right. This process repeats until the [infinite paper is covered](https://en.wikipedia.org/wiki/Cantor's_diagonal_argument. So, the first few codes are filled in in this order:
+The codes are printed on an infinite sheet of paper<!--- The paper is very thin so it can be folded up neatly into the manual. -->, starting in the top-left corner. The codes are filled in by diagonals: starting with the first row with an empty first box, the codes are filled in diagonally up and to the right. This process repeats until the [infinite paper is covered](https://en.wikipedia.org/wiki/Cantor's_diagonal_argument). So, the first few codes are filled in in this order:
  
+
 ```
 | 1   2   3   4   5   6  
 ---+---+---+---+---+---+---+
@@ -23,6 +24,7 @@ The codes are printed on an infinite sheet of paper, starting in the top-left co
  5 | 11  17
  6 | 16
 ```
+
  
 For example, the 12th code would be written to row `4`, column `2`; the 15th code would be written to row `1`, column `5`.
  
@@ -32,6 +34,7 @@ So, to find the second code (which ends up in row `2`, column `1`), start with t
  
 "Oh!", says the voice. "It looks like we missed a scrap from one of the manuals. Let me read it to you." You write down his numbers:
  
+
 ```
 |    1         2         3         4         5         6
 ---+---------+---------+---------+---------+---------+---------+
@@ -42,6 +45,7 @@ So, to find the second code (which ends up in row `2`, column `1`), start with t
  5 |    77061  17552253  28094349   6899651   9250759  31663883
  6 | 33071741   6796745  25397450  24659492   1534922  27995004
 ```
+
  
 "Now remember", the voice continues, "that's not even all of the first few numbers; for example, you're missing the one at 7,1 that would come before 6,2. But, it should be enough to let your-- oh, it's time for lunch! Bye!" The call disconnects.
  

@@ -5,6 +5,7 @@ The area you are in is made up entirely of **rooms** and **doors**. The rooms ar
  
 For example, drawing rooms as `.`, walls as `#`, doors as `|` or `-`, your current position as `X`, and where north is up, the area you're in might look like this:
  
+
 ```
 #####
 #.|.#
@@ -12,8 +13,9 @@ For example, drawing rooms as `.`, walls as `#`, doors as `|` or `-`, your curre
 #.|X#
 #####
 ```
+
  
-You get the attention of a passing construction Elf and ask for a map. "I don't have time to draw out a map of this place - it's **huge**. Instead, I can give you directions to **every room in the facility**!" He writes down some directions on a piece of parchment and runs off. In the example above, the instructions might have been `^WNE$`, a [regular expression](https://en.wikipedia.org/wiki/Regular_expression or "**regex**" (your puzzle input).
+You get the attention of a passing construction Elf and ask for a map. "I don't have time to draw out a map of this place - it's **huge**. Instead, I can give you directions to **every room in the facility**!" He writes down some directions on a piece of parchment and runs off. In the example above, the instructions might have been `^WNE$`, a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) or "**regex**" (your puzzle input).
  
 The regex matches routes (like `WNE` for "west, north, east") that will take you from your current room through various doors in the facility. In aggregate, the routes will take you through **every door in the facility at least once**; mapping out all of these routes will let you build a proper map and find your way around.
  
@@ -27,6 +29,7 @@ For example, consider this regex: `^ENWWW(NEEE|SSE(EE|N))$`
  
 This regex begins with `ENWWW`, which means that from your current position, all routes must begin by moving east, north, and then west three times, in that order. After this, there is a branch. Before you consider the branch, this is what you know about the map so far, with doors you aren't sure about marked with a `?`:
  
+
 ```
 #?#?#?#?#
 ?.|.|.|.?
@@ -34,9 +37,11 @@ This regex begins with `ENWWW`, which means that from your current position, all
     ?X|.?
     #?#?#
 ```
+
  
 After this point, there is `(NEEE|SSE(EE|N))`. This gives you exactly two options: `NEEE` and `SSE(EE|N)`. By following `NEEE`, the map now looks like this:
  
+
 ```
 #?#?#?#?#
 ?.|.|.|.?
@@ -46,9 +51,11 @@ After this point, there is `(NEEE|SSE(EE|N))`. This gives you exactly two option
     ?X|.?
     #?#?#
 ```
+
  
 Now, only `SSE(EE|N)` remains. Because it is in the same parenthesized group as `NEEE`, it starts from the same room `NEEE` started in. It states that starting from that point, there exist doors which will allow you to move south twice, then east; this ends up at another branch. After that, you can either move east twice or north once. This information fills in the rest of the doors:
  
+
 ```
 #?#?#?#?#
 ?.|.|.|.?
@@ -60,9 +67,11 @@ Now, only `SSE(EE|N)` remains. Because it is in the same parenthesized group as 
 ?.|.|.|.?
 #?#?#?#?#
 ```
+
  
 Once you've followed all possible routes, you know the remaining unknown parts are all walls, producing a finished map of the facility:
  
+
 ```
 #########
 #.|.|.|.#
@@ -74,9 +83,11 @@ Once you've followed all possible routes, you know the remaining unknown parts a
 #.|.|.|.#
 #########
 ```
+
  
 Sometimes, a list of options can have an **empty option**, like `(NEWS|WNSE|)`. This means that routes at this point could effectively skip the options in parentheses and move on immediately. For example, consider this regex and the corresponding map:
  
+
 ```
 ^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$
 
@@ -92,24 +103,35 @@ Sometimes, a list of options can have an **empty option**, like `(NEWS|WNSE|)`. 
 #.|.|.#.|.#
 ###########
 ```
+
  
 This regex has one main route which, at three locations, can optionally include additional detours and be valid: `(NEWS|)`, `(WNSE|)`, and `(SWEN|)`. Regardless of which option is taken, the route continues from the position it is left at after taking those steps. So, for example, this regex matches all of the following routes (and more that aren't listed here):
  
+ 
 - `ENNWSWWSSSEENEENNN`
+ 
 - `ENNWSWWNEWSSSSEENEENNN`
+ 
 - `ENNWSWWNEWSSSSEENEESWENNNN`
+ 
 - `ENNWSWWSSSEENWNSEEENNN`
+ 
  
 By following the various routes the regex matches, a full map of all of the doors and rooms in the facility can be assembled.
  
 To get a sense for the size of this facility, you'd like to determine which room is **furthest** from you: specifically, you would like to find the room for which the **shortest path to that room would require passing through the most doors**.
  
+ 
 - In the first example (`^WNE$`), this would be the north-east corner `3` doors away.
+ 
 - In the second example (`^ENWWW(NEEE|SSE(EE|N))$`), this would be the south-east corner `10` doors away.
+ 
 - In the third example (`^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$`), this would be the north-east corner `18` doors away.
+ 
  
 Here are a few more examples:
  
+
 ```
 Regex: ^ESSWWN(E|NNENN(EESS(WNSE|)SSS|WWWSSSSE(SW|NNNE)))$
 Furthest room requires passing 23 doors
@@ -128,7 +150,9 @@ Furthest room requires passing 23 doors
 #.|.#.|.|.#.#
 #############
 ```
+
  
+
 ```
 Regex: ^WSSEESWWWNW(S|NENNEEEENN(ESSSSW(NWSW|SSEN)|WSWWN(E|WWS(E|SS))))$
 Furthest room requires passing 31 doors
@@ -149,6 +173,7 @@ Furthest room requires passing 31 doors
 #.#.|.|.|.#.|.#
 ###############
 ```
+
  
 **What is the largest number of doors you would be required to pass through to reach a room?** That is, find the room for which the shortest path from your starting location to that room would require passing through the most doors; what is the fewest doors you can pass through to reach it?
  

@@ -1,7 +1,7 @@
 ## --- Day 25: Four-Dimensional Adventure ---
 The reindeer's symptoms are getting worse, and neither you nor the white-bearded man have a solution. At least the reindeer has a warm place to rest: a small bed near where you're sitting.
  
-As you reach down, the reindeer looks up at you, accidentally bumping a button on your wrist-mounted device with its nose in the process - a button labeled **"help"**.
+As you reach down, the reindeer looks up at you, accidentally<!--- It was not an accident. --> bumping a button on your wrist-mounted device with its nose in the process - a button labeled **"help"**.
  
 "Hello, and welcome to the Time Travel Support Hotline! If you are lost in time and space, press 1. If you are trapped in a time paradox, press 2. If you need help caring for a sick reindeer, press 3. If you--"
  
@@ -23,6 +23,7 @@ The list of fixed points in spacetime (your puzzle input) is a set of four-dimen
  
 Two points are in the same **constellation** if their manhattan distance apart is **no more than 3** or if they can form a chain of points, each a manhattan distance no more than 3 from the last, between the two of them. (That is, if a point is close enough to a constellation, it "joins" that constellation.) For example:
  
+
 ```
 0,0,0,0
  3,0,0,0
@@ -33,11 +34,13 @@ Two points are in the same **constellation** if their manhattan distance apart i
  9,0,0,0
 12,0,0,0
 ```
+
  
 In the above list, the first six points form a single constellation: `0,0,0,0` is exactly distance `3` from the next four, and the point at `0,0,0,6` is connected to the others by being `3` away from `0,0,0,3`, which is already in the constellation. The bottom two points, `9,0,0,0` and `12,0,0,0` are in a separate constellation because no point is close enough to connect them to the first constellation. So, in the above list, the number of constellations is `2`. (If a point at `6,0,0,0` were present, it would connect `3,0,0,0` and `9,0,0,0`, merging all of the points into a single giant constellation instead.)
  
 In this example, the number of constellations is `4`:
  
+
 ```
 -1,2,2,0
 0,0,2,-2
@@ -50,9 +53,11 @@ In this example, the number of constellations is `4`:
 0,2,1,-2
 3,0,0,0
 ```
+
  
 In this one, it's `3`:
  
+
 ```
 1,-1,0,1
 2,0,-1,0
@@ -65,9 +70,11 @@ In this one, it's `3`:
 1,-1,0,-1
 3,2,0,2
 ```
+
  
 Finally, in this one, it's `8`:
  
+
 ```
 1,-1,-1,-2
 -2,-2,0,1
@@ -80,6 +87,7 @@ Finally, in this one, it's `8`:
 1,2,2,0
 -1,-2,0,-2
 ```
+
  
 The portly man nervously strokes his white beard. It's time to get that hot chocolate.
  

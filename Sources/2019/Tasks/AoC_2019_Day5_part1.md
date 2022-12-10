@@ -1,12 +1,15 @@
 ## --- Day 5: Sunny with a Chance of Asteroids ---
 You're starting to sweat as the ship makes its way toward Mercury. The Elves suggest that you get the air conditioner working by upgrading your ship computer to support the Thermal Environment Supervision Terminal.
  
-The Thermal Environment Supervision Terminal (TEST) starts by running a **diagnostic program** (your puzzle input). The TEST diagnostic program will run on [your existing Intcode computer](2 after a few modifications:
+The Thermal Environment Supervision Terminal (TEST) starts by running a **diagnostic program** (your puzzle input). The TEST diagnostic program will run on [your existing Intcode computer](2) after a few modifications:
  
 **First**, you'll need to add **two new instructions**:
  
+ 
 - Opcode `3` takes a single integer as **input** and saves it to the position given by its only parameter. For example, the instruction `3,50` would take an input value and store it at address `50`.
+ 
 - Opcode `4` **outputs** the value of its only parameter. For example, the instruction `4,50` would output the value at address `50`.
+ 
  
 Programs that use these instructions will come with documentation that explains what should be connected to the input and output. The program `3,0,4,0,99` outputs whatever it gets as input, then halts.
  
@@ -22,6 +25,7 @@ For example, consider the program `1002,4,3,4,33`.
  
 The first instruction, `1002,4,3,4`, is a **multiply** instruction - the rightmost two digits of the first value, `02`, indicate opcode `2`, multiplication. Then, going right to left, the parameter modes are `0` (hundreds digit), `1` (thousands digit), and `0` (ten-thousands digit, not present and therefore zero):
  
+
 ```
 ABCDE
  1002
@@ -32,6 +36,7 @@ DE - two-digit opcode,      02 == opcode 2
  A - mode of 3rd parameter,  0 == position mode,
                                   omitted due to being a leading zero
 ```
+
  
 This instruction multiplies its first two parameters. The first parameter, `4` in position mode, works like it did before - its value is the value stored at address `4` (`33`). The second parameter, `3` in immediate mode, simply has value `3`. The result of this operation, `33 * 3 = 99`, is written according to the third parameter, `4` in position mode, which also works like it did before - `99` is written to address `4`.
  
@@ -39,8 +44,11 @@ Parameters that an instruction writes to will **never be in immediate mode**.
  
 **Finally**, some notes:
  
+ 
 - It is important to remember that the instruction pointer should increase by **the number of values in the instruction** after the instruction finishes. Because of the new instructions, this amount is no longer always `4`.
+ 
 - Integers can be negative: `1101,100,-1,4,0` is a valid program (find `100 + -1`, store the result in position `4`).
+ 
  
 The TEST diagnostic program will start by requesting from the user the ID of the system to test by running an **input** instruction - provide it `1`, the ID for the ship's air conditioner unit.
  

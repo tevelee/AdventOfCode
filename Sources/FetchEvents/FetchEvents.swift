@@ -73,26 +73,49 @@ struct FetchEvents: AsyncParsableCommand {
         }
         let text = try element.text()
         switch element.tagName() {
-        case "h1": return "# \(text)"
-        case "h2": return "## \(text)"
-        case "h3": return "### \(text)"
-        case "h4": return "#### \(text)"
-        case "h5": return "##### \(text)"
-        case "h6": return "##### \(text)"
-        case "p", "div", "li": return try element.getChildNodes().map(convert).joined()
-        case "em" where element.hasClass("star"): return "***\(text)***"
-        case "em": return "**\(text)**"
-        case "a": return try "[\(text)](\(element.attr("href"))"
-        case "code": return "`\(text)`"
-        case "pre": return "```\n\(text)\n```"
-        case "hr": return "---"
-        case "ul": return try element.children()
-                .map { node in
-                    let text = try convert(node: node)
-                    return node.tagName() == "li" ? "- \(text)" : text
-                }
-                .joined(separator: "\n")
-        default: return text
+        case "h1":
+            return "# \(text)"
+        case "h2":
+            return "## \(text)"
+        case "h3":
+            return "### \(text)"
+        case "h4":
+            return "#### \(text)"
+        case "h5":
+            return "##### \(text)"
+        case "h6":
+            return "##### \(text)"
+        case "span" where element.hasAttr("title"):
+            return try "\(text)<!--- \(element.attr("title")) -->"
+        case "p", "div", "span":
+            return try element.getChildNodes().map(convert).joined()
+        case "li":
+            let body = try element.getChildNodes().map(convert).joined()
+            if element.children().first()?.tagName() == "pre" {
+                return body
+            } else {
+                return "- " + body
+            }
+        case "em" where element.hasClass("star"):
+            return "***\(text)***"
+        case "em":
+            return "**\(text)**"
+        case "s":
+            return "~\(text)~"
+        case "a":
+            return try "[\(text)](\(element.attr("href")))"
+        case "code":
+            return "`\(text)`"
+        case "pre":
+            return "\n```\n\(text)\n```\n"
+        case "hr":
+            return "---"
+        case "br":
+            return "\n"
+        case "ul":
+            return try element.getChildNodes().map(convert).joined(separator: "\n")
+        default:
+            return text
         }
     }
 }

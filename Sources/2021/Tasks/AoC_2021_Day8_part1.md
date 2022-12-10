@@ -1,10 +1,11 @@
 ## --- Day 8: Seven Segment Search ---
 You barely reach the safety of the cave when the whale smashes into the cave mouth, collapsing it. Sensors indicate another exit to this cave at a much greater depth, so you have no choice but to press on.
  
-As your submarine slowly makes its way through the cave system, you notice that the four-digit [seven-segment displays](https://en.wikipedia.org/wiki/Seven-segment_display in your submarine are malfunctioning; they must have been damaged during the escape. You'll be in a lot of trouble without them, so you'd better figure out what's wrong.
+As your submarine slowly makes its way through the cave system, you notice that the four-digit [seven-segment displays](https://en.wikipedia.org/wiki/Seven-segment_display) in your submarine are malfunctioning; they must have been damaged<!--- Yes, just the four-digit seven-segment ones. Whole batch must have been faulty. --> during the escape. You'll be in a lot of trouble without them, so you'd better figure out what's wrong.
  
 Each digit of a seven-segment display is rendered by turning on or off any of seven segments named `a` through `g`:
  
+
 ```
 0:      1:      2:      3:      4:
  aaaa    ....    aaaa aaaa    ....
@@ -24,6 +25,7 @@ b    .  b    .  .    c b c b c
 .    f e f  .    f e f  .    f
  gggg gggg    ....    gggg gggg
 ```
+
  
 So, to render a `1`, only segments `c` and `f` would be turned on; the rest would be off. To render a `7`, only segments `a`, `c`, and `f` would be turned on.
  
@@ -35,10 +37,12 @@ For each display, you watch the changing signals for a while, make a note of **a
  
 For example, here is what you might see in a single entry in your notes:
  
+
 ```
 acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab |
 cdfeb fcadb cdfeb cdbaf
 ```
+
  
 (The entry is wrapped here to two lines so it fits; in your notes, it will all be on a single line.)
  
@@ -48,6 +52,7 @@ Using this information, you should be able to work out which combination of sign
  
 For now, **focus on the easy digits**. Consider this larger example:
  
+
 ```
 be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb |
 fdgacbe cefdb cefbgd gcbe
@@ -70,6 +75,7 @@ gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc |
 fgae cfgab fg bagce
 ```
+
  
 Because the digits `1`, `4`, `7`, and `8` each use a unique number of segments, you should be able to tell which combinations of signals correspond to those digits. Counting **only digits in the output values** (the part after `|` on each line), in the above example, there are `26` instances of digits that use a unique number of segments (highlighted above).
  

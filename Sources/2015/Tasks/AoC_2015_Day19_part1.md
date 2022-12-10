@@ -9,19 +9,27 @@ However, the machine has to be calibrated before it can be used. Calibration inv
  
 For example, imagine a simpler machine that supports only the following replacements:
  
+
 ```
 H => HO
 H => OH
 O => HH
 ```
+
  
 Given the replacements above and starting with `HOH`, the following molecules could be generated:
  
+ 
 - `HOOH` (via `H => HO` on the first `H`).
+ 
 - `HOHO` (via `H => HO` on the second `H`).
+ 
 - `OHOH` (via `H => OH` on the first `H`).
+ 
 - `HOOH` (via `H => OH` on the second `H`).
+ 
 - `HHHH` (via `O => HH`).
+ 
  
 So, in the example above, there are `4` **distinct** molecules (not five, because `HOOH` appears twice) after one replacement from `HOH`. Santa's favorite molecule, `HOHOHO`, can become `7` **distinct** molecules (over nine replacements: six from `H`, and three from `O`).
  

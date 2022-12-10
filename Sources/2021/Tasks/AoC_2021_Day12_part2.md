@@ -3,6 +3,7 @@ After reviewing the available paths, you realize you might have time to visit a 
  
 Now, the `36` possible paths through the first example above are:
  
+
 ```
 start,A,b,A,b,A,c,A,end
 start,A,b,A,b,A,end
@@ -41,6 +42,7 @@ start,b,d,b,A,end
 start,b,d,b,end
 start,b,end
 ```
+
  
 The slightly larger example above now has `103` paths through it, and the even larger example now has `3509` paths through it.
  

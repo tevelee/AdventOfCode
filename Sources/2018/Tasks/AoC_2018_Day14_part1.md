@@ -1,5 +1,5 @@
 ## --- Day 14: Chocolate Charts ---
-You finally have a chance to look at all of the produce moving around. Chocolate, cinnamon, mint, chili peppers, nutmeg, vanilla... the Elves must be growing these plants to make **hot chocolate**! As you realize this, you hear a conversation in the distance. When you go to investigate, you discover two Elves in what appears to be a makeshift underground kitchen/laboratory.
+You finally have a chance to look at all of the produce moving around. Chocolate, cinnamon, mint, chili peppers, nutmeg, vanilla... the Elves must be growing these plants to make<!--- Please do not use a programming puzzle as a recipe for hot chocolate. I cannot guarantee your safety. --> **hot chocolate**! As you realize this, you hear a conversation in the distance. When you go to investigate, you discover two Elves in what appears to be a makeshift underground kitchen/laboratory.
  
 The Elves are trying to come up with the ultimate hot chocolate recipe; they're even maintaining a scoreboard which tracks the quality **score** (`0`-`9`) of each recipe.
  
@@ -13,6 +13,7 @@ After all new recipes are added to the scoreboard, each Elf picks a new current 
  
 Drawing the first Elf as parentheses and the second Elf as square brackets, they continue this process:
  
+
 ```
 (3)[7]
 (3)[7] 1  0 
@@ -31,13 +32,19 @@ Drawing the first Elf as parentheses and the second Elf as square brackets, they
  3  7 [1] 0  1  0 (1) 2  4  5  1  5  8  9  1  6  7  7  9 
  3  7  1  0 [1] 0  1  2 (4) 5 1 5 8 9 1 6 7 7 9  2
 ```
+
  
 The Elves think their skill will improve after making a few recipes (your puzzle input). However, that could take ages; you can speed this up considerably by identifying **the scores of the ten recipes** after that. For example:
  
+ 
 - If the Elves think their skill will improve after making `9` recipes, the scores of the ten recipes **after** the first nine on the scoreboard would be `5158916779` (highlighted in the last line of the diagram).
+ 
 - After `5` recipes, the scores of the next ten would be `0124515891`.
+ 
 - After `18` recipes, the scores of the next ten would be `9251071085`.
+ 
 - After `2018` recipes, the scores of the next ten would be `5941429882`.
+ 
  
 **What are the scores of the ten recipes immediately after the number of recipes in your puzzle input?**
  

@@ -7,6 +7,7 @@ The Elves don't want to interrupt the crane operator during this delicate proced
  
 They do, however, have a drawing of the starting stacks of crates **and** the rearrangement procedure (your puzzle input). For example:
  
+
 ```
 [D]    
 [N] [C]    
@@ -18,20 +19,24 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2
 ```
+
  
 In this example, there are three stacks of crates. Stack 1 contains two crates: crate `Z` is on the bottom, and crate `N` is on top. Stack 2 contains three crates; from bottom to top, they are crates `M`, `C`, and `D`. Finally, stack 3 contains a single crate, `P`.
  
 Then, the rearrangement procedure is given. In each step of the procedure, a quantity of crates is moved from one stack to a different stack. In the first step of the above rearrangement procedure, one crate is moved from stack 2 to stack 1, resulting in this configuration:
  
+
 ```
 [D]        
 [N] [C]    
 [Z] [M] [P]
  1   2   3
 ```
+
  
 In the second step, three crates are moved from stack 1 to stack 3. Crates are moved **one at a time**, so the first crate to be moved (`D`) ends up below the second and third crates:
  
+
 ```
 [Z]
         [N]
@@ -39,9 +44,11 @@ In the second step, three crates are moved from stack 1 to stack 3. Crates are m
     [M] [P]
  1   2   3
 ```
+
  
 Then, both crates are moved from stack 2 to stack 1. Again, because crates are moved **one at a time**, crate `C` ends up below crate `M`:
  
+
 ```
 [Z]
         [N]
@@ -49,9 +56,11 @@ Then, both crates are moved from stack 2 to stack 1. Again, because crates are m
 [C]     [P]
  1   2   3
 ```
+
  
 Finally, one crate is moved from stack 1 to stack 2:
  
+
 ```
 [Z]
         [N]
@@ -59,6 +68,7 @@ Finally, one crate is moved from stack 1 to stack 2:
 [C] [M] [P]
  1   2   3
 ```
+
  
 The Elves just need to know **which crate will end up on top of each stack**; in this example, the top crates are `C` in stack 1, `M` in stack 2, and `Z` in stack 3, so you should combine these together and give the Elves the message `CMZ`.
  

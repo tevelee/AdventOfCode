@@ -3,6 +3,7 @@ Considering every single measurement isn't as useful as you expected: there's ju
  
 Instead, consider sums of a **three-measurement sliding window**. Again considering the above example:
  
+
 ```
 199  A      
 200  A B    
@@ -15,6 +16,7 @@ Instead, consider sums of a **three-measurement sliding window**. Again consider
 260      G H
 263        H
 ```
+
  
 Start by comparing the first and second three-measurement windows. The measurements in the first window are marked `A` (`199`, `200`, `208`); their sum is `199 + 200 + 208 = 607`. The second window is marked `B` (`200`, `208`, `210`); its sum is `618`. The sum of measurements in the second window is larger than the sum of the first, so this first comparison **increased**.
  
@@ -22,6 +24,7 @@ Your goal now is to count **the number of times the sum of measurements in this 
  
 In the above example, the sum of each three-measurement window is as follows:
  
+
 ```
 A: 607 (N/A - no previous sum)
 B: 618 (increased)
@@ -32,6 +35,7 @@ F: 716 (increased)
 G: 769 (increased)
 H: 792 (increased)
 ```
+
  
 In this example, there are **5** sums that are larger than the previous sum.
  

@@ -3,7 +3,7 @@ Your raft makes it to the tropical island; it turns out that the small crab was 
  
 As you enter the lobby, you discover a small problem: the floor is being renovated. You can't even reach the check-in desk until they've finished installing the **new tile floor**.
  
-The tiles are all **hexagonal**; they need to be arranged in a [hex grid](https://en.wikipedia.org/wiki/Hexagonal_tiling with a very specific color pattern. Not in the mood to wait, you offer to help figure out the pattern.
+The tiles are all **hexagonal**; they need to be arranged in a [hex grid](https://en.wikipedia.org/wiki/Hexagonal_tiling) with a very specific color pattern. Not in the mood to wait, you offer to help figure out the pattern.
  
 The tiles are all **white** on one side and **black** on the other. They start with the white side facing up. The lobby is large enough to fit whatever pattern might need to appear there.
  
@@ -15,6 +15,7 @@ Each time a tile is identified, it flips from white to black or from black to wh
  
 Here is a larger example:
  
+
 ```
 sesenwnenenewseeswwswswwnenewsewsw
 neeenesenwnwwswnenewnwwsewnenwseswesw
@@ -37,6 +38,7 @@ eneswnwswnwsenenwnwnwwseeswneewsenese
 neswnwewnwnwseenwseesewsenwsweewe
 wseweeenwnesenwwwswnew
 ```
+
  
 In the above example, 10 tiles are flipped once (to black), and 5 more are flipped twice (to black, then back to white). After all of these instructions have been followed, a total of **10** tiles are **black**.
  

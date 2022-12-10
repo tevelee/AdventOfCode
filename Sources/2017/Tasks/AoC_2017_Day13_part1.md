@@ -5,15 +5,18 @@ By studying the firewall briefly, you are able to record (in your puzzle input) 
  
 For example, suppose you've recorded the following:
  
+
 ```
 0: 3
 1: 2
 4: 4
 6: 4
 ```
+
  
 This means that there is a layer immediately inside the firewall (with range `3`), a second layer immediately after that (with range `2`), a third layer which begins at depth `4` (with range `4`), and a fourth layer which begins at depth 6 (also with range `4`). Visually, it might look like this:
  
+
 ```
 0   1   2   3   4   5   6
 [ ] [ ] ... ... [ ] ... [ ]
@@ -21,9 +24,11 @@ This means that there is a layer immediately inside the firewall (with range `3`
 [ ]             [ ]     [ ]
                 [ ]     [ ]
 ```
+
  
 Within each layer, a security scanner moves back and forth within its range. Each security scanner starts at the top and moves down until it reaches the bottom, then moves up until it reaches the top, and repeats. A security scanner takes **one picosecond** to move one step. Drawing scanners as `S`, the first few picoseconds look like this:
  
+
 ```
 Picosecond 0:
  0   1   2   3   4   5   6
@@ -53,9 +58,11 @@ Picosecond 3:
 [ ]             [ ]     [ ]
                 [S]     [S]
 ```
+
  
 Your plan is to hitch a ride on a packet about to move through the firewall. The packet will travel along the top of each layer, and it moves at **one layer per picosecond**. Each picosecond, the packet moves one layer forward (its first move takes it into layer 0), and then the scanners move one step. If there is a scanner at the top of the layer **as your packet enters it**, you are **caught**. (If a scanner moves into the top of its layer while you are there, you are **not** caught: it doesn't have time to notice you before you leave.) If you were to do this in the configuration above, marking your current position with parentheses, your passage through the firewall would look like this:
  
+
 ```
 Initial state:
  0   1   2   3   4   5   6
@@ -161,6 +168,7 @@ Picosecond 6:
 [ ]             [ ]     [ ]
                 [ ]     [ ]
 ```
+
  
 In this situation, you are **caught** in layers `0` and `6`, because your packet entered the layer when its scanner was at the top when you entered it. You are **not** caught in layer `1`, since the scanner moved into the top of the layer once you were already there.
  

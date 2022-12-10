@@ -1,5 +1,5 @@
 ## --- Day 18: Like a GIF For Your Yard ---
-After the [million lights incident](6, the fire code has gotten stricter: now, at most ten thousand lights are allowed. You arrange them in a 100x100 grid.
+After the [million lights incident](6), the fire code has gotten stricter: now, at most ten thousand lights<!--- This is an outrage!  We're going to the next town hall meeting. --> are allowed. You arrange them in a 100x100 grid.
  
 Never one to let you down, Santa again mails you instructions on the ideal lighting configuration. With so few lights, he says, you'll have to resort to **animation**.
  
@@ -9,6 +9,7 @@ Then, animate your grid in steps, where each step decides the next configuration
  
 For example, in a simplified 6x6 grid, the light marked `A` has the neighbors numbered `1` through `8`, and the light marked `B`, which is on an edge, only has the neighbors marked `1` through `5`:
  
+
 ```
 1B5...
 234...
@@ -17,16 +18,21 @@ For example, in a simplified 6x6 grid, the light marked `A` has the neighbors nu
 ..8A4.
 ..765.
 ```
+
  
 The state a light should have next is based on its current state (on or off) plus the **number of neighbors that are on**:
  
+ 
 - A light which is **on** stays on when `2` or `3` neighbors are on, and turns off otherwise.
+ 
 - A light which is **off** turns on if exactly `3` neighbors are on, and stays off otherwise.
+ 
  
 All of the lights update simultaneously; they all consider the same current state before moving to the next.
  
 Here's a few steps from an example configuration of another 6x6 grid:
  
+
 ```
 Initial state:
 .#.#.#
@@ -68,6 +74,7 @@ After 4 steps:
 ......
 ......
 ```
+
  
 After `4` steps, this example has four lights on.
  

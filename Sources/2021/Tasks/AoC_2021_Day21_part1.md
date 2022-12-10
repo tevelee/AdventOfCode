@@ -1,7 +1,7 @@
 ## --- Day 21: Dirac Dice ---
-There's not much to do as you slowly descend to the bottom of the ocean. The submarine computer challenges you to a nice game of **Dirac Dice**.
+There's not much to do as you slowly descend to the bottom of the ocean. The submarine computer challenges you to a nice game<!--- A STRANGE GAME. --> of **Dirac Dice**.
  
-This game consists of a single [die](https://en.wikipedia.org/wiki/Dice, two [pawns](https://en.wikipedia.org/wiki/Glossary_of_board_games#piece, and a game board with a circular track containing ten spaces marked `1` through `10` clockwise. Each player's **starting space** is chosen randomly (your puzzle input). Player 1 goes first.
+This game consists of a single [die](https://en.wikipedia.org/wiki/Dice), two [pawns](https://en.wikipedia.org/wiki/Glossary_of_board_games#piece), and a game board with a circular track containing ten spaces marked `1` through `10` clockwise. Each player's **starting space** is chosen randomly (your puzzle input). Player 1 goes first.
  
 Players take turns moving. On each player's turn, the player rolls the die **three times** and adds up the results. Then, the player moves their pawn that many times **forward** around the track (that is, moving clockwise on spaces in order of increasing value, wrapping back around to `1` after `10`). So, if a player is on space `7` and they roll `2`, `2`, and `1`, they would move forward 5 times, to spaces `8`, `9`, `10`, `1`, and finally stopping on `2`.
  
@@ -11,28 +11,44 @@ Since the first game is a practice game, the submarine opens a compartment label
  
 For example, given these starting positions:
  
+
 ```
 Player 1 starting position: 4
 Player 2 starting position: 8
 ```
+
  
 This is how the game would go:
  
+ 
 - Player 1 rolls `1`+`2`+`3` and moves to space `10` for a total score of `10`.
+ 
 - Player 2 rolls `4`+`5`+`6` and moves to space `3` for a total score of `3`.
+ 
 - Player 1 rolls `7`+`8`+`9` and moves to space `4` for a total score of `14`.
+ 
 - Player 2 rolls `10`+`11`+`12` and moves to space `6` for a total score of `9`.
+ 
 - Player 1 rolls `13`+`14`+`15` and moves to space `6` for a total score of `20`.
+ 
 - Player 2 rolls `16`+`17`+`18` and moves to space `7` for a total score of `16`.
+ 
 - Player 1 rolls `19`+`20`+`21` and moves to space `6` for a total score of `26`.
+ 
 - Player 2 rolls `22`+`23`+`24` and moves to space `6` for a total score of `22`.
+ 
  
 ...after many turns...
  
+ 
 - Player 2 rolls `82`+`83`+`84` and moves to space `6` for a total score of `742`.
+ 
 - Player 1 rolls `85`+`86`+`87` and moves to space `4` for a total score of `990`.
+ 
 - Player 2 rolls `88`+`89`+`90` and moves to space `3` for a total score of `745`.
+ 
 - Player 1 rolls `91`+`92`+`93` and moves to space `10` for a final score, `1000`.
+ 
  
 Since player 1 has at least `1000` points, player 1 wins and the game ends. At this point, the losing player had `745` points and the die had been rolled a total of `993` times; `745 * 993 = 739785`.
  

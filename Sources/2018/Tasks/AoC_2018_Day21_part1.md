@@ -1,7 +1,7 @@
 ## --- Day 21: Chronal Conversion ---
 You should have been watching where you were going, because as you wander the new North Pole base, you trip and fall into a very deep hole!
  
-Just kidding. You're falling through time again.
+Just kidding.<!--- The old time travel hole gag! Classic. --> You're falling through time again.
  
 If you keep up your current pace, you should have resolved all of the temporal anomalies by the next time the device activates. Since you have very little interest in browsing history in 500-year increments for the rest of your life, you need to find a way to get back to your present time.
  
@@ -11,9 +11,9 @@ First, you discover that the device is hard-wired to always send you back in tim
  
 Second, you discover the **activation system** (your puzzle input) for the time travel module. Currently, it appears to **run forever without halting**.
  
-If you can cause the activation system to **halt** at a specific moment, maybe you can make the device send you so far back in time that you cause an [integer underflow](https://cwe.mitre.org/data/definitions/191.html **in time itself** and wrap around back to your current time!
+If you can cause the activation system to **halt** at a specific moment, maybe you can make the device send you so far back in time that you cause an [integer underflow](https://cwe.mitre.org/data/definitions/191.html) **in time itself** and wrap around back to your current time!
  
-The device executes the program as specified in [manual section one](16 and [manual section two](19.
+The device executes the program as specified in [manual section one](16) and [manual section two](19).
  
 Your goal is to figure out how the program works and cause it to halt. You can only control **register 0**; every other register begins at `0` as usual.
  

@@ -1,7 +1,7 @@
 ## --- Day 15: Timing is Everything ---
-The halls open into an interior plaza containing a large kinetic sculpture. The sculpture is in a sealed enclosure and seems to involve a set of identical spherical capsules that are carried to the top and allowed to [bounce through the maze](https://youtu.be/IxDoO9oODOk?t=177 of spinning pieces.
+The halls open into an interior plaza containing a large kinetic sculpture. The sculpture is in a sealed enclosure and seems to involve a set of identical spherical capsules that are carried to the top and allowed to [bounce through the maze](https://youtu.be/IxDoO9oODOk?t=177) of spinning pieces.
  
-Part of the sculpture is even interactive! When a button is pressed, a capsule is dropped and tries to fall through slots in a set of rotating discs to finally go through a little hole at the bottom and come out of the sculpture. If any of the slots aren't aligned with the capsule as it passes, the capsule bounces off the disc and soars away. You feel compelled to get one of those capsules.
+Part of the sculpture is even interactive! When a button is pressed, a capsule is dropped and tries to fall through slots in a set of rotating discs to finally go through a little hole at the bottom and come out of the sculpture. If any of the slots aren't aligned with the capsule as it passes, the capsule bounces off the disc and soars away. You feel compelled to get one of those capsules<!--- These machines are everywhere in Japan, but on a MUCH smaller scale. -->.
  
 The discs pause their motion each second and come in different sizes; they seem to each have a fixed number of positions at which they stop. You decide to call the position with the slot `0`, and count up for each position it reaches next.
  
@@ -11,10 +11,12 @@ The button will only drop a capsule at an integer time - no fractional seconds a
  
 For example, at `time=0`, suppose you see the following arrangement:
  
+
 ```
 Disc #1 has 5 positions; at time=0, it is at position 4.
 Disc #2 has 2 positions; at time=0, it is at position 1.
 ```
+
  
 If you press the button exactly at `time=0`, the capsule would start to fall; it would reach the first disc at `time=1`. Since the first disc was at position `4` at `time=0`, by `time=1` it has ticked one position forward. As a five-position disc, the next position is `0`, and the capsule falls through the slot.
  
