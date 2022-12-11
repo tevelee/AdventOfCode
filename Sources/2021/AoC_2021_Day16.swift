@@ -39,9 +39,9 @@ public final class AoC_2021_Day16 {
                 case let .literal(_, value):
                     return value
                 case let .`operator`(.sum, _, content):
-                    return content.map(\.evaluate).reduce(0, +)
+                    return content.map(\.evaluate).sum()
                 case let .`operator`(.product, _, content):
-                    return content.map(\.evaluate).reduce(1, *)
+                    return content.map(\.evaluate).product()
                 case let .`operator`(.min, _, content):
                     return content.map(\.evaluate).min() ?? 0
                 case let .`operator`(.max, _, content):

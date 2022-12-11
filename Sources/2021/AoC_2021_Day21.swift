@@ -22,7 +22,7 @@ public final class AoC_2021_Day21 {
         var players = [Player(position: player1), Player(position: player2)]
         var round = 0
         for roll in rolls {
-            let sum = roll.reduce(0, +)
+            let sum = roll.sum()
             let player = round % players.count
             players[player].move(by: sum, on: board)
             round += 1

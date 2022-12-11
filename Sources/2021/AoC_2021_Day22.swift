@@ -46,7 +46,7 @@ public final class AoC_2021_Day22 {
             }
         }
 
-        return on.map(\.numberOfPoints).reduce(0, +) - off.map(\.numberOfPoints).reduce(0, +)
+        return on.sum(of: \.numberOfPoints) - off.sum(of: \.numberOfPoints)
     }
 
     private struct ParsingError: Error {}

@@ -14,8 +14,7 @@ public final class AoC_2021_Day10 {
     public func solvePart1() async throws -> Int {
         try await lines
             .compactMap { self.invalidCharacter(in: $0) }
-            .map(\.part1Score)
-            .reduce(0, +)
+            .sum(of: \.part1Score)
     }
 
     public func solvePart2() async throws -> Int {

@@ -29,8 +29,7 @@ public final class AoC_2021_Day7 {
             .map { destination in
                 positions
                     .map { abs(destination - $0) }
-                    .map(transform)
-                    .reduce(0, +)
+                    .sum(of: transform)
             }
             .min()!
     }

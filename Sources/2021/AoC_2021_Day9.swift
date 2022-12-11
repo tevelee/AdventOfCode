@@ -28,7 +28,7 @@ public final class AoC_2021_Day9 {
                 }
             }
         }
-        return heights.map { $0 + 1 }.reduce(0, +)
+        return heights.sum { $0 + 1 }
     }
 
     public func solvePart2() async throws -> Int {
@@ -45,7 +45,7 @@ public final class AoC_2021_Day9 {
                 pointsToSkip.formUnion(basin)
             }
         }
-        return basins.map(\.count).max(count: 3).reduce(1, *)
+        return basins.map(\.count).max(count: 3).product()
     }
 
     struct Point: Hashable {

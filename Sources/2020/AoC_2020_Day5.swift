@@ -46,8 +46,4 @@ public final class AoC_2020_Day5 {
         }
         return range.upperBound
     }
-
-    private static func pow(_ value: Int, base: Int = 2) -> Int {
-        Array(repeating: base, count: value).reduce(1, *)
-    }
 }

@@ -9,12 +9,21 @@ public final class AoC_2022_Day11 {
     }
 
     public func solvePart1() throws -> Int {
+        try run(rounds: 20) { Int($0 / 3) }
+    }
+
+    public func solvePart2() throws -> Int {
+        try run(rounds: 10_000) { $0 }
+    }
+
+    private func run(rounds: Int, rule: (Int) -> Int) throws -> Int {
         var monkeys = try input.wholeInput.paragraphs.map { $0.joined(separator: "\n") }.map(parse)
-        for _ in 1...20 {
+        let commonDivisor = monkeys.map(\.divisor).product()
+        for _ in 1...rounds {
             for index in monkeys.indices {
                 let monkey = monkeys[index]
                 for item in monkey.items {
-                    let worryLevel = Int(monkey.operation(item) / 3)
+                    let worryLevel = rule(monkey.operation(item)) % commonDivisor
                     let recipient = monkey.throwToMonkey(worryLevel)
                     monkeys[recipient].items.append(worryLevel)
                 }
@@ -22,18 +31,14 @@ public final class AoC_2022_Day11 {
                 monkeys[index].items.removeAll()
             }
         }
-        return monkeys.map(\.numberOfInspectedItems).max(count: 2).reduce(1, *)
-    }
-
-    public func solvePart2() throws -> Int {
-        0
+        return monkeys.map(\.numberOfInspectedItems).max(count: 2).product()
     }
 
     private func parse(string: String) throws -> Monkey {
         let regex = #/
         Monkey\ (?<monkey>\d+):\
         \ \ Starting\ items:\ (?<items>.*)\
-        \ \ Operation:\ new\ =\ old\ (?<operation>.)\ (?<number>.*)\
+        \ \ Operation:\ new\ =\ (?<lhs>.*)\ (?<operation>.)\ (?<rhs>.*)\
         \ \ Test:\ divisible\ by\ (?<divisor>\d+)\
         \ \ \ \ If\ true:\ throw\ to\ monkey\ (?<true>\d+)\
         \ \ \ \ If\ false:\ throw\ to\ monkey\ (?<false>\d+)
@@ -48,8 +53,14 @@ public final class AoC_2022_Day11 {
         }
         return Monkey(index: index,
                       items: output.items.split(separator: ", ").map(String.init).compactMap(Int.init),
-                      operation: { operation.perform($0, Int(output.number) ?? $0) },
-                      throwToMonkey: { $0.isMultiple(of: divisor) ? trueMonkey : falseMonkey })
+                      divisor: divisor,
+                      operation: {
+                        operation.perform(Int(output.lhs) ?? $0,
+                                          Int(output.rhs) ?? $0)
+                      },
+                      throwToMonkey: {
+                        $0.isMultiple(of: divisor) ? trueMonkey : falseMonkey
+                      })
     }
 }
 
@@ -59,17 +70,17 @@ private struct Monkey {
     let index: Int
     var items: [Int]
     var numberOfInspectedItems: Int = 0
+    var divisor: Int
     let operation: (Int) -> Int
     let throwToMonkey: (Int) -> Int
 }
 
 private struct Operation {
+    let sign: String
     let perform: (Int, Int) -> Int
 
-    static let addition = Operation { $0 + $1 }
-    static let multiplication = Operation { $0 * $1 }
-    static let subtraction = Operation { $0 - $1 }
-    static let division = Operation { $0 / $1 }
+    static let addition = Operation(sign: "+") { $0 + $1 }
+    static let multiplication = Operation(sign: "*") { $0 * $1 }
 }
 
 private extension Operation {
@@ -79,10 +90,6 @@ private extension Operation {
             self = .addition
         case "*":
             self = .multiplication
-        case "-":
-            self = .subtraction
-        case "/":
-            self = .division
         default:
             return nil
         }

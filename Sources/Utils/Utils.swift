@@ -85,6 +85,10 @@ public extension Sequence {
         reduce(into: 0) { $0 += property($1) }
     }
 
+    func product<T: Numeric>(of property: (Element) -> T) -> T {
+        reduce(into: 1) { $0 *= property($1) }
+    }
+
     func count(where condition: (Element) throws -> Bool) rethrows -> Int {
         try filter(condition).count
     }
@@ -93,6 +97,10 @@ public extension Sequence {
 public extension Sequence where Element: Numeric {
     func sum() -> Element {
         sum { $0 }
+    }
+
+    func product() -> Element {
+        product { $0 }
     }
 }
 
@@ -114,6 +122,10 @@ public extension AsyncSequence {
             try await reduce(0) { result, _ in result + 1 }
         }
     }
+}
+
+public func pow(_ value: Int, base: Int = 2) -> Int {
+    Array(repeating: base, count: value).product()
 }
 
 public extension Dictionary where Value: Hashable {

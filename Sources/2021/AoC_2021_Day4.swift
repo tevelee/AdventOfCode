@@ -30,7 +30,7 @@ public final class AoC_2021_Day4 {
                     boards[boardIndex][index].marked = true
                     let board = boards[boardIndex]
                     if isBingo(on: board) {
-                        return board.filter(!\.marked).map(\.value).reduce(0, +) * number
+                        return board.filter(!\.marked).sum(of: \.value) * number
                     }
                 }
             }
@@ -59,7 +59,7 @@ public final class AoC_2021_Day4 {
             }
         }
         guard let winner = winner else { return 0 }
-        return winner.board.filter(!\.marked).map(\.value).reduce(0, +) * winner.number
+        return winner.board.filter(!\.marked).sum(of: \.value) * winner.number
     }
 
     private let range = 0 ..< 5

@@ -13,12 +13,11 @@ public final class AoC_2021_Day8 {
     }
 
     public func solvePart1() async throws -> Int {
-        try await lines.map { line in
+        try await lines.sum { line in
             let segments = line.replacingOccurrences(of: "\n", with: "").split(separator: "|")
             let outputValues = segments[1].words
             return outputValues.map(\.count).filter([2,3,4,7].contains).count
         }
-        .reduce(0, +)
     }
 
     public func solvePart2() async throws -> Int {
@@ -33,7 +32,7 @@ public final class AoC_2021_Day8 {
             return String(numbers)
         }
         .compactMap { Int($0) }
-        .reduce(0, +)
+        .sum()
     }
 
     private let digits: [Set<Character>: Character] = [

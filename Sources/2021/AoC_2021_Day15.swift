@@ -35,8 +35,7 @@ public final class AoC_2021_Day15: GraphDelegate {
             .dropFirst()
             .compactMap { $0 as? GKGridGraphNode }
             .map(\.gridPosition)
-            .map(cost)
-            .reduce(0, +)
+            .sum(of: cost)
     }
 
     func cost(to node: vector_int2) -> Int {
