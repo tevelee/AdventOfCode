@@ -133,3 +133,7 @@ public extension Dictionary where Value: Hashable {
         Dictionary<Value, [Key]>(grouping: keys, by: { self[$0]! }).compactMapValues(\.first)
     }
 }
+
+public prefix func !<T>(keyPath: KeyPath<T, Bool>) -> (T) -> Bool {
+    { !$0[keyPath: keyPath] }
+}

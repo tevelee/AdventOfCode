@@ -555,4 +555,50 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day12 / Part2 solution: \(answer)")
     }
+
+    func test_day13_intro() async throws {
+        let problem = AoC_2022_Day13(.string("""
+        [1,1,3,1,1]
+        [1,1,5,1,1]
+
+        [[1],[2,3,4]]
+        [[1],4]
+
+        [9]
+        [[8,7,6]]
+
+        [[4,4],4,4]
+        [[4,4],4,4,4]
+
+        [7,7,7,7]
+        [7,7,7]
+
+        []
+        [3]
+
+        [[[]]]
+        [[]]
+
+        [1,[2,[3,[4,[5,6,7]]]],8,9]
+        [1,[2,[3,[4,[5,6,0]]]],8,9]
+        """))
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 13)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 140)
+    }
+
+    func test_day13() async throws {
+        let problem = try AoC_2022_Day13(.url(url(for: "2022_day13")))
+
+        var answer = 4643
+        var result = try await problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day13 / Part1 solution: \(answer)")
+
+        answer = 21614
+        result = try await problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day13 / Part2 solution: \(answer)")
+    }
 }

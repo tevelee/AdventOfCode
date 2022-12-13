@@ -87,3 +87,32 @@ public struct AsyncSequenceFromSequence<Base: Sequence>: AsyncSequence {
         }
     }
 }
+
+public extension AsyncSequence {
+    func enumerated() -> AsyncEnumeratedSequence<Self> {
+        AsyncEnumeratedSequence(base: self)
+    }
+}
+
+public struct AsyncEnumeratedSequence<Base: AsyncSequence>: AsyncSequence {
+    public typealias AsyncIterator = Iterator<Base.AsyncIterator>
+    public typealias Element = AsyncIterator.Element
+
+    var base: Base
+
+    public func makeAsyncIterator() -> Iterator<Base.AsyncIterator> {
+        Iterator(base: base.makeAsyncIterator())
+    }
+
+    public struct Iterator<Base: AsyncIteratorProtocol>: AsyncIteratorProtocol {
+        public typealias Element = (offset: Int, value: Base.Element)
+
+        var base: Base
+        var offset = 0
+
+        public mutating func next() async throws -> (offset: Int, value: Base.Element)? {
+            defer { offset += 1 }
+            return try await base.next().map { (offset, $0) }
+        }
+    }
+}

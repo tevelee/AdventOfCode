@@ -1,3 +1,4 @@
+import Utils
 
 public final class AoC_2021_Day4 {
     let numbers: [Int]
@@ -80,8 +81,4 @@ public final class AoC_2021_Day4 {
             return row.allSatisfy(\.marked) || column.allSatisfy(\.marked)
         }
     }
-}
-
-prefix func !<T>(keyPath: KeyPath<T, Bool>) -> (T) -> Bool {
-    { !$0[keyPath: keyPath] }
 }
