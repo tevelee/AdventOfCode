@@ -601,4 +601,29 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day13 / Part2 solution: \(answer)")
     }
+
+    func test_day14_intro() throws {
+        let problem = try AoC_2022_Day14(.string("""
+        498,4 -> 498,6 -> 496,6
+        503,4 -> 502,4 -> 502,9 -> 494,9
+        """))
+        let part1 = try problem.solvePart1()
+        XCTAssertEqual(part1, 24)
+        let part2 = try problem.solvePart2()
+        XCTAssertEqual(part2, 93)
+    }
+
+    func test_day14() throws {
+        let problem = try AoC_2022_Day14(.url(url(for: "2022_day14")))
+
+        var answer = 683
+        var result = try problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day14 / Part1 solution: \(answer)")
+
+        answer = 28821
+        result = try problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day14 / Part2 solution: \(answer)")
+    }
 }
