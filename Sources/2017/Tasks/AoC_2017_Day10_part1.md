@@ -5,7 +5,7 @@ This hash function simulates tying a knot in a circle of string with 256 marks o
  
 
 ```
-4--5   pinch   4  5           4   1
+  4--5   pinch   4  5           4   1
  /    \  5,0,1  / \/ \  twist  / \ / \
 3      0  -->  3      0  -->  3   X   0
  \    /         \ /\ /         \ / \ /

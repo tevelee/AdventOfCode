@@ -12,10 +12,10 @@ For example, the steps to evaluate the expression `1 + 2 * 3 + 4 * 5 + 6` are as
 
 ```
 1 + 2 * 3 + 4 * 5 + 6
-  3 * 3 + 4 * 5 + 6
-      9 + 4 * 5 + 6
-         13 * 5 + 6
-             65 + 6
+  3   * 3 + 4 * 5 + 6
+      9   + 4 * 5 + 6
+         13   * 5 + 6
+             65   + 6
                  71
 ```
 
@@ -25,10 +25,10 @@ Parentheses can override this order; for example, here is what happens if parent
 
 ```
 1 + (2 * 3) + (4 * (5 + 6))
-1 + 6    + (4 * (5 + 6))
+1 +    6    + (4 * (5 + 6))
      7      + (4 * (5 + 6))
-     7      + (4 * 11 )
-     7 + 44
+     7      + (4 *   11   )
+     7      +     44
             51
 ```
 

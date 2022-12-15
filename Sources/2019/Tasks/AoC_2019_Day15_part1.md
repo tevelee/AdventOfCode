@@ -35,7 +35,11 @@ For example, we can draw the area using `D` for the droid, `#` for walls, `.` fo
  
 
 ```
-D
+      
+      
+   D  
+      
+      
 ```
 
  
@@ -43,8 +47,11 @@ To make the droid go north, send it `1`. If it replies with `0`, you know that l
  
 
 ```
-#  
-   D
+      
+   #  
+   D  
+      
+      
 ```
 
  
@@ -52,8 +59,11 @@ To move east, send `4`; a reply of `1` means the movement was successful:
  
 
 ```
-#  
-   .D
+      
+   #  
+   .D 
+      
+      
 ```
 
  
@@ -61,9 +71,11 @@ Then, perhaps attempts to move north (`1`), south (`2`), and east (`4`) are all 
  
 
 ```
-## 
+      
+   ## 
    .D#
-    #
+    # 
+      
 ```
 
  
@@ -71,9 +83,11 @@ Now, you know the repair droid is in a dead end. Backtrack with `3` (which you a
  
 
 ```
-## 
+      
+   ## 
    D.#
-    #
+    # 
+      
 ```
 
  
@@ -81,10 +95,11 @@ Then, perhaps west (`3`) gets a reply of `0`, south (`2`) gets a reply of `1`, s
  
 
 ```
-## 
+      
+   ## 
   #..#
   D.# 
-   #
+   #  
 ```
 
  

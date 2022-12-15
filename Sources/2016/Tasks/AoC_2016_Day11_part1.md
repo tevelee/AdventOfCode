@@ -33,7 +33,7 @@ As a diagram (`F#` for a Floor number, `E` for Elevator, `H` for Hydrogen, `L` f
 F4 .  .  .  .  .  
 F3 .  .  .  LG .  
 F2 .  HG .  .  .  
-F1 E  .  HM .  LM
+F1 E  .  HM .  LM 
 ```
 
  
@@ -45,7 +45,7 @@ Then, to get everything up to the assembling machine on the fourth floor, the fo
 F4 .  .  .  .  .  
 F3 .  .  .  LG .  
 F2 E  HG HM .  .  
-F1 .  .  .  .  LM
+F1 .  .  .  .  LM 
 ```
 
  
@@ -54,7 +54,7 @@ F1 .  .  .  .  LM
 F4 .  .  .  .  .  
 F3 E  HG HM LG .  
 F2 .  .  .  .  .  
-F1 .  .  .  .  LM
+F1 .  .  .  .  LM 
 ```
 
  
@@ -63,7 +63,7 @@ F1 .  .  .  .  LM
 F4 .  .  .  .  .  
 F3 .  HG .  LG .  
 F2 E  .  HM .  .  
-F1 .  .  .  .  LM
+F1 .  .  .  .  LM 
 ```
 
  
@@ -72,7 +72,7 @@ F1 .  .  .  .  LM
 F4 .  .  .  .  .  
 F3 .  HG .  LG .  
 F2 .  .  .  .  .  
-F1 E  .  HM .  LM
+F1 E  .  HM .  LM 
 ```
 
  
@@ -81,7 +81,7 @@ F1 E  .  HM .  LM
 F4 .  .  .  .  .  
 F3 .  HG .  LG .  
 F2 E  .  HM .  LM 
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -90,7 +90,7 @@ F1 .  .  .  .  .
 F4 .  .  .  .  .  
 F3 E  HG HM LG LM 
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -99,7 +99,7 @@ F1 .  .  .  .  .
 F4 E  .  HM .  LM 
 F3 .  HG .  LG .  
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -108,7 +108,7 @@ F1 .  .  .  .  .
 F4 .  .  .  .  LM 
 F3 E  HG HM LG .  
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -117,7 +117,7 @@ F1 .  .  .  .  .
 F4 E  HG .  LG LM 
 F3 .  .  HM .  .  
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -126,7 +126,7 @@ F1 .  .  .  .  .
 F4 .  HG .  LG .  
 F3 E  .  HM .  LM 
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  
@@ -135,7 +135,7 @@ F1 .  .  .  .  .
 F4 E  HG HM LG LM 
 F3 .  .  .  .  .  
 F2 .  .  .  .  .  
-F1 .  .  .  .  .
+F1 .  .  .  .  .  
 ```
 
  

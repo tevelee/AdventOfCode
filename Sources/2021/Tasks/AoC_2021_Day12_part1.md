@@ -21,7 +21,7 @@ So, the above cave system looks roughly like this:
  
 
 ```
-start
+    start
     /   \
 c--A-----b--d
     \   /

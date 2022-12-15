@@ -145,7 +145,7 @@ After round 1, the monkeys are holding items with these worry levels:
 Monkey 0: 20, 23, 27, 26
 Monkey 1: 2080, 25, 167, 207, 401, 1046
 Monkey 2: 
-Monkey 3:
+Monkey 3: 
 ```
 
  
@@ -223,7 +223,7 @@ After round 20, the monkeys are holding items with these worry levels:
 Monkey 0: 10, 12, 14, 26, 34
 Monkey 1: 245, 93, 53, 199, 115
 Monkey 2: 
-Monkey 3:
+Monkey 3: 
 ```
 
  

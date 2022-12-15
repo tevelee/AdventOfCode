@@ -25,7 +25,7 @@ Two points are in the same **constellation** if their manhattan distance apart i
  
 
 ```
-0,0,0,0
+ 0,0,0,0
  3,0,0,0
  0,3,0,0
  0,0,3,0

@@ -72,7 +72,7 @@ pick up: 7, 4, 1
 destination: 3
 
 -- final --
-cups:  5 (8) 3  7  4  1  9  2  6
+cups:  5 (8) 3  7  4  1  9  2  6 
 ```
 
  

@@ -5,7 +5,7 @@ There are five amplifiers connected in series<!--- As you can see, I know exactl
  
 
 ```
-O-------O  O-------O  O-------O  O-------O  O-------O
+    O-------O  O-------O  O-------O  O-------O  O-------O
 0 ->| Amp A |->| Amp B |->| Amp C |->| Amp D |->| Amp E |-> (to thrusters)
     O-------O  O-------O  O-------O  O-------O  O-------O
 ```

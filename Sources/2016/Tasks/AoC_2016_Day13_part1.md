@@ -21,7 +21,7 @@ For example, if the office designer's favorite number were `10`, drawing walls a
  
 
 ```
-0123456789
+  0123456789
 0 .#.####.##
 1 ..#..#...#
 2 #....##...
@@ -36,7 +36,7 @@ Now, suppose you wanted to reach `7,4`. The shortest route you could take is mar
  
 
 ```
-0123456789
+  0123456789
 0 .#.####.##
 1 .O#..#...#
 2 #OOO.##...

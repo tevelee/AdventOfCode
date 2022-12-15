@@ -28,7 +28,7 @@ If you continue around the table, you could then seat Bob next to Alice (Bob gai
  
 
 ```
-+41 +46
+     +41 +46
 +55   David    -2
 Carol       Alice
 +60    Bob    +54

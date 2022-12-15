@@ -22,7 +22,7 @@ Continuing this process, the **first 8 rows and columns** for key `flqrgnkx` app
 .#...#..   
 ##.#.##.-->
 |      |   
-V      V
+V      V   
 ```
 
  

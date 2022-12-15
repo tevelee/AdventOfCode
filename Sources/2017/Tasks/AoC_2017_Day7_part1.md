@@ -29,7 +29,7 @@ cntj (57)
  
 
 ```
-gyxo
+                gyxo
               /     
          ugml - ebii
        /      \     

@@ -25,7 +25,7 @@ Visually, these requirements look like this:
  
 
 ```
--->A--->B--
+  -->A--->B--
  /    \      \
 C      -->D----->E
  \           /

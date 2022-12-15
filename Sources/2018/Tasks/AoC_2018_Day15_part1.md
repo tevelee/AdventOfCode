@@ -9,7 +9,7 @@ All units are very disciplined and always follow very strict combat rules. Units
  
 
 ```
-would take their
+                 would take their
 These units:   turns in this order:
   #######           #######
   #.G.E.#           #.1.2.#
@@ -129,12 +129,12 @@ For example, suppose the only Elf is about to attack:
  
 
 ```
-HP:            HP:
+       HP:            HP:
 G....  9       G....  9  
 ..G..  4       ..G..  4  
 ..EG.  2  -->  ..E..     
 ..G..  2       ..G..  2  
-...G.  1       ...G.  1
+...G.  1       ...G.  1  
 ```
 
  
@@ -240,7 +240,7 @@ After 47 rounds:
 #.#.#G#   G(59)
 #...#.#   
 #....G#   G(200)
-#######
+#######   
 ```
 
  

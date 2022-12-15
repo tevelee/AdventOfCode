@@ -60,9 +60,9 @@ For grid serial number `18`, the largest total 3x3 square has a top-left corner 
 
 ```
 -2  -4   4   4   4
--4  4 4 4 -5
- 4  3 3 4 -4
- 1  1 2 4 -3
+-4   4   4   4  -5
+ 4   3   3   4  -4
+ 1   1   2   4  -3
 -1   0   2  -5  -2
 ```
 
@@ -72,9 +72,9 @@ For grid serial number `42`, the largest 3x3 square's top-left is `21,61` (with 
 
 ```
 -3   4   2   2   2
--4  4 3 3  4
--5  3 3 4 -4
- 4  3 3 4 -3
+-4   4   3   3   4
+-5   3   3   4  -4
+ 4   3   3   4  -3
  3   3   3  -5  -1
 ```
 

@@ -7,12 +7,13 @@ Sometimes, the lines cross over each other; in these cases, it needs to continue
  
 
 ```
-|          
+     |          
      |  +--+    
      A  |  C    
  F---|----E|--+ 
      |  |  |  D 
-     +B-+  +--+
+     +B-+  +--+ 
+
 ```
 
  

@@ -32,7 +32,7 @@ Drawing sensors as `S` and beacons as `B`, the above arrangement of sensors and 
  
 
 ```
-1    1    2    2
+               1    1    2    2
      0    5    0    5    0    5
  0 ....S.......................
  1 ......................S.....
@@ -64,7 +64,7 @@ This isn't necessarily a comprehensive map of all beacons in the area, though. B
  
 
 ```
-1    1    2    2
+               1    1    2    2
      0    5    0    5    0    5
 -2 ..........#.................
 -1 .........###................
@@ -102,7 +102,7 @@ So, suppose you have an arrangement of beacons and sensors like in the example a
  
 
 ```
-1    1    2    2
+                 1    1    2    2
        0    5    0    5    0    5
  9 ...#########################...
 10 ..####B######################..

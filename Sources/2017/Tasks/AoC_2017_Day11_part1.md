@@ -9,7 +9,7 @@ The hexagons ("hexes") in this grid<!--- Raindrops on roses and whiskers on kitt
  
 
 ```
-\ n  /
+  \ n  /
 nw +--+ ne
   /    \
 -+      +-

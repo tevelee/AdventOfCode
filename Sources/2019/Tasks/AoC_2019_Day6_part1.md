@@ -5,7 +5,7 @@ Except for the universal Center of Mass (`COM`), every object in space is in orb
  
 
 ```
-\
+                  \
                    \
                     |
                     |
@@ -44,7 +44,7 @@ Visually, the above map of orbits looks like this:
  
 
 ```
-G - H       J - K - L
+        G - H       J - K - L
        /           /
 COM - B - C - D - E - F
                \

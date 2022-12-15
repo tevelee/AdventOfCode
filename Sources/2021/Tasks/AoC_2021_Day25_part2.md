@@ -17,7 +17,11 @@ The experimental antenna control console lights up again:
  
 
 ```
-Energy source detected. Integrating energy source from device "sleigh keys"...done. Installing device drivers...done. Recalibrating experimental antenna...done. Boost strength due to matching signal phase: 1 star
+Energy source detected.
+Integrating energy source from device "sleigh keys"...done.
+Installing device drivers...done.
+Recalibrating experimental antenna...done.
+Boost strength due to matching signal phase: 1 star
 ```
 
  

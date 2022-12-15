@@ -40,7 +40,7 @@ For example, suppose the cave system's depth is `510` and the target's coordinat
  
 - At `1,0`, because the `Y` coordinate is `0`, the geologic index is `1 * 16807 = 16807`. The erosion level is `(16807 + 510) % 20183 = 17317`. The type is `17317 % 3 = 1`, **wet**.
  
-- At `0,1`, because the `X` coordinate is `0`, the geologic index is `1 * 48271 = 48271`. The erosion level is `(48271 + 510) % 20183 = 8415`. The type is `8415 % 3 = 0`, **rocky**.
+- At `0,1`, because the `X` coordinate is `0`, the geologic index is ` 1 * 48271 = 48271`. The erosion level is `(48271 + 510) % 20183 = 8415`. The type is `8415 % 3 = 0`, **rocky**.
  
 - At `1,1`, neither coordinate is `0` and it is not the coordinate of the target, so the geologic index is the erosion level of `0,1` (`8415`) times the erosion level of `1,0` (`17317`), `8415 * 17317 = 145722555`. The erosion level is `(145722555 + 510) % 20183 = 1805`. The type is `1805 % 3 = 2`, **narrow**.
  

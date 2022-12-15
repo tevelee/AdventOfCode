@@ -44,7 +44,7 @@ For brevity, in this example, only the combinations which do produce a plant are
  
 
 ```
-1         2         3     
+                 1         2         3     
        0         0         0         0     
  0: ...#..#.#..##......###...###...........
  1: ...#...#....#.....#..#..#..#...........

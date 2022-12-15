@@ -71,7 +71,7 @@ struct FetchEvents: AsyncParsableCommand {
         guard let element = node as? Element else {
             return ""
         }
-        let text = try element.text()
+        let text = try element.text(trimAndNormaliseWhitespace: false)
         switch element.tagName() {
         case "h1":
             return "# \(text)"
@@ -107,7 +107,9 @@ struct FetchEvents: AsyncParsableCommand {
         case "code":
             return "`\(text)`"
         case "pre":
-            return "\n```\n\(text)\n```\n"
+            let prefix = text.hasPrefix("\n") ? "" : "\n"
+            let suffix = text.hasSuffix("\n") ? "" : "\n"
+            return "\n```\(prefix)\(text)\(suffix)```\n"
         case "hr":
             return "---"
         case "br":

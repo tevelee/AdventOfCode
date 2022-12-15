@@ -7,7 +7,7 @@ For example, with five Elves (numbered `1` to `5`):
  
 
 ```
-1
+  1
 5   2
  4 3
 ```

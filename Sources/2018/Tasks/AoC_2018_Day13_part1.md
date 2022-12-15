@@ -159,7 +159,7 @@ Here is a longer example:
 | /-+--+-\  |
 | | |  X |  |
 \-+-/  \-+--/
-  \------/
+  \------/   
 ```
 
  
@@ -167,14 +167,14 @@ After following their respective paths for a while, the carts eventually crash. 
  
 
 ```
-111
+           111
  0123456789012
 0/---\        
 1|   |  /----\
 2| /-+--+-\  |
 3| | |  X |  |
 4\-+-/  \-+--/
-5  \------/
+5  \------/   
 ```
 
  

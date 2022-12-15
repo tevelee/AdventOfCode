@@ -11,7 +11,7 @@ To better understand the tractor beam, it is important to **get a good picture**
  
 
 ```
-X
+       X
   0->      9
  0#.........
  |.#........

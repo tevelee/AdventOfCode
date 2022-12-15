@@ -9,10 +9,10 @@ Again considering the example above, the crates begin in the same configuration:
  
 
 ```
-[D]    
+    [D]    
 [N] [C]    
 [Z] [M] [P]
- 1   2   3
+ 1   2   3 
 ```
 
  
@@ -23,7 +23,7 @@ Moving a single crate from stack 2 to stack 1 behaves the same as before:
 [D]        
 [N] [C]    
 [Z] [M] [P]
- 1   2   3
+ 1   2   3 
 ```
 
  
@@ -31,7 +31,7 @@ However, the action of moving three crates from stack 1 to stack 3 means that th
  
 
 ```
-[D]
+        [D]
         [N]
     [C] [Z]
     [M] [P]
@@ -43,7 +43,7 @@ Next, as both crates are moved from stack 2 to stack 1, they **retain their orde
  
 
 ```
-[D]
+        [D]
         [N]
 [C]     [Z]
 [M]     [P]
@@ -55,7 +55,7 @@ Finally, a single crate is still moved from stack 1 to stack 2, but now it's cra
  
 
 ```
-[D]
+        [D]
         [N]
         [Z]
 [M] [C] [P]

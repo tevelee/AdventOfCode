@@ -9,7 +9,7 @@ They do, however, have a drawing of the starting stacks of crates **and** the re
  
 
 ```
-[D]    
+    [D]    
 [N] [C]    
 [Z] [M] [P]
  1   2   3 
@@ -30,7 +30,7 @@ Then, the rearrangement procedure is given. In each step of the procedure, a qua
 [D]        
 [N] [C]    
 [Z] [M] [P]
- 1   2   3
+ 1   2   3 
 ```
 
  
@@ -38,7 +38,7 @@ In the second step, three crates are moved from stack 1 to stack 3. Crates are m
  
 
 ```
-[Z]
+        [Z]
         [N]
     [C] [D]
     [M] [P]
@@ -50,7 +50,7 @@ Then, both crates are moved from stack 2 to stack 1. Again, because crates are m
  
 
 ```
-[Z]
+        [Z]
         [N]
 [M]     [D]
 [C]     [P]
@@ -62,7 +62,7 @@ Finally, one crate is moved from stack 1 to stack 2:
  
 
 ```
-[Z]
+        [Z]
         [N]
         [D]
 [C] [M] [P]

@@ -5,7 +5,7 @@ Between the first and second lines of text that contain amphipod starting positi
  
 
 ```
-#D#C#B#A#
+  #D#C#B#A#
   #D#B#A#C#
 ```
 
@@ -17,7 +17,8 @@ So, the above example now becomes:
 #############
 #...........#
 ###B#C#B#D###
-  #D#C#B#A# #D#B#A#C#
+  #D#C#B#A#
+  #D#B#A#C#
   #A#D#C#A#
   #########
 ```

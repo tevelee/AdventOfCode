@@ -12,7 +12,7 @@ After some careful analysis, the mapping between signal wires and segments only 
  
 
 ```
-dddd
+ dddd
 e    a
 e    a
  ffff

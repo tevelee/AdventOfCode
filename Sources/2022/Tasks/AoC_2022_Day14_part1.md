@@ -24,7 +24,7 @@ Drawing rock as `#`, air as `.`, and the source of the sand as `+`, this becomes
  
 
 ```
-4     5  5
+  4     5  5
   9     0  0
   4     0  3
 0 ......+...

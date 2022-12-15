@@ -24,7 +24,7 @@ Rendering clay as `#`, sand as `.`, and the water spring as `+`, and with `x` in
  
 
 ```
-44444455555555
+   44444455555555
    99999900000000
    45678901234567
  0 ......+.......

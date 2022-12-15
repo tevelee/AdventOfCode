@@ -100,7 +100,7 @@ Once the game ends, you can calculate the winning player's **score**. The bottom
  
 
 ```
-3 * 10
+   3 * 10
 +  2 *  9
 + 10 *  8
 +  6 *  7
