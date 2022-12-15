@@ -626,4 +626,41 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day14 / Part2 solution: \(answer)")
     }
+
+    func test_day15_intro() throws {
+        let problem = try AoC_2022_Day15(.string("""
+        Sensor at x=2, y=18: closest beacon is at x=-2, y=15
+        Sensor at x=9, y=16: closest beacon is at x=10, y=16
+        Sensor at x=13, y=2: closest beacon is at x=15, y=3
+        Sensor at x=12, y=14: closest beacon is at x=10, y=16
+        Sensor at x=10, y=20: closest beacon is at x=10, y=16
+        Sensor at x=14, y=17: closest beacon is at x=10, y=16
+        Sensor at x=8, y=7: closest beacon is at x=2, y=10
+        Sensor at x=2, y=0: closest beacon is at x=2, y=10
+        Sensor at x=0, y=11: closest beacon is at x=2, y=10
+        Sensor at x=20, y=14: closest beacon is at x=25, y=17
+        Sensor at x=17, y=20: closest beacon is at x=21, y=22
+        Sensor at x=16, y=7: closest beacon is at x=15, y=3
+        Sensor at x=14, y=3: closest beacon is at x=15, y=3
+        Sensor at x=20, y=1: closest beacon is at x=15, y=3
+        """))
+        let part1 = try problem.solvePart1(y: 10)
+        XCTAssertEqual(part1, 26)
+        let part2 = try problem.solvePart2(range: 0...20)
+        XCTAssertEqual(part2, 56000011)
+    }
+
+    func test_day15() throws {
+        let problem = try AoC_2022_Day15(.url(url(for: "2022_day15")))
+
+        var answer = 4861076
+        var result = try problem.solvePart1(y: 2_000_000)
+        XCTAssertEqual(result, answer)
+        print("Day15 / Part1 solution: \(answer)")
+
+        answer = 10649103160102
+        result = try problem.solvePart2(range: 0...4_000_000)
+        XCTAssertEqual(result, answer)
+        print("Day15 / Part2 solution: \(answer)")
+    }
 }

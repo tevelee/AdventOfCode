@@ -108,19 +108,21 @@ public extension AsyncSequence {
     func sum<T: Numeric>(of property: (Element) -> T) async throws -> T {
         try await reduce(into: 0) { $0 += property($1) }
     }
+
+    func count(where condition: @escaping @Sendable (Element) throws -> Bool) async throws -> Int {
+        try await filter(condition).count
+    }
+
+    var count: Int {
+        get async throws {
+            try await reduce(0) { result, _ in result + 1 }
+        }
+    }
 }
 
 public extension AsyncSequence where Element: Numeric {
     func sum() async throws -> Element {
         try await sum { $0 }
-    }
-}
-
-public extension AsyncSequence {
-    var count: Int {
-        get async throws {
-            try await reduce(0) { result, _ in result + 1 }
-        }
     }
 }
 

@@ -32,7 +32,3 @@ public struct Integer: RegexComponent {
         }
     }
 }
-
-extension Regex.Match {
-
-}
