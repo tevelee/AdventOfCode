@@ -663,4 +663,37 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day15 / Part2 solution: \(answer)")
     }
+
+    func test_day16_intro() throws {
+        let problem = try AoC_2022_Day16(.string("""
+        Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
+        Valve BB has flow rate=13; tunnels lead to valves CC, AA
+        Valve CC has flow rate=2; tunnels lead to valves DD, BB
+        Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE
+        Valve EE has flow rate=3; tunnels lead to valves FF, DD
+        Valve FF has flow rate=0; tunnels lead to valves EE, GG
+        Valve GG has flow rate=0; tunnels lead to valves FF, HH
+        Valve HH has flow rate=22; tunnel leads to valve GG
+        Valve II has flow rate=0; tunnels lead to valves AA, JJ
+        Valve JJ has flow rate=21; tunnel leads to valve II
+        """))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 1651)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 1707)
+    }
+
+    func test_day16() throws {
+        let problem = try AoC_2022_Day16(.url(url(for: "2022_day16")))
+
+        var answer = 1638
+        var result = problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day16 / Part1 solution: \(answer)")
+
+        answer = 2400
+        result = problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day16 / Part2 solution: \(answer)")
+    }
 }
