@@ -81,6 +81,14 @@ public func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C
 }
 
 public extension Sequence {
+    func max<T: Numeric & Comparable>(of property: (Element) -> T) -> Element? {
+        max(of: property, comparator: <)
+    }
+
+    func max<T: Numeric>(of property: (Element) -> T, comparator: (T, T) -> Bool) -> Element? {
+        self.max { comparator(property($0), property($1)) }
+    }
+
     func sum<T: Numeric>(of property: (Element) -> T) -> T {
         reduce(into: 0) { $0 += property($1) }
     }
