@@ -757,27 +757,27 @@ final class AoC_2022_Tests: XCTestCase {
         print("Day18 / Part2 solution: \(answer)")
     }
 
-    func test_day19_intro() throws {
+    func test_day19_intro() async throws {
         let problem = try AoC_2022_Day19(.string("""
         Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
         Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
         """))
-        let part1 = problem.solvePart1()
+        let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 33)
-        let part2 = problem.solvePart2()
+        let part2 = try await problem.solvePart2()
         XCTAssertEqual(part2, 56 * 62)
     }
 
-    func test_day19() throws {
+    func test_day19() async throws {
         let problem = try AoC_2022_Day19(.url(url(for: "2022_day19")))
 
         var answer = 1150
-        var result = problem.solvePart1()
+        var result = try await problem.solvePart1()
         XCTAssertEqual(result, answer)
         print("Day19 / Part1 solution: \(answer)")
 
         answer = 0
-        result = problem.solvePart2()
+        result = try await problem.solvePart2()
         XCTAssertEqual(result, answer)
         print("Day19 / Part2 solution: \(answer)")
     }
@@ -810,5 +810,43 @@ final class AoC_2022_Tests: XCTestCase {
         result = problem.solvePart2()
         XCTAssertEqual(result, answer)
         print("Day20 / Part2 solution: \(answer)")
+    }
+
+    func test_day21_intro() throws {
+        let problem = try AoC_2022_Day21(.string("""
+        root: pppw + sjmn
+        dbpl: 5
+        cczh: sllz + lgvd
+        zczc: 2
+        ptdq: humn - dvpt
+        dvpt: 3
+        lfqf: 4
+        humn: 5
+        ljgn: 2
+        sjmn: drzm * dbpl
+        sllz: 4
+        pppw: cczh / lfqf
+        lgvd: ljgn * ptdq
+        drzm: hmdt - zczc
+        hmdt: 32
+        """))
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 152)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 301)
+    }
+
+    func test_day21() throws {
+        let problem = try AoC_2022_Day21(.url(url(for: "2022_day21")))
+
+        var answer = 158731561459602
+        var result = problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day21 / Part1 solution: \(answer)")
+
+        answer = 3769668716709
+        result = problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day21 / Part2 solution: \(answer)")
     }
 }

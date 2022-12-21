@@ -93,8 +93,24 @@ public extension Sequence {
         reduce(into: 0) { $0 += property($1) }
     }
 
+    func sum<T: Numeric>(of property: (Element) async throws -> T) async throws -> T {
+        var result: T = 0
+        for element in self {
+            result += try await property(element)
+        }
+        return result
+    }
+
     func product<T: Numeric>(of property: (Element) -> T) -> T {
         reduce(into: 1) { $0 *= property($1) }
+    }
+
+    func product<T: Numeric>(of property: (Element) async throws -> T) async throws -> T {
+        var result: T = 1
+        for element in self {
+            result *= try await property(element)
+        }
+        return result
     }
 
     func count(where condition: (Element) throws -> Bool) rethrows -> Int {
@@ -115,6 +131,10 @@ public extension Sequence where Element: Numeric {
 public extension AsyncSequence {
     func sum<T: Numeric>(of property: (Element) -> T) async throws -> T {
         try await reduce(into: 0) { $0 += property($1) }
+    }
+
+    func product<T: Numeric>(of property: (Element) -> T) async throws -> T {
+        try await reduce(into: 1) { $0 *= property($1) }
     }
 
     func count(where condition: @escaping @Sendable (Element) throws -> Bool) async throws -> Int {

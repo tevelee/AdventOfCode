@@ -17,7 +17,6 @@ public final class AoC_2022_Day20 {
         return groveCoordinate(from: mixed)
     }
 
-
     private func mix(numbers: [Int], times: Int = 1) -> [Int] {
         var mixed = numbers.enumerated().map(Number.init)
         let originalOrder = mixed
