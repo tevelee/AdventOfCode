@@ -30,6 +30,8 @@ public final class AoC_2022_Day19 {
         var robots: Resources
         var resources: Resources = [:]
 
+        var score: Int { resources[.geode] }
+
         func apply(_ block: (inout State) -> Void) -> State {
             var copy = self
             block(&copy)
@@ -51,23 +53,41 @@ public final class AoC_2022_Day19 {
         }
     }
 
-    private func maxGeodes(using blueprint: Blueprint, at state: State, builds: [Resource] = []) -> (score: Int, builds: [Resource]) {
-        if state.minutesRemaining == 0 {
-            let score = state.resources[.geode]
-            return (score, builds)
+    private func maxGeodes(using blueprint: Blueprint, at state: State) -> (score: Int, builds: [Resource]) {
+        var max: (score: Int, builds: [Resource]) = (0, [])
+        maxGeodes(using: blueprint, at: state, max: &max)
+        return max
+    }
+
+    private func maxGeodes(using blueprint: Blueprint,
+                           at state: State,
+                           builds: [Resource] = [],
+                           max: inout (score: Int, builds: [Resource])) {
+        guard state.minutesRemaining > 0 else {
+            let score = state.score
+            if score > max.score {
+                max = (score, builds)
+            }
+            return
         }
-        var max: (score: Int, [Resource]) = (0, [])
-        let scoreIfNotBuildingAnyMoreRobots = maxGeodes(using: blueprint, at: state.apply {
+        let bestCaseWhenWeCanBuildANewGeodeRobotEveryMinute = state.apply {
+            for _ in 1...state.minutesRemaining {
+                $0.advance(minutes: 1)
+                $0.build(robot: .geode, from: blueprint)
+            }
+        }
+        if bestCaseWhenWeCanBuildANewGeodeRobotEveryMinute.score < max.score {
+            return // early return if this branch can't possibly beat best score
+        }
+
+        maxGeodes(using: blueprint, at: state.apply {
             $0.advance(minutes: state.minutesRemaining)
-        }, builds: builds)
-        if scoreIfNotBuildingAnyMoreRobots.score > max.score {
-            max = scoreIfNotBuildingAnyMoreRobots
-        }
+        }, builds: builds, max: &max)
         var robotsToBuildNext: [Resource] = Resource.allCases
             .reversed()
-            .filter { blueprint.canBuild(robot: $0, usingRobots: state.robots) }
-            .filter { $0 == .geode || state.robots[$0] < blueprint.max[$0] }
-        if state.robots[.obsidian] > 0, let index = robotsToBuildNext.firstIndex(of: .ore) {
+            .filter { blueprint.canBuild(robot: $0, usingRobots: state.robots) } // only chose robots that are available with given robots
+            .filter { $0 == .geode || state.robots[$0] < blueprint.max[$0] } // don't build more than necessary to build a new robot
+        if state.robots[.obsidian] > 0, let index = robotsToBuildNext.firstIndex(of: .ore) { // stop building ores once obsidian is available
             robotsToBuildNext.remove(at: index)
         }
         for robotType in robotsToBuildNext {
@@ -75,15 +95,11 @@ public final class AoC_2022_Day19 {
             if roundsNeeded > state.minutesRemaining {
                 continue
             }
-            let score = maxGeodes(using: blueprint, at: state.apply {
+            maxGeodes(using: blueprint, at: state.apply {
                 $0.advance(minutes: roundsNeeded)
                 $0.build(robot: robotType, from: blueprint)
-            }, builds: builds + [robotType])
-            if score.score > max.score {
-                max = score
-            }
+            }, builds: builds + [robotType], max: &max)
         }
-        return max
     }
 }
 

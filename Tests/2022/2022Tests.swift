@@ -762,9 +762,9 @@ final class AoC_2022_Tests: XCTestCase {
         Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
         Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
         """))
-        let part1 = try await problem.solvePart1()
+        let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 33)
-        let part2 = try await problem.solvePart2()
+        let part2 = problem.solvePart2()
         XCTAssertEqual(part2, 56 * 62)
     }
 
@@ -772,12 +772,12 @@ final class AoC_2022_Tests: XCTestCase {
         let problem = try AoC_2022_Day19(.url(url(for: "2022_day19")))
 
         var answer = 1150
-        var result = try await problem.solvePart1()
+        var result = problem.solvePart1()
         XCTAssertEqual(result, answer)
         print("Day19 / Part1 solution: \(answer)")
 
-        answer = 0
-        result = try await problem.solvePart2()
+        answer = 37367
+        result = problem.solvePart2()
         XCTAssertEqual(result, answer)
         print("Day19 / Part2 solution: \(answer)")
     }
