@@ -976,4 +976,33 @@ final class AoC_2022_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day24 / Part2 solution: \(answer)")
     }
+
+    func test_day25_intro() async throws {
+        let problem = try AoC_2022_Day25(.string("""
+        1=-0-2
+        12111
+        2=0=
+        21
+        2=01
+        111
+        20012
+        112
+        1=-1=
+        1-12
+        12
+        1=
+        122
+        """))
+        let part1 = try await problem.solve()
+        XCTAssertEqual(part1, "2=-1=0")
+    }
+
+    func test_day25() async throws {
+        let problem = try AoC_2022_Day25(.url(url(for: "2022_day25")))
+
+        let answer = "2-=2-0=-0-=0200=--21"
+        let result = try await problem.solve()
+        XCTAssertEqual(result, answer)
+        print("Day25 solution: \(answer)")
+    }
 }
