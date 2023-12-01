@@ -139,13 +139,13 @@ struct EnumeratedAsyncSequence<Base: AsyncSequence>: AsyncSequence {
         Iterator(base: base.makeAsyncIterator())
     }
 
-    struct Iterator<Base: AsyncIteratorProtocol>: AsyncIteratorProtocol {
-        typealias Element = (offset: Int, element: Base.Element)
+    struct Iterator<BaseIterator: AsyncIteratorProtocol>: AsyncIteratorProtocol {
+        typealias Element = (offset: Int, element: BaseIterator.Element)
 
-        var base: Base
+        var base: BaseIterator
         var offset = 0
 
-        mutating func next() async throws -> (offset: Int, element: Base.Element)? {
+        mutating func next() async throws -> (offset: Int, element: BaseIterator.Element)? {
             guard let element = try await base.next() else { return nil }
             defer { offset += 1 }
             return (offset: offset, element: element)

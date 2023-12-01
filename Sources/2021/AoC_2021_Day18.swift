@@ -39,7 +39,7 @@ public final class AoC_2021_Day18 {
     private func nodeParser() -> AnyParser<Substring, Node> {
         Parse {
             OneOf {
-                Int.parser().map(Node.number)
+                Int.parser(of: Substring.self).map(Node.number)
                 Parse(Node.pair) {
                     "["
                     Lazy { self.nodeParser() }

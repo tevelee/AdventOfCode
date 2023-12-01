@@ -1,22 +1,22 @@
 import RegexBuilder
 import Foundation
 
-public extension Regex {
-    static func ~=(regex: Self, input: String) -> Bool {
+extension Regex {
+    @inlinable public static func ~=(regex: Self, input: String) -> Bool {
         input.wholeMatch(of: regex) != nil
     }
 
-    static func ~=(regex: Self, input: Substring) -> Bool {
+    @inlinable public static func ~=(regex: Self, input: Substring) -> Bool {
         input.wholeMatch(of: regex) != nil
     }
 }
 
-public extension Locale {
-    static var english = Locale(identifier: "en-US")
+extension Locale {
+    public static let english = Locale(identifier: "en-US")
 }
 
-public extension RegexComponent where Self == Integer {
-    static var integer: Self {
+extension RegexComponent where Self == Integer {
+    @inlinable public static var integer: Self {
         Integer()
     }
 }
@@ -24,9 +24,9 @@ public extension RegexComponent where Self == Integer {
 public struct Integer: RegexComponent {
     public typealias RegexOutput = Int
 
-    public init() {}
+    @inlinable public init() {}
 
-    public var regex: Regex<Int> {
+    @inlinable public var regex: Regex<Int> {
         Regex {
             .localizedInteger(locale: .english).grouping(.never).sign(strategy: .automatic)
         }

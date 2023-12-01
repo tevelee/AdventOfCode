@@ -131,14 +131,14 @@ private struct ChunkedByCount<Base: Sequence>: Sequence {
         Iterator(base: base.makeIterator(), size: size)
     }
 
-    struct Iterator<Base: IteratorProtocol>: IteratorProtocol {
-        typealias Element = [Base.Element]
+    struct Iterator<BaseIterator: IteratorProtocol>: IteratorProtocol {
+        typealias Element = [BaseIterator.Element]
 
-        var base: Base
+        var base: BaseIterator
         let size: Int
 
-        mutating func next() -> [Base.Element]? {
-            var result: [Base.Element] = []
+        mutating func next() -> [BaseIterator.Element]? {
+            var result: [BaseIterator.Element] = []
             while result.count < size, let value = base.next() {
                 result.append(value)
             }

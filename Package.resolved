@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms.git",
       "state" : {
-        "revision" : "2327673b0e9c7e90e6b1826376526ec3627210e4",
-        "version" : "0.2.1"
+        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+        "version" : "1.2.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-async-algorithms.git",
       "state" : {
-        "revision" : "cca423ff03ab657062f3781847e65a867b51bb01",
-        "version" : "0.0.3"
+        "revision" : "cb417003f962f9de3fc7852c1b735a1f1152a89a",
+        "version" : "1.0.0-beta.1"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
-        "revision" : "6583ac70c326c3ee080c1d42d9ca3361dca816cd",
-        "version" : "0.1.0"
+        "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
+        "version" : "1.0.2"
       }
     },
     {
@@ -61,6 +61,15 @@
       "state" : {
         "revision" : "bc92e84968990b41640214b636667f35b6e5d44c",
         "version" : "0.10.0"
+      }
+    },
+    {
+      "identity" : "swiftgraph",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/davecom/SwiftGraph.git",
+      "state" : {
+        "revision" : "76b5180a5cc32eda7f5236a756f4c1e0936311c6",
+        "version" : "3.1.0"
       }
     },
     {
