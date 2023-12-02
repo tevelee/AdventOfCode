@@ -19,11 +19,36 @@ final class AoC_2023_Day2 {
 
     func solvePart2() -> Int {
         games.sum { game in
-            let (red, green, blue) = game.sessions.reduce((red: 0, green: 0, blue: 0)) { result, session in
-                (max(result.red, session.red), max(result.green, session.green), max(result.blue, session.blue))
-            }
-            return red * green * blue
+            let (red, green, blue) = max(of: game.sessions, for: \.red, \.green, \.blue)
+            return product(of: (red, green, blue))
         }
+    }
+
+    private func max<Root, each Value: Numeric & Comparable>(
+        of root: some Collection<Root>,
+        for property: repeat KeyPath<Root, each Value>
+    ) -> (repeat each Value) {
+        perform(
+            operation: repeat (Swift.max, (each Value).self).0, // `repeat Swift.max` cannot be written in source, the expression has to contain at least one pack reference. See the "Concrete pattern type" section of https://github.com/apple/swift-evolution/blob/main/proposals/0393-parameter-packs.md#pack-expansion-type
+            on: root,
+            for: repeat each property
+        )
+    }
+
+    private func perform<Root, each Value: Numeric & Comparable>(
+        operation: repeat @escaping (each Value, each Value) -> each Value,
+        on root: some Collection<Root>,
+        for property: repeat KeyPath<Root, each Value>
+    ) -> (repeat each Value) {
+        root.reduce((repeat (each Value).zero)) { (result: (repeat each Value), element) in
+            (repeat (each operation)(each result, element[keyPath: each property]))
+        }
+    }
+
+    private func product<each Value>(of element: (repeat each Value)) -> Int /* where repeat each Value == Int */ {
+        var value = 1
+        repeat value *= each element as! Int // Same-element requirement is not yet implemented in Swift 5.9
+        return value
     }
 }
 
