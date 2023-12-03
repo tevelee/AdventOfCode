@@ -72,4 +72,37 @@ final class AoC_2023_Tests: XCTestCase {
         XCTAssertEqual(result, answer)
         print("Day2 / Part2 solution: \(answer)")
     }
+
+    func test_day3_intro() throws {
+        let problem = try AoC_2023_Day3("""
+        467..114..
+        ...*......
+        ..35..633.
+        ......#...
+        617*......
+        .....+.58.
+        ..592.....
+        ......755.
+        ...$.*....
+        .664.598..
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 4361)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 467835)
+    }
+
+    func test_day3() throws {
+        let problem = try AoC_2023_Day3(file("2023_day3"))
+
+        var answer = 507214
+        var result = problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day3 / Part1 solution: \(answer)")
+
+        answer = 72553319
+        result = problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day3 / Part2 solution: \(answer)")
+    }
 }

@@ -89,4 +89,3 @@ private struct Game {
         })?.output.1 ?? defaultValue
     }
 }
-
