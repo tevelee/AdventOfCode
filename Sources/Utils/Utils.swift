@@ -8,8 +8,11 @@ extension AsyncSequence {
 
 extension String {
     @inlinable public subscript(_ i: Int) -> Character? {
-        guard i < count else { return nil }
-        return self[index(startIndex, offsetBy: i)]
+        self[...][i]
+    }
+
+    @inlinable public var integers: [Int] {
+        self[...].integers
     }
 }
 
@@ -17,6 +20,10 @@ extension Substring {
     @inlinable public subscript(_ i: Int) -> Character? {
         guard i < count else { return nil }
         return self[index(startIndex, offsetBy: i)]
+    }
+
+    @inlinable public var integers: [Int] {
+        chunked(on: \.isWholeNumber).filter(\.0).compactMap { Int($0.1) }
     }
 }
 
@@ -81,12 +88,12 @@ extension Array where Element: Hashable {
 }
 
 extension Sequence {
-    @inlinable public func max<T: Numeric & Comparable>(of property: (Element) -> T) -> Element? {
-        max(of: property, comparator: <)
+    @inlinable public func max<T: Comparable>(of property: (Element) -> T) -> T? {
+        map(property).max()
     }
 
-    @inlinable public func max<T: Numeric>(of property: (Element) -> T, comparator: (T, T) -> Bool) -> Element? {
-        self.max { comparator(property($0), property($1)) }
+    @inlinable public func min<T: Comparable>(of property: (Element) -> T) -> T? {
+        map(property).min()
     }
 
     @inlinable public func sum<T: Numeric>(of property: (Element) -> T) -> T {
