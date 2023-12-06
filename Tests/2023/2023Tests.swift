@@ -135,7 +135,6 @@ final class AoC_2023_Tests: XCTestCase {
         print("Day4 / Part2 solution: \(answer)")
     }
 
-
     func test_day5_intro() throws {
         let problem = try AoC_2023_Day5("""
         seeds: 79 14 55 13
@@ -190,5 +189,30 @@ final class AoC_2023_Tests: XCTestCase {
         result = problem.solvePart2()
         XCTAssertEqual(result, answer)
         print("Day5 / Part2 solution: \(answer)")
+    }
+
+    func test_day6_intro() throws {
+        let problem = AoC_2023_Day6("""
+        Time:      7  15   30
+        Distance:  9  40  200
+        """)
+        let part1 = try problem.solvePart1()
+        XCTAssertEqual(part1, 288)
+        let part2 = try problem.solvePart2()
+        XCTAssertEqual(part2, 71503)
+    }
+
+    func test_day6() throws {
+        let problem = try AoC_2023_Day6(file("2023_day6"))
+
+        var answer = 138915
+        var result = try problem.solvePart1()
+        XCTAssertEqual(result, answer)
+        print("Day6 / Part1 solution: \(answer)")
+
+        answer = 27340847
+        result = try problem.solvePart2()
+        XCTAssertEqual(result, answer)
+        print("Day6 / Part2 solution: \(answer)")
     }
 }
