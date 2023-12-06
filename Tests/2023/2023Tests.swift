@@ -34,15 +34,13 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day1() async throws {
         let problem = try AoC_2023_Day1(file("2023_day1"))
 
-        var answer = 54450
-        var result = try await problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day1 / Part1 solution: \(answer)")
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 54450)
+        print("Day1 / Part1 solution: \(part1)")
 
-        answer = 54265
-        result = try await problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day1 / Part2 solution: \(answer)")
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 54265)
+        print("Day1 / Part2 solution: \(part2)")
     }
 
     func test_day2_intro() throws {
@@ -62,15 +60,13 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day2() throws {
         let problem = try AoC_2023_Day2(file("2023_day2"))
 
-        var answer = 2551
-        var result = problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day2 / Part1 solution: \(answer)")
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 2551)
+        print("Day2 / Part1 solution: \(part1)")
 
-        answer = 62811
-        result = problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day2 / Part2 solution: \(answer)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 62811)
+        print("Day2 / Part2 solution: \(part2)")
     }
 
     func test_day3_intro() throws {
@@ -95,15 +91,13 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day3() throws {
         let problem = try AoC_2023_Day3(file("2023_day3"))
 
-        var answer = 507214
-        var result = problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day3 / Part1 solution: \(answer)")
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 507214)
+        print("Day3 / Part1 solution: \(part1)")
 
-        answer = 72553319
-        result = problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day3 / Part2 solution: \(answer)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 72553319)
+        print("Day3 / Part2 solution: \(part2)")
     }
 
     func test_day4_intro() throws {
@@ -124,15 +118,13 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day4() throws {
         let problem = try AoC_2023_Day4(file("2023_day4"))
 
-        var answer = 27059
-        var result = problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day4 / Part1 solution: \(answer)")
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 27059)
+        print("Day4 / Part1 solution: \(part1)")
 
-        answer = 5744979
-        result = problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day4 / Part2 solution: \(answer)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 5744979)
+        print("Day4 / Part2 solution: \(part2)")
     }
 
     func test_day5_intro() throws {
@@ -180,15 +172,13 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day5() throws {
         let problem = try AoC_2023_Day5(file("2023_day5"))
 
-        var answer = 251346198
-        var result = problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day5 / Part1 solution: \(answer)")
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 251346198)
+        print("Day5 / Part1 solution: \(part1)")
 
-        answer = 72263011
-        result = problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day5 / Part2 solution: \(answer)")
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 72263011)
+        print("Day5 / Part2 solution: \(part2)")
     }
 
     func test_day6_intro() throws {
@@ -205,14 +195,33 @@ final class AoC_2023_Tests: XCTestCase {
     func test_day6() throws {
         let problem = try AoC_2023_Day6(file("2023_day6"))
 
-        var answer = 138915
-        var result = try problem.solvePart1()
-        XCTAssertEqual(result, answer)
-        print("Day6 / Part1 solution: \(answer)")
+        let part1 = try problem.solvePart1()
+        XCTAssertEqual(part1, 138915)
+        print("Day6 / Part1 solution: \(part1)")
 
-        answer = 27340847
-        result = try problem.solvePart2()
-        XCTAssertEqual(result, answer)
-        print("Day6 / Part2 solution: \(answer)")
+        let part2 = try problem.solvePart2()
+        XCTAssertEqual(part2, 27340847)
+        print("Day6 / Part2 solution: \(part2)")
     }
+
+//    func test_dayX_intro() {
+//        let problem = AoC_2023_DayX("""
+//        """)
+//        let part1 = problem.solvePart1()
+//        XCTAssertEqual(part1, 0)
+//        let part2 = problem.solvePart2()
+//        XCTAssertEqual(part2, 0)
+//    }
+//
+//    func test_dayX() throws {
+//        let problem = try AoC_2023_DayX(file("2023_dayX"))
+//
+//        let part1 = problem.solvePart1()
+//        XCTAssertEqual(part1, 0)
+//        print("DayX / Part1 solution: \(part1)")
+//
+//        let part2 = problem.solvePart2()
+//        XCTAssertEqual(part2, 0)
+//        print("DayX / Part2 solution: \(part2)")
+//    }
 }

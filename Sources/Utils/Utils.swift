@@ -204,3 +204,7 @@ extension Dictionary {
 @inlinable public func + <Key: Hashable, Value>(lhs: [Key: Value], rhs: [Key: Value]) -> [Key: Value] {
     lhs.merging(rhs, uniquingKeysWith: takeNewest)
 }
+
+public struct ParseError: Error {
+    public init() {}
+}

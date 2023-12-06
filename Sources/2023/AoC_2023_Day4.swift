@@ -36,8 +36,8 @@ private struct Card {
             return nil
         }
         self.id = id
-        self.winnerNumbers = values.winning.split(separator: " ").compactMap { Int($0) }
-        self.allNumbers = values.all.split(separator: " ").compactMap { Int($0) }
+        self.winnerNumbers = values.winning.integers
+        self.allNumbers = values.all.integers
     }
 
     var numberOfMatches: Int {

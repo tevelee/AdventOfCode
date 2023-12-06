@@ -1,10 +1,9 @@
 import Algorithms
+import Utils
 
 final class AoC_2023_Day5 {
     private let seeds: [Int]
     private let maps: [Map]
-
-    struct ParseError: Error {}
 
     init(_ input: Input) throws {
         guard let (seeds, maps) = try input.wholeInput.paragraphs.headAndTail else {

@@ -33,23 +33,9 @@ final class AoC_2023_Day1 {
         in sourceString: some Collection<Character>,
         values: [some Collection<Character>: Int]
     ) -> Int {
-        firstMatchingDigit(in: sourceString, digits: values.keys).flatMap { values[$0] } ?? 0
-    }
-
-    private func firstMatchingDigit<DigitRepresentation: Collection<Character>>(
-        in sourceString: some Collection<Character>,
-        digits: some Collection<DigitRepresentation>
-    ) -> DigitRepresentation? {
         (0...sourceString.count).firstNonNil { startIndex in
-            firstDigitThatIsPrefix(of: sourceString.dropFirst(startIndex), digits: digits)
-        }
-    }
-
-    private func firstDigitThatIsPrefix<DigitRepresentation: Collection<Character>>(
-        of sourceString: some Collection<Character>,
-        digits: some Collection<DigitRepresentation>
-    ) -> DigitRepresentation? {
-        digits.first(where: sourceString.hasPrefix)
+            values.keys.first(where: sourceString.dropFirst(startIndex).hasPrefix)
+        }.flatMap { values[$0] } ?? 0
     }
 }
 
