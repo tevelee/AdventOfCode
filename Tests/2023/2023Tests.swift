@@ -230,6 +230,63 @@ final class AoC_2023_Tests: XCTestCase {
         print("Day7 / Part2 solution: \(part2)")
     }
 
+    func test_day8_intro1() throws {
+        let problem = try AoC_2023_Day8("""
+        RL
+
+        AAA = (BBB, CCC)
+        BBB = (DDD, EEE)
+        CCC = (ZZZ, GGG)
+        DDD = (DDD, DDD)
+        EEE = (EEE, EEE)
+        GGG = (GGG, GGG)
+        ZZZ = (ZZZ, ZZZ)
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 2)
+    }
+
+    func test_day8_intro2() throws {
+        let problem = try AoC_2023_Day8("""
+        LLR
+
+        AAA = (BBB, BBB)
+        BBB = (AAA, ZZZ)
+        ZZZ = (ZZZ, ZZZ)
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 6)
+    }
+
+    func test_day8_intro3() throws {
+        let problem = try AoC_2023_Day8("""
+        LR
+
+        11A = (11B, XXX)
+        11B = (XXX, 11Z)
+        11Z = (11B, XXX)
+        22A = (22B, XXX)
+        22B = (22C, 22C)
+        22C = (22Z, 22Z)
+        22Z = (22B, 22B)
+        XXX = (XXX, XXX)
+        """)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 6)
+    }
+
+    func test_day8() throws {
+        let problem = try AoC_2023_Day8(file("2023_day8"))
+
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 14893)
+        print("Day8 / Part1 solution: \(part1)")
+
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 10241191004509)
+        print("Day8 / Part2 solution: \(part2)")
+    }
+
 //    func test_dayX_intro() {
 //        let problem = AoC_2023_DayX("""
 //        """)
