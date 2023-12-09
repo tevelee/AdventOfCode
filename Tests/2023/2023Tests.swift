@@ -287,6 +287,30 @@ final class AoC_2023_Tests: XCTestCase {
         print("Day8 / Part2 solution: \(part2)")
     }
 
+    func test_day9_intro() async throws {
+        let problem = AoC_2023_Day9("""
+        0 3 6 9 12 15
+        1 3 6 10 15 21
+        10 13 16 21 30 45
+        """)
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 114)
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 2)
+    }
+
+    func test_day9() async throws {
+        let problem = try AoC_2023_Day9(file("2023_day9"))
+
+        let part1 = try await problem.solvePart1()
+        XCTAssertEqual(part1, 1930746032)
+        print("Day9 / Part1 solution: \(part1)")
+
+        let part2 = try await problem.solvePart2()
+        XCTAssertEqual(part2, 1154)
+        print("Day9 / Part2 solution: \(part2)")
+    }
+
 //    func test_dayX_intro() {
 //        let problem = AoC_2023_DayX("""
 //        """)

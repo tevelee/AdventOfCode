@@ -23,7 +23,7 @@ extension Substring {
     }
 
     @inlinable public var integers: [Int] {
-        chunked(on: \.isWholeNumber).filter(\.0).compactMap { Int($0.1) }
+        chunked { $0.isWholeNumber || $0 == "-" }.filter(\.0).compactMap { Int($0.1) }
     }
 }
 
