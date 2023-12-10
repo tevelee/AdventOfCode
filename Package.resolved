@@ -64,6 +64,24 @@
       }
     },
     {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "6ad4ea24b01559dde0773e3d091f1b9e36175036",
+        "version" : "509.0.2"
+      }
+    },
+    {
+      "identity" : "swift-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-testing.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3fa4ea0bfcbfc48102ca5d81f03a00debd0d4372"
+      }
+    },
+    {
       "identity" : "swiftgraph",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/davecom/SwiftGraph.git",

@@ -15,6 +15,7 @@ let package = Package(
          .package(url: "https://github.com/apple/swift-algorithms.git", from: "1.2.0"),
          .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "1.0.0-beta.1"),
          .package(url: "https://github.com/apple/swift-collections.git", branch: "release/1.1"),
+         .package(url: "https://github.com/apple/swift-testing.git", branch: "main"),
 //         .package(url: "https://github.com/apple/swift-numerics.git", from: "0.1.0"),
          .package(url: "https://github.com/davecom/SwiftGraph.git", from: "3.1.0"),
          .package(url: "https://github.com/pointfreeco/swift-parsing.git", from: "0.3.1"),
@@ -29,11 +30,12 @@ let package = Package(
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             path: "Sources/2023",
+            exclude: ["Tasks"],
             swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .testTarget(
             name: "AoC-2023-Tests",
-            dependencies: ["AoC-2023"],
+            dependencies: ["AoC-2023", .product(name: "Testing", package: "swift-testing")],
             path: "Tests/2023",
             resources: (1...25).map { .copy("Resources/2023_day\($0).txt") }
         ),
