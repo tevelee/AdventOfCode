@@ -311,6 +311,96 @@ final class AoC_2023_Tests: XCTestCase {
         print("Day9 / Part2 solution: \(part2)")
     }
 
+    func test_day10_intro1() throws {
+        let problem = try AoC_2023_Day10("""
+        -L|F7
+        7S-7|
+        L|7||
+        -L-J|
+        L|-JF
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 4)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 1)
+    }
+
+    func test_day10_intro2() throws {
+        let problem = try AoC_2023_Day10("""
+        ..F7.
+        .FJ|.
+        SJ.L7
+        |F--J
+        LJ...
+        """)
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 8)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 1)
+    }
+
+    func test_day10_intro3() throws {
+        let problem = try AoC_2023_Day10("""
+        ...........
+        .S-------7.
+        .|F-----7|.
+        .||.....||.
+        .||.....||.
+        .|L-7.F-J|.
+        .|..|.|..|.
+        .L--J.L--J.
+        ...........
+        """)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 4)
+    }
+
+    func test_day10_intro4() throws {
+        let problem = try AoC_2023_Day10("""
+        .F----7F7F7F7F-7....
+        .|F--7||||||||FJ....
+        .||.FJ||||||||L7....
+        FJL7L7LJLJ||LJ.L-7..
+        L--J.L7...LJS7F-7L7.
+        ....F-J..F7FJ|L7L7L7
+        ....L7.F7||L7|.L7L7|
+        .....|FJLJ|FJ|F7|.LJ
+        ....FJL-7.||.||||...
+        ....L---J.LJ.LJLJ...
+        """)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 8)
+    }
+
+    func test_day10_intro5() throws {
+        let problem = try AoC_2023_Day10("""
+        FF7FSF7F7F7F7F7F---7
+        L|LJ||||||||||||F--J
+        FL-7LJLJ||||||LJL-77
+        F--JF--7||LJLJ7F7FJ-
+        L---JF-JLJ.||-FJLJJ7
+        |F|F-JF---7F7-L7L|7|
+        |FFJF7L7F-JF7|JL---7
+        7-L-JL7||F7|L7F-7F7|
+        L.L7LFJ|||||FJL7||LJ
+        L7JLJL-JLJLJL--JLJ.L
+        """)
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 10)
+    }
+
+    func test_day10() throws {
+        let problem = try AoC_2023_Day10(file("2023_day10"))
+
+        let part1 = problem.solvePart1()
+        XCTAssertEqual(part1, 7066)
+        print("Day10 / Part1 solution: \(part1)")
+
+        let part2 = problem.solvePart2()
+        XCTAssertEqual(part2, 0)
+        print("Day10 / Part2 solution: \(part2)")
+    }
+
 //    func test_dayX_intro() {
 //        let problem = AoC_2023_DayX("""
 //        """)
