@@ -56,7 +56,7 @@ private struct Grid<T> {
         self.width = values[0].count
     }
 
-    var positions: some Collection<Position> {
+    var positions: [Position] {
         positions2D.flatMap { $0 }
     }
 
