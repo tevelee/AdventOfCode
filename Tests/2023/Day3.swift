@@ -17,13 +17,13 @@ struct Day3 {
         .664.598..
         """)
         #expect(problem.solvePart1() == 4361)
-        #expect(problem.solvePart2() == 467835)
+        #expect(problem.solvePart2() == 467_835)
     }
 
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day3(file("2023_day3"))
-        #expect(problem.solvePart1() == 507214)
-        #expect(problem.solvePart2() == 72553319)
+        let problem = try AoC_2023_Day3()
+        #expect(problem.solvePart1() == 507_214)
+        #expect(problem.solvePart2() == 72_553_319)
     }
 }

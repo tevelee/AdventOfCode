@@ -2,12 +2,8 @@ import AoC_2022
 import XCTest
 
 final class AoC_2022_Tests: XCTestCase {
-    func url(for fileName: String, fileExtension: String = "txt") throws -> URL {
-        try XCTUnwrap(Bundle.module.url(forResource: fileName, withExtension: fileExtension))
-    }
-
     func test_day1_intro() throws {
-        let problem = AoC_2022_Day1(.string("""
+        let problem = AoC_2022_Day1("""
         1000
         2000
         3000
@@ -22,7 +18,7 @@ final class AoC_2022_Tests: XCTestCase {
         9000
 
         10000
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, 24000)
         let part2 = try problem.solvePart2()
@@ -30,7 +26,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day1() throws {
-        let problem = try AoC_2022_Day1(.url(url(for: "2022_day1")))
+        let problem = try AoC_2022_Day1(file("2022_day1"))
 
         var answer = 68802
         var result = try problem.solvePart1()
@@ -44,11 +40,11 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day2_intro() async throws {
-        let problem = AoC_2022_Day2(.string("""
+        let problem = AoC_2022_Day2("""
         A Y
         B X
         C Z
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 15)
         let part2 = try await problem.solvePart2()
@@ -56,7 +52,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day2() async throws {
-        let problem = try AoC_2022_Day2(.url(url(for: "2022_day2")))
+        let problem = try AoC_2022_Day2(file("2022_day2"))
 
         var answer = 11873
         var result = try await problem.solvePart1()
@@ -70,14 +66,14 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day3_intro() async throws {
-        let problem = AoC_2022_Day3(.string("""
+        let problem = AoC_2022_Day3("""
         vJrwpWtwJgWrhcsFMMfFFhFp
         jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
         PmmdzqPrVvPwwTWBwg
         wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
         ttgJtRGJQctTZtZT
         CrZsJsPPZsGzwwsLwLmpwMDw
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 157)
         let part2 = try await problem.solvePart2()
@@ -85,7 +81,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day3() async throws {
-        let problem = try AoC_2022_Day3(.url(url(for: "2022_day3")))
+        let problem = try AoC_2022_Day3(file("2022_day3"))
 
         var answer = 7763
         var result = try await problem.solvePart1()
@@ -99,14 +95,14 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day4_intro() async throws {
-        let problem = AoC_2022_Day4(.string("""
+        let problem = AoC_2022_Day4("""
         2-4,6-8
         2-3,4-5
         5-7,7-9
         2-8,3-7
         6-6,4-6
         2-6,4-8
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 2)
         let part2 = try await problem.solvePart2()
@@ -114,7 +110,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day4() async throws {
-        let problem = try AoC_2022_Day4(.url(url(for: "2022_day4")))
+        let problem = try AoC_2022_Day4(file("2022_day4"))
 
         var answer = 534
         var result = try await problem.solvePart1()
@@ -128,7 +124,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day5_intro() throws {
-        let problem = AoC_2022_Day5(.string("""
+        let problem = AoC_2022_Day5("""
             [D]
         [N] [C]
         [Z] [M] [P]
@@ -138,7 +134,7 @@ final class AoC_2022_Tests: XCTestCase {
         move 3 from 1 to 3
         move 2 from 2 to 1
         move 1 from 1 to 2
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, "CMZ")
         let part2 = try problem.solvePart2()
@@ -146,7 +142,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day5() throws {
-        let problem = try AoC_2022_Day5(.url(url(for: "2022_day5")))
+        let problem = try AoC_2022_Day5(file("2022_day5"))
 
         var answer = "WHTLRMZRC"
         var result = try problem.solvePart1()
@@ -160,21 +156,21 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day6_intro() throws {
-        try XCTAssertEqual(AoC_2022_Day6(.string("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).solvePart1(), 7)
-        try XCTAssertEqual(AoC_2022_Day6(.string("bvwbjplbgvbhsrlpgdmjqwftvncz")).solvePart1(), 5)
-        try XCTAssertEqual(AoC_2022_Day6(.string("nppdvjthqldpwncqszvftbrmjlhg")).solvePart1(), 6)
-        try XCTAssertEqual(AoC_2022_Day6(.string("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg")).solvePart1(), 10)
-        try XCTAssertEqual(AoC_2022_Day6(.string("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).solvePart1(), 11)
+        try XCTAssertEqual(AoC_2022_Day6("mjqjpqmgbljsphdztnvjfqwrcgsmlb").solvePart1(), 7)
+        try XCTAssertEqual(AoC_2022_Day6("bvwbjplbgvbhsrlpgdmjqwftvncz").solvePart1(), 5)
+        try XCTAssertEqual(AoC_2022_Day6("nppdvjthqldpwncqszvftbrmjlhg").solvePart1(), 6)
+        try XCTAssertEqual(AoC_2022_Day6("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg").solvePart1(), 10)
+        try XCTAssertEqual(AoC_2022_Day6("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw").solvePart1(), 11)
 
-        try XCTAssertEqual(AoC_2022_Day6(.string("mjqjpqmgbljsphdztnvjfqwrcgsmlb")).solvePart2(), 19)
-        try XCTAssertEqual(AoC_2022_Day6(.string("bvwbjplbgvbhsrlpgdmjqwftvncz")).solvePart2(), 23)
-        try XCTAssertEqual(AoC_2022_Day6(.string("nppdvjthqldpwncqszvftbrmjlhg")).solvePart2(), 23)
-        try XCTAssertEqual(AoC_2022_Day6(.string("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg")).solvePart2(), 29)
-        try XCTAssertEqual(AoC_2022_Day6(.string("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw")).solvePart2(), 26)
+        try XCTAssertEqual(AoC_2022_Day6("mjqjpqmgbljsphdztnvjfqwrcgsmlb").solvePart2(), 19)
+        try XCTAssertEqual(AoC_2022_Day6("bvwbjplbgvbhsrlpgdmjqwftvncz").solvePart2(), 23)
+        try XCTAssertEqual(AoC_2022_Day6("nppdvjthqldpwncqszvftbrmjlhg").solvePart2(), 23)
+        try XCTAssertEqual(AoC_2022_Day6("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg").solvePart2(), 29)
+        try XCTAssertEqual(AoC_2022_Day6("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw").solvePart2(), 26)
     }
 
     func test_day6() throws {
-        let problem = try AoC_2022_Day6(.url(url(for: "2022_day6")))
+        let problem = try AoC_2022_Day6(file("2022_day6"))
 
         var answer = 1920
         var result = try problem.solvePart1()
@@ -188,7 +184,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day7_intro() throws {
-        let problem = AoC_2022_Day7(.string("""
+        let problem = AoC_2022_Day7("""
         $ cd /
         $ ls
         dir a
@@ -212,7 +208,7 @@ final class AoC_2022_Tests: XCTestCase {
         8033020 d.log
         5626152 d.ext
         7214296 k
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, 95437)
         let part2 = try problem.solvePart2()
@@ -220,7 +216,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day7() throws {
-        let problem = try AoC_2022_Day7(.url(url(for: "2022_day7")))
+        let problem = try AoC_2022_Day7(file("2022_day7"))
 
         var answer = 1334506
         var result = try problem.solvePart1()
@@ -234,13 +230,13 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day8_intro() throws {
-        let problem = AoC_2022_Day8(.string("""
+        let problem = AoC_2022_Day8("""
         30373
         25512
         65332
         33549
         35390
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, 21)
         let part2 = try problem.solvePart2()
@@ -248,7 +244,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day8() throws {
-        let problem = try AoC_2022_Day8(.url(url(for: "2022_day8")))
+        let problem = try AoC_2022_Day8(file("2022_day8"))
 
         var answer = 1796
         var result = try problem.solvePart1()
@@ -262,7 +258,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day9_intro() async throws {
-        let problem = AoC_2022_Day9(.string("""
+        let problem = AoC_2022_Day9("""
         R 4
         U 4
         L 3
@@ -271,7 +267,7 @@ final class AoC_2022_Tests: XCTestCase {
         D 1
         L 5
         R 2
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 13)
         let part2 = try await problem.solvePart2()
@@ -279,7 +275,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day9_intro2() async throws {
-        let problem = AoC_2022_Day9(.string("""
+        let problem = AoC_2022_Day9("""
         R 5
         U 8
         L 8
@@ -288,7 +284,7 @@ final class AoC_2022_Tests: XCTestCase {
         D 10
         L 25
         U 20
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 88)
         let part2 = try await problem.solvePart2()
@@ -296,7 +292,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day9() async throws {
-        let problem = try AoC_2022_Day9(.url(url(for: "2022_day9")))
+        let problem = try AoC_2022_Day9(file("2022_day9"))
 
         var answer = 5960
         var result = try await problem.solvePart1()
@@ -310,7 +306,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day10_intro() async throws {
-        let problem = AoC_2022_Day10(.string("""
+        let problem = AoC_2022_Day10("""
         addx 15
         addx -11
         addx 6
@@ -457,7 +453,7 @@ final class AoC_2022_Tests: XCTestCase {
         noop
         noop
         noop
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 13140)
         let part2 = try await problem.solvePart2()
@@ -465,7 +461,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day10() async throws {
-        let problem = try AoC_2022_Day10(.url(url(for: "2022_day10")))
+        let problem = try AoC_2022_Day10(file("2022_day10"))
 
         let answerToPart1 = 16060
         let resultOfPart1 = try await problem.solvePart1()
@@ -479,7 +475,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day11_intro() throws {
-        let problem = AoC_2022_Day11(.string("""
+        let problem = AoC_2022_Day11("""
         Monkey 0:
           Starting items: 79, 98
           Operation: new = old * 19
@@ -507,7 +503,7 @@ final class AoC_2022_Tests: XCTestCase {
           Test: divisible by 17
             If true: throw to monkey 0
             If false: throw to monkey 1
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, 10605)
         let part2 = try problem.solvePart2()
@@ -515,7 +511,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day11() throws {
-        let problem = try AoC_2022_Day11(.url(url(for: "2022_day11")))
+        let problem = try AoC_2022_Day11(file("2022_day11"))
 
         var answer = 50830
         var result = try problem.solvePart1()
@@ -529,13 +525,13 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day12_intro() throws {
-        let problem = try AoC_2022_Day12(.string("""
+        let problem = try AoC_2022_Day12("""
         Sabqponm
         abcryxxl
         accszExk
         acctuvwj
         abdefghi
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 31)
         let part2 = problem.solvePart2()
@@ -543,7 +539,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day12() throws {
-        let problem = try AoC_2022_Day12(.url(url(for: "2022_day12")))
+        let problem = try AoC_2022_Day12(file("2022_day12"))
 
         var answer = 462
         var result = problem.solvePart1()
@@ -557,7 +553,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day13_intro() async throws {
-        let problem = AoC_2022_Day13(.string("""
+        let problem = AoC_2022_Day13("""
         [1,1,3,1,1]
         [1,1,5,1,1]
 
@@ -581,7 +577,7 @@ final class AoC_2022_Tests: XCTestCase {
 
         [1,[2,[3,[4,[5,6,7]]]],8,9]
         [1,[2,[3,[4,[5,6,0]]]],8,9]
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 13)
         let part2 = try await problem.solvePart2()
@@ -589,7 +585,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day13() async throws {
-        let problem = try AoC_2022_Day13(.url(url(for: "2022_day13")))
+        let problem = try AoC_2022_Day13(file("2022_day13"))
 
         var answer = 4643
         var result = try await problem.solvePart1()
@@ -603,10 +599,10 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day14_intro() throws {
-        let problem = try AoC_2022_Day14(.string("""
+        let problem = try AoC_2022_Day14("""
         498,4 -> 498,6 -> 496,6
         503,4 -> 502,4 -> 502,9 -> 494,9
-        """))
+        """)
         let part1 = try problem.solvePart1()
         XCTAssertEqual(part1, 24)
         let part2 = try problem.solvePart2()
@@ -614,7 +610,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day14() throws {
-        let problem = try AoC_2022_Day14(.url(url(for: "2022_day14")))
+        let problem = try AoC_2022_Day14(file("2022_day14"))
 
         var answer = 683
         var result = try problem.solvePart1()
@@ -628,7 +624,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day15_intro() throws {
-        let problem = try AoC_2022_Day15(.string("""
+        let problem = try AoC_2022_Day15("""
         Sensor at x=2, y=18: closest beacon is at x=-2, y=15
         Sensor at x=9, y=16: closest beacon is at x=10, y=16
         Sensor at x=13, y=2: closest beacon is at x=15, y=3
@@ -643,7 +639,7 @@ final class AoC_2022_Tests: XCTestCase {
         Sensor at x=16, y=7: closest beacon is at x=15, y=3
         Sensor at x=14, y=3: closest beacon is at x=15, y=3
         Sensor at x=20, y=1: closest beacon is at x=15, y=3
-        """))
+        """)
         let part1 = try problem.solvePart1(y: 10)
         XCTAssertEqual(part1, 26)
         let part2 = try problem.solvePart2(range: 0...20)
@@ -651,7 +647,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day15() throws {
-        let problem = try AoC_2022_Day15(.url(url(for: "2022_day15")))
+        let problem = try AoC_2022_Day15(file("2022_day15"))
 
         var answer = 4861076
         var result = try problem.solvePart1(y: 2_000_000)
@@ -665,7 +661,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day16_intro() throws {
-        let problem = try AoC_2022_Day16(.string("""
+        let problem = try AoC_2022_Day16("""
         Valve AA has flow rate=0; tunnels lead to valves DD, II, BB
         Valve BB has flow rate=13; tunnels lead to valves CC, AA
         Valve CC has flow rate=2; tunnels lead to valves DD, BB
@@ -676,7 +672,7 @@ final class AoC_2022_Tests: XCTestCase {
         Valve HH has flow rate=22; tunnel leads to valve GG
         Valve II has flow rate=0; tunnels lead to valves AA, JJ
         Valve JJ has flow rate=21; tunnel leads to valve II
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 1651)
         let part2 = problem.solvePart2()
@@ -684,7 +680,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day16() throws {
-        let problem = try AoC_2022_Day16(.url(url(for: "2022_day16")))
+        let problem = try AoC_2022_Day16(file("2022_day16"))
 
         var answer = 1638
         var result = problem.solvePart1()
@@ -698,9 +694,9 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day17_intro() throws {
-        let problem = try AoC_2022_Day17(.string("""
+        let problem = try AoC_2022_Day17("""
         >>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 3068)
         let part2 = problem.solvePart2()
@@ -708,7 +704,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day17() throws {
-        let problem = try AoC_2022_Day17(.url(url(for: "2022_day17")))
+        let problem = try AoC_2022_Day17(file("2022_day17"))
 
         var answer = 3083
         var result = problem.solvePart1()
@@ -722,7 +718,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day18_intro() async throws {
-        let problem = try AoC_2022_Day18(.string("""
+        let problem = try AoC_2022_Day18("""
         2,2,2
         1,2,2
         3,2,2
@@ -736,7 +732,7 @@ final class AoC_2022_Tests: XCTestCase {
         3,2,5
         2,1,5
         2,3,5
-        """))
+        """)
         let part1 = try await problem.solvePart1()
         XCTAssertEqual(part1, 64)
         let part2 = try await problem.solvePart2()
@@ -744,7 +740,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day18() async throws {
-        let problem = try AoC_2022_Day18(.url(url(for: "2022_day18")))
+        let problem = try AoC_2022_Day18(file("2022_day18"))
 
         var answer = 4460
         var result = try await problem.solvePart1()
@@ -758,10 +754,10 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day19_intro() async throws {
-        let problem = try AoC_2022_Day19(.string("""
+        let problem = try AoC_2022_Day19("""
         Blueprint 1: Each ore robot costs 4 ore. Each clay robot costs 2 ore. Each obsidian robot costs 3 ore and 14 clay. Each geode robot costs 2 ore and 7 obsidian.
         Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsidian robot costs 3 ore and 8 clay. Each geode robot costs 3 ore and 12 obsidian.
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 33)
         let part2 = problem.solvePart2()
@@ -769,7 +765,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day19() async throws {
-        let problem = try AoC_2022_Day19(.url(url(for: "2022_day19")))
+        let problem = try AoC_2022_Day19(file("2022_day19"))
 
         var answer = 1150
         var result = problem.solvePart1()
@@ -783,7 +779,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day20_intro() throws {
-        let problem = try AoC_2022_Day20(.string("""
+        let problem = try AoC_2022_Day20("""
         1
         2
         -3
@@ -791,7 +787,7 @@ final class AoC_2022_Tests: XCTestCase {
         -2
         0
         4
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 3)
         let part2 = problem.solvePart2()
@@ -799,7 +795,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day20() throws {
-        let problem = try AoC_2022_Day20(.url(url(for: "2022_day20")))
+        let problem = try AoC_2022_Day20(file("2022_day20"))
 
         var answer = 13883
         var result = problem.solvePart1()
@@ -813,7 +809,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day21_intro() throws {
-        let problem = try AoC_2022_Day21(.string("""
+        let problem = try AoC_2022_Day21("""
         root: pppw + sjmn
         dbpl: 5
         cczh: sllz + lgvd
@@ -829,7 +825,7 @@ final class AoC_2022_Tests: XCTestCase {
         lgvd: ljgn * ptdq
         drzm: hmdt - zczc
         hmdt: 32
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 152)
         let part2 = problem.solvePart2()
@@ -837,7 +833,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day21() throws {
-        let problem = try AoC_2022_Day21(.url(url(for: "2022_day21")))
+        let problem = try AoC_2022_Day21(file("2022_day21"))
 
         var answer = 158731561459602
         var result = problem.solvePart1()
@@ -851,7 +847,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day22_intro() throws {
-        let problem = try AoC_2022_Day22(.string("""
+        let problem = try AoC_2022_Day22("""
                 ...#
                 .#..
                 #...
@@ -866,7 +862,7 @@ final class AoC_2022_Tests: XCTestCase {
                 ......#.
 
         10R5L5R10L4R5L5
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 6032)
         let part2 = problem.solvePart2()
@@ -874,7 +870,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day22() throws {
-        let problem = try AoC_2022_Day22(.url(url(for: "2022_day22")))
+        let problem = try AoC_2022_Day22(file("2022_day22"))
 
         var answer = 56372
         var result = problem.solvePart1()
@@ -888,14 +884,14 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day23_intro1() throws {
-        let problem = try AoC_2022_Day23(.string("""
+        let problem = try AoC_2022_Day23("""
         .....
         ..##.
         ..#..
         .....
         ..##.
         .....
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 25)
         let part2 = problem.solvePart2()
@@ -903,7 +899,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day23_intro2() throws {
-        let problem = try AoC_2022_Day23(.string("""
+        let problem = try AoC_2022_Day23("""
         ....#..
         ..###.#
         #...#.#
@@ -911,7 +907,7 @@ final class AoC_2022_Tests: XCTestCase {
         #.###..
         ##.#.##
         .#..#..
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 110)
         let part2 = problem.solvePart2()
@@ -919,7 +915,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day23() throws {
-        let problem = try AoC_2022_Day23(.url(url(for: "2022_day23")))
+        let problem = try AoC_2022_Day23(file("2022_day23"))
 
         var answer = 4208
         var result = problem.solvePart1()
@@ -933,7 +929,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day24_intro1() throws {
-        let problem = try AoC_2022_Day24(.string("""
+        let problem = try AoC_2022_Day24("""
         #.#####
         #.....#
         #>....#
@@ -941,7 +937,7 @@ final class AoC_2022_Tests: XCTestCase {
         #...v.#
         #.....#
         #####.#
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 10)
         let part2 = problem.solvePart2()
@@ -949,14 +945,14 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day24_intro2() throws {
-        let problem = try AoC_2022_Day24(.string("""
+        let problem = try AoC_2022_Day24("""
         #.######
         #>>.<^<#
         #.<..<<#
         #>v.><>#
         #<^v^^>#
         ######.#
-        """))
+        """)
         let part1 = problem.solvePart1()
         XCTAssertEqual(part1, 18)
         let part2 = problem.solvePart2()
@@ -964,7 +960,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day24() throws {
-        let problem = try AoC_2022_Day24(.url(url(for: "2022_day24")))
+        let problem = try AoC_2022_Day24(file("2022_day24"))
 
         var answer = 299
         var result = problem.solvePart1()
@@ -978,7 +974,7 @@ final class AoC_2022_Tests: XCTestCase {
     }
 
     func test_day25_intro() async throws {
-        let problem = try AoC_2022_Day25(.string("""
+        let problem = try AoC_2022_Day25("""
         1=-0-2
         12111
         2=0=
@@ -992,17 +988,21 @@ final class AoC_2022_Tests: XCTestCase {
         12
         1=
         122
-        """))
+        """)
         let part1 = try await problem.solve()
         XCTAssertEqual(part1, "2=-1=0")
     }
 
     func test_day25() async throws {
-        let problem = try AoC_2022_Day25(.url(url(for: "2022_day25")))
+        let problem = try AoC_2022_Day25(file("2022_day25"))
 
         let answer = "2-=2-0=-0-=0200=--21"
         let result = try await problem.solve()
         XCTAssertEqual(result, answer)
         print("Day25 solution: \(answer)")
+    }
+
+    private func file(_ fileName: String, fileExtension: String = "txt") throws -> Input {
+        try .contentsOfFile(XCTUnwrap(Bundle.module.url(forResource: fileName, withExtension: fileExtension)))
     }
 }

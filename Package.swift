@@ -47,6 +47,7 @@ let package = Package(
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             path: "Sources/2022",
+            exclude: ["Tasks"],
             swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .testTarget(
@@ -64,6 +65,7 @@ let package = Package(
                 .product(name: "Parsing", package: "swift-parsing"),
             ],
             path: "Sources/2021",
+            exclude: ["Tasks"],
             swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .testTarget(
@@ -80,6 +82,7 @@ let package = Package(
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             path: "Sources/2020",
+            exclude: ["Tasks"],
             swiftSettings: [.unsafeFlags(["-enable-bare-slash-regex"])]
         ),
         .testTarget(

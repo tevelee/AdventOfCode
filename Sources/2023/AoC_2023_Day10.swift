@@ -1,7 +1,7 @@
 import Algorithms
 import Collections
 
-final class AoC_2023_Day10 {
+final class AoC_2023_Day10: Day {
     private let grid: PipeGrid
     private lazy var loop = grid.findLoopFromStartPosition()
 

@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day8 {
+final class AoC_2023_Day8: Day {
     private let instructions: String
     private let routes: [String: (left: String, right: String)]
 

@@ -1,7 +1,7 @@
 import Algorithms
 import RegexBuilder
 
-final class AoC_2023_Day2 {
+final class AoC_2023_Day2: Day {
     fileprivate let games: [Game]
 
     init(_ input: Input) throws {

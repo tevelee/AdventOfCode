@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day12 {
+final class AoC_2023_Day12: Day {
     private let entries: AnyAsyncSequence<Entry>
 
     init(_ input: Input) {
@@ -80,7 +80,7 @@ final class AoC_2023_Day12 {
                     cache: &cache
                 )
             }
-            guard sizeOfFirstGroup <= sizeOfPrefix, entry.pattern.element(at: sizeOfFirstGroup) != "#" else {
+            guard sizeOfFirstGroup <= sizeOfPrefix, entry.pattern[safe: sizeOfFirstGroup] != "#" else {
                 return 0
             }
             return numberOfPossibleArrangements(
@@ -120,9 +120,5 @@ extension Entry {
 private extension ArraySlice {
     func repeated(_ times: Int, separator: Self = []) -> [Element] {
         Array<Self>(repeating: self, count: times).interspersed(with: separator).flatMap { $0 }
-    }
-
-    func element(at position: Int) -> Element? {
-        self[index(startIndex, offsetBy: position)]
     }
 }

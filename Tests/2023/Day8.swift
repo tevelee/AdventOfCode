@@ -53,8 +53,8 @@ struct Day8 {
 
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day8(file("2023_day8"))
-        #expect(problem.solvePart1() == 14893)
-        #expect(problem.solvePart2() == 10241191004509)
+        let problem = try AoC_2023_Day8()
+        #expect(problem.solvePart1() == 14_893)
+        #expect(problem.solvePart2() == 10_241_191_004_509)
     }
 }

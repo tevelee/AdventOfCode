@@ -1,4 +1,4 @@
-final class AoC_2023_Day3 {
+final class AoC_2023_Day3: Day {
     let board: [[Character]]
 
     init(_ input: Input) throws {

@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day9 {
+final class AoC_2023_Day9: Day {
     private let entries: AnyAsyncSequence<[Int]>
 
     init(_ input: Input) {

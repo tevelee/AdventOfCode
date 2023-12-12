@@ -97,7 +97,7 @@ struct Day10 {
     }
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day10(file("2023_day10"))
+        let problem = try AoC_2023_Day10()
         #expect(problem.solvePart1() == 7066)
         #expect(problem.solvePart2() == 401)
     }

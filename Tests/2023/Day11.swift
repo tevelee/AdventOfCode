@@ -23,8 +23,8 @@ struct Day11 {
 
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day11(file("2023_day11"))
-        #expect(problem.solve(expansionSize: 2) == 9522407)
-        #expect(problem.solve(expansionSize: 1_000_000) == 544723432977)
+        let problem = try AoC_2023_Day11()
+        #expect(problem.solve(expansionSize: 2) == 9_522_407)
+        #expect(problem.solve(expansionSize: 1_000_000) == 544_723_432_977)
     }
 }

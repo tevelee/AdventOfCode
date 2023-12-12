@@ -28,8 +28,9 @@ extension Substring {
 }
 
 extension Collection {
-    @inlinable public subscript (safe index: Index) -> Element? {
-        indices.contains(index) ? self[index] : nil
+    @inlinable public subscript (safe position: Index) -> Element? where Index == Int {
+        let index = self.index(startIndex, offsetBy: position)
+        return indices.contains(index) ? self[index] : nil
     }
 
     @inlinable public func sorted<T>(by selector: (Element) -> T) -> [Element] where T: Comparable {

@@ -18,7 +18,7 @@ struct Day12 {
 
     @Test(.tags(.green))
     func live() async throws {
-        let problem = try AoC_2023_Day12(file("2023_day12"))
+        let problem = try AoC_2023_Day12()
         #expect(try await problem.solvePart1() == 7653)
         #expect(try await problem.solvePart2() == 60_681_419_004_564)
     }
