@@ -1,10 +1,13 @@
 @testable import AoC_2023
 import Testing
 
-struct Day1 {
+private typealias CurrentPuzzle = AoC_2023_Day1
+extension CurrentPuzzle: Puzzle {}
+
+private struct Day1 {
     @Test
     func part1_intro() async throws {
-        let problem = AoC_2023_Day1("""
+        let problem = CurrentPuzzle("""
         1abc2
         pqr3stu8vwx
         a1b2c3d4e5f
@@ -15,7 +18,7 @@ struct Day1 {
 
     @Test
     func part2_intro() async throws {
-        let problem = AoC_2023_Day1("""
+        let problem = CurrentPuzzle("""
         two1nine
         eightwothree
         abcone2threexyz
@@ -29,7 +32,7 @@ struct Day1 {
 
     @Test(.tags(.green))
     func live() async throws {
-        let problem = try AoC_2023_Day1()
+        let problem = try CurrentPuzzle()
         #expect(try await problem.solvePart1() == 54_450)
         #expect(try await problem.solvePart2() == 54_265)
     }

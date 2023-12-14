@@ -1,7 +1,7 @@
 import Algorithms
 import Utils
 
-final class AoC_2023_Day5: Day {
+final class AoC_2023_Day5 {
     private let seeds: [Int]
     private let maps: [Map]
 

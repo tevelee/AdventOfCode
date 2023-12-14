@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day4: Day {
+final class AoC_2023_Day4 {
     private let cards: [Card]
 
     init(_ input: Input) throws {

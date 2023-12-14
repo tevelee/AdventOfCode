@@ -1,6 +1,6 @@
 import Utils
 
-final class AoC_2023_Day6: Day {
+final class AoC_2023_Day6 {
     private let input: Input
 
     init(_ input: Input) {

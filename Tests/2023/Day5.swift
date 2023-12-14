@@ -1,10 +1,13 @@
 @testable import AoC_2023
 import Testing
 
-struct Day5 {
+private typealias CurrentPuzzle = AoC_2023_Day5
+extension CurrentPuzzle: Puzzle {}
+
+private struct Day5 {
     @Test
     func intro() throws {
-        let problem = try AoC_2023_Day5("""
+        let problem = try CurrentPuzzle("""
         seeds: 79 14 55 13
 
         seed-to-soil map:
@@ -45,7 +48,7 @@ struct Day5 {
 
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day5()
+        let problem = try CurrentPuzzle()
         #expect(problem.solvePart1() == 251_346_198)
         #expect(problem.solvePart2() == 72_263_011)
     }

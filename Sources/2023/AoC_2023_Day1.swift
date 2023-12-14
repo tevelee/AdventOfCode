@@ -1,4 +1,4 @@
-final class AoC_2023_Day1: Day {
+final class AoC_2023_Day1 {
     let input: Input
 
     init(_ input: Input) {

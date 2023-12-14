@@ -81,6 +81,15 @@ extension Array where Element: Hashable {
     }
 }
 
+extension Array {
+    @inlinable public func rotatedClockwise<T>() -> [[T]] where Element == [T] {
+        guard let firstRow = self.first else { return self }
+        return firstRow.indices.map { x in
+            reversed().map { $0[x] }
+        }
+    }
+}
+
 @inlinable public func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Element, C.Element)] {
     product(product(c1, c2), c3).map { p, z in
         let (x,y) = p

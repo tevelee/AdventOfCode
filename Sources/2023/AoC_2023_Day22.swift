@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day22: Day {
+final class AoC_2023_Day22 {
     let input: Input
 
     init(_ input: Input) {

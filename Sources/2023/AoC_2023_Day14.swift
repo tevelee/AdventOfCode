@@ -1,7 +1,7 @@
 import Algorithms
 import Utils
 
-final class AoC_2023_Day14: Day {
+final class AoC_2023_Day14 {
     private let items: [[Character]]
     private lazy var height = items.count
 
@@ -70,13 +70,5 @@ final class AoC_2023_Day14: Day {
         let prefixBeforeRepetition = results.count - 2 * sizeOfRepeatingSuffix
         let offsetInRepetition = (projectedIndex - prefixBeforeRepetition) % sizeOfRepeatingSuffix
         return results[prefixBeforeRepetition + offsetInRepetition]
-    }
-}
-
-private extension Array {
-    func rotatedClockwise<T>() -> [[T]] where Element == [T] {
-        self[0].indices.map { x in
-            reversed().map { $0[x] }
-        }
     }
 }

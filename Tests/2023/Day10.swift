@@ -1,10 +1,13 @@
 @testable import AoC_2023
 import Testing
 
-struct Day10 {
+private typealias CurrentPuzzle = AoC_2023_Day10
+extension CurrentPuzzle: Puzzle {}
+
+private struct Day10 {
     @Test
     func intro1() throws {
-        let problem = try AoC_2023_Day10("""
+        let problem = try CurrentPuzzle("""
         -L|F7
         7S-7|
         L|7||
@@ -17,7 +20,7 @@ struct Day10 {
 
     @Test
     func intro2() throws {
-        let problem = try AoC_2023_Day10("""
+        let problem = try CurrentPuzzle("""
         ..F7.
         .FJ|.
         SJ.L7
@@ -31,7 +34,7 @@ struct Day10 {
         struct Part2 {
         @Test
         func intro1() throws {
-            let problem = try AoC_2023_Day10("""
+            let problem = try CurrentPuzzle("""
             ...........
             .S-------7.
             .|F-----7|.
@@ -47,7 +50,7 @@ struct Day10 {
 
         @Test
         func intro2() throws {
-            let problem = try AoC_2023_Day10("""
+            let problem = try CurrentPuzzle("""
             ..........
             .S------7.
             .|F----7|.
@@ -63,7 +66,7 @@ struct Day10 {
 
         @Test
         func intro3() throws {
-            let problem = try AoC_2023_Day10("""
+            let problem = try CurrentPuzzle("""
             .F----7F7F7F7F-7....
             .|F--7||||||||FJ....
             .||.FJ||||||||L7....
@@ -80,7 +83,7 @@ struct Day10 {
 
         @Test
         func intro4() throws {
-            let problem = try AoC_2023_Day10("""
+            let problem = try CurrentPuzzle("""
             FF7FSF7F7F7F7F7F---7
             L|LJ||||||||||||F--J
             FL-7LJLJ||||||LJL-77
@@ -97,7 +100,7 @@ struct Day10 {
     }
     @Test(.tags(.green))
     func live() throws {
-        let problem = try AoC_2023_Day10()
+        let problem = try CurrentPuzzle()
         #expect(problem.solvePart1() == 7066)
         #expect(problem.solvePart2() == 401)
     }

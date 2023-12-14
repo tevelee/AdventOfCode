@@ -1,6 +1,6 @@
 import Algorithms
 
-final class AoC_2023_Day11: Day {
+final class AoC_2023_Day11 {
     private let map: Map
     private lazy var pairsOfGalaxies = map.positionsOfStars.lazy.combinations(ofCount: 2).map { combination in
         (one: combination[0], two: combination[1])
