@@ -1,4 +1,5 @@
 import Algorithms
+import AsyncAlgorithms
 
 extension AsyncSequence {
     @inlinable public func collect() async rethrows -> [Element] {
@@ -162,6 +163,10 @@ extension AsyncSequence {
         get async throws {
             try await reduce(0) { result, _ in result + 1 }
         }
+    }
+
+    @inlinable public func split(by element: Element) -> AnyAsyncSequence<[Element]> where Element: Equatable {
+        chunked(into: Array.self, on: { $0 != element }).filter(\.0).map(\.1).eraseToAnyAsyncSequence()
     }
 }
 

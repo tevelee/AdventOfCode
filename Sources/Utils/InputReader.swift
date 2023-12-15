@@ -24,6 +24,15 @@ public enum Input {
             return url.lines.eraseToAnyAsyncSequence()
         }
     }
+
+    @inlinable public var characters: AnyAsyncSequence<Character> {
+        switch self {
+        case .staticString(let value):
+            return Array(String(staticString: value)).async.eraseToAnyAsyncSequence()
+        case .contentsOfFile(let url):
+            return url.resourceBytes.characters.eraseToAnyAsyncSequence()
+        }
+    }
 }
 
 extension Input: ExpressibleByStringLiteral {
