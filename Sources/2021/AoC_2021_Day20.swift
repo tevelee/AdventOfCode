@@ -15,7 +15,7 @@ public final class AoC_2021_Day20 {
         lightPixelIndices = Set(rawMap
             .enumerated()
             .filter { $0.element == "#" }
-            .dictionary(byUniqueKey: \.offset)
+            .keyed(by: \.offset)
             .keys)
         map = sections[1].map { line in
             line.map(Self.digit)

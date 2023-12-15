@@ -3,7 +3,7 @@ import AsyncAlgorithms
 
 extension AsyncSequence {
     @inlinable public func collect() async rethrows -> [Element] {
-        try await reduce(into: [Element]()) { $0.append($1) }
+        try await Array(self)
     }
 }
 
@@ -29,7 +29,7 @@ extension Substring {
 }
 
 extension Collection {
-    @inlinable public subscript (safe position: Index) -> Element? where Index == Int {
+    @inlinable public subscript(safe position: Index) -> Element? where Index == Int {
         let index = self.index(startIndex, offsetBy: position)
         return indices.contains(index) ? self[index] : nil
     }
@@ -62,22 +62,13 @@ extension Sequence {
             try IteratorSequence(iterator).reduce(first, nextPartialResult)
         }
     }
-
-    @inlinable public func dictionary<Key: Hashable>(by keySelector: (Element) -> Key) -> [Key: [Element]] {
-        .init(grouping: self, by: keySelector)
-    }
-
-    @inlinable public func dictionary<Key: Hashable>(byUniqueKey keySelector: (Element) -> Key) -> [Key: Element] {
-        Dictionary(grouping: self, by: keySelector).compactMapValues(\.first)
-    }
 }
 
 extension Array where Element: Hashable {
     @inlinable public func removingDuplicates() -> [Element] {
-        var addedDict = [Element: Bool]()
-
+        var elements: Set<Element> = []
         return filter {
-            addedDict.updateValue(true, forKey: $0) == nil
+            elements.insert($0).inserted
         }
     }
 }
@@ -164,8 +155,10 @@ extension AsyncSequence {
             try await reduce(0) { result, _ in result + 1 }
         }
     }
+}
 
-    @inlinable public func split(by element: Element) -> AnyAsyncSequence<[Element]> where Element: Equatable {
+extension AsyncSequence where Element: Equatable {
+    @inlinable public func split(by element: Element) -> AnyAsyncSequence<[Element]> {
         chunked(into: Array.self, on: { $0 != element }).filter(\.0).map(\.1).eraseToAnyAsyncSequence()
     }
 }

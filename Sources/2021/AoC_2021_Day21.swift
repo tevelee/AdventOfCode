@@ -37,7 +37,7 @@ public final class AoC_2021_Day21 {
     }
 
     private lazy var sums: [Int: Int] = {
-        sumOfNextRolls(in: 1...3).dictionary { $0 }.mapValues(\.count)
+        sumOfNextRolls(in: 1...3).grouped { $0 }.mapValues(\.count)
     }()
 
     public func solvePart2() async throws -> Int {

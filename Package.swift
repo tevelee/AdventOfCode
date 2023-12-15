@@ -96,6 +96,7 @@ let package = Package(
             name: "Utils",
             dependencies: [
                 .product(name: "Algorithms", package: "swift-algorithms"),
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
                 .product(name: "Collections", package: "swift-collections"),
                 .product(name: "SwiftGraph", package: "SwiftGraph")
             ]
