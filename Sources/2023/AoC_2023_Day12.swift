@@ -20,81 +20,55 @@ final class AoC_2023_Day12 {
         try await entries.map(\.unfolded).sum(of: numberOfPossibleArrangements)
     }
 
-    private func numberOfPossibleArrangements(for entry: Entry) -> Int {
-        var cache: [Entry: Int] = [:]
-        let result = numberOfPossibleArrangements(for: entry, cache: &cache)
-        return result
+    private lazy var numberOfPossibleArrangements = memoize(_numberOfPossibleArrangements)
+
+    private func _numberOfPossibleArrangements(for entry: Entry) -> Int {
+        switch entry.pattern.first {
+        case ".":
+            processDot(entry)
+        case "?":
+            processQuestionMark(entry)
+        case "#":
+            processHash(for: entry)
+        case nil:
+            processEndOfPattern(for: entry)
+        default:
+            fatalError("invalid character")
+        }
     }
 
-    private func numberOfPossibleArrangements(for entry: Entry, cache: inout [Entry: Int]) -> Int {
-        if let value = cache[entry] {
-            return value
-        }
-        let value = recurse(for: entry, cache: &cache)
-        cache[entry] = value
-        return value
+    private func processDot(_ entry: Entry) -> Int {
+        numberOfPossibleArrangements(Entry(pattern: entry.pattern.dropFirst(), groups: entry.groups))
+    }
 
-        func recurse(for entry: Entry, cache: inout [Entry: Int]) -> Int {
-            switch entry.pattern.first {
-            case ".":
-                processDot(entry, &cache)
-            case "?":
-                processQuestionMark(entry, &cache)
-            case "#":
-                processHash(for: entry, cache: &cache)
-            case nil:
-                processEndOfPattern(for: entry)
-            default:
-                fatalError("invalid character")
-            }
-        }
+    private func processQuestionMark(_ entry: Entry) -> Int {
+        let withDot = numberOfPossibleArrangements(Entry(pattern: ["."] + entry.pattern.dropFirst(), groups: entry.groups))
+        let withHash = numberOfPossibleArrangements(Entry(pattern: ["#"] + entry.pattern.dropFirst(), groups: entry.groups))
+        return withDot + withHash
+    }
 
-        func processDot(_ entry: Entry, _ cache: inout [Entry : Int]) -> Int {
-            numberOfPossibleArrangements(
-                for: Entry(pattern: entry.pattern.dropFirst(), groups: entry.groups),
-                cache: &cache
+    private func processHash(for entry: Entry) -> Int {
+        guard let sizeOfFirstGroup = entry.groups.first else {
+            return 0
+        }
+        let prefix = entry.pattern.prefix { $0 == "#" || $0 == "?" }
+        let sizeOfPrefix = prefix.count
+        if entry.pattern == prefix, sizeOfFirstGroup == sizeOfPrefix {
+            return numberOfPossibleArrangements(Entry(pattern: [], groups: entry.groups.dropFirst()))
+        }
+        guard sizeOfFirstGroup <= sizeOfPrefix, entry.pattern[safe: sizeOfFirstGroup] != "#" else {
+            return 0
+        }
+        return numberOfPossibleArrangements(
+            Entry(
+                pattern: entry.pattern.dropFirst(sizeOfFirstGroup + 1),
+                groups: entry.groups.dropFirst()
             )
-        }
+        )
+    }
 
-        func processQuestionMark(_ entry: Entry, _ cache: inout [Entry : Int]) -> Int {
-            let withDot = numberOfPossibleArrangements(
-                for: Entry(pattern: ["."] + entry.pattern.dropFirst(), groups: entry.groups),
-                cache: &cache
-            )
-            let withHash = numberOfPossibleArrangements(
-                for: Entry(pattern: ["#"] + entry.pattern.dropFirst(), groups: entry.groups),
-                cache: &cache
-            )
-            return withDot + withHash
-        }
-
-        func processHash(for entry: Entry, cache: inout [Entry: Int]) -> Int {
-            guard let sizeOfFirstGroup = entry.groups.first else {
-                return 0
-            }
-            let prefix = entry.pattern.prefix { $0 == "#" || $0 == "?" }
-            let sizeOfPrefix = prefix.count
-            if entry.pattern == prefix, sizeOfFirstGroup == sizeOfPrefix {
-                return numberOfPossibleArrangements(
-                    for: Entry(pattern: [], groups: entry.groups.dropFirst()),
-                    cache: &cache
-                )
-            }
-            guard sizeOfFirstGroup <= sizeOfPrefix, entry.pattern[safe: sizeOfFirstGroup] != "#" else {
-                return 0
-            }
-            return numberOfPossibleArrangements(
-                for: Entry(
-                    pattern: entry.pattern.dropFirst(sizeOfFirstGroup + 1),
-                    groups: entry.groups.dropFirst()
-                ),
-                cache: &cache
-            )
-        }
-
-        func processEndOfPattern(for entry: Entry) -> Int {
-            entry.groups.isEmpty ? 1 : 0
-        }
+    private func processEndOfPattern(for entry: Entry) -> Int {
+        entry.groups.isEmpty ? 1 : 0
     }
 }
 
