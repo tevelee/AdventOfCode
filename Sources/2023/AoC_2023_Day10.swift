@@ -1,5 +1,6 @@
 import Algorithms
 import Collections
+import Utils
 
 final class AoC_2023_Day10 {
     private let grid: PipeGrid
@@ -15,20 +16,7 @@ final class AoC_2023_Day10 {
     }
 
     func solvePart2() -> Int {
-        grid.positions2D.sum { row in
-            row.lazy.chunked(on: loop.contains)
-                .reduce(into: (isInside: false, count: 0)) { result, chunk in
-                    let (isBoundary, positions) = chunk
-                    if isBoundary {
-                        if positions.count(where: grid.hasVerticalConnection).isOdd {
-                            result.isInside.toggle()
-                        }
-                    } else if result.isInside {
-                        result.count += positions.count
-                    }
-                }
-                .count
-        }
+        numberOfPoints(inside: loop.map { ($0.x, $0.y) })
     }
 }
 
@@ -57,11 +45,7 @@ private struct Grid<T> {
     }
 
     var positions: [Position] {
-        positions2D.flatMap { $0 }
-    }
-
-    var positions2D: [[Position]] {
-        (0..<height).map { y in
+        (0..<height).flatMap { y in
             (0..<width).map { x in
                 Position(x: x, y: y)
             }
@@ -86,7 +70,6 @@ private struct Grid<T> {
     }
 }
 
-@dynamicMemberLookup
 private struct PipeGrid {
     typealias Position = Grid<Character>.Position
     typealias Direction = Grid<Character>.Direction
@@ -139,14 +122,6 @@ private struct PipeGrid {
         case "S": Direction.allCases
         default: []
         }
-    }
-
-    func hasVerticalConnection(_ position: Position) -> Bool {
-        connections[position, default: []].contains(grid.nextPosition(from: position, in: .up))
-    }
-
-    subscript<T>(dynamicMember keyPath: KeyPath<Grid<Character>, T>) -> T {
-        grid[keyPath: keyPath]
     }
 }
 

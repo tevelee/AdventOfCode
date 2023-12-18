@@ -1,4 +1,5 @@
 import Algorithms
+import Utils
 
 final class AoC_2023_Day18 {
     private let entries: [Entry]
@@ -23,7 +24,8 @@ final class AoC_2023_Day18 {
     }
 
     private func solve(_ moves: [Move]) -> Int {
-        sizeOfLagoon(path: path(moves: moves), length: moves.sum(of: \.length))
+        let polygon = path(moves: moves).map { ($0.x, $0.y) }
+        return numberOfPoints(inside: polygon) + circumference(of: polygon)
     }
 
     private func path(
@@ -37,10 +39,6 @@ final class AoC_2023_Day18 {
             positions.append(current)
         }
         return positions
-    }
-
-    private func sizeOfLagoon(path: [Position], length: Int) -> Int {
-        area(of: path.map { ($0.x, $0.y) }) + length / 2 + 1
     }
 }
 

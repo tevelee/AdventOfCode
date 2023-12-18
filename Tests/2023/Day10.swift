@@ -31,7 +31,7 @@ private struct Day10 {
         #expect(problem.solvePart2() == 1)
     }
 
-        struct Part2 {
+    struct Part2 {
         @Test
         func intro1() throws {
             let problem = try CurrentPuzzle("""

@@ -16,7 +16,7 @@ let package = Package(
          .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "1.0.0-beta.1"),
          .package(url: "https://github.com/apple/swift-collections.git", branch: "release/1.1"),
          .package(url: "https://github.com/apple/swift-testing.git", branch: "main"),
-//         .package(url: "https://github.com/apple/swift-numerics.git", from: "0.1.0"),
+//         .package(url: "https://github.com/apple/swift-numerics.git", from: "1.0.2"),
          .package(url: "https://github.com/davecom/SwiftGraph.git", from: "3.1.0"),
          .package(url: "https://github.com/pointfreeco/swift-parsing.git", from: "0.3.1"),
          .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
