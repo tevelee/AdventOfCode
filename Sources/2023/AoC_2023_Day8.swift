@@ -1,4 +1,5 @@
 import Algorithms
+import Utils
 
 final class AoC_2023_Day8 {
     private let instructions: String
@@ -24,7 +25,7 @@ final class AoC_2023_Day8 {
         routes.keys
             .filter { $0.last == "A" }
             .map { solve(start: $0) { $0.last == "Z" } }
-            .reduce(1, lowestCommonMultiple)
+            .lowestCommonMultiple()
     }
 
     private func solve(start: String, until condition: (String) -> Bool) -> Int {
@@ -41,20 +42,5 @@ final class AoC_2023_Day8 {
             }
         } while !condition(currentState)
         return numberOfSteps
-    }
-
-    private func lowestCommonMultiple(_ a: Int, _ b: Int) -> Int {
-        (a * b) / greatestCommonDivisor(a, b)
-    }
-
-    private func greatestCommonDivisor(_ a: Int, _ b: Int) -> Int {
-        var num1 = a
-        var num2 = b
-        while num2 != 0 {
-            let temp = num2
-            num2 = num1 % num2
-            num1 = temp
-        }
-        return num1
     }
 }
