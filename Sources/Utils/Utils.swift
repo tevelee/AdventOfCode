@@ -182,7 +182,11 @@ extension Collection where Element: Equatable {
 }
 
 @inlinable public func pow(_ value: Int, base: Int = 2) -> Int {
-    Array(repeating: base, count: value).product()
+    if base == 0 {
+        precondition(value != 0)
+        return 1
+    }
+    return Array(repeating: base, count: value).product()
 }
 
 extension Dictionary where Value: Hashable {

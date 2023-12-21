@@ -1,4 +1,5 @@
 import Algorithms
+import Utils
 
 final class AoC_2023_Day21 {
     private let startPosition: Position
@@ -12,23 +13,40 @@ final class AoC_2023_Day21 {
     }
 
     func solvePart1(steps: Int) -> Int {
-        var availablePositions: Set<Position> = [startPosition]
-        for _ in 1...steps {
-            availablePositions = Set(availablePositions.flatMap { position in
-                map.neighbors(of: position)
-                    .filter(map.contains)
-                    .filter {  map[$0] != "#" }
-            })
-        }
-        return availablePositions.count
+        availablePositions(for: steps, isFinite: true)
     }
 
     func solvePart2(steps: Int) -> Int {
+        let size = map.count
+        let (quotient, remainder) = steps.quotientAndRemainder(dividingBy: size)
+        return if quotient / 100 == 2023 {
+            Int(predictValueInQuadraticEquation(for: Double(quotient), given: [0, 1, 2].map { x in
+                (
+                    x: Double(x),
+                    y: Double(availablePositions(for: remainder + size * x, isFinite: false))
+                )
+            }))
+        } else {
+            availablePositions(for: steps, isFinite: false)
+        }
+    }
+
+    private func availablePositions(for steps: Int, isFinite: Bool) -> Int {
+        if isFinite {
+            availablePositions(for: steps) { map.contains(position: $0) && map[$0] != "#" }
+        } else {
+            availablePositions(for: steps) { map[infinite: $0] != "#" }
+        }
+    }
+
+    private func availablePositions(for steps: Int, where condition: (Position) -> Bool) -> Int {
         var availablePositions: Set<Position> = [startPosition]
         for _ in 1...steps {
-            availablePositions = Set(availablePositions.flatMap { position in
-                map.neighbors(of: position).filter {  map[infinite: $0] != "#" }
-            })
+            var newPositions: Set<Position> = []
+            for position in availablePositions {
+                newPositions.formUnion(map.neighbors(of: position).filter(condition))
+            }
+            availablePositions = newPositions
         }
         return availablePositions.count
     }
