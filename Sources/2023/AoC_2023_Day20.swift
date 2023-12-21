@@ -1,3 +1,4 @@
+import Algorithms
 import Utils
 
 final class AoC_2023_Day20 {
@@ -16,41 +17,68 @@ final class AoC_2023_Day20 {
     }
 
     func solvePart2() -> Int {
-        let rxInputs = machine.inputs(of: "rx")
-        guard rxInputs.count == 1, let conjunctionInput = rxInputs.first, machine.isConjunction(conjunctionInput) else {
-            fatalError("My input graph has only one conjunction input of the reset module. In order to output a low pulse, all their input needs to be high")
-        }
-        let inputModules = machine.inputs(of: conjunctionInput)
-        guard inputModules.allSatisfy(machine.isInverter) else {
-            fatalError("All those modules are inverters, so I'll look for when they receive a low pulse to output a high")
-        }
-        var inputModuleMap = Dictionary(uniqueKeysWithValues: inputModules.map { ($0, 0) })
+        numberOfIterationsRequired(
+            for: desiredModulePulseCombination(for: ["rx": .low])
+        )
+        .lowestCommonMultiple(of: \.value)
+    }
 
+    private func numberOfIterationsRequired(for desiredState: [String: Pulse]) -> [String: Int] {
         machine.reset()
-
+        var numberOfIterationsRequiredPerModule = desiredState.mapValues { _ in 0 }
         var iteration = 0
-        while inputModuleMap.values.contains(0) {
+        while numberOfIterationsRequiredPerModule.values.contains(0) {
             iteration += 1
             machine.pushButton { instruction in
-                if inputModuleMap[instruction.destination] == 0, instruction.pulse == .low {
-                    inputModuleMap[instruction.destination] = iteration
+                if numberOfIterationsRequiredPerModule[instruction.destination] == 0, desiredState[instruction.destination] == instruction.pulse {
+                    numberOfIterationsRequiredPerModule[instruction.destination] = iteration
                 }
             }
         }
-        
-        return inputModuleMap.lowestCommonMultiple(of: \.value)
+        return numberOfIterationsRequiredPerModule
     }
+
+    private func desiredModulePulseCombination(for desiredState: [String : Pulse]) -> [String : Pulse] {
+        var desiredState = desiredState
+        search: while true {
+            let inputs = desiredState.keys.flatMap(machine.inputs).sorted()
+            let pulseCombinations = Array(repeating: Pulse.allCases, count: inputs.count).flatMap { $0 }.uniquePermutations(ofCount: inputs.count)
+            for combination in pulseCombinations {
+                let modulePulseCombination = zip(inputs, combination).map { (module: $0, pulse: $1) }
+                let instructions = modulePulseCombination.map {
+                    Machine.Instruction(
+                        sender: machine.inputs(of: $0.module).first!,
+                        pulse: $0.pulse,
+                        destination: $0.module
+                    )
+                }
+                var canFulfillGoal = false
+                machine.reset()
+                machine.send(instructions: instructions) {
+                    if desiredState[$0.destination] == $0.pulse {
+                        canFulfillGoal = true
+                    }
+                }
+                desiredState = Dictionary(uniqueKeysWithValues: modulePulseCombination)
+                if canFulfillGoal {
+                    break search
+                }
+            }
+        }
+        return desiredState
+    }
+
+
 }
 
 private final class Machine {
-    private let modules: [String: Module]
+    private lazy var modules: [String: Module] = createModules()
+    private var inputs: [String: Set<String>] = [:]
+    private var outputs: [String: [String]] = [:]
+    private var types: [String: Character?] = [:]
     var pulsesSent: [Pulse: Int] = [:]
 
     init(input: Input) throws {
-        var inputs: [String: Set<String>] = [:]
-        var outputs: [String: [String]] = [:]
-        var types: [String: Character?] = [:]
-
         for entry in try input.wholeInput.lines {
             let segments = entry.split(separator: " -> ")
             guard segments.count == 2, var name = segments.first.map(String.init), let output = segments.last?.split(separator: ", ").map(String.init) else {
@@ -67,8 +95,10 @@ private final class Machine {
                 inputs[module, default: []].insert(name)
             }
         }
+    }
 
-        modules = types.map { name, prefix in
+    private func createModules() -> [String: Module] {
+        types.map { name, prefix in
             let factory = switch prefix {
             case "%":
                 FlipFlop.init
@@ -82,13 +112,15 @@ private final class Machine {
     }
 
     func reset() {
-        for module in modules.values {
-            module.reset()
-        }
+        modules = createModules()
     }
 
     func pushButton(evaluate: ((Instruction) -> Void)? = nil) {
-        var instructions = [Instruction(sender: "button", pulse: .low, destination: "broadcaster")]
+        send(instructions: [Instruction(sender: "button", pulse: .low, destination: "broadcaster")], evaluate: evaluate)
+    }
+
+    func send(instructions: [Instruction], evaluate: ((Instruction) -> Void)? = nil) {
+        var instructions = instructions
         while !instructions.isEmpty {
             let instruction = instructions.removeFirst()
             evaluate?(instruction)
@@ -104,22 +136,10 @@ private final class Machine {
         modules.filter { $0.value.outputs.contains(module) }.keys
     }
 
-    func isConjunction(_ module: String) -> Bool {
-        modules[module] is Conjunction
-    }
-
-    func isInverter(_ module: String) -> Bool {
-        isConjunction(module) && inputs(of: module).count == 1
-    }
-
     struct Instruction {
         let sender: String
         let pulse: Pulse
         let destination: String
-    }
-
-    enum Pulse {
-        case high, low
     }
 
     private class Module {
@@ -134,7 +154,6 @@ private final class Machine {
         }
 
         func handle(pulse: Pulse, from module: String) -> Pulse? { nil }
-        func reset() {}
     }
 
     private final class FlipFlop: Module {
@@ -149,10 +168,6 @@ private final class Machine {
                 return nil
             }
         }
-
-        override func reset() {
-            isOn = false
-        }
     }
 
     private final class Conjunction: Module {
@@ -162,10 +177,6 @@ private final class Machine {
             memory[module] = pulse
             return inputs.allSatisfy { memory[$0, default: .low] == .high } ? .low : .high
         }
-
-        override func reset() {
-            memory = [:]
-        }
     }
 
     private final class Broadcaster: Module {
@@ -173,4 +184,8 @@ private final class Machine {
             pulse
         }
     }
+}
+
+private enum Pulse: CaseIterable {
+    case low, high
 }
