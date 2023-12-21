@@ -40,15 +40,13 @@ final class AoC_2023_Day21 {
     }
 
     private func availablePositions(for steps: Int, where condition: (Position) -> Bool) -> Int {
-        var availablePositions: Set<Position> = [startPosition]
-        for _ in 1...steps {
-            var newPositions: Set<Position> = []
-            for position in availablePositions {
-                newPositions.formUnion(map.neighbors(of: position).filter(condition))
-            }
-            availablePositions = newPositions
-        }
-        return availablePositions.count
+        search(start: (step: steps, positions: [startPosition])) {
+            BFS().unique(by: \.positions)
+        } goal: {
+            $0.step == 0
+        } next: { step, positions in
+            (step - 1, Set(positions.flatMap(map.neighbors).filter(condition)))
+        }?.positions.count ?? 0
     }
 }
 

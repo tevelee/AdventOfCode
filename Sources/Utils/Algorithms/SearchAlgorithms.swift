@@ -1,50 +1,67 @@
 import Foundation
 
-public protocol Search {
-    associatedtype Coordinate: Hashable
-
-    func neighbors(for point: Coordinate) -> [Coordinate]
-    func goalReached(at: Coordinate) -> Bool
+@inlinable public func search<T>(
+    start: T,
+    using strategy: () -> some SearchStrategy<T>,
+    goal: (T) -> Bool,
+    next: (T) -> some Sequence<T>
+) -> T? {
+    var storage = strategy()
+    return search(storage: &storage, start: start, next: next, goal: goal)
 }
 
-protocol SearchStrategy<Node> {
+// overload for a single next value
+@inlinable public func search<T>(
+    start: T,
+    using strategy: () -> some SearchStrategy<T>,
+    goal: (T) -> Bool,
+    next: (T) -> T
+) -> T? {
+    search(start: start, using: strategy, goal: goal) { [next($0)] }
+}
+
+@usableFromInline func search<T>(
+    storage: inout some SearchStrategy<T>,
+    start: T,
+    next: (T) -> some Sequence<T>,
+    goal: (T) -> Bool
+) -> T? {
+    storage.add(start)
+    while let current = storage.next() {
+        if goal(current) {
+            return current
+        }
+        for value in next(current) where !storage.shouldDiscard(value) {
+            storage.add(value)
+        }
+    }
+    return nil
+}
+
+// MARK: Strategies
+
+public protocol SearchStrategy<Node> {
     associatedtype Node
 
     mutating func add(_ node: Node)
     mutating func next() -> Node?
+    func shouldDiscard(_ node: Node) -> Bool
 }
 
-func search<Map: Search>(
-    start: Map.Coordinate,
-    map: Map,
-    strategy: inout some SearchStrategy<Map.Coordinate>
-) -> Map.Coordinate? {
-    var visited = Set<Map.Coordinate>()
-    strategy.add(start)
-
-    while let current = strategy.next() {
-        if map.goalReached(at: current) {
-            return current
-        }
-
-        visited.insert(current)
-
-        for neighbor in map.neighbors(for: current) where !visited.contains(neighbor) {
-            strategy.add(neighbor)
-        }
-    }
-
-    return nil
+extension SearchStrategy {
+    public func shouldDiscard(_ node: Node) -> Bool { false }
 }
 
-struct BFS<Node>: SearchStrategy where Node: Hashable {
-    private var queue: [Node] = []
+public struct BFS<Node>: SearchStrategy {
+    @inlinable public init() {}
 
-    mutating func add(_ node: Node) {
+    @usableFromInline var queue: [Node] = []
+
+    @inlinable public mutating func add(_ node: Node) {
         queue.append(node)
     }
 
-    mutating func next() -> Node? {
+    @inlinable public mutating func next() -> Node? {
         if queue.isEmpty {
             nil
         } else {
@@ -53,14 +70,54 @@ struct BFS<Node>: SearchStrategy where Node: Hashable {
     }
 }
 
-struct DFS<Node>: SearchStrategy where Node: Hashable {
-    private var stack: [Node] = []
+public struct DFS<Node>: SearchStrategy {
+    @inlinable public init() {}
 
-    mutating func add(_ node: Node) {
+    @usableFromInline var stack: [Node] = []
+
+    @inlinable public mutating func add(_ node: Node) {
         stack.append(node)
     }
 
-    mutating func next() -> Node? {
+    @inlinable public mutating func next() -> Node? {
         stack.popLast()
+    }
+}
+
+public struct Unique<Base: SearchStrategy, HashValue: Hashable>: SearchStrategy {
+    public typealias Node = Base.Node
+
+    @usableFromInline var base: Base
+    @usableFromInline var hashValue: (Node) -> HashValue
+    @usableFromInline var visited: Set<HashValue> = []
+
+    @inlinable public init(base: Base, hashValue: @escaping (Node) -> HashValue) {
+        self.base = base
+        self.hashValue = hashValue
+    }
+
+    @inlinable public mutating func add(_ node: Node) {
+        base.add(node)
+        visited.insert(hashValue(node))
+    }
+
+    @inlinable public mutating func next() -> Node? {
+        base.next()
+    }
+
+    @inlinable public func shouldDiscard(_ node: Node) -> Bool {
+        visited.contains(hashValue(node)) || base.shouldDiscard(node)
+    }
+}
+
+extension SearchStrategy where Node: Hashable {
+    @inlinable public var unique: Unique<Self, Node> {
+        Unique(base: self) { $0 }
+    }
+}
+
+extension SearchStrategy {
+    @inlinable public func unique<HashValue: Hashable>(by hashValue: @escaping (Node) -> HashValue) -> Unique<Self, HashValue> {
+        Unique(base: self, hashValue: hashValue)
     }
 }
