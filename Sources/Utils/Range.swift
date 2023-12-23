@@ -18,4 +18,8 @@ extension ClosedRange<Int> {
     @inlinable public func contains(_ element: Int) -> Bool {
         lowerBound <= element && element <= upperBound
     }
+
+    @inlinable public func intersects(with other: Self) -> Bool {
+        contains(other.lowerBound) || contains(other.upperBound)
+    }
 }
