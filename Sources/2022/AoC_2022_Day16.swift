@@ -54,7 +54,7 @@ public final class AoC_2022_Day16 {
             if !visitedValves.contains(valve), newTimeRemining > 0 {
                 let pressureReleased = newTimeRemining * valves[valve]!.flowRate
                 explore(valve: valve,
-                        visitedValves: visitedValves.union([valve]),
+                        visitedValves: visitedValves + valve,
                         totalPressureReleased: totalPressureReleased + pressureReleased,
                         maxPressureReleased: &maxPressureReleased,
                         totalTime: totalTime,

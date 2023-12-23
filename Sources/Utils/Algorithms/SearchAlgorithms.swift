@@ -1,4 +1,5 @@
 import Foundation
+import Collections
 
 @inlinable public func search<T>(
     start: T,
@@ -55,18 +56,14 @@ extension SearchStrategy {
 public struct BFS<Node>: SearchStrategy {
     @inlinable public init() {}
 
-    @usableFromInline var queue: [Node] = []
+    @usableFromInline var queue: Deque<Node> = []
 
     @inlinable public mutating func add(_ node: Node) {
         queue.append(node)
     }
 
     @inlinable public mutating func next() -> Node? {
-        if queue.isEmpty {
-            nil
-        } else {
-            queue.removeFirst()
-        }
+        queue.popFirst()
     }
 }
 
@@ -84,17 +81,19 @@ public struct DFS<Node>: SearchStrategy {
     }
 }
 
-public struct Unique<Base: SearchStrategy, HashValue: Hashable>: SearchStrategy {
-    public typealias Node = Base.Node
-
+public struct Unique<Base, Element, HashValue: Hashable> {
     @usableFromInline var base: Base
-    @usableFromInline var hashValue: (Node) -> HashValue
+    @usableFromInline var hashValue: (Element) -> HashValue
     @usableFromInline var visited: Set<HashValue> = []
 
-    @inlinable public init(base: Base, hashValue: @escaping (Node) -> HashValue) {
+    @inlinable public init(base: Base, hashValue: @escaping (Element) -> HashValue) {
         self.base = base
         self.hashValue = hashValue
     }
+}
+
+extension Unique: SearchStrategy where Base: SearchStrategy, Element == Base.Node {
+    public typealias Node = Base.Node
 
     @inlinable public mutating func add(_ node: Node) {
         base.add(node)
@@ -111,13 +110,13 @@ public struct Unique<Base: SearchStrategy, HashValue: Hashable>: SearchStrategy 
 }
 
 extension SearchStrategy where Node: Hashable {
-    @inlinable public var unique: Unique<Self, Node> {
+    @inlinable public var unique: Unique<Self, Node, Node> {
         Unique(base: self) { $0 }
     }
 }
 
 extension SearchStrategy {
-    @inlinable public func unique<HashValue: Hashable>(by hashValue: @escaping (Node) -> HashValue) -> Unique<Self, HashValue> {
+    @inlinable public func unique<HashValue: Hashable>(by hashValue: @escaping (Node) -> HashValue) -> Unique<Self, Node, HashValue> {
         Unique(base: self, hashValue: hashValue)
     }
 }

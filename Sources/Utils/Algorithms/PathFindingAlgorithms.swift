@@ -10,9 +10,73 @@ public protocol PathFinding {
     func goalReached(at: Coordinate, goal: Coordinate) -> Bool
 }
 
+extension PathFinding {
+    public func costToMove(from: Coordinate, to: Coordinate) -> Cost { 0 }
+    public func distance(from: Coordinate, to: Coordinate) -> Cost { 1 }
+    public func goalReached(at: Coordinate, goal: Coordinate) -> Bool { at == goal }
+}
+
 public protocol PathFinder {
     associatedtype Map: PathFinding
     func shortestPath(from start: Map.Coordinate, to destination: Map.Coordinate) -> [Map.Coordinate]
+}
+
+extension PathFinding {
+    @inlinable public var unique: Unique<Self, Coordinate, Coordinate> {
+        Unique(base: self) { $0 }
+    }
+}
+
+extension Unique: PathFinding where Base: PathFinding, Element == Base.Coordinate {
+    public typealias Cost = Base.Cost
+    public struct Coordinate: Hashable {
+        @usableFromInline let base: Base.Coordinate
+        @usableFromInline let visited: Set<HashValue>
+
+        @inlinable public init(base: Base.Coordinate, visited: Set<HashValue> = []) {
+            self.base = base
+            self.visited = visited
+        }
+
+        @inlinable public static func == (lhs: Self, rhs: Self) -> Bool {
+            lhs.base == rhs.base
+        }
+
+        @inlinable public func hash(into hasher: inout Hasher) {
+            hasher.combine(base)
+        }
+    }
+
+    @inlinable public func neighbors(for point: Coordinate, goal: Coordinate) -> [Coordinate] {
+        base.neighbors(for: point.base, goal: goal.base)
+            .filter {
+                !point.visited.contains(hashValue($0))
+            }
+            .map {
+                Coordinate(base: $0, visited: point.visited + hashValue($0))
+            }
+    }
+
+    @inlinable public func costToMove(from: Coordinate, to: Coordinate) -> Cost {
+        base.costToMove(from: from.base, to: to.base)
+    }
+
+    @inlinable public func distance(from: Coordinate, to: Coordinate) -> Cost {
+        base.distance(from: from.base, to: to.base)
+    }
+
+    @inlinable public func goalReached(at: Coordinate, goal: Coordinate) -> Bool {
+        base.goalReached(at: at.base, goal: goal.base)
+    }
+}
+
+extension PathFinder {
+    @inlinable public func shortestPath<BaseMap: PathFinding>(
+        from start: BaseMap.Coordinate,
+        to destination: BaseMap.Coordinate
+    ) -> [BaseMap.Coordinate] where Map == Unique<BaseMap, BaseMap.Coordinate, BaseMap.Coordinate> {
+        shortestPath(from: .init(base: start), to: .init(base: destination)).map(\.base)
+    }
 }
 
 public final class AStar<Map: PathFinding>: PathFinder {
@@ -60,7 +124,7 @@ public final class AStar<Map: PathFinding>: PathFinder {
             let currentCoordinate = currentNode.coordinate
 
             if map.goalReached(at: currentCoordinate, goal: destination) {
-                var result = [Coordinate]()
+                var result: [Coordinate] = []
                 var node: AStarNode? = currentNode
                 while let n = node {
                     result.append(n.coordinate)
@@ -86,7 +150,7 @@ public final class AStar<Map: PathFinding>: PathFinder {
     }
 }
 
-public final class Dijkstra<Map: PathFinding>: PathFinder where Map.Coordinate: Comparable {
+public final class Dijkstra<Map: PathFinding>: PathFinder {
     public typealias Coordinate = Map.Coordinate
     public typealias Cost = Map.Cost
 
@@ -97,33 +161,49 @@ public final class Dijkstra<Map: PathFinding>: PathFinder where Map.Coordinate: 
     }
 
     public func shortestPath(from start: Coordinate, to destination: Coordinate) -> [Coordinate] {
-        buildPath(from: dijkstraCore(from: start).predecessors, destination: destination).reversed()
+        let predecessors = dijkstraCore(from: start, to: destination).predecessors
+        return buildPath(from: predecessors, destination: destination)
     }
 
     public func shortestPaths(from start: Coordinate) -> [Coordinate: [Coordinate]] {
-        let predecessors = dijkstraCore(from: start).predecessors
-        var paths = [Coordinate: [Coordinate]]()
+        let predecessors = dijkstraCore(from: start, to: nil).predecessors
+        var paths: [Coordinate: [Coordinate]] = [:]
         for (node, _) in predecessors {
-            paths[node] = buildPath(from: predecessors, destination: node).reversed()
+            paths[node] = buildPath(from: predecessors, destination: node)
         }
         return paths
     }
 
-    private func dijkstraCore(from start: Coordinate) -> (distances: [Coordinate: Cost], predecessors: [Coordinate: Coordinate?]) {
-        var distances = [Coordinate: Cost]()
-        var predecessors = [Coordinate: Coordinate?]()
-        var priorityQueue = Heap<Coordinate>()
+    struct Node: Comparable {
+        var coordinate: Coordinate
+        var cost: Cost
+
+        static func < (lhs: Node, rhs: Node) -> Bool {
+            return lhs.cost < rhs.cost
+        }
+    }
+
+    private func dijkstraCore(from start: Coordinate, to destination: Coordinate?) -> (distances: [Coordinate: Cost], predecessors: [Coordinate: Coordinate?]) {
+        var distances: [Coordinate: Cost] = [:]
+        var predecessors: [Coordinate: Coordinate?] = [:]
+        var priorityQueue = Heap<Node>()
 
         distances[start] = 0
-        priorityQueue.insert(start)
+        priorityQueue.insert(Node(coordinate: start, cost: 0))
 
-        while let current = priorityQueue.popMin() {
-            for neighbor in map.neighbors(for: current, goal: start) {
-                let newDistance = distances[current, default: .max] + map.costToMove(from: current, to: neighbor)
-                if newDistance < distances[neighbor, default: .max] {
-                    distances[neighbor] = newDistance
+        while let current = priorityQueue.popMin()?.coordinate {
+            if let destination, map.goalReached(at: current, goal: destination) {
+                break
+            }
+            let currentDistance = distances[current] ?? 0
+
+            for neighbor in map.neighbors(for: current, goal: destination ?? start) {
+                let distanceToNeighbor = currentDistance + map.costToMove(from: current, to: neighbor)
+
+                if distanceToNeighbor < (distances[neighbor] ?? .max) {
+                    distances[neighbor] = distanceToNeighbor
                     predecessors[neighbor] = current
-                    priorityQueue.insert(neighbor)
+                    priorityQueue.insert(Node(coordinate: neighbor, cost: distanceToNeighbor))
                 }
             }
         }
@@ -132,19 +212,26 @@ public final class Dijkstra<Map: PathFinding>: PathFinder where Map.Coordinate: 
     }
 
     private func buildPath(from predecessors: [Coordinate: Coordinate?], destination: Coordinate) -> [Coordinate] {
-        var path = [Coordinate]()
+        var path: [Coordinate] = []
         var current: Coordinate? = destination
         while let next = current, let predecessor = predecessors[next] {
             path.append(next)
             current = predecessor
         }
-        return path
+        return path.reversed()
     }
 }
 
 public protocol AllCoordinatesProviding {
     associatedtype Coordinate: Hashable
-    var allCoordinates: [Coordinate] { get }
+    associatedtype Coordinates: Collection<Coordinate>
+    var allCoordinates: Coordinates { get }
+}
+
+extension Unique: AllCoordinatesProviding where Base: AllCoordinatesProviding & PathFinding, Element == Base.Coordinate {
+    @inlinable public var allCoordinates: [Coordinate] {
+        base.allCoordinates.map { .init(base: $0) }
+    }
 }
 
 public final class FloydWarshall<Node: Hashable> {
@@ -188,5 +275,68 @@ public final class FloydWarshall<Node: Hashable> {
             }
         }
         return result
+    }
+}
+
+public final class BellmanFord<Map: PathFinding & AllCoordinatesProviding>: PathFinder {
+    public typealias Coordinate = Map.Coordinate
+    public typealias Cost = Map.Cost
+
+    private let map: Map
+
+    public init(map: Map) {
+        self.map = map
+    }
+
+    public func shortestPath(from start: Coordinate, to destination: Coordinate) -> [Coordinate] {
+        var distances: [Coordinate: Cost] = Dictionary(minimumCapacity: map.allCoordinates.count)
+        var predecessors: [Coordinate: Coordinate?] = Dictionary(minimumCapacity: map.allCoordinates.count)
+
+        // Initialize distances and predecessors
+        for vertex in map.allCoordinates {
+            distances[vertex] = (vertex == start) ? 0 : Cost.max
+            predecessors[vertex] = nil
+        }
+
+        // Relax edges repeatedly
+        for _ in 1..<map.allCoordinates.count {
+            for vertex in map.allCoordinates {
+                for neighbor in map.neighbors(for: vertex, goal: destination) {
+                    let edgeWeight = map.costToMove(from: vertex, to: neighbor)
+                    if let currentDistance = distances[vertex], currentDistance != Cost.max,
+                        currentDistance + edgeWeight < distances[neighbor, default: Cost.max] {
+                        distances[neighbor] = currentDistance + edgeWeight
+                        predecessors[neighbor] = vertex
+                    }
+                }
+            }
+        }
+
+        // Check for negative weight cycles
+        for vertex in map.allCoordinates {
+            for neighbor in map.neighbors(for: vertex, goal: destination) {
+                let edgeWeight = map.costToMove(from: vertex, to: neighbor)
+                if let currentDistance = distances[vertex], currentDistance != Cost.max,
+                    currentDistance + edgeWeight < distances[neighbor, default: Cost.max] {
+                    return [] // Negative cycle detected
+                }
+            }
+        }
+
+        // Reconstruct path from predecessors
+        var path: [Coordinate] = []
+        var currentVertex: Coordinate? = destination
+
+        while let current = currentVertex, current != start, let predecessor = predecessors[current] {
+            path.append(current)
+            currentVertex = predecessor
+        }
+
+        if currentVertex == start {
+            path.append(start)
+            return path.reversed()
+        } else {
+            return [] // No path found
+        }
     }
 }

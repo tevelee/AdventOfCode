@@ -63,7 +63,7 @@ public final class AoC_2021_Day9 {
 
         let current = Point(row: row, column: column)
 
-        var existingBasin = existingBasin.union([current])
+        var existingBasin = existingBasin + current
         for point in adjacentPoints where points[point.row][point.column] != 9 && !existingBasin.contains(point) {
             let additional = basin(row: point.row, column: point.column, existingBasin: existingBasin, in: points)
             existingBasin.formUnion(additional)

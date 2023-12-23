@@ -136,10 +136,14 @@ private final class Machine {
         modules.filter { $0.value.outputs.contains(module) }.keys
     }
 
-    struct Instruction {
+    struct Instruction: CustomStringConvertible {
         let sender: String
         let pulse: Pulse
         let destination: String
+
+        var description: String {
+            "\(sender) -\(pulse)-> \(destination)"
+        }
     }
 
     private class Module {

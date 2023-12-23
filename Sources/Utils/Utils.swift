@@ -217,6 +217,14 @@ extension Dictionary {
     lhs.merging(rhs, uniquingKeysWith: takeNewest)
 }
 
+@inlinable public func + <Element>(lhs: Set<Element>, rhs: Element) -> Set<Element> {
+    lhs + [rhs]
+}
+
+@inlinable public func + <Element>(lhs: Set<Element>, rhs: some Collection<Element>) -> Set<Element> {
+    lhs.union(rhs)
+}
+
 public struct ParseError: Error {
     let message: String
 
