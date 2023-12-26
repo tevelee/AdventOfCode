@@ -225,6 +225,13 @@ extension Dictionary {
     lhs.union(rhs)
 }
 
+@inlinable public func += <Element>(lhs: inout Set<Element>, rhs: Element) {
+    lhs += [rhs]
+}
+@inlinable public func += <Element>(lhs: inout Set<Element>, rhs: some Collection<Element>) {
+    lhs.formUnion(rhs)
+}
+
 public struct ParseError: Error {
     let message: String
 
