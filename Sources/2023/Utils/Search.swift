@@ -28,7 +28,9 @@ extension Search: Sequence {
         }
 
         mutating func next() -> Node? {
-            storage.next(neighbors: traversal.neighbors)
+            storage.next { [traversal] node in
+                traversal.edges(from: node).map(\.destination)
+            }
         }
     }
 
