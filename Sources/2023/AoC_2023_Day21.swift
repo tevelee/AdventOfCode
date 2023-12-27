@@ -33,20 +33,21 @@ final class AoC_2023_Day21 {
 
     private func availablePositions(for steps: Int, isFinite: Bool) -> Int {
         if isFinite {
-            availablePositions(for: steps) { map.contains(position: $0) && map[$0] != "#" }
+            availablePositions(for: steps) { [map] in map.contains(position: $0) && map[$0] != "#" }
         } else {
-            availablePositions(for: steps) { map[infinite: $0] != "#" }
+            availablePositions(for: steps) { [map] in map[infinite: $0] != "#" }
         }
     }
 
-    private func availablePositions(for steps: Int, where condition: (Position) -> Bool) -> Int {
-        search(start: (step: steps, positions: [startPosition])) {
-            BFS().unique(by: \.positions)
-        } goal: {
-            $0.step == 0
-        } next: { step, positions in
-            (step - 1, Set(positions.flatMap(map.neighbors).filter(condition)))
-        }?.positions.count ?? 0
+    private func availablePositions(for steps: Int, where condition: @escaping (Position) -> Bool) -> Int {
+        Search {
+            BFS().visitEachNodeOnlyOnce(by: \.node)
+        } traversal: {
+            Traversal(start: [startPosition]) { [map] node in
+                Set(node.flatMap(map.neighbors).filter(condition))
+            }
+            .until(depth: steps)
+        }.run()?.count ?? 0
     }
 }
 

@@ -89,18 +89,17 @@ final class AoC_2023_Day23 {
     }
 
     private func solve(_ neighbors: @escaping (Position) -> [Position]) -> Int {
-        var longest = 0
-        _ = search(start: (position: start, path: Set())) {
+        Search {
             DFS()
-        } goal: { position, path in
-            if position == end {
-                longest = max(longest, path.count)
-            }
-            return false
-        } next: { position, path in
-            neighbors(position).filter { !path.contains($0) }.map { ($0, path + $0) }
+        } traversal: {
+            Traversal(start: start, next: neighbors)
+                .includePath()
         }
-        return longest
+        .reduce(into: 0) { result, element in
+            if element.node == end {
+                result = max(result, element.path.count)
+            }
+        }
     }
 }
 
