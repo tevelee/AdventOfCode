@@ -2,10 +2,29 @@ import Foundation
 
 protocol Traversable<Node> {
     associatedtype Node
-    associatedtype Edges: Collection<Edge<Node>>
+    associatedtype Edge: EdgeProtocol<Node>
+    associatedtype Edges: Collection<Edge>
 
-    var start: Node { get }
-    func edges(from node: Node) -> Edges
+    var start: Edge.Node { get }
+    func edges(from node: Edge.Node) -> Edges
+}
+
+protocol EdgeProtocol<Node> {
+    associatedtype Node
+    var source: Node { get }
+    var destination: Node { get }
+
+    init(source: Node, destination: Node)
+}
+
+struct GraphEdge<Node>: EdgeProtocol {
+    var source: Node
+    var destination: Node
+
+    init(source: Node, destination: Node) {
+        self.source = source
+        self.destination = destination
+    }
 }
 
 protocol Terminable<Node> {
@@ -13,7 +32,7 @@ protocol Terminable<Node> {
     func goalReached(for node: Node) -> Bool
 }
 
-struct Traversal<Node, Edges: Collection<Edge<Node>>>: Traversable {
+struct Traversal<Node, Edge: EdgeProtocol<Node>, Edges: Collection<Edge>>: Traversable {
     let start: Node
     let edges: (Node) -> Edges
 
@@ -22,26 +41,28 @@ struct Traversal<Node, Edges: Collection<Edge<Node>>>: Traversable {
         self.edges = edges
     }
 
-    init<Neighbors: Collection<Node>>(start: Node, neighbors: @escaping (Node) -> Neighbors) where Edges == LazyMapSequence<Neighbors, Edge<Node>> {
-        self.init(start: start) { node in
-            neighbors(node).lazy.map {
-                Edge(source: node, destination: $0)
-            }
-        }
-    }
-
     func edges(from node: Node) -> Edges {
         edges(node)
     }
 }
 
-extension Traversal where Edges == CollectionOfOne<Edge<Node>> {
-    init(start: Node, edge: @escaping (Node) -> Edge<Node>) {
+extension Traversal {
+    init<Neighbors: Collection<Node>>(start: Node, neighbors: @escaping (Node) -> Neighbors) where Edge == GraphEdge<Node>, Edges == LazyMapSequence<Neighbors, Edge> {
+        self.init(start: start) { node in
+            neighbors(node).lazy.map {
+                GraphEdge(source: node, destination: $0)
+            }
+        }
+    }
+}
+
+extension Traversal where Edges == CollectionOfOne<Edge> {
+    init(start: Node, edge: @escaping (Node) -> Edge) {
         self.init(start: start) { CollectionOfOne(edge($0)) }
     }
 }
 
-extension Traversal where Edges == LazyMapSequence<CollectionOfOne<Node>, Edge<Node>> {
+extension Traversal where Edges == LazyMapSequence<CollectionOfOne<Node>, GraphEdge<Node>> {
     init(start: Node, neighbor: @escaping (Node) -> Node) {
         self.init(start: start) { CollectionOfOne(neighbor($0)) }
     }
@@ -66,10 +87,59 @@ extension Traversable {
     func map<T>(_ transform: @escaping (Node) -> T) -> MappedTraversal<Self, T> {
         MappedTraversal(base: self, transform: transform)
     }
+    func weight<Weight: Numeric>(_ weight: @escaping (Edge) -> Weight) -> Weighted<Self, Weight> {
+        Weighted(base: self, weight: weight)
+    }
+}
+
+struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWrapper {
+    typealias Node = Base.Node
+    typealias Edge = WeightedEdge<Base.Edge>
+    
+    struct WeightedEdge<BaseEdge: EdgeProtocol>: EdgeProtocol {
+        typealias Node = BaseEdge.Node
+        let base: BaseEdge
+        let weight: Weight
+
+        var source: Node {
+            base.source
+        }
+
+        var destination: Node {
+            base.destination
+        }
+
+        init(source: BaseEdge.Node, destination: BaseEdge.Node) {
+            base = BaseEdge(source: source, destination: destination)
+            weight = .zero
+        }
+
+        init(base: BaseEdge, weight: Weight) {
+            self.base = base
+            self.weight = weight
+        }
+    }
+    typealias Edges = LazyMapCollection<Base.Edges, Edge>
+
+    let base: Base
+    let weight: (Base.Edge) -> Weight
+    let extractBaseNode: (Node) -> Base.Node = { $0 }
+
+    var start: Node {
+        base.start
+    }
+
+    func edges(from node: Node) -> Edges {
+        base.edges(from: node).lazy.map {
+            Edge(
+                base: $0,
+                weight: weight($0)
+            )
+        }
+    }
 }
 
 protocol TraversableWrapper: Traversable {
-    associatedtype Node
     associatedtype Base: Traversable
 
     var base: Base { get }
@@ -93,7 +163,8 @@ struct MappedTraversal<Base: Traversable, Element>: Traversable, TraversableWrap
         let node: Base.Node
         let transformed: Element
     }
-    typealias Edges = LazyMapCollection<Base.Edges, Edge<Node>>
+    typealias Edge = GraphEdge<Node>
+    typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
     let base: Base
     let transform: (Base.Node) -> Element
@@ -105,9 +176,10 @@ struct MappedTraversal<Base: Traversable, Element>: Traversable, TraversableWrap
 
     func edges(from node: Node) -> Edges {
         base.edges(from: node.node).lazy.map {
-            $0.map {
-                Node(node: $0, transformed: transform($0))
-            }
+            GraphEdge(
+                source: Node(node: $0.source, transformed: transform($0.source)),
+                destination: Node(node: $0.destination, transformed: transform($0.destination))
+            )
         }
     }
 }
@@ -119,7 +191,8 @@ extension MappedTraversal: Terminable where Base: Terminable {
 }
 
 struct ConditionalTermination<Base: Traversable>: Traversable, Terminable, TraversableWrapper {
-    typealias Node = Base.Node
+    typealias Node = Edge.Node
+    typealias Edge = Base.Edge
 
     let base: Base
     let goalReached: (Node) -> Bool
@@ -138,38 +211,39 @@ struct ConditionalTermination<Base: Traversable>: Traversable, Terminable, Trave
     }
 }
 
-struct WithDepth<Base: Traversable>: Traversable, TraversableWrapper {
+struct WithDepth<Base: Traversable>: Traversable {
     struct Node {
         let node: Base.Node
         let depth: Int
     }
-    typealias Edges = LazyMapCollection<Base.Edges, Edge<Node>>
+    typealias Edge = GraphEdge<Node>
+    typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
     let base: Base
-    let extractBaseNode: (Node) -> Base.Node = \.node
 
     var start: Node {
         Node(node: base.start, depth: 0)
     }
 
     func edges(from node: Node) -> Edges {
-        base.edges(from: node.node).lazy.map {
-            $0.map {
-                Node(node: $0, depth: node.depth + 1)
-            }
+        base.edges(from: node.node).lazy.map { edge in
+            Edge(
+                source: Node(node: edge.source, depth: node.depth),
+                destination: Node(node: edge.destination, depth: node.depth + 1)
+            )
         }
     }
 }
 
-struct WithPath<Base: Traversable>: Traversable, TraversableWrapper {
+struct WithPath<Base: Traversable>: Traversable {
     struct Node {
         let node: Base.Node
         let path: [Base.Node]
     }
-    typealias Edges = LazyMapCollection<Base.Edges, Edge<Node>>
+    typealias Edge = GraphEdge<Node>
+    typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
     let base: Base
-    let extractBaseNode: (Node) -> Base.Node = \.node
 
     var start: Node {
         Node(node: base.start, path: [])
@@ -177,9 +251,10 @@ struct WithPath<Base: Traversable>: Traversable, TraversableWrapper {
 
     func edges(from node: Node) -> Edges {
         base.edges(from: node.node).lazy.map {
-            $0.map {
-                Node(node: $0, path: node.path + $0)
-            }
+            Edge(
+                source: Node(node: $0.source, path: node.path),
+                destination: Node(node: $0.destination, path: node.path + $0.destination)
+            )
         }
     }
 }
@@ -189,8 +264,8 @@ struct Acyclic<Base: Traversable, HashValue: Hashable>: Traversable, Traversable
         let node: Base.Node
         let visited: Set<HashValue>
     }
-    typealias Edges = LazyFilterCollection<LazyMapCollection<Base.Edges, Edge<Node>>>
-
+    typealias Edge = GraphEdge<Node>
+    typealias Edges = LazyFilterCollection<LazyMapCollection<Base.Edges, Edge>>
 
     let base: Base
     let hashValue: (Base.Node) -> HashValue

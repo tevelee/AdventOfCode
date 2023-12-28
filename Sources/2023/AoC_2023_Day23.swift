@@ -92,8 +92,7 @@ final class AoC_2023_Day23 {
         Search {
             DFS()
         } traversal: {
-            Traversal(start: start, neighbors: neighbors)
-                .includePath()
+            Traversal(start: start, neighbors: neighbors).includePath()
         }
         .reduce(into: 0) { result, element in
             if element.node == end {

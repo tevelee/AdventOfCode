@@ -47,7 +47,7 @@ final class AoC_2023_Day21 {
                 Set(node.flatMap(map.neighbors).filter(condition))
             }
             .until(depth: steps)
-        }.run()?.count ?? 0
+        }.run()?.node.count ?? 0
     }
 }
 
