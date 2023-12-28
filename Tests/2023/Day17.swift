@@ -4,6 +4,7 @@ import Testing
 private typealias CurrentPuzzle = AoC_2023_Day17
 extension CurrentPuzzle: Puzzle {}
 
+@Suite(.tags("debug"))
 private struct Day17 {
     @Test
     func intro() throws {

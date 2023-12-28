@@ -92,11 +92,20 @@ extension Traversable {
     }
 }
 
-struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWrapper {
+protocol HasWeight {
+    associatedtype Weight: Numeric
+    var weight: Weight { get }
+}
+
+protocol HasWeightedEdge {
+    associatedtype Edge: HasWeight
+}
+
+struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWrapper, HasWeightedEdge {
     typealias Node = Base.Node
     typealias Edge = WeightedEdge<Base.Edge>
     
-    struct WeightedEdge<BaseEdge: EdgeProtocol>: EdgeProtocol {
+    struct WeightedEdge<BaseEdge: EdgeProtocol>: EdgeProtocol, HasWeight {
         typealias Node = BaseEdge.Node
         let base: BaseEdge
         let weight: Weight
@@ -136,6 +145,12 @@ struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWra
                 weight: weight($0)
             )
         }
+    }
+}
+
+extension Weighted: Terminable where Base: Terminable {
+    func goalReached(for node: Node) -> Bool {
+        base.goalReached(for: extractBaseNode(node))
     }
 }
 
@@ -211,7 +226,7 @@ struct ConditionalTermination<Base: Traversable>: Traversable, Terminable, Trave
     }
 }
 
-struct WithDepth<Base: Traversable>: Traversable {
+struct WithDepth<Base: Traversable>: Traversable, TraversableWrapper {
     struct Node {
         let node: Base.Node
         let depth: Int
@@ -220,6 +235,7 @@ struct WithDepth<Base: Traversable>: Traversable {
     typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
     let base: Base
+    let extractBaseNode: (Node) -> Base.Node = \.node
 
     var start: Node {
         Node(node: base.start, depth: 0)
@@ -235,7 +251,7 @@ struct WithDepth<Base: Traversable>: Traversable {
     }
 }
 
-struct WithPath<Base: Traversable>: Traversable {
+struct WithPath<Base: Traversable>: Traversable, TraversableWrapper {
     struct Node {
         let node: Base.Node
         let path: [Base.Node]
@@ -244,6 +260,7 @@ struct WithPath<Base: Traversable>: Traversable {
     typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
     let base: Base
+    let extractBaseNode: (Node) -> Base.Node = \.node
 
     var start: Node {
         Node(node: base.start, path: [])
