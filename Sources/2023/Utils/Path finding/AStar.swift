@@ -29,7 +29,7 @@ final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparabl
     private let traversal: Traversal
     private let heuristic: (Traversal.Node) -> Cost
 
-    init(traversal: () -> Traversal, heuristic: @escaping (Traversal.Node) -> Cost) {
+    init(traversal: () -> Traversal, heuristic: @escaping (Traversal.Node) -> Cost = { _ in 0 }) {
         self.traversal = traversal()
         self.heuristic = heuristic
     }
