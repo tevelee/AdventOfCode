@@ -45,17 +45,18 @@ final class AoC_2023_Day17 {
                     )
                 }
             }
+            .weight { edge in
+                self.grid[edge.destination.position]
+            }
             .goal {
                 $0.position == self.bottomRight && $0.length >= range.lowerBound
             }
-            .weight { edge in
-                self.grid[edge.destination.position]
-            }// as Weighted<ConditionalTermination<Traversal<State, GraphEdge<State>, [GraphEdge<State>]>>, Int>
         } heuristic: {
             manhattanDistance(($0.position.x, $0.position.y), (self.bottomRight.x, self.bottomRight.y))
         }
         .shortestPath()
-        .sum { self.grid[$0.position] } - 2
+        .dropFirst()
+        .sum { self.grid[$0.position] }
     }
 
     private func isValid(_ position: Position) -> Bool {

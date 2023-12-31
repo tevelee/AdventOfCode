@@ -1,7 +1,6 @@
-import Foundation
 import Collections
 
-final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparable> where Traversal.Node: Hashable, Traversal.Edge: HasWeight, Traversal.Edge.Weight == Cost {
+final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparable> where Traversal.Node: Hashable, Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
     typealias Node = Traversal.Node
 
     private final class AStarNode: Comparable {
