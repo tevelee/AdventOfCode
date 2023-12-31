@@ -1,26 +1,36 @@
 extension Traversable {
-    func map<T>(_ transform: @escaping (Node) -> T) -> MappedTraversal<Self, T> {
+    @inlinable public func map<T>(_ transform: @escaping (Node) -> T) -> MappedTraversal<Self, T> {
         MappedTraversal(base: self, transform: transform)
     }
 }
 
-struct MappedTraversal<Base: Traversable, Element>: Traversable, TraversableWrapper {
-    struct Node {
-        let node: Base.Node
-        let transformed: Element
+public struct MappedTraversal<Base: Traversable, Element>: Traversable, TraversableWrapper {
+    public struct Node {
+        public let node: Base.Node
+        public let transformed: Element
+
+        @inlinable public init(node: Base.Node, transformed: Element) {
+            self.node = node
+            self.transformed = transformed
+        }
     }
-    typealias Edge = GraphEdge<Node>
-    typealias Edges = LazyMapCollection<Base.Edges, Edge>
+    public typealias Edge = GraphEdge<Node>
+    public typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
-    let base: Base
-    let transform: (Base.Node) -> Element
-    let extractBaseNode: (Node) -> Base.Node = \.node
+    public let base: Base
+    public let transform: (Base.Node) -> Element
+    public let extractBaseNode: (Node) -> Base.Node = \.node
 
-    var start: Node {
+    @inlinable public init(base: Base, transform: @escaping (Base.Node) -> Element) {
+        self.base = base
+        self.transform = transform
+    }
+
+    @inlinable public var start: Node {
         Node(node: base.start, transformed: transform(base.start))
     }
 
-    func edges(from node: Node) -> Edges {
+    @inlinable public func edges(from node: Node) -> Edges {
         base.edges(from: node.node).lazy.map {
             GraphEdge(
                 source: Node(node: $0.source, transformed: transform($0.source)),

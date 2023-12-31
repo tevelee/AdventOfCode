@@ -1,29 +1,39 @@
 extension Traversable {
-    func avoidCycles<HashValue: Hashable>(of hashValue: @escaping (Node) -> HashValue) -> Acyclic<Self, HashValue> {
+    @inlinable public func avoidCycles<HashValue: Hashable>(of hashValue: @escaping (Node) -> HashValue) -> Acyclic<Self, HashValue> {
         Acyclic(base: self, hashValue: hashValue)
     }
-    func avoidCycles() -> Acyclic<Self, Node> where Node: Hashable {
+    @inlinable public func avoidCycles() -> Acyclic<Self, Node> where Node: Hashable {
         Acyclic(base: self) { $0 }
     }
 }
 
-struct Acyclic<Base: Traversable, HashValue: Hashable>: Traversable, TraversableWrapper {
-    struct Node {
-        let node: Base.Node
-        let visited: Set<HashValue>
+public struct Acyclic<Base: Traversable, HashValue: Hashable>: Traversable, TraversableWrapper {
+    public struct Node {
+        public let node: Base.Node
+        public let visited: Set<HashValue>
+
+        @inlinable public init(node: Base.Node, visited: Set<HashValue>) {
+            self.node = node
+            self.visited = visited
+        }
     }
-    typealias Edge = GraphEdge<Node>
-    typealias Edges = LazyFilterCollection<LazyMapCollection<Base.Edges, Edge>>
+    public typealias Edge = GraphEdge<Node>
+    public typealias Edges = LazyFilterCollection<LazyMapCollection<Base.Edges, Edge>>
 
-    let base: Base
-    let hashValue: (Base.Node) -> HashValue
-    let extractBaseNode: (Node) -> Base.Node = \.node
+    public let base: Base
+    public let hashValue: (Base.Node) -> HashValue
+    public let extractBaseNode: (Node) -> Base.Node = \.node
 
-    var start: Node {
+    @inlinable public init(base: Base, hashValue: @escaping (Base.Node) -> HashValue) {
+        self.base = base
+        self.hashValue = hashValue
+    }
+
+    @inlinable public var start: Node {
         Node(node: base.start, visited: [])
     }
 
-    func edges(from node: Node) -> Edges {
+    @inlinable public func edges(from node: Node) -> Edges {
         base.edges(from: node.node).lazy
             .map {
                 Edge(

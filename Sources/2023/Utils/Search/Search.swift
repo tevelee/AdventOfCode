@@ -1,10 +1,10 @@
 import Foundation
 
-struct Search<Node, Strategy: SearchStrategy<Node>, Traversal: Traversable<Node>> {
-    let strategy: () -> Strategy
-    let traversal: Traversal
+public struct Search<Node, Strategy: SearchStrategy<Node>, Traversal: Traversable<Node>> {
+    public let strategy: () -> Strategy
+    public let traversal: Traversal
 
-    init(
+    @inlinable public init(
         strategy: @escaping () -> Strategy,
         traversal: () -> Traversal
     ) {
@@ -14,12 +14,12 @@ struct Search<Node, Strategy: SearchStrategy<Node>, Traversal: Traversable<Node>
 }
 
 extension Search: Sequence {
-    struct Iterator: IteratorProtocol {
-        let search: Search
-        var storage: Strategy
-        let traversal: Traversal
+    public struct Iterator: IteratorProtocol {
+        public let search: Search
+        public var storage: Strategy
+        public let traversal: Traversal
 
-        init(search: Search, storage: Strategy, traversal: Traversal) {
+        @inlinable public init(search: Search, storage: Strategy, traversal: Traversal) {
             self.search = search
             self.storage = storage
             self.traversal = traversal
@@ -27,28 +27,28 @@ extension Search: Sequence {
             self.storage.add(traversal.start)
         }
 
-        mutating func next() -> Node? {
+        @inlinable public mutating func next() -> Node? {
             storage.next { [traversal] node in
                 traversal.edges(from: node).map(\.destination)
             }
         }
     }
 
-    func makeIterator() -> Iterator {
+    @inlinable public func makeIterator() -> Iterator {
         Iterator(search: self, storage: strategy(), traversal: traversal)
     }
 }
 
 extension Search where Traversal: Terminable {
-    func run() -> Node? {
+    @inlinable public func run() -> Node? {
         first(where: traversal.goalReached)
     }
 
-    func run() -> Traversal.Base.Node? where Traversal: TraversableWrapper {
+    @inlinable public func run() -> Traversal.Base.Node? where Traversal: TraversableWrapper {
         run().map(traversal.extractBaseNode)
     }
 
-    func run() -> Traversal.Base.Base.Node? where Traversal: TraversableWrapper, Traversal.Base: TraversableWrapper {
+    @inlinable public func run() -> Traversal.Base.Base.Node? where Traversal: TraversableWrapper, Traversal.Base: TraversableWrapper {
         run().map(traversal.base.extractBaseNode)
     }
 }

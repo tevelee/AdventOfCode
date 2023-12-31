@@ -1,47 +1,52 @@
 extension Traversable {
-    func weight<Weight: Numeric>(_ weight: @escaping (Edge) -> Weight) -> Weighted<Self, Weight> {
+    @inlinable public func weight<Weight: Numeric>(_ weight: @escaping (Edge) -> Weight) -> Weighted<Self, Weight> {
         Weighted(base: self, weight: weight)
     }
 }
 
-struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWrapper {
-    typealias Node = Base.Node
-    typealias Edge = WeightedEdge<Base.Edge>
+public struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWrapper {
+    public typealias Node = Base.Node
+    public typealias Edge = WeightedEdge<Base.Edge>
 
-    struct WeightedEdge<BaseEdge: EdgeProtocol>: EdgeProtocol, WeightedEdgeProtocol {
-        typealias Node = BaseEdge.Node
-        let base: BaseEdge
-        let weight: Weight
+    public struct WeightedEdge<BaseEdge: EdgeProtocol>: EdgeProtocol, WeightedEdgeProtocol {
+        public typealias Node = BaseEdge.Node
+        public let base: BaseEdge
+        public let weight: Weight
 
-        var source: Node {
+        @inlinable public var source: Node {
             base.source
         }
 
-        var destination: Node {
+        @inlinable public var destination: Node {
             base.destination
         }
 
-        init(source: BaseEdge.Node, destination: BaseEdge.Node) {
+        @inlinable public init(source: BaseEdge.Node, destination: BaseEdge.Node) {
             base = BaseEdge(source: source, destination: destination)
             weight = .zero
         }
 
-        init(base: BaseEdge, weight: Weight) {
+        @inlinable public init(base: BaseEdge, weight: Weight) {
             self.base = base
             self.weight = weight
         }
     }
-    typealias Edges = LazyMapCollection<Base.Edges, Edge>
+    public typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
-    let base: Base
-    let weight: (Base.Edge) -> Weight
-    let extractBaseNode: (Node) -> Base.Node = { $0 }
+    public let base: Base
+    public let weight: (Base.Edge) -> Weight
+    public let extractBaseNode: (Node) -> Base.Node = { $0 }
 
-    var start: Node {
+    @inlinable public init(base: Base, weight: @escaping (Base.Edge) -> Weight) {
+        self.base = base
+        self.weight = weight
+    }
+
+    @inlinable public var start: Node {
         base.start
     }
 
-    func edges(from node: Node) -> Edges {
+    @inlinable public func edges(from node: Node) -> Edges {
         base.edges(from: node).lazy.map {
             Edge(
                 base: $0,
@@ -53,13 +58,13 @@ struct Weighted<Base: Traversable, Weight: Numeric>: Traversable, TraversableWra
 
 extension Weighted: Terminable where Base: Terminable {}
 
-protocol WeightedEdgeProtocol {
+public protocol WeightedEdgeProtocol {
     associatedtype Weight: Numeric
     var weight: Weight { get }
 }
 
 extension TraversableWrapper where Base: WeightedEdgeProtocol {
-    var weight: Base.Weight {
+    @inlinable public var weight: Base.Weight {
         base.weight
     }
 }

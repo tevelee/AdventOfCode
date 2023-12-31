@@ -1,11 +1,19 @@
 extension TraversalOrder {
-    static var postorder: PostorderTraversalOrder<Node> {
+    @inlinable public static var postorder: PostorderTraversalOrder<Node> {
         PostorderTraversalOrder()
     }
 }
 
-struct PostorderTraversalOrder<Node>: TraversalOrder {
-    func order(node: Node, neighbors: some Collection<Node>) -> [Node] {
+public struct PostorderTraversalOrder<Node>: TraversalOrder {
+    @inlinable public init() {}
+
+    @inlinable public func order(node: Node, neighbors: some Collection<Node>) -> [Node] {
         neighbors + [node]
+    }
+}
+
+extension DFS {
+    @inlinable public init(order: Order) where Self == DFS<Node, PostorderTraversalOrder<DFSNode<Node>>> {
+        self.order = order
     }
 }

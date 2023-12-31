@@ -1,4 +1,4 @@
-protocol TraversableWrapper: Traversable {
+public protocol TraversableWrapper: Traversable {
     associatedtype Base: Traversable
 
     var base: Base { get }
@@ -6,7 +6,7 @@ protocol TraversableWrapper: Traversable {
 }
 
 extension TraversableWrapper where Base: TraversableWrapper {
-    var extractBaseNode: (Base.Node) -> Base.Base.Node {
+    @inlinable public var extractBaseNode: (Base.Node) -> Base.Base.Node {
         {
             base.extractBaseNode($0)
         }

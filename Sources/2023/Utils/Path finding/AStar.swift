@@ -1,40 +1,40 @@
 import Collections
 
-final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparable> where Traversal.Node: Hashable, Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
-    typealias Node = Traversal.Node
+public final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparable> where Traversal.Node: Hashable, Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
+    public typealias Node = Traversal.Node
 
-    private final class AStarNode: Comparable {
-        let node: Node
-        let parent: AStarNode?
-        var gScore: Cost
-        var hScore: Cost
-        var fScore: Cost { gScore + hScore }
+    @usableFromInline final class AStarNode: Comparable {
+        @usableFromInline let node: Node
+        @usableFromInline let parent: AStarNode?
+        @usableFromInline var gScore: Cost
+        @usableFromInline var hScore: Cost
+        @usableFromInline var fScore: Cost { gScore + hScore }
 
-        init(node: Node, parent: AStarNode? = nil, gScore: Cost = 0, hScore: Cost = 0) {
+        @usableFromInline init(node: Node, parent: AStarNode? = nil, gScore: Cost = 0, hScore: Cost = 0) {
             self.node = node
             self.parent = parent
             self.gScore = gScore
             self.hScore = hScore
         }
 
-        static func == (lhs: AStarNode, rhs: AStarNode) -> Bool {
+        @usableFromInline static func == (lhs: AStarNode, rhs: AStarNode) -> Bool {
             lhs.node == rhs.node
         }
 
-        static func < (lhs: AStarNode, rhs: AStarNode) -> Bool {
+        @usableFromInline static func < (lhs: AStarNode, rhs: AStarNode) -> Bool {
             lhs.fScore < rhs.fScore
         }
     }
 
-    private let traversal: Traversal
-    private let heuristic: (Traversal.Node) -> Cost
+    @usableFromInline let traversal: Traversal
+    @usableFromInline let heuristic: (Traversal.Node) -> Cost
 
-    init(traversal: () -> Traversal, heuristic: @escaping (Traversal.Node) -> Cost = { _ in 0 }) {
+    @inlinable public init(traversal: () -> Traversal, heuristic: @escaping (Traversal.Node) -> Cost = { _ in 0 }) {
         self.traversal = traversal()
         self.heuristic = heuristic
     }
 
-    func shortestPath() -> [Node] {
+    @inlinable public func shortestPath() -> [Node] {
         var frontier = Heap<AStarNode>()
         frontier.insert(AStarNode(node: traversal.start))
 
@@ -65,7 +65,7 @@ final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Comparabl
         return []
     }
 
-    private func buildPath(from node: AStarNode) -> [Node] {
+    @usableFromInline func buildPath(from node: AStarNode) -> [Node] {
         var path: [Node] = []
         var current: AStarNode? = node
         while let currentNode = current {

@@ -1,13 +1,13 @@
 import Collections
 
-final class Dijkstra<Traversal: Traversable, Cost: FixedWidthInteger & Comparable> where Traversal.Node: Hashable {
-    private let traversal: Traversal
+public final class Dijkstra<Traversal: Traversable, Cost: FixedWidthInteger & Comparable> where Traversal.Node: Hashable {
+    public let traversal: Traversal
 
-    init(traversal: () -> Traversal) {
+    @inlinable public init(traversal: () -> Traversal) {
         self.traversal = traversal()
     }
 
-    internal func shortestPath(
+    @usableFromInline internal func shortestPath(
         weight: ((Traversal.Edge) -> Cost)? = nil,
         goalReached: ((Traversal.Node) -> Bool)? = nil
     ) -> [Traversal.Node] {
@@ -19,7 +19,7 @@ final class Dijkstra<Traversal: Traversable, Cost: FixedWidthInteger & Comparabl
         return buildPath(from: predecessors, destination: destination)
     }
 
-    internal func shortestPaths(weight: ((Traversal.Edge) -> Cost)? = nil) -> [Traversal.Node: [Traversal.Node]] {
+    @usableFromInline internal func shortestPaths(weight: ((Traversal.Edge) -> Cost)? = nil) -> [Traversal.Node: [Traversal.Node]] {
         let predecessors = dijkstraCore(from: traversal.start, weight: weight, goalReached: nil).predecessors
         var paths: [Traversal.Node: [Traversal.Node]] = [:]
         for (node, _) in predecessors {
@@ -28,11 +28,11 @@ final class Dijkstra<Traversal: Traversable, Cost: FixedWidthInteger & Comparabl
         return paths
     }
 
-    struct Node: Comparable {
+    @usableFromInline struct Node: Comparable {
         var node: Traversal.Node
         var cost: Cost
 
-        static func < (lhs: Node, rhs: Node) -> Bool {
+        @usableFromInline static func < (lhs: Node, rhs: Node) -> Bool {
             return lhs.cost < rhs.cost
         }
     }
@@ -84,21 +84,21 @@ final class Dijkstra<Traversal: Traversable, Cost: FixedWidthInteger & Comparabl
 }
 
 extension Dijkstra where Traversal: Terminable {
-    func shortestPath() -> [Traversal.Node] {
+    @inlinable public func shortestPath() -> [Traversal.Node] {
         shortestPath(goalReached: traversal.goalReached)
     }
 
-    func shortestPath() -> [Traversal.Node] where Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
+    @inlinable public func shortestPath() -> [Traversal.Node] where Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
         shortestPath(weight: { $0.weight }, goalReached: traversal.goalReached)
     }
 }
 
 extension Dijkstra where Traversal.Edge: WeightedEdgeProtocol, Traversal.Edge.Weight == Cost {
-    func shortestPath() -> [Traversal.Node] {
+    @inlinable public func shortestPath() -> [Traversal.Node] {
         shortestPath(weight: { $0.weight })
     }
 
-    func shortestPaths() -> [Traversal.Node: [Traversal.Node]] {
+    @inlinable public func shortestPaths() -> [Traversal.Node: [Traversal.Node]] {
         shortestPaths(weight: { $0.weight })
     }
 }
