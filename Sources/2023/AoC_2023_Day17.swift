@@ -20,56 +20,43 @@ final class AoC_2023_Day17 {
     }
 
     private func solve(range: ClosedRange<Int>) -> Int {
-        AStar(map: Map(grid: grid, range: range))
-            .shortestPath(from: .init(topLeft), to: .init(bottomRight))
-            .sum { grid[$0.position] }
-    }
-}
+        AStar {
+            Traversal(start: State(topLeft)) { state in
+                Direction.allCases.compactMap { direction in
+                    if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
+                        return nil
+                    }
+                    if state.direction == direction, state.length == range.upperBound {
+                        return nil
+                    }
+                    if state.direction == direction.opposite {
+                        return nil
+                    }
 
-private struct Map: PathFinding {
-    private let grid: [[Int]]
-    private let range: ClosedRange<Int>
+                    var position = state.position
+                    position.move(in: direction)
+                    guard self.isValid(position) else { return nil }
 
-    init(grid: [[Int]], range: ClosedRange<Int>) {
-        self.grid = grid
-        self.range = range
-    }
-
-    func neighbors(for state: State, goal: State) -> [State] {
-        Direction.allCases.compactMap { direction in
-            if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
-                return nil
+                    let length = direction == state.direction ? state.length : 0
+                    return State(
+                        position: position,
+                        direction: direction,
+                        length: length + 1
+                    )
+                }
             }
-            if state.direction == direction, state.length == range.upperBound {
-                return nil
+            .weight { edge in
+                self.grid[edge.destination.position]
             }
-            if state.direction == direction.opposite {
-                return nil
+            .goal {
+                $0.position == self.bottomRight && $0.length >= range.lowerBound
             }
-
-            var position = state.position
-            position.move(in: direction)
-            guard isValid(position) else { return nil }
-
-            let length = direction == state.direction ? state.length : 0
-            return State(
-                position: position,
-                direction: direction,
-                length: length + 1
-            )
+        } heuristic: {
+            manhattanDistance(($0.position.x, $0.position.y), (self.bottomRight.x, self.bottomRight.y))
         }
-    }
-
-    func costToMove(from origin: State, to destination: State) -> Int {
-        grid[destination.position]
-    }
-
-    func distance(from origin: State, to destination: State) -> Int {
-        1
-    }
-
-    func goalReached(at current: State, goal: State) -> Bool {
-        current.position == goal.position && current.length >= range.lowerBound
+        .shortestPath()
+        .dropFirst()
+        .sum { self.grid[$0.position] }
     }
 
     private func isValid(_ position: Position) -> Bool {

@@ -72,14 +72,17 @@ final class AoC_2023_Day25 {
 
     private func size(of graph: [String: Set<String>], source: String) -> Int {
         var count = 0
-        _ = search(start: source) {
-            DFS().unique
-        } goal: { _ in
-            count += 1
-            return false
-        } next: {
-            graph[$0]!
-        }
+        _ = Search {
+            DFS().visitEachNodeOnlyOnce()
+        } traversal: {
+            Traversal(start: source) { node in
+                graph[node] ?? []
+            }
+            .goal { _ in
+                count += 1
+                return false
+            }
+        }.run()
         return count
     }
 
@@ -89,15 +92,20 @@ final class AoC_2023_Day25 {
         in graph: [String: Set<String>],
         parentMap: inout [String: String]
     ) -> Bool {
-        parentMap[source] = source
-        return search(start: (node: source, previous: String?.none)) {
-            BFS().unique(by: \.node)
-        } goal: { node, previous in
-            parentMap[node] = previous
-            return node == sink
-        } next: { node, _ in
-            graph[node]!.map { ($0, node) }
-        } != nil
+        var innerParentMap = parentMap
+        innerParentMap[source] = source
+        defer { parentMap = innerParentMap }
+        return Search {
+            BFS().visitEachNodeOnlyOnce(by: \.node)
+        } traversal: {
+            Traversal(start: (node: source, previous: String?.none)) { node, _ in
+                graph[node]!.map { ($0, node) }
+            }
+            .goal { node, previous in
+                innerParentMap[node] = previous
+                return node == sink
+            }
+        }.run() != nil
     }
 
     private func findCutEdges(

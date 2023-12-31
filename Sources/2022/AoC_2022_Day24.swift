@@ -1,7 +1,9 @@
 import Utils
 
 public final class AoC_2022_Day24 {
-    private let map: Map
+    private let startPosition, endPosition: Position
+    private let width, height: Int
+    private let blizzards: [Blizzard]
 
     public init(_ input: Input) throws {
         let lines = try input.wholeInput.lines
@@ -26,29 +28,74 @@ public final class AoC_2022_Day24 {
                 }
             }
         }
-
-        map = Map(blizzards: blizzards,
-                  width: width,
-                  height: height,
-                  startPosition: startPosition,
-                  endPosition: endPosition)
+        (self.blizzards, self.width, self.height, self.startPosition, self.endPosition) = (blizzards, width, height, startPosition, endPosition)
     }
 
-    private lazy var pathFinder = AStar(map: map)
-    private lazy var path = pathFinder.shortestPath(from: State(position: map.startPosition),
-                                                    to: State(position: map.endPosition))
+    private lazy var path = shortestPath(from: State(position: startPosition), to: State(position: endPosition))
+
+    private func shortestPath(from source: State, to destination: State) -> Int {
+        AStar {
+            Traversal(start: source, neighbors: { state in
+                self.possibleMoves(from: state, to: destination)
+                    .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
+                    .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
+            })
+            .weight { edge in
+                edge.source.position.distance(to: edge.destination.position) + edge.destination.numberOfMoves
+            }
+            .goal { state in
+                state.position == destination.position
+            }
+        } heuristic: { state in
+            state.position.distance(to: destination.position)
+        }
+        .shortestPath()
+        .dropFirst()
+        .count
+    }
 
     public func solvePart1() -> Int {
-        path.count
+        path
     }
 
     public func solvePart2() -> Int {
-        let back = pathFinder.shortestPath(from: State(position: map.endPosition, numberOfMoves: path.count),
-                                           to: State(position: map.startPosition))
-        let forth = pathFinder.shortestPath(from: State(position: map.startPosition, numberOfMoves: path.count + back.count),
-                                            to: State(position: map.endPosition))
+        let back = shortestPath(from: State(position: endPosition, numberOfMoves: path),
+                                to: State(position: startPosition))
+        let forth = shortestPath(from: State(position: startPosition, numberOfMoves: path + back),
+                                 to: State(position: endPosition))
 
-        return path.count + back.count + forth.count
+        return path + back + forth
+    }
+
+    private func hasBlizzard(at position: Position, afterNumberOfMoves count: Int) -> Bool {
+        blizzards.contains { $0.advanced(count: count, width: width, height: height) == position }
+    }
+
+    private func possibleMoves(from state: State, to destination: State) -> [Position] {
+        let position = state.position
+        var result: [Position] = []
+        if position.row < height - 1 {
+            result.append(position.apply { $0.advance(in: .down) })
+        }
+        if position.column < width - 1 {
+            result.append(position.apply { $0.advance(in: .right) })
+        }
+        if position.row > 0 {
+            result.append(position.apply { $0.advance(in: .up) })
+        }
+        if position.column > 0 {
+            result.append(position.apply { $0.advance(in: .left) })
+        }
+        result = result.filter(isValid)
+        result.append(position) // wait in place
+        if destination.position.distance(to: position) == 1, !result.contains(destination.position) {
+            result.insert(destination.position, at: 0)
+        }
+        return result
+    }
+
+    private func isValid(position: Position) -> Bool {
+        (0..<width).contains(position.column) && (0..<height).contains(position.row)
     }
 }
 
@@ -58,17 +105,17 @@ private struct Blizzard: Hashable {
     let startPosition: Position
     let direction: Direction
 
-    func advanced(count: Int, on map: Map) -> Position {
+    func advanced(count: Int, width: Int, height: Int) -> Position {
         startPosition.apply { position in
             switch direction {
             case .up:
-                position.row = nonNegativeModulo(of: position.row - count, by: map.height)
+                position.row = nonNegativeModulo(of: position.row - count, by: height)
             case .down:
-                position.row = nonNegativeModulo(of: position.row + count, by: map.height)
+                position.row = nonNegativeModulo(of: position.row + count, by: height)
             case .left:
-                position.column = nonNegativeModulo(of: position.column - count, by: map.width)
+                position.column = nonNegativeModulo(of: position.column - count, by: width)
             case .right:
-                position.column = nonNegativeModulo(of: position.column + count, by: map.width)
+                position.column = nonNegativeModulo(of: position.column + count, by: width)
             }
         }
     }
@@ -116,67 +163,4 @@ private enum Direction: Character, CustomStringConvertible {
     case up = "^"
 
     var description: String { String(rawValue) }
-}
-
-private struct Map {
-    let blizzards: [Blizzard]
-    let width: Int
-    let height: Int
-    let startPosition: Position
-    let endPosition: Position
-
-    @inlinable
-    func hasBlizzard(at position: Position, afterNumberOfMoves count: Int) -> Bool {
-        blizzards.contains { $0.advanced(count: count, on: self) == position }
-    }
-
-    @inlinable
-    func possibleMoves(from state: State, goal: State) -> [Position] {
-        let position = state.position
-        var result: [Position] = []
-        if position.row < height - 1 {
-            result.append(position.apply { $0.advance(in: .down) })
-        }
-        if position.column < width - 1 {
-            result.append(position.apply { $0.advance(in: .right) })
-        }
-        if position.row > 0 {
-            result.append(position.apply { $0.advance(in: .up) })
-        }
-        if position.column > 0 {
-            result.append(position.apply { $0.advance(in: .left) })
-        }
-        result = result.filter(isValid)
-        result.append(position) // wait in place
-        if goal.position.distance(to: position) == 1, !result.contains(goal.position) {
-            result.insert(goal.position, at: 0)
-        }
-        return result
-    }
-
-    private func isValid(position: Position) -> Bool {
-        (0..<width).contains(position.column) && (0..<height).contains(position.row)
-    }
-}
-
-extension Map: PathFinding {
-    typealias Coordinate = State
-
-    func neighbors(for state: State, goal: State) -> [State] {
-        possibleMoves(from: state, goal: goal)
-            .filter { !hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
-            .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
-    }
-
-    func costToMove(from: State, to: State) -> Int {
-        distance(from: from, to: to) + to.numberOfMoves
-    }
-
-    func distance(from: State, to: State) -> Int {
-        from.position.distance(to: to.position)
-    }
-
-    func goalReached(at node: State, goal: State) -> Bool {
-        node.position == goal.position
-    }
 }

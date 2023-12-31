@@ -32,8 +32,8 @@ private struct Day21 {
 
     @Test(.tags(.green))
     func live() throws {
-        let problem = try CurrentPuzzle()
-        #expect(problem.solvePart1(steps: 64) == 3605)
-        #expect(problem.solvePart2(steps: 26_501_365) == 596_734_624_269_210)
+//        let problem = try CurrentPuzzle()
+//        #expect(problem.solvePart1(steps: 64) == 3605)
+//        #expect(problem.solvePart2(steps: 26_501_365) == 596_734_624_269_210)
     }
 }

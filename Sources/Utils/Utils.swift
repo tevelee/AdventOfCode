@@ -217,6 +217,14 @@ extension Dictionary {
     lhs.merging(rhs, uniquingKeysWith: takeNewest)
 }
 
+@inlinable public func + <Element>(lhs: [Element], rhs: Element) -> [Element] {
+    lhs + [rhs]
+}
+
+@inlinable public func + <Element>(lhs: Element, rhs: [Element]) -> [Element] {
+    [lhs] + rhs
+}
+
 @inlinable public func + <Element>(lhs: Set<Element>, rhs: Element) -> Set<Element> {
     lhs + [rhs]
 }
