@@ -27,19 +27,17 @@ final class AoC_2023_Day8 {
             .lowestCommonMultiple()
     }
 
-    private func solve(start: String, until condition: (String) -> Bool) -> Int {
-        var numberOfSteps = 0
-        var currentState = start
-        repeat {
-            let instruction = instructions[numberOfSteps % instructions.count]
-            numberOfSteps += 1
-            let routing = routes[currentState]!
-            if instruction == "L" {
-                currentState = routing.left
-            } else {
-                currentState = routing.right
+    private func solve(start: String, until condition: @escaping (String) -> Bool) -> Int {
+        Search {
+            DFS()
+        } traversal: {
+            Traversal(start: (node: start, numberOfSteps: 0)) { [self] node, numberOfSteps in
+                let instruction = instructions[numberOfSteps % instructions.count]
+                let routing = routes[node]!
+                return (instruction == "L" ? routing.left : routing.right, numberOfSteps + 1)
             }
-        } while !condition(currentState)
-        return numberOfSteps
+            .goal { condition($0.node) }
+        }
+        .run()?.numberOfSteps ?? 0
     }
 }

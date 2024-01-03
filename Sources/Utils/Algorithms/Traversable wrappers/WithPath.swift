@@ -5,15 +5,7 @@ extension Traversable {
 }
 
 public struct WithPath<Base: Traversable>: Traversable, TraversableWrapper {
-    public struct Node {
-        public let node: Base.Node
-        public let path: [Base.Node]
-
-        public init(node: Base.Node, path: [Base.Node]) {
-            self.node = node
-            self.path = path
-        }
-    }
+    public typealias Node = NodeWithPath<Base.Node>
     public typealias Edge = GraphEdge<Node>
     public typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
@@ -35,6 +27,16 @@ public struct WithPath<Base: Traversable>: Traversable, TraversableWrapper {
                 destination: Node(node: $0.destination, path: node.path + $0.destination)
             )
         }
+    }
+}
+
+public struct NodeWithPath<Node> {
+    public let node: Node
+    public let path: [Node]
+
+    public init(node: Node, path: [Node]) {
+        self.node = node
+        self.path = path
     }
 }
 

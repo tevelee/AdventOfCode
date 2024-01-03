@@ -1,19 +1,15 @@
 extension Traversable {
+    @inlinable public func includeDepth() -> WithDepth<Self> {
+        WithDepth(base: self)
+    }
+
     @inlinable public func until(depth: Int) -> ConditionalTermination<WithDepth<Self>> {
-        ConditionalTermination(base: WithDepth(base: self)) { $0.depth == depth }
+        ConditionalTermination(base: includeDepth()) { $0.depth == depth }
     }
 }
 
 public struct WithDepth<Base: Traversable>: Traversable, TraversableWrapper {
-    public struct Node {
-        public let node: Base.Node
-        public let depth: Int
-
-        public init(node: Base.Node, depth: Int) {
-            self.node = node
-            self.depth = depth
-        }
-    }
+    public typealias Node = NodeWithDepth<Base.Node>
     public typealias Edge = GraphEdge<Node>
     public typealias Edges = LazyMapCollection<Base.Edges, Edge>
 
@@ -39,3 +35,13 @@ public struct WithDepth<Base: Traversable>: Traversable, TraversableWrapper {
 }
 
 extension WithDepth: Terminable where Base: Terminable {}
+
+public struct NodeWithDepth<Node> {
+    public var node: Node
+    public let depth: Int
+
+    public init(node: Node, depth: Int) {
+        self.node = node
+        self.depth = depth
+    }
+}

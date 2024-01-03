@@ -52,4 +52,3 @@ extension Search where Traversal: Terminable {
         run().map(traversal.base.extractBaseNode)
     }
 }
-

@@ -31,6 +31,12 @@ extension Traversal {
     }
 }
 
+extension Traversal where Edges == EmptyCollection<GraphEdge<Node>> {
+    @inlinable public init(start: Node) {
+        self.init(start: start) { _ in EmptyCollection() }
+    }
+}
+
 extension Traversal where Edges == CollectionOfOne<Edge> {
     @inlinable public init(start: Node, edge: @escaping (Node) -> Edge) {
         self.init(start: start) { CollectionOfOne(edge($0)) }
