@@ -35,34 +35,28 @@ public final class AStar<Traversal: Traversable & Terminable, Cost: Numeric & Co
     }
 
     @inlinable public func shortestPath() -> [Node] {
-        var frontier = Heap<AStarNode>()
-        frontier.insert(AStarNode(node: traversal.start))
-
         var explored: [Node: Cost] = [:]
         explored[traversal.start] = 0
+        return Search {
+            MinimumFirst()
+        } traversal: {
+            Utils.Traversal(start: AStarNode(node: traversal.start)) { [traversal, heuristic] currentNode in
+                traversal.edges(from: currentNode.node).compactMap { edge in
+                    let moveCost = edge.weight
+                    let newCost = currentNode.gScore + moveCost
 
-        while let currentNode = frontier.popMin() {
-            let current = currentNode.node
-
-            if traversal.goalReached(for: current) {
-                return buildPath(from: currentNode)
-            }
-
-            for edge in traversal.edges(from: current) {
-                let neighbor = edge.destination
-                let moveCost = edge.weight
-                let newCost = currentNode.gScore + moveCost
-
-                if explored[neighbor] == nil || explored[neighbor]! > newCost {
-                    explored[neighbor] = newCost
-                    let hScore = heuristic(current)
-                    let node = AStarNode(node: neighbor, parent: currentNode, gScore: newCost, hScore: hScore)
-                    frontier.insert(node)
+                    let neighbor = edge.destination
+                    if explored[neighbor].map({ $0 > newCost }) ?? true {
+                        explored[neighbor] = newCost
+                        return AStarNode(node: neighbor, parent: currentNode, gScore: newCost, hScore: heuristic(currentNode.node))
+                    } else {
+                        return nil
+                    }
                 }
             }
         }
-
-        return []
+        .first { [traversal] in traversal.goalReached(for: $0.node) }
+        .map(buildPath) ?? []
     }
 
     @usableFromInline func buildPath(from node: AStarNode) -> [Node] {
