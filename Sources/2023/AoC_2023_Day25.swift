@@ -8,12 +8,11 @@ final class AoC_2023_Day25 {
         var connections: [String: Set<String>] = [:]
         var first: String = ""
         for line in try input.wholeInput.lines {
-            let segments = line.split(separator: ":")
-            let origin = String(segments[0])
+            let (origin, destinationsString) = try line.split(":").elements()
 
             if connections.isEmpty { first = origin }
 
-            let destinations = Set(segments[1].split(separator: " ").map(String.init))
+            let destinations = Set(destinationsString.words)
             connections[origin, default: []] += destinations
             for node in destinations {
                 connections[node, default: []] += origin

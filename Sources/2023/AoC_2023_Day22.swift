@@ -112,10 +112,7 @@ private struct Brick: Hashable, CustomStringConvertible {
 
 extension Brick {
     init(rawString: String) throws {
-        let positions = try rawString.split(separator: "~").lazy.map(String.init).map(Position.init)
-        guard let first = positions.first, let last = positions.last else { throw ParseError() }
-        start = first
-        end = last
+        (start, end) = try rawString.split("~").map(Position.init).elements()
     }
 }
 

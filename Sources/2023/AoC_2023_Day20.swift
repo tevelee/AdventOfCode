@@ -80,10 +80,8 @@ private final class Machine {
 
     init(input: Input) throws {
         for entry in try input.wholeInput.lines {
-            let segments = entry.split(separator: " -> ")
-            guard segments.count == 2, var name = segments.first.map(String.init), let output = segments.last?.split(separator: ", ").map(String.init) else {
-                throw ParseError()
-            }
+            var (name, list) = try entry.split(" -> ").elements()
+            let output = list.split(", ")
             let prefix: Character = if name.hasPrefix("&") || name.hasPrefix("%") {
                 name.removeFirst()
             } else {

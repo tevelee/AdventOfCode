@@ -113,7 +113,7 @@ private struct Workflow {
     init(rawString: String) throws {
         guard let output = rawString.firstMatch(of: /(?<name>.*){(?<rules>.*)}/)?.output else { throw ParseError() }
         name = String(output.name)
-        rules = output.rules.split(separator: ",").map(String.init).map(Rule.init)
+        rules = output.rules.split(",").map(Rule.init)
     }
 }
 

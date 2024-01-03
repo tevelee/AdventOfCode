@@ -6,10 +6,9 @@ final class AoC_2023_Day8 {
     private let routes: [String: (left: String, right: String)]
 
     init(_ input: Input) throws {
-        let paragraphs = try input.wholeInput.paragraphs
-        guard let (first, rest) = paragraphs.headAndTail else { throw ParseError() }
+        let (first, last) = try input.wholeInput.paragraphs.elements()
         self.instructions = first.joined()
-        self.routes = Dictionary(uniqueKeysWithValues: rest.joined().compactMap { line in
+        self.routes = Dictionary(uniqueKeysWithValues: last.compactMap { line in
             guard let match = line.firstMatch(of: /(?<origin>.*?) = \((?<left>.*?), (?<right>.*?)\)/)?.output else {
                 return nil
             }
