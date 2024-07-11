@@ -19,7 +19,7 @@ private struct Day12 {
         #expect(try await problem.solvePart2() == 525_152)
     }
 
-    @Test(.tags(.green))
+    @Test(.tags(.live))
     func live() async throws {
         let problem = try CurrentPuzzle()
         #expect(try await problem.solvePart1() == 7653)

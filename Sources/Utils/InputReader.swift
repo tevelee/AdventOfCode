@@ -1,7 +1,7 @@
 import Foundation
 import Algorithms
 
-public enum Input {
+public enum Input: Sendable {
     case staticString(StaticString)
     case contentsOfFile(URL)
 
@@ -11,12 +11,12 @@ public enum Input {
             case .staticString(let value):
                 return String(staticString: value)
             case .contentsOfFile(let url):
-                return try String(contentsOf: url)
+                return try String(contentsOf: url, encoding: .utf8)
             }
         }
     }
 
-    @inlinable public var lines: AnyAsyncSequence<String> {
+    @inlinable public var lines: some AsyncSequence<String, any Error> {
         switch self {
         case .staticString(let value):
             return String(staticString: value).lines(includeEmptyLines: true).async.eraseToAnyAsyncSequence()
@@ -25,7 +25,7 @@ public enum Input {
         }
     }
 
-    @inlinable public var characters: AnyAsyncSequence<Character> {
+    @inlinable public var characters: some AsyncSequence<Character, any Error> {
         switch self {
         case .staticString(let value):
             return Array(String(staticString: value)).async.eraseToAnyAsyncSequence()
@@ -36,7 +36,7 @@ public enum Input {
 }
 
 extension Input: ExpressibleByStringLiteral {
-    public init(stringLiteral value: StaticString) {
+    @inlinable public init(stringLiteral value: StaticString) {
         self = .staticString(value)
     }
 }

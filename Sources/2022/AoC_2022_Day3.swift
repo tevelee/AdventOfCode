@@ -34,7 +34,6 @@ public final class AoC_2022_Day3 {
         return result
     }()
 
-    @Sendable
     private func score(of character: Character) -> Int {
         scores[character, default: 0]
     }

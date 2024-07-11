@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 
 final class AoC_2023_Day7 {
     private let entries: [Entry]

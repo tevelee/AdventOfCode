@@ -11,7 +11,7 @@ public final class AoC_2021_Day25 {
     private let map: Map
 
     public convenience init(_ inputFileURL: URL) throws {
-        self.init(try String(contentsOf: inputFileURL))
+        self.init(try String(contentsOf: inputFileURL, encoding: .utf8))
     }
 
     public init(_ input: String) {

@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 import Utils
 
 final class AoC_2023_Day22 {
@@ -20,7 +20,7 @@ final class AoC_2023_Day22 {
 private struct Bricks {
     private var bricks: [Brick]
     private var numberOfFallenBricks = 0
-    private lazy var safeToDisintegrate = Set(bricks.filter(safeToDisintegrate))
+    private lazy var safeToDisintegrate: Set<Brick> = Set(bricks.filter(safeToDisintegrate))
 
     init(bricks: [Brick]) {
         self.bricks = bricks.sorted(by: \.minZ)
@@ -48,7 +48,7 @@ private struct Bricks {
     }
 
     @discardableResult
-    mutating func freeFall() -> Int {
+    mutating private func freeFall() -> Int {
         var indices: Set<Int> = []
         for index in bricks.indices {
             while true {

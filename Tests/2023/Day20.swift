@@ -29,7 +29,7 @@ private struct Day20 {
         #expect(problem.solvePart1() == 11_687_500)
     }
 
-    @Test(.tags(.green))
+    @Test(.tags(.live))
     func live() throws {
         let problem = try CurrentPuzzle()
         #expect(problem.solvePart1() == 814_934_624)

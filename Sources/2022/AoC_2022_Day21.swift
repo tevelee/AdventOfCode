@@ -62,15 +62,15 @@ private enum Entry {
     case operation(name: String, operation: Character, lhs: String, rhs: String)
 }
 
-private struct Operation {
-    let perform: (Int, Int) -> Int
-    let inverse: (Int, Int) -> Int
+private struct Operation: Sendable {
+    let perform: @Sendable (Int, Int) -> Int
+    let inverse: @Sendable (Int, Int) -> Int
     let isCommutative: Bool
 
-    static let addition = Operation(perform: +, inverse: -, isCommutative: true)
-    static let subtraction = Operation(perform: -, inverse: +, isCommutative: false)
-    static let multiplication = Operation(perform: *, inverse: /, isCommutative: true)
-    static let division = Operation(perform: /, inverse: *, isCommutative: false)
+    static let addition = Operation(perform: { $0 + $1 }, inverse: { $0 - $1 }, isCommutative: true)
+    static let subtraction = Operation(perform: { $0 - $1 }, inverse: { $0 + $1 }, isCommutative: false)
+    static let multiplication = Operation(perform: { $0 * $1 }, inverse: { $0 / $1 }, isCommutative: true)
+    static let division = Operation(perform: { $0 / $1 }, inverse: { $0 * $1 }, isCommutative: false)
 }
 
 private extension Operation {

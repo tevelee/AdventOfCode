@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 import Utils
 
 final class AoC_2023_Day5 {
@@ -11,7 +11,7 @@ final class AoC_2023_Day5 {
         }
         self.seeds = seeds.joined().integers
         self.maps = maps.map { lines in
-            Map(ranges: lines.dropFirst().map(\.integers).map { integers in
+            Map(ranges: lines.dropFirst().map { $0.integers }.map { integers in
                 Map.Range(source: integers[1], destination: integers[0], length: integers[2])
             }.sorted(by: \.source))
         }

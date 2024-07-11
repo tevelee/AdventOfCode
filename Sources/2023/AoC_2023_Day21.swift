@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 import Utils
 
 final class AoC_2023_Day21 {

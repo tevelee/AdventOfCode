@@ -1,5 +1,5 @@
-import Algorithms
-import Collections
+private import Algorithms
+private import Collections
 import Utils
 
 final class AoC_2023_Day10 {

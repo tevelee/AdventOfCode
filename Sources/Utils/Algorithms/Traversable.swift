@@ -31,7 +31,7 @@ extension Traversal {
     }
 }
 
-extension Traversal where Edges == EmptyCollection<GraphEdge<Node>> {
+extension Traversal where Edges == EmptyCollection<GraphEdge<Node>>, Edge == GraphEdge<Node> {
     @inlinable public init(start: Node) {
         self.init(start: start) { _ in EmptyCollection() }
     }
@@ -43,7 +43,7 @@ extension Traversal where Edges == CollectionOfOne<Edge> {
     }
 }
 
-extension Traversal where Edges == LazyMapSequence<CollectionOfOne<Node>, GraphEdge<Node>> {
+extension Traversal where Edges == LazyMapSequence<CollectionOfOne<Node>, GraphEdge<Node>>, Edge == GraphEdge<Node> {
     @inlinable public init(start: Node, neighbor: @escaping (Node) -> Node) {
         self.init(start: start) { CollectionOfOne(neighbor($0)) }
     }

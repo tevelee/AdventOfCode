@@ -34,18 +34,19 @@ public final class AoC_2022_Day24 {
     private lazy var path = shortestPath(from: State(position: startPosition), to: State(position: endPosition))
 
     private func shortestPath(from source: State, to destination: State) -> Int {
-        AStar {
-            Traversal(start: source, neighbors: { state in
-                self.possibleMoves(from: state, to: destination)
-                    .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
-                    .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
-            })
-            .weight { edge in
-                edge.source.position.distance(to: edge.destination.position) + edge.destination.numberOfMoves
-            }
-            .goal { state in
-                state.position == destination.position
-            }
+        let traversal = Traversal(start: source, neighbors: { state in
+            self.possibleMoves(from: state, to: destination)
+                .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
+                .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
+        })
+        .weight { edge in
+            edge.source.position.distance(to: edge.destination.position) + edge.destination.numberOfMoves
+        }
+        .goal { state in
+            state.position == destination.position
+        }
+        return AStar {
+            traversal
         } heuristic: { state in
             state.position.distance(to: destination.position)
         }

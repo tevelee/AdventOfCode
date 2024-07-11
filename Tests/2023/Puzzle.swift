@@ -1,5 +1,6 @@
+import Foundation
+import Testing
 import Utils
-import XCTest
 
 protocol Puzzle {
     init(_ input: Input) throws
@@ -12,11 +13,11 @@ extension Puzzle {
         String(reflecting: Self.self)
     }
 
-    static var day: Int {
+    @inlinable static var day: Int {
         className.integers.last!
     }
 
-    static var year: Int {
+    @inlinable static var year: Int {
         className.integers.first!
     }
 }
@@ -28,5 +29,6 @@ extension Puzzle {
 }
 
 func file(_ fileName: String, fileExtension: String = "txt") throws -> Input {
-    try .contentsOfFile(XCTUnwrap(Bundle.module.url(forResource: fileName, withExtension: fileExtension)))
+    let url = try #require(Bundle.module.url(forResource: fileName, withExtension: fileExtension))
+    return .contentsOfFile(url)
 }

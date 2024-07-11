@@ -28,7 +28,7 @@ public final class AoC_2022_Day10 {
         return parseCharacters(on: screen)
     }
 
-    private func runCycles(tick: (Int, Int) -> Void) async throws {
+    private static func runCycles(input: Input, tick: (Int, Int) -> Void) async throws {
         var registerValue = 1
         var numberOfIterationsCompleted = 0
         for try await line in input.lines {
@@ -48,10 +48,11 @@ public final class AoC_2022_Day10 {
     }
 
     private func streamOfCycles() -> AsyncThrowingStream<(numberOfIterationsCompleted: Int, registerValue: Int), Error> {
-        .init { continuation in
+        let input = self.input
+        return .init { continuation in
             let task = Task {
                 do {
-                    try await self.runCycles {
+                    try await Self.runCycles(input: input) {
                         continuation.yield(($0, $1))
                     }
                     continuation.finish()

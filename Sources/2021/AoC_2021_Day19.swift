@@ -10,7 +10,7 @@ public final class AoC_2021_Day19 {
     private let scanners: [Int: Set<Point>]
 
     public convenience init(_ inputFileURL: URL) throws {
-        self.init(try String(contentsOf: inputFileURL))
+        self.init(try String(contentsOf: inputFileURL, encoding: .utf8))
     }
 
     public init(_ input: String) {
@@ -183,7 +183,7 @@ public final class AoC_2021_Day19 {
     }
 }
 
-extension simd_double3x3: Hashable {
+extension simd_double3x3: @retroactive Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(columns.0)
         hasher.combine(columns.1)

@@ -24,7 +24,7 @@ private struct Day11 {
         #expect(problem.solve(expansionSize: 100) == 8410)
     }
 
-    @Test(.tags(.green))
+    @Test(.tags(.live))
     func live() throws {
         let problem = try CurrentPuzzle()
         #expect(problem.solve(expansionSize: 2) == 9_522_407)

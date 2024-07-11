@@ -21,7 +21,7 @@ public final class AoC_2021_Day14 {
     let transformations: [Pair<Character>: Character]
 
     public convenience init(_ inputFileURL: URL) throws {
-        self.init(try String(contentsOf: inputFileURL))
+        self.init(try String(contentsOf: inputFileURL, encoding: .utf8))
     }
 
     public init(_ contents: String) {

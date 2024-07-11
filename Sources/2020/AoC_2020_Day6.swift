@@ -7,7 +7,7 @@ public final class AoC_2020_Day6 {
     }
 
     public func solvePart1() async throws -> Int {
-        try String(contentsOf: inputFileURL)
+        try String(contentsOf: inputFileURL, encoding: .utf8)
             .paragraphs
             .sum { group in
                 Set(group.flatMap(Array.init)).count
@@ -15,7 +15,7 @@ public final class AoC_2020_Day6 {
     }
 
     public func solvePart2() async throws -> Int {
-        try String(contentsOf: inputFileURL)
+        try String(contentsOf: inputFileURL, encoding: .utf8)
             .paragraphs
             .sum { group in
                 let sets = group.map(Array.init).map(Set.init)

@@ -75,9 +75,9 @@ private struct Monkey {
     let throwToMonkey: (Int) -> Int
 }
 
-private struct Operation {
+private struct Operation: Sendable {
     let sign: String
-    let perform: (Int, Int) -> Int
+    let perform: @Sendable (Int, Int) -> Int
 
     static let addition = Operation(sign: "+") { $0 + $1 }
     static let multiplication = Operation(sign: "*") { $0 * $1 }

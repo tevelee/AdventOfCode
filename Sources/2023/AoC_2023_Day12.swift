@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 
 final class AoC_2023_Day12 {
     private let entries: AnyAsyncSequence<Entry>

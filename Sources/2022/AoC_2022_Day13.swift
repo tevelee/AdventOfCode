@@ -13,7 +13,7 @@ public final class AoC_2022_Day13 {
             .nonEmpty()
             .chunks(ofCount: 2)
             .enumerated()
-            .filter { try self.isInRightOrder(lhs: $1[0], rhs: $1[1]) }
+            .filter { try Self.isInRightOrder(lhs: $1[0], rhs: $1[1]) }
             .sum { $0.offset + 1 }
     }
 
@@ -21,13 +21,13 @@ public final class AoC_2022_Day13 {
         var items = try await input.lines
             .nonEmpty()
             .collect()
-            .map(parse)
+            .map(Self.parse)
 
         let divider1: Node = .composite([.composite([.number(2)])])
         let divider2: Node = .composite([.composite([.number(6)])])
         items.append(divider1)
         items.append(divider2)
-        items.sort(by: isInRightOrder)
+        items.sort(by: Self.isInRightOrder)
 
         guard let index1 = items.firstIndex(of: divider1),
               let index2 = items.firstIndex(of: divider2) else {
@@ -36,20 +36,19 @@ public final class AoC_2022_Day13 {
         return (index1 + 1) * (index2 + 1)
     }
 
-    @Sendable
-    private func isInRightOrder(lhs: String, rhs: String) throws -> Bool {
+    private static func isInRightOrder(lhs: String, rhs: String) throws -> Bool {
         try isInRightOrder(lhs: parse(lhs), rhs: parse(rhs))
     }
 
-    private func isInRightOrder(lhs: Node, rhs: Node) -> Bool {
+    private static func isInRightOrder(lhs: Node, rhs: Node) -> Bool {
         Node.isInRightOrder(lhs: lhs, rhs: rhs) ?? true
     }
 
-    private func parse(_ string: String) throws -> Node {
+    private static func parse(_ string: String) throws -> Node {
         try parse(string[...]).node
     }
 
-    private func parse(_ string: Substring) throws -> (node: Node, length: Int) {
+    private static func parse(_ string: Substring) throws -> (node: Node, length: Int) {
         if let int = Int(string) {
             return (.number(int), string.count)
         }

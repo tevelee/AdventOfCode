@@ -1,12 +1,11 @@
-import Collections
+private import Collections
 import Utils
 
 final class AoC_2023_Day15 {
     private let values: AnyAsyncSequence<[Character]>
 
     init(_ input: Input) {
-        values = input.characters.filter { $0 != "\n" }.split(by: ",")
-
+        values = input.characters.filter { $0 != "\n" }.split(by: ",").eraseToAnyAsyncSequence()
     }
 
     func solvePart1() async throws -> Int {

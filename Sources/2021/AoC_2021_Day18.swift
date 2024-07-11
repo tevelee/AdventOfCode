@@ -1,5 +1,4 @@
 import Algorithms
-import Parsing
 import Utils
 
 public final class AoC_2021_Day18 {
@@ -19,11 +18,11 @@ public final class AoC_2021_Day18 {
     }
 
     public func solvePart1() async throws -> Int {
-        try await lines.map { self.parse(line: $0) }.reduce(add)!.magnitude
+        try await lines.compactMap { Self.parse(line: $0) }.reduce(add)!.magnitude
     }
 
     public func solvePart2() async throws -> Int {
-        let values = try await lines.map { self.parse(line: $0) }.collect()
+        let values = try await lines.compactMap { Self.parse(line: $0) }.collect()
         return product(values, values)
             .lazy
             .filter { $0 != $1 }
@@ -32,23 +31,33 @@ public final class AoC_2021_Day18 {
             .max()!
     }
 
-    private func parse(line: String) -> Node {
-        try! nodeParser().parse(line)
+    private static func parse(line: String) -> Node? {
+        return parseNode(from: line[...])
     }
 
-    private func nodeParser() -> AnyParser<Substring, Node> {
-        Parse {
-            OneOf {
-                Int.parser(of: Substring.self).map(Node.number)
-                Parse(Node.pair) {
-                    "["
-                    Lazy { self.nodeParser() }
-                    ","
-                    Lazy { self.nodeParser() }
-                    "]"
+    private static func parseNode(from input: Substring) -> Node? {
+        if let number = input.wholeMatch(of: /\d+/)?.output as? Int {
+            return .number(number)
+        }
+
+        if input.first == "[" {
+            var depth = 0
+            for (index, char) in input.enumerated() {
+                if char == "[" {
+                    depth += 1
+                } else if char == "]" {
+                    depth -= 1
+                    if depth == 0 {
+                        let middleIndex = input.index(input.startIndex, offsetBy: index + 1)
+                        let components = input[input.index(after: input.startIndex)..<input.index(before: middleIndex)].components(separatedBy: ",")
+                        if let leftNode = parseNode(from: components[0][...]), let rightNode = parseNode(from: components[1][...]) {
+                            return .pair(left: leftNode, right: rightNode)
+                        }
+                    }
                 }
             }
-        }.eraseToAnyParser()
+        }
+        return nil
     }
 
     private func add(left: Node, right: Node) -> Node {

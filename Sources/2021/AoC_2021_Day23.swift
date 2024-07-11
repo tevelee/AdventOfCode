@@ -6,7 +6,7 @@ private let entrances = [2, 4, 6, 8]
 
 public final class AoC_2021_Day23 {
     public convenience init(_ inputFileURL: URL) throws {
-        self.init(try String(contentsOf: inputFileURL))
+        self.init(try String(contentsOf: inputFileURL, encoding: .utf8))
     }
 
     let input: String

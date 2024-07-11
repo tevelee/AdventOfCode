@@ -1,4 +1,4 @@
-import Algorithms
+private import Algorithms
 
 final class AoC_2023_Day16 {
     private let mirrors: [[Character]]

@@ -157,9 +157,9 @@ extension AsyncSequence {
     }
 }
 
-extension AsyncSequence where Element: Equatable {
-    @inlinable public func split(by element: Element) -> AnyAsyncSequence<[Element]> {
-        chunked(into: Array.self, on: { $0 != element }).filter(\.0).map(\.1).eraseToAnyAsyncSequence()
+extension AsyncSequence where Element: Equatable & Sendable {
+    @inlinable public func split(by element: Element) -> any AsyncSequence<[Element], any Error> {
+        chunked(into: Array.self, on: { $0 != element }).filter(\.0).map(\.1)
     }
 }
 
@@ -201,7 +201,7 @@ extension Dictionary {
     }
 }
 
-@inlinable public prefix func !<T>(keyPath: KeyPath<T, Bool>) -> (T) -> Bool {
+@inlinable public prefix func !<T>(keyPath: KeyPath<T, Bool> & Sendable) -> @Sendable (T) -> Bool {
     { !$0[keyPath: keyPath] }
 }
 

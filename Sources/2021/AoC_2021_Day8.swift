@@ -25,17 +25,17 @@ public final class AoC_2021_Day8 {
             let segments = line.replacingOccurrences(of: "\n", with: "").split(separator: "|")
             let clues = segments[0].words.sorted { $0.count < $1.count }.map(Set.init)
             let outputValues = segments[1].words
-            let mapping = self.mapping(for: clues)
+            let mapping = Self.mapping(for: clues)
             let numbers = outputValues
                 .compactMap { character in character.compactMap { mapping[$0] } }
-                .compactMap { digit in self.digits[Set(digit)] }
+                .compactMap { digit in Self.digits[Set(digit)] }
             return String(numbers)
         }
         .compactMap { Int($0) }
         .sum()
     }
 
-    private let digits: [Set<Character>: Character] = [
+    private static let digits: [Set<Character>: Character] = [
         Set("abcefg"): "0",
         Set("cf"): "1",
         Set("acdeg"): "2",
@@ -48,7 +48,7 @@ public final class AoC_2021_Day8 {
         Set("abcdfg"): "9"
     ]
 
-    private func mapping(for clues: [Set<Character>]) -> [Character: Character] {
+    private static func mapping(for clues: [Set<Character>]) -> [Character: Character] {
         var segments: [Character: Character] = [:]
         let one = clues[0]
         let seven = clues[1]

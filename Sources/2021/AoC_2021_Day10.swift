@@ -13,14 +13,14 @@ public final class AoC_2021_Day10 {
 
     public func solvePart1() async throws -> Int {
         try await lines
-            .compactMap { self.invalidCharacter(in: $0) }
+            .compactMap { Self.invalidCharacter(in: $0) }
             .sum(of: \.part1Score)
     }
 
     public func solvePart2() async throws -> Int {
         let scores = try await lines
             .compactMap { line in
-                self.missingBrackets(in: line)?.reduce(0) { result, bracket in
+                Self.missingBrackets(in: line)?.reduce(0) { result, bracket in
                     result * 5 + bracket.part2Score
                 }
             }
@@ -29,21 +29,21 @@ public final class AoC_2021_Day10 {
         return scores[Int(scores.count / 2)]
     }
 
-    private func invalidCharacter(in line: String) -> Bracket? {
+    private static func invalidCharacter(in line: String) -> Bracket? {
         if case .corrupted(let bracket) = process(line: line) {
             return bracket
         }
         return nil
     }
 
-    private func missingBrackets(in line: String) -> [Bracket]? {
+    private static func missingBrackets(in line: String) -> [Bracket]? {
         if case .incomplete(let stack) = process(line: line) {
             return stack.reversed()
         }
         return nil
     }
 
-    private func process(line: String) -> Validity {
+    private static func process(line: String) -> Validity {
         var counters: [Character: Int] = [:]
         var stack: [Bracket] = []
         let brackets = Bracket.allCases

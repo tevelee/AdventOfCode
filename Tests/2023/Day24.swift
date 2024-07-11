@@ -18,7 +18,7 @@ private struct Day24 {
         #expect(problem.solvePart2() == 24 + 13 + 10)
     }
 
-    @Test(.tags(.green))
+    @Test(.tags(.live))
     func live() throws {
         let problem = try CurrentPuzzle()
         let range = (2...4).map { Double($0 * 1e14) }

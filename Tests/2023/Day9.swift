@@ -16,7 +16,7 @@ private struct Day9 {
         #expect(try await problem.solvePart2() == 2)
     }
 
-    @Test(.tags(.green))
+    @Test(.tags(.live))
     func live() async throws {
         let problem = try CurrentPuzzle()
         #expect(try await problem.solvePart1() == 1_930_746_032)

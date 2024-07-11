@@ -25,7 +25,7 @@ public final class AoC_2021_Day22 {
         var on: [Cuboid] = []
         var off: [Cuboid] = []
 
-        for try await line in lines.compactMap({ try self.parse(line: $0) }) where line.ranges.overlaps(bounds) {
+        for try await line in lines.compactMap({ try Self.parse(line: $0) }) where line.ranges.overlaps(bounds) {
             let cuboid = line.ranges.clamped(to: bounds)
             let originalOff = off
             if line.isOn {
@@ -51,7 +51,7 @@ public final class AoC_2021_Day22 {
 
     private struct ParsingError: Error {}
 
-    private func parse(line: String) throws -> (isOn: Bool, ranges: Cuboid) {
+    private static func parse(line: String) throws -> (isOn: Bool, ranges: Cuboid) {
         let number = TryCapture {
             Optionally {
                 "-"
