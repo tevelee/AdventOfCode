@@ -15,12 +15,10 @@ public struct Search<Node, Strategy: SearchStrategy<Node>, Traversal: Traversabl
 
 extension Search: Sequence {
     public struct Iterator: IteratorProtocol {
-        public let search: Search
         public var storage: Strategy
         public let traversal: Traversal
 
-        @inlinable public init(search: Search, storage: Strategy, traversal: Traversal) {
-            self.search = search
+        @inlinable public init(storage: Strategy, traversal: Traversal) {
             self.storage = storage
             self.traversal = traversal
 
@@ -35,7 +33,7 @@ extension Search: Sequence {
     }
 
     @inlinable public func makeIterator() -> Iterator {
-        Iterator(search: self, storage: strategy(), traversal: traversal)
+        Iterator(storage: strategy(), traversal: traversal)
     }
 }
 

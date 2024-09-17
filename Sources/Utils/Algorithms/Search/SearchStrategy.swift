@@ -8,8 +8,9 @@ public protocol SearchStrategy<Node> {
     mutating func next(neighbors: (Node) -> some Collection<Node>) -> Node?
 }
 
-public protocol TraversalOrder {
+public protocol TraversalOrder<Node> {
     associatedtype Node
+
     func order(node: Node, neighbors: some Collection<Node>) -> [Node]
 }
 

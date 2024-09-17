@@ -21,17 +21,24 @@ public struct DFS<Node, Order: TraversalOrder>: SearchStrategy where Order.Node 
     }
 
     @inlinable public mutating func next(neighbors: (Node) -> some Collection<Node>) -> Node? {
-        while var node = stack.popLast() {
+        while var node = stack.first {
+            stack.removeFirst()
             if node.isFirstVisit {
                 node.isFirstVisit.toggle()
                 let neighbors = neighbors(node.node).map {
                     DFSNode(node: $0, isFirstVisit: true)
                 }
-                stack = order.order(node: node, neighbors: neighbors) + stack
-                continue
+                stack.prepend(order.order(node: node, neighbors: neighbors))
+            } else {
+                return node.node
             }
-            return node.node
         }
         return nil
+    }
+}
+
+extension Array {
+    @inlinable mutating func prepend(_ other: Self) {
+        self = other + self
     }
 }
