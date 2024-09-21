@@ -1,19 +1,19 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day14 {
+public final class AoC_2023_Day14 {
     private let items: [[Character]]
     private lazy var height = items.count
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         items = try Array(input.wholeInput.lines.map(Array.init))
     }
     
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         calculateLoad(of: tiltNorth(items))
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         var items = self.items
         var results: [Int] = []
         repeat {

@@ -1,7 +1,7 @@
-final class AoC_2023_Day1 {
+public final class AoC_2023_Day1 {
     let input: Input
 
-    init(_ input: Input) {
+    public init(_ input: Input) {
         self.input = input
     }
     
@@ -12,11 +12,11 @@ final class AoC_2023_Day1 {
         return (1...9).keyed(by: formatter.format)
     }()
 
-    func solvePart1() async throws -> Int {
+    public func solvePart1() async throws -> Int {
         try await sumNumbers(digitValues)
     }
 
-    func solvePart2() async throws -> Int {
+    public func solvePart2() async throws -> Int {
         try await sumNumbers(digitValues + spelledOutValues)
     }
 

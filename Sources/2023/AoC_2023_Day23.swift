@@ -1,10 +1,11 @@
 import Utils
+import Graph
 
-final class AoC_2023_Day23 {
+public final class AoC_2023_Day23 {
     private let grid: [[Character]]
     private let start, end: Position
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         let grid: [[Character]] = try input.wholeInput.lines.map(Array.init)
         guard let start = grid.positions.first(where: { grid[$0] == "." }),
               let end = grid.positions.reversed().first(where: { grid[$0] == "." }) else { throw ParseError() }
@@ -13,7 +14,7 @@ final class AoC_2023_Day23 {
         self.end = end
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve { [grid] position in
             var next: [Position] = []
             let right = Position(row: position.row, column: position.column + 1)
@@ -36,7 +37,7 @@ final class AoC_2023_Day23 {
         }
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         longestPath(from: start, to: end, seen: [start], paths: paths(between: junctions()))
     }
 
@@ -89,14 +90,11 @@ final class AoC_2023_Day23 {
     }
 
     private func solve(_ neighbors: @escaping (Position) -> [Position]) -> Int {
-        Search {
-            DFS()
-        } traversal: {
-            Traversal(start: start, neighbors: neighbors).includePath()
-        }
+        LazyGraph { neighbors($0) }
+        .traversal(from: start, strategy: .dfs(tracker: .trackDepth()))
         .reduce(into: 0) { result, element in
             if element.node == end {
-                result = max(result, element.path.count)
+                result = max(result, element.depth)
             }
         }
     }

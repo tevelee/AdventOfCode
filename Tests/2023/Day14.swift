@@ -1,4 +1,4 @@
-@testable import AoC_2023
+import AoC_2023
 import Testing
 
 private typealias CurrentPuzzle = AoC_2023_Day14

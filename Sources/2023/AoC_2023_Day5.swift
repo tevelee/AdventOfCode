@@ -1,11 +1,11 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day5 {
+public final class AoC_2023_Day5 {
     private let seeds: [Int]
     private let maps: [Map]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         guard let (seeds, maps) = try input.wholeInput.paragraphs.headAndTail else {
             throw ParseError()
         }
@@ -17,13 +17,13 @@ final class AoC_2023_Day5 {
         }
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         seeds.min { seed in
             maps.reduce(seed, resolve)
         } ?? 0
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         var ranges = seeds.chunks(ofCount: 2).map {
             ClosedRange(lowerBound: $0.first!, length: $0.last!)
         }

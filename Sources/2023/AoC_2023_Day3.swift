@@ -1,7 +1,7 @@
-final class AoC_2023_Day3 {
+public final class AoC_2023_Day3 {
     let board: [[Character]]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         board = try input.wholeInput.lines.map { Array($0) }
     }
 
@@ -11,13 +11,13 @@ final class AoC_2023_Day3 {
             .split(omittingEmptySubsequences: true) { !board[$0].isWholeNumber }
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         numbers
             .filter { neighbors(of: $0).contains(where: isSymbol) }
             .sum(of: value)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         board.positions
             .filter { board[$0] == "*" }
             .compactMap { gearPosition in

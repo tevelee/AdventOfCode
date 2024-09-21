@@ -1,21 +1,21 @@
 import Utils
 
-final class AoC_2023_Day17 {
+public final class AoC_2023_Day17 {
     private let grid: [[Int]]
     private let topLeft, bottomRight: Position
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         grid = try input.wholeInput.lines.map { Array($0).compactMap(\.wholeNumberValue) }
         guard let first = grid.positions().first, let last = grid.positions().reversed().first else { throw ParseError() }
         topLeft = first
         bottomRight = last
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve(range: 0...3)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         solve(range: 4...10)
     }
 

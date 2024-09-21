@@ -17,7 +17,6 @@ let package = Package(
          .package(url: "https://github.com/apple/swift-async-algorithms.git", from: "1.0.0"),
          .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
          .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.0"),
-         .package(url: "https://github.com/davecom/SwiftGraph.git", from: "3.1.0"),
          .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
     ],
     targets: [
@@ -99,7 +98,7 @@ let package = Package(
                 .product(name: "Algorithms", package: "swift-algorithms"),
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
                 .product(name: "Collections", package: "swift-collections"),
-                .product(name: "SwiftGraph", package: "SwiftGraph")
+                .target(name: "Graph")
             ],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
@@ -108,6 +107,22 @@ let package = Package(
             name: "Utils-Tests",
             dependencies: ["Utils"],
             path: "Tests/Utils",
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
+
+        .target(
+            name: "Graph",
+            dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms"),
+                .product(name: "Collections", package: "swift-collections"),
+            ],
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
+
+        .testTarget(
+            name: "Graph-Tests",
+            dependencies: ["Graph"],
+            path: "Tests/Graph",
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
 

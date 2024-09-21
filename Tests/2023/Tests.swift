@@ -1,4 +1,4 @@
-@testable import AoC_2023
+import AoC_2023
 import Foundation
 import Testing
 import XCTest

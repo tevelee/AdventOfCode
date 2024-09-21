@@ -1,14 +1,14 @@
 private import Algorithms
 private import RegexBuilder
 
-final class AoC_2023_Day2 {
+public final class AoC_2023_Day2 {
     fileprivate let games: [Game]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         games = try input.wholeInput.lines.compactMap(Game.init)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         games.filter { game in
             game.sessions.allSatisfy {
                 $0.red <= 12 && $0.green <= 13 && $0.blue <= 14
@@ -17,7 +17,7 @@ final class AoC_2023_Day2 {
         .sum(of: \.id)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         games.sum { game in
             let (red, green, blue) = game.sessions.reduce((red: 0, green: 0, blue: 0)) { result, session in
                 (max(result.red, session.red), max(result.green, session.green), max(result.blue, session.blue))

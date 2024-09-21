@@ -1,9 +1,9 @@
 private import Algorithms
 
-final class AoC_2023_Day12 {
+public final class AoC_2023_Day12 {
     private let entries: AnyAsyncSequence<Entry>
 
-    init(_ input: Input) {
+    public init(_ input: Input) {
         entries = input.lines
             .map { line in
                 guard let (pattern, rest) = line.words.headAndTail else { throw ParseError() }
@@ -12,11 +12,11 @@ final class AoC_2023_Day12 {
             .eraseToAnyAsyncSequence()
     }
 
-    func solvePart1() async throws -> Int {
+    public func solvePart1() async throws -> Int {
         try await entries.sum(of: numberOfPossibleArrangements)
     }
 
-    func solvePart2() async throws -> Int {
+    public func solvePart2() async throws -> Int {
         try await entries.map(\.unfolded).sum(of: numberOfPossibleArrangements)
     }
 

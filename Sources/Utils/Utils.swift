@@ -121,10 +121,6 @@ extension Sequence {
         }
         return result
     }
-
-    @inlinable public func count(where condition: (Element) throws -> Bool) rethrows -> Int {
-        try filter(condition).count
-    }
 }
 
 extension Sequence where Element: Numeric {

@@ -2,21 +2,21 @@ import AsyncAlgorithms
 import Utils
 import Accelerate
 
-final class AoC_2023_Day24 {
+public final class AoC_2023_Day24 {
     private let entries: [Entry]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         entries = try input.wholeInput.lines.map(Entry.init)
     }
 
-    func solvePart1(_ range: ClosedRange<Double>) -> Int {
+    public func solvePart1(_ range: ClosedRange<Double>) -> Int {
         entries.combinations(ofCount: 2)
             .map { ($0[0].line2D, $0[1].line2D) }
             .compactMap { $0.intersectionInFuture(with: $1) }
             .count { range.contains($0.x) && range.contains($0.y) }
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         let p1 = entries[0].point
         let v1 = entries[0].velocity
         let p2 = entries[1].point

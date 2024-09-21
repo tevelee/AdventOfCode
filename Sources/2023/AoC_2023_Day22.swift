@@ -1,18 +1,18 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day22 {
+public final class AoC_2023_Day22 {
     private var bricks: Bricks
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         bricks = try Bricks(bricks: input.wholeInput.lines.map(Brick.init))
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         bricks.numberOfBricksThatAreSafeToDisintegrate()
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         bricks.sumWhereOthersWouldFall()
     }
 }
