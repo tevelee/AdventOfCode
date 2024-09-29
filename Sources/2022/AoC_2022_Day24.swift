@@ -1,4 +1,5 @@
 import Utils
+import Graphs
 
 public final class AoC_2022_Day24 {
     private let startPosition, endPosition: Position
@@ -34,25 +35,16 @@ public final class AoC_2022_Day24 {
     private lazy var path = shortestPath(from: State(position: startPosition), to: State(position: endPosition))
 
     private func shortestPath(from source: State, to destination: State) -> Int {
-        let traversal = Traversal(start: source, neighbors: { state in
+        LazyGraph<State, Void> { state in
             self.possibleMoves(from: state, to: destination)
                 .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
                 .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
-        })
-        .weight { edge in
-            edge.source.position.distance(to: edge.destination.position) + edge.destination.numberOfMoves
         }
-        .goal { state in
-            state.position == destination.position
+        .weighted { source, destination in
+            source.position.distance(to: destination.position) + destination.numberOfMoves
         }
-        return AStar {
-            traversal
-        } heuristic: { state in
-            state.position.distance(to: destination.position)
-        }
-        .shortestPath()
-        .dropFirst()
-        .count
+        .shortestPath(from: source, to: destination, satisfying: { $0.position == destination.position }, using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))
+        .map { $0.path.count - 1 } ?? 0
     }
 
     public func solvePart1() -> Int {
@@ -139,6 +131,10 @@ private struct Position: Hashable, CustomStringConvertible {
 
     func distance(to other: Position) -> Int {
         abs(other.row - row) + abs(other.column - column)
+    }
+
+    var coordinates: SIMD2<Double> {
+        SIMD2(Double(column), Double(row))
     }
 
     mutating func advance(in direction: Direction) {

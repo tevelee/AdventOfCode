@@ -1,6 +1,6 @@
 private import Algorithms
 import Utils
-import Graph
+import Graphs
 
 public final class AoC_2023_Day21 {
     private let startPosition: Position
@@ -44,7 +44,7 @@ public final class AoC_2023_Day21 {
         LazyGraph { [map] node in
             Set(node.flatMap(map.neighbors).filter(condition))
         }
-        .searchFirst(from: Set([startPosition]), strategy: .bfs(tracker: .trackDepth())) {
+        .searchFirst(from: Set([startPosition]), strategy: .bfs(.trackDepth())) {
             $0.depth == steps
         }?.node.count ?? 0
     }

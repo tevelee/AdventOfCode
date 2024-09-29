@@ -1,5 +1,5 @@
 import Utils
-import Graph
+import Graphs
 
 public final class AoC_2023_Day23 {
     private let grid: [[Character]]
@@ -91,7 +91,7 @@ public final class AoC_2023_Day23 {
 
     private func solve(_ neighbors: @escaping (Position) -> [Position]) -> Int {
         LazyGraph { neighbors($0) }
-        .traversal(from: start, strategy: .dfs(tracker: .trackDepth()))
+        .traversal(from: start, strategy: .dfs(.trackDepth()))
         .reduce(into: 0) { result, element in
             if element.node == end {
                 result = max(result, element.depth)

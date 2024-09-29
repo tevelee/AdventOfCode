@@ -1,5 +1,5 @@
 import Utils
-import Graph
+import Graphs
 
 public final class AoC_2023_Day25 {
     private let first: String

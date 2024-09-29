@@ -1,6 +1,6 @@
 private import Algorithms
 import Utils
-import Graph
+import Graphs
 
 public final class AoC_2023_Day8 {
     private let instructions: String
