@@ -1,4 +1,4 @@
-@testable import AoC_2023
+import AoC_2023
 import Testing
 
 private typealias CurrentPuzzle = AoC_2023_Day21
@@ -25,9 +25,9 @@ private struct Day21 {
         #expect(problem.solvePart2(steps: 10) == 50)
         #expect(problem.solvePart2(steps: 50) == 1594)
         #expect(problem.solvePart2(steps: 100) == 6536)
-//        #expect(problem.solvePart2(steps: 500) == 167_004)
-//        #expect(problem.solvePart2(steps: 1000) == 668_697)
-//        #expect(problem.solvePart2(steps: 5000) == 16_733_044)
+        #expect(problem.solvePart2(steps: 500) == 167_004)
+        #expect(problem.solvePart2(steps: 1000) == 668_697)
+        #expect(problem.solvePart2(steps: 5000) == 16_733_044)
     }
 
     @Test(.tags(.live))

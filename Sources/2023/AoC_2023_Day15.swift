@@ -1,18 +1,18 @@
 private import Collections
 import Utils
 
-final class AoC_2023_Day15 {
+public final class AoC_2023_Day15 {
     private let values: AnyAsyncSequence<[Character]>
 
-    init(_ input: Input) {
+    public init(_ input: Input) {
         values = input.characters.filter { $0 != "\n" }.split(by: ",").eraseToAnyAsyncSequence()
     }
 
-    func solvePart1() async throws -> Int {
+    public func solvePart1() async throws -> Int {
         try await values.sum(of: hash)
     }
 
-    func solvePart2() async throws -> Int {
+    public func solvePart2() async throws -> Int {
         var boxes: [Int: OrderedDictionary<String, Int>] = [:]
         for try await value in values {
             if let index = value.firstIndex(of: "-") {

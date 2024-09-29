@@ -1,10 +1,10 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day18 {
+public final class AoC_2023_Day18 {
     private let entries: [Entry]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         entries = try input.wholeInput.lines.compactMap { line in
             guard let output = line.firstMatch(of: /(?<direction>\w) (?<length>\d+) \(\#(?<color>.*?)\)/)?.output,
                   let direction = output.direction.first.flatMap(Direction.init),
@@ -15,11 +15,11 @@ final class AoC_2023_Day18 {
         }
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve(entries.map { Move(direction: $0.direction, length: $0.length) })
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         solve(entries.map { Move(hex: $0.color) })
     }
 

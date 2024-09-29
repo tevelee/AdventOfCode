@@ -1,11 +1,11 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day19 {
+public final class AoC_2023_Day19 {
     private var workflows: [String: Workflow]
     private let ratings: [Rating]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         let paragraphs = try input.wholeInput.paragraphs
         workflows = try paragraphs[0].map(Workflow.init).keyed(by: \.name)
         ratings = paragraphs[1].map(Rating.init)
@@ -13,13 +13,13 @@ final class AoC_2023_Day19 {
         eliminateRedundantRules(in: &workflows)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         ratings
             .filter { isAccepted(rating: $0) }
             .sum { $0.x + $0.m + $0.a + $0.s }
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         acceptableRanges(within: Ranges(all: 1...4000)).sum(of: \.numberOfCombinations)
     }
 

@@ -1,10 +1,11 @@
 import Utils
+import Graphs
 
-final class AoC_2023_Day25 {
+public final class AoC_2023_Day25 {
     private let first: String
     private let connections: [String: Set<String>]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         var connections: [String: Set<String>] = [:]
         var first: String = ""
         for line in try input.wholeInput.lines {
@@ -21,7 +22,7 @@ final class AoC_2023_Day25 {
         (self.first, self.connections) = (first, connections)
     }
 
-    func solve() -> Int {
+    public func solve() -> Int {
         for key in connections.keys.shuffled() {
             let residualGraph = fordFulkerson(
                 connections: connections,
@@ -70,19 +71,9 @@ final class AoC_2023_Day25 {
     }
 
     private func size(of graph: [String: Set<String>], source: String) -> Int {
-        var count = 0
-        _ = Search {
-            DFS().visitEachNodeOnlyOnce()
-        } traversal: {
-            Traversal(start: source) { node in
-                graph[node] ?? []
-            }
-            .goal { _ in
-                count += 1
-                return false
-            }
-        }.run()
-        return count
+        LazyGraph { graph[$0] ?? [] }
+        .traverse(from: source, strategy: .dfs().visitEachNodeOnce())
+        .count
     }
 
     private func isReachable(
@@ -94,17 +85,14 @@ final class AoC_2023_Day25 {
         var innerParentMap = parentMap
         innerParentMap[source] = source
         defer { parentMap = innerParentMap }
-        return Search {
-            BFS().visitEachNodeOnlyOnce(by: \.node)
-        } traversal: {
-            Traversal(start: (node: source, previous: String?.none)) { node, _ in
-                graph[node]!.map { ($0, node) }
-            }
-            .goal { node, previous in
-                innerParentMap[node] = previous
-                return node == sink
-            }
-        }.run() != nil
+
+        return LazyGraph<(name: String, previous: String?), Void> { (node, _) in
+            graph[node]!.map { ($0, node) }
+        }
+        .searchFirst(from: (source, nil), strategy: .bfs().visitEachNodeOnce(by: \.name)) { visit in
+            innerParentMap[visit.name] = visit.previous
+            return visit.name == sink
+        } != nil
     }
 
     private func findCutEdges(

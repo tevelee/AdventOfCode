@@ -1,17 +1,17 @@
 private import Algorithms
 
-final class AoC_2023_Day9 {
+public final class AoC_2023_Day9 {
     private let entries: AnyAsyncSequence<[Int]>
 
-    init(_ input: Input) {
+    public init(_ input: Input) {
         entries = input.lines.map(\.integers).eraseToAnyAsyncSequence()
     }
 
-    func solvePart1() async throws -> Int {
+    public func solvePart1() async throws -> Int {
         try await entries.sum(of: extrapolateNext)
     }
 
-    func solvePart2() async throws -> Int {
+    public func solvePart2() async throws -> Int {
         try await entries.map { $0.reversed() }.sum(of: extrapolateNext)
     }
 

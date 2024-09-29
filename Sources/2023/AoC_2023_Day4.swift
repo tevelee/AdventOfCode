@@ -1,19 +1,19 @@
 private import Algorithms
 
-final class AoC_2023_Day4 {
+public final class AoC_2023_Day4 {
     private let cards: [Card]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         cards = try input.wholeInput.lines.compactMap(Card.init)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         cards.sum { card in
             pow(card.numberOfMatches, base: 2) / 2
         }
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         var instances: [Int: Int] = cards.indices.grouped { $0 }.mapValues { _ in 1 }
         for (offset, card) in self.cards.enumerated() {
             let multiplier = instances[offset, default: 1]

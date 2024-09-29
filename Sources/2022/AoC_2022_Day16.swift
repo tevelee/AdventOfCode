@@ -1,12 +1,13 @@
 import Utils
+import Graphs
 
 public final class AoC_2022_Day16 {
     private let valves: [String: Valve]
     private let initialValve = "AA"
 
-    private lazy var shortestPaths = FloydWarshall(nodes: valves.mapValues { valve in
-        Set(valve.connections.map { .init(node: $0, weight: 1) })
-    }).shortestPaths
+    private lazy var shortestPaths = Graph(edges: valves.mapValues { valve in
+        Array(Set(valve.connections))
+    }).weighted(constant: 1).shortestPathsForAllPairs()
 
     public init(_ input: Input) throws {
         let valves: [Valve] = try input.wholeInput.lines.map { line in

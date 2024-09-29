@@ -1,22 +1,23 @@
 private import Algorithms
 import Utils
+import Graphs
 
-final class AoC_2023_Day21 {
+public final class AoC_2023_Day21 {
     private let startPosition: Position
     private let map: [[Character]]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         let map: [[Character]] = try input.wholeInput.lines.map(Array.init)
         guard let startPosition = map.positions.first(where: { map[$0] == "S" }) else { throw ParseError() }
         self.map = map
         self.startPosition = startPosition
     }
 
-    func solvePart1(steps: Int) -> Int {
+    public func solvePart1(steps: Int) -> Int {
         availablePositions(for: steps, isFinite: true)
     }
 
-    func solvePart2(steps: Int) -> Int {
+    public func solvePart2(steps: Int) -> Int {
         let size = map.count
         let (quotient, remainder) = steps.quotientAndRemainder(dividingBy: size)
         return if quotient / 100 == 2023 {
@@ -40,14 +41,12 @@ final class AoC_2023_Day21 {
     }
 
     private func availablePositions(for steps: Int, where condition: @escaping (Position) -> Bool) -> Int {
-        Search {
-            BFS().visitEachNodeOnlyOnce(by: \.node)
-        } traversal: {
-            Traversal(start: [startPosition]) { [map] node in
-                Set(node.flatMap(map.neighbors).filter(condition))
-            }
-            .until(depth: steps)
-        }.run()?.count ?? 0
+        LazyGraph { [map] node in
+            Set(node.flatMap(map.neighbors).filter(condition))
+        }
+        .searchFirst(from: Set([startPosition]), strategy: .bfs(.trackDepth())) {
+            $0.depth == steps
+        }?.node.count ?? 0
     }
 }
 

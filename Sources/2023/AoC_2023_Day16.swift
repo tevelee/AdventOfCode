@@ -1,17 +1,17 @@
 private import Algorithms
 
-final class AoC_2023_Day16 {
+public final class AoC_2023_Day16 {
     private let mirrors: [[Character]]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         mirrors = try input.wholeInput.lines.map(Array.init)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         numberOfEnergizedFields(from: Laser(position: Position(x: 0, y: 0), direction: .right))
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         let firstRow = mirrors[0].indices.map { x in
             Laser(position: Position(x: x, y: 0), direction: .down)
         }

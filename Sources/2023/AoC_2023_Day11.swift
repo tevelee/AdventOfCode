@@ -1,6 +1,6 @@
 private import Algorithms
 
-final class AoC_2023_Day11 {
+public final class AoC_2023_Day11 {
     private let map: Map
     private lazy var pairsOfGalaxies = map.positionsOfStars.lazy.combinations(ofCount: 2).map { combination in
         (one: combination[0], two: combination[1])
@@ -20,11 +20,11 @@ final class AoC_2023_Day11 {
         $0.sumOfEmptySpacesBetweenGalaxies += $1.emptySpace
     }
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         map = try Map(characters: input.wholeInput.lines.map(Array.init))
     }
 
-    func solve(expansionSize: Int) -> Int {
+    public func solve(expansionSize: Int) -> Int {
         let (sumOfDistances, sumOfEmptySpacesBetweenGalaxies) = result
         return sumOfDistances + (expansionSize - 1) * sumOfEmptySpacesBetweenGalaxies
     }

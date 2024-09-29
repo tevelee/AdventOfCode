@@ -1,17 +1,17 @@
 private import Algorithms
 
-final class AoC_2023_Day7 {
+public final class AoC_2023_Day7 {
     private let entries: [Entry]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         entries = try input.wholeInput.lines.map(Entry.init)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve(entries)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         solve(entries.map(\.switchingJacksToJokers))
     }
 

@@ -1,18 +1,18 @@
 private import Algorithms
 
-final class AoC_2023_Day13 {
+public final class AoC_2023_Day13 {
     typealias Pattern = [[Character]]
     private let patterns: [Pattern]
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         patterns = try input.wholeInput.paragraphs.map { $0.map(Array.init) }
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve(forDifference: 0)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         solve(forDifference: 1)
     }
 

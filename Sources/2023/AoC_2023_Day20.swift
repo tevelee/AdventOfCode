@@ -1,14 +1,14 @@
 private import Algorithms
 import Utils
 
-final class AoC_2023_Day20 {
+public final class AoC_2023_Day20 {
     private let machine: Machine
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         machine = try Machine(input: input)
     }
     
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         machine.reset()
         for _ in 1...1000 {
             machine.pushButton()
@@ -16,7 +16,7 @@ final class AoC_2023_Day20 {
         return machine.pulsesSent.product(of: \.value)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         numberOfIterationsRequired(
             for: desiredModulePulseCombination(for: ["rx": .low])
         )

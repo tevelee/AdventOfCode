@@ -1,19 +1,19 @@
 import Utils
 
-final class AoC_2023_Day6 {
+public final class AoC_2023_Day6 {
     private let input: Input
 
-    init(_ input: Input) {
+    public init(_ input: Input) {
         self.input = input
     }
 
-    func solvePart1() throws -> Int {
+    public func solvePart1() throws -> Int {
         let (times, distances) = try parseSegments { $0.compactMap { Int($0) } }
         let races = zip(times, distances).map(Race.init)
         return races.product(of: numberOfWaysToBeat_procedual)
     }
 
-    func solvePart2() throws -> Int {
+    public func solvePart2() throws -> Int {
         let (time, distance) = try parseSegments { $0.joined() }
         guard let time = Int(time), let distance = Int(distance) else { throw ParseError() }
         let race = Race(time: time, bestDistance: distance)

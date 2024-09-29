@@ -2,20 +2,20 @@ private import Algorithms
 private import Collections
 import Utils
 
-final class AoC_2023_Day10 {
+public final class AoC_2023_Day10 {
     private let grid: PipeGrid
     private lazy var loop = grid.findLoopFromStartPosition()
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         grid = try PipeGrid(rawString: input.wholeInput)
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         let (quotient, remainder) = loop.count.quotientAndRemainder(dividingBy: 2)
         return quotient + remainder
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         numberOfPoints(inside: loop.map { ($0.x, $0.y) })
     }
 }

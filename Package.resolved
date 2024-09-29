@@ -1,5 +1,5 @@
 {
-  "originHash" : "00e355923d34875fdeac493fd31dc745bfe908b7bb9583459a2a17565457ad57",
+  "originHash" : "b5be40643bdf6c54e5cc7eca74619584b82793ec2f4f55201e740df604fd3552",
   "pins" : [
     {
       "identity" : "swift-algorithms",
@@ -38,21 +38,21 @@
       }
     },
     {
+      "identity" : "swift-graphs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tevelee/swift-graphs.git",
+      "state" : {
+        "revision" : "6b19c5d84dfd1c8b94d96bd24e78f39dba7a4877",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "swift-numerics",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
         "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
         "version" : "1.0.2"
-      }
-    },
-    {
-      "identity" : "swiftgraph",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/davecom/SwiftGraph.git",
-      "state" : {
-        "revision" : "76b5180a5cc32eda7f5236a756f4c1e0936311c6",
-        "version" : "3.1.0"
       }
     },
     {

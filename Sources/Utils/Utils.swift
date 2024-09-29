@@ -121,10 +121,6 @@ extension Sequence {
         }
         return result
     }
-
-    @inlinable public func count(where condition: (Element) throws -> Bool) rethrows -> Int {
-        try filter(condition).count
-    }
 }
 
 extension Sequence where Element: Numeric {
@@ -158,7 +154,7 @@ extension AsyncSequence {
 }
 
 extension AsyncSequence where Element: Equatable & Sendable {
-    @inlinable public func split(by element: Element) -> any AsyncSequence<[Element], any Error> {
+    @inlinable public func split(by element: Element) -> some AsyncSequence<[Element], any Error> {
         chunked(into: Array.self, on: { $0 != element }).filter(\.0).map(\.1)
     }
 }

@@ -1,62 +1,59 @@
 import Utils
+import Graphs
 
-final class AoC_2023_Day17 {
+public final class AoC_2023_Day17 {
     private let grid: [[Int]]
     private let topLeft, bottomRight: Position
 
-    init(_ input: Input) throws {
+    public init(_ input: Input) throws {
         grid = try input.wholeInput.lines.map { Array($0).compactMap(\.wholeNumberValue) }
         guard let first = grid.positions().first, let last = grid.positions().reversed().first else { throw ParseError() }
         topLeft = first
         bottomRight = last
     }
 
-    func solvePart1() -> Int {
+    public func solvePart1() -> Int {
         solve(range: 0...3)
     }
 
-    func solvePart2() -> Int {
+    public func solvePart2() -> Int {
         solve(range: 4...10)
     }
 
     private func solve(range: ClosedRange<Int>) -> Int {
-        AStar {
-            Traversal(start: State(topLeft)) { state in
-                Direction.allCases.compactMap { direction in
-                    if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
-                        return nil
-                    }
-                    if state.direction == direction, state.length == range.upperBound {
-                        return nil
-                    }
-                    if state.direction == direction.opposite {
-                        return nil
-                    }
-
-                    var position = state.position
-                    position.move(in: direction)
-                    guard self.isValid(position) else { return nil }
-
-                    let length = direction == state.direction ? state.length : 0
-                    return State(
-                        position: position,
-                        direction: direction,
-                        length: length + 1
-                    )
+        LazyGraph<State, Void> { state in
+            Direction.allCases.compactMap { direction in
+                if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
+                    return nil
                 }
+                if state.direction == direction, state.length == range.upperBound {
+                    return nil
+                }
+                if state.direction == direction.opposite {
+                    return nil
+                }
+
+                var position = state.position
+                position.move(in: direction)
+                guard self.isValid(position) else { return nil }
+
+                let length = direction == state.direction ? state.length : 0
+                return State(
+                    position: position,
+                    direction: direction,
+                    length: length + 1
+                )
             }
-            .weight { edge in
-                self.grid[edge.destination.position]
-            }
-            .goal {
-                $0.position == self.bottomRight && $0.length >= range.lowerBound
-            }
-        } heuristic: {
-            manhattanDistance(($0.position.x, $0.position.y), (self.bottomRight.x, self.bottomRight.y))
         }
-        .shortestPath()
+        .weighted { _, destination in
+            self.grid[destination.position]
+        }
+        .shortestPath(from: State(topLeft), to: State(bottomRight), satisfying: {
+            $0.position == bottomRight && $0.length >= range.lowerBound
+        }, using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))?
+        .path
         .dropFirst()
-        .sum { self.grid[$0.position] }
+        .sum { self.grid[$0.position] } ?? 0
     }
 
     private func isValid(_ position: Position) -> Bool {
@@ -88,6 +85,10 @@ private struct Position: Hashable {
         case .down: y += 1
         case .right: x += 1
         }
+    }
+
+    var coordinates: SIMD2<Double> {
+        SIMD2(Double(x), Double(y))
     }
 }
 
