@@ -5,7 +5,7 @@ public final class AoC_2022_Day16 {
     private let valves: [String: Valve]
     private let initialValve = "AA"
 
-    private lazy var shortestPaths = Graph(edges: valves.mapValues { valve in
+    private lazy var shortestPaths = ConnectedGraph(edges: valves.mapValues { valve in
         Array(Set(valve.connections))
     }).weighted(constant: 1).shortestPathsForAllPairs()
 

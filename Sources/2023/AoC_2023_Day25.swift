@@ -86,10 +86,13 @@ public final class AoC_2023_Day25 {
         innerParentMap[source] = source
         defer { parentMap = innerParentMap }
 
-        return LazyGraph<(name: String, previous: String?), Void> { (node, _) in
+        return LazyGraph<(name: String, previous: String?), Empty> { (node, _) in
             graph[node]!.map { ($0, node) }
         }
-        .searchFirst(from: (source, nil), strategy: .bfs().visitEachNodeOnce(by: \.name)) { visit in
+        .searchFirst(
+            from: (source, nil),
+            strategy: .bfs().visitEachNodeOnce(by: \.name)
+        ) { visit in
             innerParentMap[visit.name] = visit.previous
             return visit.name == sink
         } != nil

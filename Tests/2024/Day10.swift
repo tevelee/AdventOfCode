@@ -1,0 +1,28 @@
+import AoC_2024
+import Testing
+
+private typealias CurrentPuzzle = AoC_2024_Day10
+extension CurrentPuzzle: Puzzle {}
+
+private struct Day10 {
+    @Test
+    func part1_intro() async throws {
+        let problem = CurrentPuzzle("""
+        """)
+        try await #expect(problem.solvePart1() == 0)
+    }
+
+    @Test
+    func part2_intro() async throws {
+        let problem = CurrentPuzzle("""
+        """)
+        try await #expect(problem.solvePart2() == 0)
+    }
+
+    @Test(.tags(.live))
+    func live() async throws {
+        let problem = try await CurrentPuzzle()
+        try await #expect(problem.solvePart1() == 0)
+        try await #expect(problem.solvePart2() == 0)
+    }
+}

@@ -22,6 +22,24 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "AoC-2024",
+            dependencies: [
+                .target(name: "Utils"),
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+            ],
+            path: "Sources/2024",
+            exclude: ["Tasks"],
+            swiftSettings: [.swiftLanguageMode(.v6), .define("ACCELERATE_NEW_LAPACK")]
+        ),
+        .testTarget(
+            name: "AoC-2024-Tests",
+            dependencies: ["AoC-2024"],
+            path: "Tests/2024",
+            resources: (1...25).map { .copy("Resources/2024_day\($0).txt") },
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
+
+        .target(
             name: "AoC-2023",
             dependencies: [
                 .target(name: "Utils"),
@@ -103,7 +121,6 @@ let package = Package(
             ],
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
-
         .testTarget(
             name: "Utils-Tests",
             dependencies: ["Utils"],

@@ -35,7 +35,7 @@ public final class AoC_2022_Day24 {
     private lazy var path = shortestPath(from: State(position: startPosition), to: State(position: endPosition))
 
     private func shortestPath(from source: State, to destination: State) -> Int {
-        LazyGraph<State, Void> { state in
+        LazyGraph<State, Empty> { state in
             self.possibleMoves(from: state, to: destination)
                 .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
                 .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
@@ -43,7 +43,11 @@ public final class AoC_2022_Day24 {
         .weighted { source, destination in
             source.position.distance(to: destination.position) + destination.numberOfMoves
         }
-        .shortestPath(from: source, to: destination, satisfying: { $0.position == destination.position }, using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))
+        .shortestPath(
+            from: source,
+            to: destination,
+            satisfying: { $0.position == destination.position },
+            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))
         .map { $0.path.count - 1 } ?? 0
     }
 

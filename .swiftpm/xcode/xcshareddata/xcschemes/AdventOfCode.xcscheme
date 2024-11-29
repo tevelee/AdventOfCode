@@ -189,12 +189,32 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AoC-2022-Tests"
                BuildableName = "AoC-2022-Tests"
                BlueprintName = "AoC-2022-Tests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AoC-2023-Tests"
+               BuildableName = "AoC-2023-Tests"
+               BlueprintName = "AoC-2023-Tests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AoC-2024-Tests"
+               BuildableName = "AoC-2024-Tests"
+               BlueprintName = "AoC-2024-Tests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>

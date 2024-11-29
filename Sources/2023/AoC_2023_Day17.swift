@@ -21,7 +21,7 @@ public final class AoC_2023_Day17 {
     }
 
     private func solve(range: ClosedRange<Int>) -> Int {
-        LazyGraph<State, Void> { state in
+        LazyGraph<State, Empty> { state in
             Direction.allCases.compactMap { direction in
                 if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
                     return nil
@@ -48,9 +48,11 @@ public final class AoC_2023_Day17 {
         .weighted { _, destination in
             self.grid[destination.position]
         }
-        .shortestPath(from: State(topLeft), to: State(bottomRight), satisfying: {
-            $0.position == bottomRight && $0.length >= range.lowerBound
-        }, using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))?
+        .shortestPath(
+            from: State(topLeft),
+            to: State(bottomRight),
+            satisfying: { $0.position == bottomRight && $0.length >= range.lowerBound },
+            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))?
         .path
         .dropFirst()
         .sum { self.grid[$0.position] } ?? 0

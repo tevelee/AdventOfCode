@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1600"
+   LastUpgradeVersion = "1610"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -18,9 +18,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AoC-2023-Tests"
-               BuildableName = "AoC-2023-Tests"
-               BlueprintName = "AoC-2023-Tests"
+               BlueprintIdentifier = "AoC-2024-Tests"
+               BuildableName = "AoC-2024-Tests"
+               BlueprintName = "AoC-2024-Tests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
