@@ -243,3 +243,17 @@ public struct ParseError: Error {
         self.message = message
     }
 }
+
+extension Collection where Index == Int {
+    @inlinable public func values() -> (Element, Element) {
+        (self[0], self[1])
+    }
+
+    @inlinable public func values() -> (Element, Element, Element) {
+        (self[0], self[1], self[2])
+    }
+
+    @inlinable public func values() -> (Element, Element, Element, Element) {
+        (self[0], self[1], self[2], self[3])
+    }
+}
