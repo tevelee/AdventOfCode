@@ -22,6 +22,10 @@ extension String {
         self[...][relativeIndex: i]
     }
 
+    @inlinable public var lazyIntegers: some Sequence<Int> {
+        self[...].lazyIntegers
+    }
+
     @inlinable public var integers: [Int] {
         self[...].integers
     }
@@ -33,8 +37,12 @@ extension Substring {
         return self[index(startIndex, offsetBy: relativeIndex)]
     }
 
+    @inlinable public var lazyIntegers: some Sequence<Int> {
+        lazy.chunked { $0.isWholeNumber || $0 == "-" }.filter(\.0).compactMap { Int($0.1) }
+    }
+
     @inlinable public var integers: [Int] {
-        chunked { $0.isWholeNumber || $0 == "-" }.filter(\.0).compactMap { Int($0.1) }
+        Array(lazyIntegers)
     }
 }
 
@@ -254,16 +262,54 @@ public struct ParseError: Error {
     }
 }
 
-extension Collection where Index == Int {
-    @inlinable public func values() -> (Element, Element) {
-        (self[0], self[1])
+extension Sequence {
+    @inlinable public func values() throws -> (Element, Element) {
+        let result: Void = ()
+        var iterator = makeIterator()
+        guard let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+        return result
     }
 
-    @inlinable public func values() -> (Element, Element, Element) {
-        (self[0], self[1], self[2])
+    @inlinable public func values() throws -> (Element, Element, Element) {
+        let result: Void = ()
+        var iterator = makeIterator()
+        guard let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+        return result
     }
 
-    @inlinable public func values() -> (Element, Element, Element, Element) {
-        (self[0], self[1], self[2], self[3])
+    @inlinable public func values() throws -> (Element, Element, Element, Element) {
+        let result: Void = ()
+        var iterator = makeIterator()
+        guard let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value),
+              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+        return result
     }
+
+//    @inlinable public func values<each T>(type: (repeat (each T).Type) = (repeat (each T).self)) throws -> (repeat each T) /*where repeat each T == Element*/ { // same-type requirement will only be supported in Swift 6.1+
+//        var result: Any = ()
+//        var iterator = makeIterator()
+//        for _ in repeat each type {
+//            guard let value = iterator.next() else { throw ParseError() }
+//            result = join(result, value)
+//        }
+//        return result /*as! (repeat each T)*/
+//    }
+}
+
+@usableFromInline func join<Prefix>(_ value: Void, _ prefix: Prefix) -> (Prefix) {
+    prefix
+}
+
+@usableFromInline func join<each T, Suffix>(_ value: (repeat each T), _ suffix: Suffix) -> (repeat each T, Suffix) {
+    (repeat each value, suffix)
+}
+
+@_disfavoredOverload
+@usableFromInline func join<Prefix, each T>(_ prefix: Prefix, _ value: (repeat each T)) -> (Prefix, repeat each T) {
+    (prefix, repeat each value)
 }

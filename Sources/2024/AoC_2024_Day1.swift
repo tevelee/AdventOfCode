@@ -7,7 +7,7 @@ public final class AoC_2024_Day1 {
 
     public init(_ input: Input) async throws {
         (left, right) = try await input.lines.reduce(into: (left: [], right: [])) { result, item in
-            let (left, right) = item.integers.values()
+            let (left, right) = try item.integers.values()
             result.left.append(left)
             result.right.append(right)
         }

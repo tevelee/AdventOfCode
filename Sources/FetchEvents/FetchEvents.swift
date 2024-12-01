@@ -49,11 +49,10 @@ struct FetchEvents: AsyncParsableCommand {
                 let id = ID(year: year, day: day)
                 try await bootstrap(for: id)
                 let html = try await fetchTask(for: id)
-                if let converted = try convertTaskToMarkdown(html) {
-                    try writeTask(for: id, part1: converted.part1, part2: converted.part2)
-                    if downloadInputs {
-                        try await downloadInput(for: id)
-                    }
+                guard let converted = try convertTaskToMarkdown(html) else { break }
+                try writeTask(for: id, part1: converted.part1, part2: converted.part2)
+                if downloadInputs {
+                    try await downloadInput(for: id)
                 }
             }
         }
@@ -61,6 +60,9 @@ struct FetchEvents: AsyncParsableCommand {
     }
 
     func authenticateSession() {
+        urlSession.configuration.httpAdditionalHeaders = [
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.1 Safari/605.1.15"
+        ]
         if let session, let cookie = HTTPCookie(properties: [
             .name: "session",
             .value: session,
