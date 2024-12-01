@@ -1,15 +1,27 @@
 import Utils
+import RegexBuilder
 
 public final class AoC_2024_Day1 {
     private let left: [Int]
     private let right: [Int]
 
     public init(_ input: Input) async throws {
-        (left, right) = try await input.lines.reduce(into: (left: [Int](), right: [Int]())) { result, item in
-            let integers = item.integers
-            result.left.append(integers[0])
-            result.right.append(integers[1])
+        let number = TryCapture {
+            OneOrMore(CharacterClass.digit)
+        } transform: {
+            Int($0)
         }
+        let regex = Regex {
+            number
+            OneOrMore(CharacterClass.whitespace)
+            number
+        }
+        (left, right) = try await input.lines.collect()
+            .compactMap { $0.wholeMatch(of: regex)?.output as (_, left: Int, right: Int)? }
+            .reduce(into: (left: [], right: [])) { result, item in
+                result.left.append(item.left)
+                result.right.append(item.right)
+            }
     }
 
     public func solvePart1() async throws -> Int {
