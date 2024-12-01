@@ -26,7 +26,8 @@ public final class AoC_2020_Day2 {
             let (minFrom1, maxFrom1, character, input) = try parse(line: line)
             let min = minFrom1 - 1
             let max = maxFrom1 - 1
-            if (input[min] == character && input[max] != character) || (input[min] != character && input[max] == character) {
+            if (input[relativeIndex: min] == character && input[relativeIndex: max] != character)
+                || (input[relativeIndex: min] != character && input[relativeIndex: max] == character) {
                 result += 1
             }
         }

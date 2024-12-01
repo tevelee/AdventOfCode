@@ -77,7 +77,7 @@ public final class AoC_2022_Day10 {
     private func character(at index: Int, on screen: String, width: Int = 4, padding: Int = 1) -> String {
         screen.lines.map { line in
             String((0 ..< width).compactMap { x in
-                line[(index * (width + padding)) + x]
+                line[relativeIndex: (index * (width + padding)) + x]
             })
         }.joined(separator: "\n")
     }

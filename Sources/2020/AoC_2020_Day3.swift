@@ -23,7 +23,7 @@ public final class AoC_2020_Day3 {
                 lineCount += 1
                 continue
             }
-            let character = line[x % line.count]
+            let character = line[relativeIndex: x % line.count]
             if character == "#" {
                 count += 1
             }

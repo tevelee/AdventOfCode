@@ -209,13 +209,13 @@ private struct Chamber {
             var line: [Character] = Array(repeating: ".", count: 7)
             if let chamberValue = stack[safe: y] {
                 let chamberLine = stringify(binary: chamberValue)
-                for characterIndex in 0..<7 where chamberLine[characterIndex] == "1" {
+                for characterIndex in 0..<7 where chamberLine[relativeIndex: characterIndex] == "1" {
                     line[characterIndex] = "#"
                 }
             }
             if let rockValue = rock.shape.stack[safe: y - rock.y] {
                 let rockLine = stringify(binary: rockValue)
-                for characterIndex in 0..<7 where rockLine[characterIndex] == "1" {
+                for characterIndex in 0..<7 where rockLine[relativeIndex: characterIndex] == "1" {
                     line[characterIndex] = "@"
                 }
             }

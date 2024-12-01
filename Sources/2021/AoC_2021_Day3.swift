@@ -38,7 +38,7 @@ public final class AoC_2021_Day3 {
     private func partition(_ allNumbers: [String], by condition: (Int, Int) -> Bool) -> String {
         var candidates = allNumbers
         for i in 0 ..< allNumbers[0].count {
-            let partition = Dictionary(grouping: candidates) { $0[i] }
+            let partition = Dictionary(grouping: candidates) { $0[relativeIndex: i] }
             let c0 = partition["0"] ?? []
             let c1 = partition["1"] ?? []
             if c0.isEmpty {

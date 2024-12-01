@@ -30,7 +30,7 @@ public final class AoC_2023_Day8 {
 
     private func solve(start: String, until condition: @escaping (String) -> Bool) -> Int {
         LazyGraph<(name: String, numberOfSteps: Int), Empty> { [self] (node: String, numberOfSteps: Int) in
-            let instruction = instructions[numberOfSteps % instructions.count]
+            let instruction = instructions[relativeIndex: numberOfSteps % instructions.count]
             let routing = routes[node]!
             return (instruction == "L" ? routing.left : routing.right, numberOfSteps + 1)
         }
