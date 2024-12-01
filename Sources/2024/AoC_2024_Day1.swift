@@ -6,18 +6,13 @@ public final class AoC_2024_Day1 {
     private let right: [Int]
 
     public init(_ input: Input) async throws {
-        let number = TryCapture {
-            OneOrMore(CharacterClass.digit)
-        } transform: {
-            Int($0)
-        }
-        let regex = Regex {
-            number
-            OneOrMore(CharacterClass.whitespace)
-            number
-        }
-        (left, right) = try await input.lines.collect()
-            .compactMap { $0.wholeMatch(of: regex)?.output as (_, left: Int, right: Int)? }
+        (left, right) = try await input.lines
+            .compactMap { line -> (left: Int, right: Int)? in
+                guard let output = line.wholeMatch(of: /(?<left>\d+)\s+(?<right>\d+)/)?.output,
+                      let left = Int(output.left),
+                      let right = Int(output.right) else { return nil }
+                return (left, right)
+            }
             .reduce(into: (left: [], right: [])) { result, item in
                 result.left.append(item.left)
                 result.right.append(item.right)
