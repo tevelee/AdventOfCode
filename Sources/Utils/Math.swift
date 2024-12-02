@@ -1,4 +1,25 @@
 import Foundation
+import Algorithms
+
+@inlinable public func pow(_ value: Int, base: Int = 2) -> Int {
+    if base == 0 {
+        precondition(value != 0)
+        return 1
+    }
+    return Array(repeating: base, count: value).product()
+}
+
+@inlinable public func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Element, C.Element)] {
+    product(product(c1, c2), c3).map { p, z in
+        let (x,y) = p
+        return (x,y,z)
+    }
+}
+
+@inlinable public func nonNegativeModulo(of lhs: Int, by rhs: Int) -> Int {
+    let result = lhs % rhs
+    return result >= 0 ? result : result + rhs
+}
 
 // MARK: LCM
 

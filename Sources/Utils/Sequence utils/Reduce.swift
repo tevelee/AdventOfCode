@@ -1,3 +1,12 @@
+extension Sequence {
+    @inlinable public func reduce(_ nextPartialResult: (Element, Element) throws -> Element) rethrows -> Element? {
+        var iterator = makeIterator()
+        return try iterator.next().map { first in
+            try IteratorSequence(iterator).reduce(first, nextPartialResult)
+        }
+    }
+}
+
 extension AsyncSequence {
     @inlinable public func reduce(_ nextPartialResult: (Element, Element) throws -> Element) async rethrows -> Element? {
         var iterator = makeAsyncIterator()
