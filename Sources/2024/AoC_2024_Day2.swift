@@ -20,14 +20,13 @@ public final class AoC_2024_Day2 {
     }
 
     private static func isValidReport(_ levels: [Int]) -> Bool {
-        isValidReport(levels) { $0 - $1 }
-        ||
         isValidReport(levels) { $1 - $0 }
-
+        ||
+        isValidReport(levels) { $0 - $1 }
     }
 
-    private static func isValidReport(_ levels: [Int], differenceAlgorithm: (Int, Int) -> Int) -> Bool {
-        levels.adjacentPairs().map(differenceAlgorithm).allSatisfy(isValidDifference)
+    private static func isValidReport(_ levels: [Int], differenceAlgorithm: @escaping (Int, Int) -> Int) -> Bool {
+        levels.adjacentPairs().lazy.map(differenceAlgorithm).allSatisfy(isValidDifference)
     }
 
     private static func isValidDifference(_ diff: Int) -> Bool {
