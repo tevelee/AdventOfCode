@@ -185,7 +185,11 @@ struct FetchEvents: AsyncParsableCommand {
         case "s":
             return "~\(text)~"
         case "a":
-            return try "[\(text)](\(element.attr("href")))"
+            var url = try element.attr("href")
+            if let match = url.wholeMatch(of: #//(?<year>\d{4})/day/(?<day>\d+)/#) {
+                url = "https://github.com/tevelee/AdventOfCode/blob/develop/Sources/\(match.year)/Tasks/AoC_\(match.year)_Day\(match.day)_part1.md"
+            }
+            return "[\(text)](\(url))"
         case "code":
             return "`\(text)`"
         case "pre":

@@ -3,7 +3,7 @@ The preparations are finally complete; you and the Elves leave camp on foot and 
  
 As you move through the dense undergrowth, one of the Elves gives you a handheld **device**. He says that it has many fancy features, but the most important one to set up right now is the **communication system**.
  
-However, because he's heard you have [significant](/2016/day/6) [experience](/2016/day/25) [dealing](/2019/day/7) [with](/2019/day/9) [signal-based](/2019/day/16) [systems](/2021/day/25), he convinced the other Elves that it would be okay to give you their one malfunctioning device - surely you'll have no problem fixing it.
+However, because he's heard you have [significant](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2016/Tasks/AoC_2016_Day6_part1.md) [experience](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2016/Tasks/AoC_2016_Day25_part1.md) [dealing](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2019/Tasks/AoC_2019_Day7_part1.md) [with](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2019/Tasks/AoC_2019_Day9_part1.md) [signal-based](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2019/Tasks/AoC_2019_Day16_part1.md) [systems](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2021/Tasks/AoC_2021_Day25_part1.md), he convinced the other Elves that it would be okay to give you their one malfunctioning device - surely you'll have no problem fixing it.
  
 As if inspired by comedic timing, the device emits a few colorful sparks<!--- The magic smoke, on the other hand, seems to be contained... FOR NOW! -->.
  
