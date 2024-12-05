@@ -12,7 +12,9 @@ public final class AoC_2024_Day5 {
     }
 
     private lazy var sortedUpdates = updates.partitioned { update in
-        update.sortingPairs().allSatisfy(orderingRules.isInCorrectOrder)
+        update.combinations(ofCount: 2)
+            .compactMap { try? $0.elements() }
+            .allSatisfy(orderingRules.isInCorrectOrder)
     }
 
     public func solvePart1() async throws -> Int {
@@ -43,13 +45,5 @@ private struct OrderingRules {
 private extension Collection where Index == Int {
     var middleElement: Element {
         self[(endIndex - startIndex) / 2]
-    }
-
-    func sortingPairs() -> some Sequence<(Element, Element)> {
-        indices.dropLast().flatMap { first in
-            indices.dropFirst(first + 1).map { second in
-                (self[first], self[second])
-            }
-        }
     }
 }
