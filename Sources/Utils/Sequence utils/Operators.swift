@@ -1,3 +1,5 @@
+import Algorithms
+
 @inlinable public prefix func !<T>(keyPath: KeyPath<T, Bool> & Sendable) -> @Sendable (T) -> Bool {
     { !$0[keyPath: keyPath] }
 }
@@ -20,6 +22,18 @@
 
 @inlinable public func + <Element>(lhs: Element, rhs: [Element]) -> [Element] {
     [lhs] + rhs
+}
+
+@inlinable public func + <Element>(lhs: some Sequence<Element>, rhs: Element) -> some Sequence<Element> {
+    lhs + CollectionOfOne(rhs)
+}
+
+@inlinable public func + <Element>(lhs: Element, rhs: some Sequence<Element>) -> some Sequence<Element> {
+    CollectionOfOne(lhs) + rhs
+}
+
+@inlinable public func + <Element>(lhs: some Sequence<Element>, rhs: some Sequence<Element>) -> some Sequence<Element> {
+    chain(lhs, rhs)
 }
 
 @inlinable public func + <Element>(lhs: Set<Element>, rhs: Element) -> Set<Element> {
