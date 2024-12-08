@@ -32,8 +32,8 @@ public final class AoC_2024_Day8 {
             try positions.combinations(ofCount: 2).flatMap { pair in
                 let (first, second) = try pair.elements()
                 let diff = Position(x: second.x - first.x, y: second.y - first.y)
-                let antinodes1 = antinodes { first - diff * $0 }.prefix(max)
-                let antinodes2 = antinodes { second + diff * $0 }.prefix(max)
+                let antinodes1 = antinodes(max: max) { first - diff * $0 }
+                let antinodes2 = antinodes(max: max) { second + diff * $0 }
                 let antennas = includeAntennas ? [first, second] : []
                 return antinodes1 + antinodes2 + antennas
             }
@@ -41,8 +41,8 @@ public final class AoC_2024_Day8 {
         return Set(results).count(where: isWithinBounds)
     }
 
-    private func antinodes(calculate: @escaping (Int) -> Position) -> some Sequence<Position> {
-        (1...).lazy.map(calculate).prefix(while: isWithinBounds)
+    private func antinodes(max: Int, calculate: @escaping (Int) -> Position) -> some Sequence<Position> {
+        (1...max).lazy.map(calculate).prefix(while: isWithinBounds)
     }
 
     private func isWithinBounds(_ position: Position) -> Bool {
