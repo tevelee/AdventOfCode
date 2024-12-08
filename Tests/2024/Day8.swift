@@ -6,23 +6,64 @@ extension CurrentPuzzle: Puzzle {}
 
 private struct Day8 {
     @Test
-    func part1_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part1_intro() throws {
+        let problem = try CurrentPuzzle("""
+        ......#....#
+        ...#....0...
+        ....#0....#.
+        ..#....0....
+        ....0....#..
+        .#....A.....
+        ...#........
+        #......#....
+        ........A...
+        .........A..
+        ..........#.
+        ..........#.
         """)
-        try await #expect(problem.solvePart1() == 0)
+        try #expect(problem.solvePart1() == 14)
     }
 
     @Test
-    func part2_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part2_intro() throws {
+        let problem = try CurrentPuzzle("""
+        T....#....
+        ...T......
+        .T....#...
+        .........#
+        ..#.......
+        ..........
+        ...#......
+        ..........
+        ....#.....
+        ..........
         """)
-        try await #expect(problem.solvePart2() == 0)
+        try #expect(problem.solvePart2() == 9)
+    }
+
+    @Test
+    func part2_intro2() throws {
+        let problem = try CurrentPuzzle("""
+        ......#....#
+        ...#....0...
+        ....#0....#.
+        ..#....0....
+        ....0....#..
+        .#....A.....
+        ...#........
+        #......#....
+        ........A...
+        .........A..
+        ..........#.
+        ..........#.
+        """)
+        try #expect(problem.solvePart2() == 34)
     }
 
     @Test(.tags(.live))
     func live() async throws {
         let problem = try await CurrentPuzzle()
-        try await #expect(problem.solvePart1() == 0)
-        try await #expect(problem.solvePart2() == 0)
+        try #expect(problem.solvePart1() == 228)
+        try #expect(problem.solvePart2() == 766)
     }
 }
