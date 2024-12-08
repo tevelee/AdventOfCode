@@ -1,28 +1,31 @@
 extension Sequence {
-    @inlinable public func elements() throws -> (Element, Element) {
+    @inlinable public func elements() throws(DestructuringError) -> (Element, Element) {
         let result: Void = ()
         var iterator = makeIterator()
         guard let value = iterator.next(), case let result = join(result, value),
-              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+              let value = iterator.next(), case let result = join(result, value) else { throw .notEnoughElements }
+        guard iterator.next() == nil else { throw .tooManyElements }
         return result
     }
 
-    @inlinable public func elements() throws -> (Element, Element, Element) {
+    @inlinable public func elements() throws(DestructuringError) -> (Element, Element, Element) {
         let result: Void = ()
         var iterator = makeIterator()
         guard let value = iterator.next(), case let result = join(result, value),
               let value = iterator.next(), case let result = join(result, value),
-              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+              let value = iterator.next(), case let result = join(result, value) else { throw .notEnoughElements }
+        guard iterator.next() == nil else { throw .tooManyElements }
         return result
     }
 
-    @inlinable public func elements() throws -> (Element, Element, Element, Element) {
+    @inlinable public func elements() throws(DestructuringError) -> (Element, Element, Element, Element) {
         let result: Void = ()
         var iterator = makeIterator()
         guard let value = iterator.next(), case let result = join(result, value),
               let value = iterator.next(), case let result = join(result, value),
               let value = iterator.next(), case let result = join(result, value),
-              let value = iterator.next(), case let result = join(result, value) else { throw ParseError() }
+              let value = iterator.next(), case let result = join(result, value) else { throw .notEnoughElements }
+        guard iterator.next() == nil else { throw .tooManyElements }
         return result
     }
 
@@ -54,4 +57,9 @@ extension StringProtocol where Self.SubSequence == Substring {
     public func split(_ separator: String, maxSplits: Int = .max, omittingEmptySubsequences: Bool = true) -> [String] {
         split(separator: separator, maxSplits: maxSplits, omittingEmptySubsequences: omittingEmptySubsequences).map(String.init)
     }
+}
+
+public enum DestructuringError: Error {
+    case notEnoughElements
+    case tooManyElements
 }

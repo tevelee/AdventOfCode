@@ -1,37 +1,38 @@
 import AsyncAlgorithms
 
 extension Sequence {
-    @inlinable public func max<T: Comparable>(of property: (Element) -> T) -> T? {
-        map(property).max()
+    @inlinable public func max<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
+        try map(property).max()
     }
 
-    @inlinable public func min<T: Comparable>(of property: (Element) -> T) -> T? {
-        map(property).min()
+    @inlinable public func min<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
+        try map(property).min()
     }
 
-    @inlinable public func sum<T: Numeric>(of property: (Element) -> T) -> T {
-        reduce(into: 0) { $0 += property($1) }
+    @inlinable public func sum<T: Numeric>(of property: (Element) throws -> T) rethrows -> T {
+        try reduce(into: 0) { $0 += try property($1) }
     }
 
-    @inlinable public func sum<T: Numeric>(of property: (Element) async throws -> T) async throws -> T {
-        var result: T = 0
+    @inlinable public func sum<T: Numeric>(of property: (Element) async throws -> T) async rethrows -> T {
+        try await reduce(into: 0) { $0 += try await property($1) }
+    }
+
+    @inlinable public func product<T: Numeric>(of property: (Element) throws -> T) rethrows -> T {
+        try reduce(into: 1) { $0 *= try property($1) }
+    }
+
+    @inlinable public func product<T: Numeric>(of property: (Element) async throws -> T) async rethrows -> T {
+        try await reduce(into: 1) { $0 *= try await property($1) }
+    }
+
+    @inlinable public func reduce<T: Numeric, E>(into: T, next: (inout T, Element) async throws(E) -> Void) async throws(E) -> T {
+        var result: T = into
         for element in self {
-            result += try await property(element)
+            try await next(&result, element)
         }
         return result
     }
 
-    @inlinable public func product<T: Numeric>(of property: (Element) -> T) -> T {
-        reduce(into: 1) { $0 *= property($1) }
-    }
-
-    @inlinable public func product<T: Numeric>(of property: (Element) async throws -> T) async throws -> T {
-        var result: T = 1
-        for element in self {
-            result *= try await property(element)
-        }
-        return result
-    }
 }
 
 extension Sequence where Element: Numeric {
@@ -49,11 +50,11 @@ extension AsyncSequence {
         try await Array(self)
     }
 
-    @inlinable public func sum<T: Numeric>(of property: (Element) -> T) async throws -> T {
+    @inlinable public func sum<T: Numeric>(of property: (Element) -> T) async rethrows -> T {
         try await reduce(into: 0) { $0 += property($1) }
     }
 
-    @inlinable public func product<T: Numeric>(of property: (Element) -> T) async throws -> T {
+    @inlinable public func product<T: Numeric>(of property: (Element) -> T) async rethrows -> T {
         try await reduce(into: 1) { $0 *= property($1) }
     }
 
@@ -69,7 +70,7 @@ extension AsyncSequence {
 }
 
 extension AsyncSequence where Element: Numeric {
-    @inlinable public func sum() async throws -> Element {
+    @inlinable public func sum() async rethrows -> Element {
         try await sum { $0 }
     }
 }
