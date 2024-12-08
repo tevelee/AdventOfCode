@@ -24,10 +24,10 @@ public final class AoC_2024_Day7 {
         }
     }
 
-    private func canSolve(target: Int, components: some Sequence<Int>, operators: [Operator]) -> Bool {
+    private func canSolve(target: Int, components: [Int], operators: [Operator]) -> Bool {
         guard let (first, components) = components.headAndTail, first <= target else { return false }
         guard let (second, components) = components.headAndTail else { return target == first }
-        for op in operators where canSolve(target: target, components: op.perform(first, second) + components, operators: operators) {
+        for op in operators where canSolve(target: target, components: [op.perform(first, second)] + components, operators: operators) {
             return true
         }
         return false
