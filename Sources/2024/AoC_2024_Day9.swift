@@ -1,113 +1,123 @@
 import Utils
 
 public final class AoC_2024_Day9 {
-    let disk: [DiskElement]
+    private let diskMap: DiskMap
 
     public init(_ input: Input) throws {
-        let diskMap = try input.wholeInput
-        var disk: [DiskElement] = []
-        var id = 0
-        for (index, value) in diskMap.compactMap(\.wholeNumberValue).enumerated() {
-            let isFileBlock = index.isMultiple(of: 2)
-            disk.append(DiskElement(count: value, type: isFileBlock ? .fileBlock(id: id) : .emptySpace))
-            if isFileBlock { id += 1 }
+        diskMap = try input.wholeInput.lazy.compactMap(\.wholeNumberValue).enumerated().map { offset, element in
+            DiskBlock(size: element, type: offset.isMultiple(of: 2) ? .file(id: (offset + 1) / 2) : .freeSpace)
         }
-        self.disk = disk
     }
 
     public func solvePart1() -> Int {
-        var disk = disk
-        while var emptyIndex = disk.firstIndex(where: \.isEmpty) {
-            while disk[emptyIndex].count > 0, let fileIndex = disk.lastIndex(where: \.isFile) {
-                let size = min(disk[emptyIndex].count, disk[fileIndex].count)
-                disk[fileIndex].count -= size
-                disk[emptyIndex].count -= size
-                disk.insert(DiskElement(count: size, type: disk[fileIndex].type), at: emptyIndex)
-                emptyIndex += 1
+        var diskMap = diskMap
+        while let indexOfFreeSpaceBlock = diskMap.firstIndex(where: { $0.size > 0 && $0.type.isFreeSpace }) {
+            var remainingSpace = diskMap[indexOfFreeSpaceBlock].size
+            if remainingSpace > 0, let indexOfFileBlock = diskMap.lastIndex(where: { $0.size > 0 && !$0.type.isFreeSpace }), case .file(let id) = diskMap[indexOfFileBlock].type {
+                let fileBlockSize = diskMap[indexOfFileBlock].size
+                let diff = reduceSize(of: indexOfFileBlock, in: &diskMap, by: remainingSpace)
+                remainingSpace -= diff
+                reduceSize(of: indexOfFreeSpaceBlock, in: &diskMap, by: fileBlockSize)
+                diskMap.insert(DiskBlock(size: diff, type: .file(id: id)), at: indexOfFreeSpaceBlock)
             }
         }
-        return checksum(of: disk)
+        return checksum(of: diskMap)
+    }
+
+    @discardableResult
+    private func reduceSize(of index: Int, in array: inout [DiskBlock], by amount: Int) -> Int {
+        let diff = min(array[index].size, amount)
+        if diff == 0 {
+            array.remove(at: index)
+        } else {
+            array[index].size -= diff
+        }
+        return diff
     }
 
     public func solvePart2() -> Int {
-        var disk = disk
-        var processed: Set<Int> = []
-        files: while let fileIndex = disk.lastIndex(where: { $0.isFile && !processed.contains($0.type.id!) }) {
-            let file = disk[fileIndex]
-            if let emptyIndex = disk.firstIndex(where: { $0.isEmpty && $0.count >= disk[fileIndex].count }), emptyIndex < fileIndex {
-                let size = file.count
-                disk[fileIndex] = DiskElement(count: size, type: .emptySpace)
-                disk[emptyIndex].count -= size
-                disk.insert(DiskElement(count: size, type: file.type), at: emptyIndex)
+        var diskMap = diskMap
+        var lastProcessedId: Int = .max
+        while lastProcessedId > 0 {
+            let fileBlock = stride(from: 0, to: diskMap.endIndex, by: 2).lazy
+                .reversed()
+                .compactMap { index in diskMap[index].type.id.map { (index: index, size: diskMap[index].size, id: $0) } }
+                .first { $0.id < lastProcessedId }
+            guard let fileBlock else {
+                continue
             }
-            processed.insert(file.type.id!)
+            if let indexOfFreeSpaceBlock = stride(from: 1, to: fileBlock.index, by: 2).first(where: { diskMap[$0].size >= fileBlock.size }) {
+                let freeSpace = diskMap[indexOfFreeSpaceBlock].size
+                let before = diskMap[safe: fileBlock.index - 1]?.size ?? 0
+                let after = diskMap[safe: fileBlock.index + 1]?.size ?? 0
+                // join spaces
+                diskMap.replaceSubrange((fileBlock.index - 1 ... fileBlock.index + 1).clamped(to: 0 ... diskMap.endIndex - 1), with: [
+                    DiskBlock(size: before + fileBlock.size + after, type: .freeSpace)
+                ])
+                // replace big space with (zero space + file + remaining space) to retain alternation
+                diskMap.replaceSubrange(indexOfFreeSpaceBlock ... indexOfFreeSpaceBlock, with: [
+                    DiskBlock(size: 0, type: .freeSpace),
+                    DiskBlock(size: fileBlock.size, type: .file(id: fileBlock.id)),
+                    DiskBlock(size: freeSpace - fileBlock.size, type: .freeSpace)
+                ])
+            }
+            lastProcessedId = fileBlock.id
         }
-        return checksum(of: disk)
+        return checksum(of: diskMap)
     }
 
-    private func checksum(of disk: [DiskElement]) -> Int {
-        var checksum = 0
-        var offset = 0
-        for element in disk {
-            switch element.type {
-                case .fileBlock(let id):
-                    for _ in 0 ..< element.count {
-                        checksum += id * offset
-                        offset += 1
-                    }
-                case .emptySpace:
-                    offset += element.count
-            }
+    private func checksum(of diskMap: consuming DiskMap) -> Int {
+        var index = 0
+        return diskMap.sum { block in
+            let indexBefore = index
+            index += block.size
+            return switch block.type {
+            case .freeSpace: 0
+            case .file(let id): id * (sumOfIncrements(until: index) - sumOfIncrements(until: indexBefore)) }
         }
-        return checksum
+    }
+
+    private func sumOfIncrements(until target: Int) -> Int {
+        (target - 1) * target / 2
     }
 }
 
-struct DiskElement: CustomStringConvertible {
-    var count: Int
-    let type: DiskElementType
+private typealias DiskMap = [DiskBlock]
 
-    enum DiskElementType: CustomStringConvertible {
-        case emptySpace
-        case fileBlock(id: Int)
+extension DiskMap {
+    var description: String {
+        map(\.description).joined()
+    }
+}
 
-        var isEmpty: Bool {
+private struct DiskBlock: CustomStringConvertible {
+    var size: Int
+    let type: DiskBlockType
+
+    var description: String {
+        String(repeating: type.description, count: size)
+    }
+
+    enum DiskBlockType: CustomStringConvertible {
+        case freeSpace
+        case file(id: Int)
+
+        var description: String {
             switch self {
-                case .emptySpace: true
-                case .fileBlock: false
+            case .freeSpace: "."
+            case .file(let id): "\(id)"
             }
+        }
+
+        var isFreeSpace: Bool {
+            id == nil
         }
 
         var id: Int? {
             switch self {
-                case .emptySpace: nil
-                case .fileBlock(let id): id
+            case .freeSpace: nil
+            case .file(let id): id
             }
         }
-
-        var description: String {
-            switch self {
-                case .emptySpace: "."
-                case .fileBlock(let id): String(id)
-            }
-        }
-    }
-
-    var isEmpty: Bool {
-        type.isEmpty && count > 0
-    }
-
-    var isFile: Bool {
-        !type.isEmpty && count > 0
-    }
-
-    var description: String {
-        String(repeating: type.description, count: count)
-    }
-}
-
-extension [DiskElement] {
-    var description: String {
-        map(\.description).joined(separator: "")
     }
 }
