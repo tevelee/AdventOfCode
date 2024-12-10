@@ -60,10 +60,21 @@ private struct Day8 {
         try #expect(problem.solvePart2() == 34)
     }
 
-    @Test(.tags(.live))
-    func live() async throws {
-        let problem = try await CurrentPuzzle()
-        try #expect(problem.solvePart1() == 228)
-        try #expect(problem.solvePart2() == 766)
+    @Suite(.tags(.live), .serialized)
+    struct Day8Live: @unchecked Sendable {
+        private let problem: CurrentPuzzle
+        init() async throws {
+            problem = try await CurrentPuzzle()
+        }
+
+        @Test("Day 8 Part 1")
+        func part1() throws {
+            try #expect(problem.solvePart1() == 228)
+        }
+
+        @Test("Day 8 Part 2")
+        func part2() throws {
+            try #expect(problem.solvePart2() == 766)
+        }
     }
 }

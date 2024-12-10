@@ -19,10 +19,21 @@ private struct Day22 {
         try await #expect(problem.solvePart2() == 0)
     }
 
-    @Test(.tags(.live))
-    func live() async throws {
-        let problem = try await CurrentPuzzle()
-        try await #expect(problem.solvePart1() == 0)
-        try await #expect(problem.solvePart2() == 0)
+    @Suite(.tags(.live), .serialized)
+    struct Day22Live {
+        private let problem: CurrentPuzzle
+        init() async throws {
+            problem = try await CurrentPuzzle()
+        }
+        
+        @Test("Day 22 Part 1")
+        func part1() async throws {
+            try await #expect(problem.solvePart1() == 0)
+        }
+        
+        @Test("Day 22 Part 2")
+        func part2() async throws {
+            try await #expect(problem.solvePart2() == 0)
+        }
     }
 }

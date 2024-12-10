@@ -1,6 +1,6 @@
 import Utils
 
-public final class AoC_2024_Day7 {
+public final class AoC_2024_Day7: Sendable {
     private let entries: [(target: Int, components: [Int])]
 
     public init(_ input: Input) throws {

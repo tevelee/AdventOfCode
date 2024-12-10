@@ -75,10 +75,21 @@ private struct Day5 {
         try await #expect(problem.solvePart2() == 123)
     }
 
-    @Test(.tags(.live))
-    func live() async throws {
-        let problem = try await CurrentPuzzle()
-        try await #expect(problem.solvePart1() == 5_991)
-        try await #expect(problem.solvePart2() == 5_479)
+    @Suite(.tags(.live), .serialized)
+    struct Day5Live {
+        private let problem: CurrentPuzzle
+        init() async throws {
+            problem = try await CurrentPuzzle()
+        }
+
+        @Test("Day 5 Part 1")
+        func part1() async throws {
+            try await #expect(problem.solvePart1() == 5_991)
+        }
+
+        @Test("Day 5 Part 2")
+        func part2() async throws {
+            try await #expect(problem.solvePart2() == 5_479)
+        }
     }
 }

@@ -39,6 +39,7 @@ struct FetchEvents: AsyncParsableCommand {
     private enum FetchError: Error {
         case invalidURL
         case invalidData
+        case invalidSession
     }
 
     mutating func run() async throws {
@@ -113,6 +114,9 @@ struct FetchEvents: AsyncParsableCommand {
         }
         let request = URLRequest(url: url)
         let (data, _) = try await urlSession.data(for: request)
+        if let string = String(data: data, encoding: .utf8), string.contains("Please log in to get your puzzle input.") {
+            throw FetchError.invalidSession
+        }
         try data.write(to: fileURL)
     }
 
@@ -253,11 +257,22 @@ struct FetchEvents: AsyncParsableCommand {
                 try await #expect(problem.solvePart2() == 0)
             }
         
-            @Test(.tags(.live))
-            func live() async throws {
-                let problem = try await CurrentPuzzle()
-                try await #expect(problem.solvePart1() == 0)
-                try await #expect(problem.solvePart2() == 0)
+            @Suite(.tags(.live), .serialized)
+            struct Day\#(id.day)Live {
+                private let problem: CurrentPuzzle
+                init() async throws {
+                    problem = try await CurrentPuzzle()
+                }
+                
+                @Test("Day \#(id.day) Part 1")
+                func part1() async throws {
+                    try await #expect(problem.solvePart1() == 0)
+                }
+                
+                @Test("Day \#(id.day) Part 2")
+                func part2() async throws {
+                    try await #expect(problem.solvePart2() == 0)
+                }
             }
         }
         
@@ -269,15 +284,6 @@ struct FetchEvents: AsyncParsableCommand {
         import \#(id.moduleName)
         import Foundation
         import Testing
-        import XCTest
-        
-        final class \#(id.moduleName)_Tests: XCTestCase {
-        #if swift(<6.0)
-            func testAll() async {
-                await XCTestScaffold.runAllTests(hostedBy: self)
-            }
-        #endif
-        }
         
         extension Tag {
             @Tag static var live: Tag

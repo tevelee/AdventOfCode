@@ -63,7 +63,7 @@ public final class AoC_2024_Day9 {
     }
 }
 
-enum ElementType {
+private enum ElementType {
     case freeSpace
     case file(id: Int)
 

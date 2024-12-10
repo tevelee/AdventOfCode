@@ -12,9 +12,16 @@ private struct Day25 {
         try await #expect(problem.solve() == 0)
     }
 
-    @Test(.tags(.live))
-    func live() async throws {
-        let problem = try await CurrentPuzzle()
-        try await #expect(problem.solve() == 0)
+    @Suite(.tags(.live), .serialized)
+    struct Day25Live {
+        private let problem: CurrentPuzzle
+        init() async throws {
+            problem = try await CurrentPuzzle()
+        }
+
+        @Test("Day 25")
+        func live() async throws {
+            try await #expect(problem.solve() == 0)
+        }
     }
 }
