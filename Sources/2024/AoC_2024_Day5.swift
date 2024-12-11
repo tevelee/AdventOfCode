@@ -17,12 +17,12 @@ public final class AoC_2024_Day5 {
             .allSatisfy(orderingRules.isInCorrectOrder)
     }
 
-    public func solvePart1() async throws -> Int {
+    public func solvePart1() -> Int {
         sortedUpdates.trueElements
             .sum(of: \.middleElement)
     }
 
-    public func solvePart2() async throws -> Int {
+    public func solvePart2() -> Int {
         sortedUpdates.falseElements
             .map { $0.sorted(by: orderingRules.isInCorrectOrder) }
             .sum(of: \.middleElement)

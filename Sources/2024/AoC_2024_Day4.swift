@@ -8,11 +8,11 @@ public final class AoC_2024_Day4 {
         grid = try Grid(rows: input.wholeInput.lines.map(Array.init))
     }
 
-    public func solvePart1() async throws -> Int {
+    public func solvePart1() -> Int {
         grid.count(consecutiveMatchesOf: "XMAS")
     }
 
-    public func solvePart2() async throws -> Int {
+    public func solvePart2() -> Int {
         grid.count(diagonalMatchesOf: Array("MAS"))
     }
 }

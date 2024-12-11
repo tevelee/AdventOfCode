@@ -6,7 +6,7 @@ extension CurrentPuzzle: Puzzle {}
 
 private struct Day6 {
     @Test
-    func part1_intro() async throws {
+    func part1_intro() throws {
         let problem = try CurrentPuzzle("""
         ....#.....
         .........#
@@ -19,11 +19,11 @@ private struct Day6 {
         #.........
         ......#...
         """)
-        try await #expect(problem.solvePart1() == 41)
+        #expect(problem.solvePart1() == 41)
     }
 
     @Test
-    func part2_intro() async throws {
+    func part2_intro() throws {
         let problem = try CurrentPuzzle("""
         ....#.....
         .........#
@@ -36,24 +36,24 @@ private struct Day6 {
         #.........
         ......#...
         """)
-        try await #expect(problem.solvePart2() == 6)
+        #expect(problem.solvePart2() == 6)
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day6Live {
+    struct Day6Live: @unchecked Sendable {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
         }
 
         @Test("Day 6 Part 1")
-        func part1() async throws {
-            try await #expect(problem.solvePart1() == 5_208)
+        func part1() {
+            #expect(problem.solvePart1() == 5_208)
         }
 
         @Test("Day 6 Part 2")
-        func part2() async throws {
-            try await #expect(problem.solvePart2() == 1_972)
+        func part2() {
+            #expect(problem.solvePart2() == 1_972)
         }
     }
 }

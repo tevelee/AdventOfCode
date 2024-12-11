@@ -13,11 +13,11 @@ public final class AoC_2024_Day1 {
         }
     }
 
-    public func solvePart1() async throws -> Int {
+    public func solvePart1() -> Int {
         zip(left.sorted(), right.sorted()).sum { abs($0 - $1) }
     }
 
-    public func solvePart2() async throws -> Int {
+    public func solvePart2() -> Int {
         let frequencies = right.grouped(by: \.self).mapValues(\.count)
         return left.sum { frequencies[$0, default: 0] * $0 }
     }

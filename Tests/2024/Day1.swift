@@ -15,7 +15,7 @@ private struct Day1 {
         3   9
         3   3
         """)
-        try await #expect(problem.solvePart1() == 11)
+        #expect(problem.solvePart1() == 11)
     }
 
     @Test
@@ -28,24 +28,24 @@ private struct Day1 {
         3   9
         3   3
         """)
-        try await #expect(problem.solvePart2() == 31)
+        #expect(problem.solvePart2() == 31)
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day1Live {
+    struct Day1Live: @unchecked Sendable {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
         }
 
         @Test("Day 1 Part 1")
-        func part1() async throws {
-            try await #expect(problem.solvePart1() == 2_375_403)
+        func part1() {
+            #expect(problem.solvePart1() == 2_375_403)
         }
 
         @Test("Day 1 Part 2")
-        func part2() async throws {
-            try await #expect(problem.solvePart2() == 23_082_277)
+        func part2() {
+            #expect(problem.solvePart2() == 23_082_277)
         }
     }
 }

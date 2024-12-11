@@ -13,7 +13,7 @@ private struct Day10 {
         8765
         9876
         """)
-        try #expect(problem.solvePart1() == 1)
+        #expect(problem.solvePart1() == 1)
     }
 
     @Test
@@ -27,7 +27,7 @@ private struct Day10 {
         8.....8
         9.....9
         """)
-        try #expect(problem.solvePart1() == 2)
+        #expect(problem.solvePart1() == 2)
     }
 
     @Test
@@ -41,7 +41,7 @@ private struct Day10 {
         876....
         987....
         """)
-        try #expect(problem.solvePart1() == 4)
+        #expect(problem.solvePart1() == 4)
     }
 
     @Test
@@ -55,7 +55,7 @@ private struct Day10 {
         ...9..2
         .....01
         """)
-        try #expect(problem.solvePart1() == 3)
+        #expect(problem.solvePart1() == 3)
     }
 
     @Test
@@ -70,7 +70,7 @@ private struct Day10 {
         01329801
         10456732
         """)
-        try #expect(problem.solvePart1() == 36)
+        #expect(problem.solvePart1() == 36)
     }
 
     @Test
@@ -85,7 +85,7 @@ private struct Day10 {
         01329801
         10456732
         """)
-        try #expect(problem.solvePart2() == 81)
+        #expect(problem.solvePart2() == 81)
     }
 
     @Suite(.tags(.live), .serialized)
@@ -96,13 +96,13 @@ private struct Day10 {
         }
 
         @Test("Day 10 Part 1")
-        func part1() throws {
-            try #expect(problem.solvePart1() == 717)
+        func part1() {
+            #expect(problem.solvePart1() == 717)
         }
 
         @Test("Day 10 Part 2")
-        func part2() throws {
-            try #expect(problem.solvePart2() == 1_686)
+        func part2() {
+            #expect(problem.solvePart2() == 1_686)
         }
     }
 }

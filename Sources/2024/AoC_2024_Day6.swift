@@ -28,11 +28,11 @@ public final class AoC_2024_Day6 {
         return positions
     }()
 
-    public func solvePart1() async throws -> Int {
+    public func solvePart1() -> Int {
         patrol.count
     }
 
-    public func solvePart2() async throws -> Int {
+    public func solvePart2() -> Int {
         patrol.filter { $0 != guardStartPosition }.count {
             runPatrol(on: map.withObstacle(at: $0)) == .circular
         }

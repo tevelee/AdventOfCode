@@ -12,7 +12,7 @@ public final class AoC_2024_Day10 {
         self.positions = positions
     }
 
-    public func solvePart1() throws -> Int {
+    public func solvePart1() -> Int {
         var reachableTrailheads: [[Set<Position>]] = grid.map { $0.map { _ in [] } }
         for position in positions[9, default: []] {
             reachableTrailheads[position] = [position]
@@ -23,7 +23,7 @@ public final class AoC_2024_Day10 {
         return positions[0, default: []].sum { reachableTrailheads[$0].count }
     }
 
-    public func solvePart2() throws -> Int {
+    public func solvePart2() -> Int {
         var numberOfDistinctTrails: [[Int]] = grid.map { $0.map { _ in 0 } }
         for position in positions[9, default: []] {
             numberOfDistinctTrails[position] = 1

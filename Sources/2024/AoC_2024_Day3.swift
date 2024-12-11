@@ -24,13 +24,13 @@ public final class AoC_2024_Day3 {
         instructions = try input.wholeInput
     }
 
-    public func solvePart1() async throws -> Int {
+    public func solvePart1() -> Int {
         instructions.matches(of: mul).sum { match in
             match.1 * match.2
         }
     }
 
-    public func solvePart2() async throws -> Int {
+    public func solvePart2() -> Int {
         let full = Regex {
             ChoiceOf {
                 "do()"
