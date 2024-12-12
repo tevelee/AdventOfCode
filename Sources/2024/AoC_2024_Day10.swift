@@ -6,7 +6,7 @@ public final class AoC_2024_Day10 {
 
     public init(_ input: Input) throws {
         let grid: [[Int]] = try input.wholeInput.lines.map { Array($0).map { $0.wholeNumberValue ?? -1 } }
-        var positions = grid.positions.grouped { grid[$0] }.mapValues { Set($0) }
+        var positions: [Int: Set<Position>] = grid.positions.grouped { grid[$0] }.mapValues { Set($0) }
         positions[-1] = nil
         self.grid = grid
         self.positions = positions

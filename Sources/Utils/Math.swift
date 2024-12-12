@@ -10,10 +10,7 @@ import Algorithms
 }
 
 @inlinable public func product3<C: Collection>(_ c1: C, _ c2: C, _ c3: C) -> [(C.Element, C.Element, C.Element)] {
-    product(product(c1, c2), c3).map { p, z in
-        let (x,y) = p
-        return (x,y,z)
-    }
+    product(product(c1, c2), c3).map(join)
 }
 
 @inlinable public func nonNegativeModulo(of lhs: Int, by rhs: Int) -> Int {
