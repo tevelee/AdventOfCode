@@ -7,29 +7,24 @@ public final class AoC_2024_Day11 {
         stones = try input.wholeInput.integers
     }
 
-    private struct Blink: Hashable {
-        let stone: Int
-        let iteration: Int
-    }
-
     public func solve(times iteration: Int) -> Int {
         computeNumberOfStones(for: stones, after: iteration)
     }
 
     private func computeNumberOfStones(for stones: [Int], after iteration: Int) -> Int {
         stones.sum { stone in
-            computeNumberOfStones(Blink(stone: stone, iteration: iteration))
+            computeNumberOfStones(stone, iteration)
         }
     }
 
     private lazy var computeNumberOfStones = memoize(_computeNumberOfStones)
-    private func _computeNumberOfStones(at blink: Blink) -> Int {
-        if blink.iteration == 0 {
+    private func _computeNumberOfStones(stone: Int, iteration: Int) -> Int {
+        if iteration == 0 {
             1
         } else {
             computeNumberOfStones(
-                for: newStones(from: blink.stone),
-                after: blink.iteration - 1
+                for: newStones(from: stone),
+                after: iteration - 1
             )
         }
     }
