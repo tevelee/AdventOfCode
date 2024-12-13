@@ -110,12 +110,16 @@ private struct GridPolygon {
     }
 
     var perimeter: Int {
-        positions.reduce(into: 0) { result, position in
-            result += 4 - positions.count(where: position.isNeighbor)
+        positions.sum { position in
+            4 - positions.count(where: position.isNeighbor)
         }
     }
 
     var numberOfSides: Int {
+        numberOfCorners
+    }
+
+    var numberOfCorners: Int {
         let corners = positions.flatMap(\.corners).grouped(by: \.self).mapValues(\.count)
         let uniqueCorners = corners.filter { !$0.value.isMultiple(of: 2) }.count
         let touchingCorners = corners.filter { $0.value == 2 }.count { corner, _ in
