@@ -1,3 +1,4 @@
+import Algorithms
 import AsyncAlgorithms
 
 extension Sequence {
@@ -7,6 +8,14 @@ extension Sequence {
 
     @inlinable public func min<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
         try map(property).min()
+    }
+
+    @inlinable public func minAndMax<T: Comparable>(of property: (Element) throws -> T) rethrows -> (min: Element, max: Element)? {
+        try minAndMax(by: { try property($0) < property($1) })
+    }
+
+    @inlinable public func minAndMaxValues<T: Comparable>(of property: (Element) throws -> T) rethrows -> (min: T, max: T)? {
+        try minAndMax(by: { try property($0) < property($1) }).map { try (property($0.min), property($0.max)) }
     }
 
     @inlinable public func sum<T: Numeric>(of property: (Element) throws -> T) rethrows -> T {
