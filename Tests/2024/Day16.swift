@@ -6,34 +6,112 @@ extension CurrentPuzzle: Puzzle {}
 
 private struct Day16 {
     @Test
-    func part1_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part1_small() throws {
+        let problem = try CurrentPuzzle("""
+        ###############
+        #.......#....E#
+        #.#.###.#.###.#
+        #.....#.#...#.#
+        #.###.#####.#.#
+        #.#.#.......#.#
+        #.#.#####.###.#
+        #...........#.#
+        ###.#.#####.#.#
+        #...#.....#.#.#
+        #.#.#.###.#.#.#
+        #.....#...#.#.#
+        #.###.#.#.#.#.#
+        #S..#.....#...#
+        ###############
         """)
-        try await #expect(problem.solvePart1() == 0)
+        #expect(problem.solvePart1() == 7_036)
     }
 
     @Test
-    func part2_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part1_large() throws {
+        let problem = try CurrentPuzzle("""
+        #################
+        #...#...#...#..E#
+        #.#.#.#.#.#.#.#.#
+        #.#.#.#...#...#.#
+        #.#.#.#.###.#.#.#
+        #...#.#.#.....#.#
+        #.#.#.#.#.#####.#
+        #.#...#.#.#.....#
+        #.#.#####.#.###.#
+        #.#.#.......#...#
+        #.#.###.#####.###
+        #.#.#...#.....#.#
+        #.#.#.#####.###.#
+        #.#.#.........#.#
+        #.#.#.#########.#
+        #S#.............#
+        #################
         """)
-        try await #expect(problem.solvePart2() == 0)
+        #expect(problem.solvePart1() == 11_048)
+    }
+
+    @Test
+    func part2_small() throws {
+        let problem = try CurrentPuzzle("""
+        ###############
+        #.......#....E#
+        #.#.###.#.###.#
+        #.....#.#...#.#
+        #.###.#####.#.#
+        #.#.#.......#.#
+        #.#.#####.###.#
+        #...........#.#
+        ###.#.#####.#.#
+        #...#.....#.#.#
+        #.#.#.###.#.#.#
+        #.....#...#.#.#
+        #.###.#.#.#.#.#
+        #S..#.....#...#
+        ###############
+        """)
+        #expect(problem.solvePart2() == 45)
+    }
+
+    @Test
+    func part2_large() throws {
+        let problem = try CurrentPuzzle("""
+        #################
+        #...#...#...#..E#
+        #.#.#.#.#.#.#.#.#
+        #.#.#.#...#...#.#
+        #.#.#.#.###.#.#.#
+        #...#.#.#.....#.#
+        #.#.#.#.#.#####.#
+        #.#...#.#.#.....#
+        #.#.#####.#.###.#
+        #.#.#.......#...#
+        #.#.###.#####.###
+        #.#.#...#.....#.#
+        #.#.#.#####.###.#
+        #.#.#.........#.#
+        #.#.#.#########.#
+        #S#.............#
+        #################
+        """)
+        #expect(problem.solvePart2() == 64)
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day16Live {
+    struct Day16Live: @unchecked Sendable {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
         }
         
         @Test("Day 16 Part 1")
-        func part1() async throws {
-            try await #expect(problem.solvePart1() == 0)
+        func part1() throws {
+            #expect(problem.solvePart1() == 123_540)
         }
         
         @Test("Day 16 Part 2")
-        func part2() async throws {
-            try await #expect(problem.solvePart2() == 0)
+        func part2() throws {
+            #expect(problem.solvePart2() == 665)
         }
     }
 }
