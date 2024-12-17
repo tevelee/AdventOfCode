@@ -45,9 +45,9 @@ public final class AoC_2022_Day24 {
         }
         .shortestPath(
             from: source,
-            to: destination,
-            satisfying: { $0.position == destination.position },
-            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))
+            until: { $0.position == destination.position },
+            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates, towards: destination))
+        )
         .map { $0.path.count - 1 } ?? 0
     }
 

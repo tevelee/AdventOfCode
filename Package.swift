@@ -18,7 +18,7 @@ let package = Package(
          .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.0"),
          .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.0"),
          .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
-         .package(url: "https://github.com/tevelee/swift-graphs.git", from: "0.0.2"),
+         .package(url: "https://github.com/tevelee/swift-graphs.git", from: "0.3.0")
     ],
     targets: [
         .target(

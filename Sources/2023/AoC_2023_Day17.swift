@@ -50,9 +50,9 @@ public final class AoC_2023_Day17 {
         }
         .shortestPath(
             from: State(topLeft),
-            to: State(bottomRight),
-            satisfying: { $0.position == bottomRight && $0.length >= range.lowerBound },
-            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates)))?
+            until: { $0.position == bottomRight && $0.length >= range.lowerBound },
+            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates, towards: State(bottomRight)))
+        )?
         .path
         .dropFirst()
         .sum { self.grid[$0.position] } ?? 0
