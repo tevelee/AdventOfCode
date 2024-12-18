@@ -24,7 +24,13 @@ extension Puzzle {
 
 extension Puzzle {
     init() async throws {
-        try await self.init(file("\(Self.year)_day\(Self.day)"))
+        try await self.init(Self.inputFile)
+    }
+
+    static var inputFile: Input {
+        get throws {
+            try file("\(Self.year)_day\(Self.day)")
+        }
     }
 }
 
