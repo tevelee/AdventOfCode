@@ -21,22 +21,19 @@ public final class AoC_2024_Day19 {
     private lazy var canPrint = memoize(_canPrint)
     private func _canPrint(design: ArraySlice<Color>) -> Bool {
         if design.isEmpty { return true }
-        for pattern in patterns where design.hasPrefix(pattern) && canPrint(design.dropFirst(pattern.count)) {
-            return true
-        }
-        return false
+        return patterns.lazy
+            .filter(design.hasPrefix)
+            .map { design.dropFirst($0.count) }
+            .contains(where: canPrint)
     }
 
     private lazy var numberOfArrangements = memoize(_numberOfArrangements)
     private func _numberOfArrangements(of design: ArraySlice<Color>) -> Int {
         if design.isEmpty { return 1 }
-        var result = 0
-        for pattern in patterns {
-            if design.hasPrefix(pattern) {
-                result += numberOfArrangements(design.dropFirst(pattern.count))
-            }
-        }
-        return result
+        return patterns.lazy
+            .filter(design.hasPrefix)
+            .map { design.dropFirst($0.count) }
+            .sum(of: numberOfArrangements)
     }
 }
 
