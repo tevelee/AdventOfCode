@@ -6,34 +6,54 @@ extension CurrentPuzzle: Puzzle {}
 
 private struct Day19 {
     @Test
-    func part1_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part1_intro() throws {
+        let problem = try CurrentPuzzle("""
+        r, wr, b, g, bwu, rb, gb, br
+        
+        brwrr
+        bggr
+        gbbr
+        rrbgbr
+        ubwu
+        bwurrg
+        brgr
+        bbrgwb
         """)
-        try await #expect(problem.solvePart1() == 0)
+        #expect(problem.solvePart1() == 6)
     }
 
     @Test
-    func part2_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func part2_intro() throws {
+        let problem = try CurrentPuzzle("""
+        r, wr, b, g, bwu, rb, gb, br
+        
+        brwrr
+        bggr
+        gbbr
+        rrbgbr
+        ubwu
+        bwurrg
+        brgr
+        bbrgwb
         """)
-        try await #expect(problem.solvePart2() == 0)
+        #expect(problem.solvePart2() == 16)
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day19Live {
+    struct Day19Live: @unchecked Sendable {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
         }
         
         @Test("Day 19 Part 1")
-        func part1() async throws {
-            try await #expect(problem.solvePart1() == 0)
+        func part1() {
+            #expect(problem.solvePart1() == 276)
         }
         
         @Test("Day 19 Part 2")
-        func part2() async throws {
-            try await #expect(problem.solvePart2() == 0)
+        func part2() {
+            #expect(problem.solvePart2() == 681_226_908_011_510)
         }
     }
 }

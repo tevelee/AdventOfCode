@@ -76,6 +76,15 @@ extension AsyncSequence {
             try await reduce(0) { result, _ in result + 1 }
         }
     }
+
+    @inlinable public var first: Element? {
+        get async throws(Failure) {
+            for try await element in self {
+                return element
+            }
+            return nil
+        }
+    }
 }
 
 extension AsyncSequence where Element: Numeric {
