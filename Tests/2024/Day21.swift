@@ -6,34 +6,32 @@ extension CurrentPuzzle: Puzzle {}
 
 private struct Day21 {
     @Test
-    func part1_intro() async throws {
-        let problem = CurrentPuzzle("""
+    func intro() throws {
+        let problem = try CurrentPuzzle("""
+        029A
+        980A
+        179A
+        456A
+        379A
         """)
-        try await #expect(problem.solvePart1() == 0)
-    }
-
-    @Test
-    func part2_intro() async throws {
-        let problem = CurrentPuzzle("""
-        """)
-        try await #expect(problem.solvePart2() == 0)
+        #expect(problem.solvePart1() == 126_384)
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day21Live {
+    struct Day21Live: @unchecked Sendable {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
         }
         
         @Test("Day 21 Part 1")
-        func part1() async throws {
-            try await #expect(problem.solvePart1() == 0)
+        func part1() {
+            #expect(problem.solvePart1() == 157_892)
         }
         
         @Test("Day 21 Part 2")
-        func part2() async throws {
-            try await #expect(problem.solvePart2() == 0)
+        func part2() {
+            #expect(problem.solvePart2() == 197_015_606_336_332)
         }
     }
 }
