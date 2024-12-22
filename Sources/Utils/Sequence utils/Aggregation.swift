@@ -42,6 +42,12 @@ extension Sequence {
         return result
     }
 
+    @inlinable public var first: Element? {
+        for element in self {
+            return element
+        }
+        return nil
+    }
 }
 
 extension Sequence where Element: Numeric {
