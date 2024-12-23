@@ -2,11 +2,19 @@ import Algorithms
 import AsyncAlgorithms
 
 extension Sequence {
-    @inlinable public func max<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
+    @inlinable public func max<T: Comparable>(by property: (Element) throws -> T) rethrows -> Element? {
+        try self.max { try property($0) < property($1) }
+    }
+
+    @inlinable public func maxValue<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
         try map(property).max()
     }
 
-    @inlinable public func min<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
+    @inlinable public func min<T: Comparable>(by property: (Element) throws -> T) rethrows -> Element? {
+        try self.min { try property($0) < property($1) }
+    }
+
+    @inlinable public func minValue<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
         try map(property).min()
     }
 

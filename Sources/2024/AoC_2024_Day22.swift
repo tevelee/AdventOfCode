@@ -22,7 +22,7 @@ public final class AoC_2024_Day22 {
                 cache[window, default: [:]][current] = value
             }
         }
-        return cache.max { $0.value.values.sum() }!
+        return cache.maxValue { $0.value.values.sum() }!
     }
 
     private func iterate(_ original: Int) -> some Sequence<Int> {

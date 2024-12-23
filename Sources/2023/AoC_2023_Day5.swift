@@ -18,7 +18,7 @@ public final class AoC_2023_Day5 {
     }
 
     public func solvePart1() -> Int {
-        seeds.min { seed in
+        seeds.minValue { seed in
             maps.reduce(seed, resolve)
         } ?? 0
     }
@@ -52,7 +52,7 @@ public final class AoC_2023_Day5 {
             ranges = newRanges
         }
 
-        return ranges.min(of: \.lowerBound) ?? 0
+        return ranges.minValue(of: \.lowerBound) ?? 0
     }
 
     private func resolve(number: Int, in map: Map) -> Int {

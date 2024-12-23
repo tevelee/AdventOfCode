@@ -25,7 +25,7 @@ public final class AoC_2023_Day16 {
             Laser(position: Position(x: mirrors[0].count - 1, y: y), direction: .left)
         }
         let lasers = firstRow + lastRow + firstColumn + lastColumn
-        return lasers.max(of: numberOfEnergizedFields) ?? 0
+        return lasers.maxValue(of: numberOfEnergizedFields) ?? 0
     }
 
     private func numberOfEnergizedFields(from laser: Laser) -> Int {
