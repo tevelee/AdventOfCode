@@ -1,5 +1,5 @@
 ## --- Day 22: Monkey Market ---
-As you're all teleported deep into the jungle, a [monkey](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2022/Tasks/AoC_2022_Day11_part1.md) steals The Historians' device! You'll need get it back while The Historians are looking for the Chief.
+As you're all teleported deep into the jungle, a [monkey](https://github.com/tevelee/AdventOfCode/blob/develop/Sources/2022/Tasks/AoC_2022_Day11_part1.md) steals The Historians' device! You'll need to get it back while The Historians are looking for the Chief.
  
 The monkey that stole the device seems willing to trade it, but only in exchange for an absurd number of bananas. Your only option is to buy bananas on the Monkey Exchange Market.
  
