@@ -21,7 +21,7 @@ public final class AoC_2023_Day17 {
     }
 
     private func solve(range: ClosedRange<Int>) -> Int {
-        LazyGraph<State, Empty> { state in
+        let graph = LazyIncidenceGraph(neighbors: { (state: State) in
             Direction.allCases.compactMap { direction in
                 if let existingDirection = state.direction, existingDirection != direction, state.length < range.lowerBound {
                     return nil
@@ -44,16 +44,22 @@ public final class AoC_2023_Day17 {
                     length: length + 1
                 )
             }
+        })
+        .withEdgeProperty(for: Weight.self) { edge, _ in
+            Double(self.grid[edge.destination.position])
         }
-        .weighted { _, destination in
-            self.grid[destination.position]
-        }
+        let path = graph
         .shortestPath(
             from: State(topLeft),
-            until: { $0.position == bottomRight && $0.length >= range.lowerBound },
-            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates, towards: State(bottomRight)))
-        )?
-        .path
+            until: { [bottomRight] in
+                $0.position == bottomRight && $0.length >= range.lowerBound
+            },
+            using: .aStar(weight: .property(\.weight), heuristic: .init { destination, _ in
+                Double(abs(destination.position.x - self.bottomRight.x) + abs(destination.position.y - self.bottomRight.y))
+            })
+        )
+        return path?
+        .vertices
         .dropFirst()
         .sum { self.grid[$0.position] } ?? 0
     }
@@ -116,5 +122,16 @@ private extension Array where Element: Collection, Element.Index == Int {
         self.lazy.enumerated().flatMap { y, line in
             line.indices.lazy.map { Position(x: $0, y: y) }
         }
+    }
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue = 0.0
+}
+
+private extension EdgeProperties {
+    var weight: Double {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
     }
 }

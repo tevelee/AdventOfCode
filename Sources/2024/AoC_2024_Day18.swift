@@ -27,9 +27,8 @@ public final class AoC_2024_Day18 {
 
     private func shortestPath(limit: Int) -> Int? {
         let positions = Set(positions.prefix(limit))
-        return LazyGraph<Position, Empty> { self.neighbors($0).filter { !positions.contains($0) } }
-            .weighted(constant: 1)
-            .shortestPath(from: topLeft, to: bottomRight, using: .dijkstra())?
+        return LazyIncidenceGraph(neighbors: { self.neighbors($0).filter { !positions.contains($0) } })
+            .shortestPath(from: topLeft, to: bottomRight, using: .dijkstra(weight: .unit))?
             .edges
             .count
     }
@@ -54,5 +53,16 @@ private extension SIMD2 {
         var copy = self
         block(&copy)
         return copy
+    }
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue: UInt = 0
+}
+
+private extension EdgeProperties {
+    var weight: UInt {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
     }
 }

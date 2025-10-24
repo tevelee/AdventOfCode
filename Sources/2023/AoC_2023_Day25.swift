@@ -51,14 +51,14 @@ public final class AoC_2023_Day25 {
             var pathFlow = Int.max
             var s = sink
             while s != source {
-                let pred = parentMap[s]!
+                guard let pred = parentMap[s] else { continue }
                 pathFlow = min(pathFlow, graph[pred]?.contains(s) ?? false ? 1 : 0)
                 s = pred
             }
 
             s = sink
             while s != source {
-                let pred = parentMap[s]!
+                guard let pred = parentMap[s] else { continue }
                 graph[pred]?.remove(s)
                 graph[s]?.insert(pred)
                 s = pred
@@ -71,9 +71,9 @@ public final class AoC_2023_Day25 {
     }
 
     private func size(of graph: [String: Set<String>], source: String) -> Int {
-        LazyGraph { graph[$0] ?? [] }
-        .traverse(from: source, strategy: .dfs().visitEachNodeOnce())
-        .count
+        LazyIncidenceGraph(neighbors: { graph[$0] ?? [] })
+        .traverse(from: source, using: .dfs())
+        .vertices.count
     }
 
     private func isReachable(
@@ -86,13 +86,21 @@ public final class AoC_2023_Day25 {
         innerParentMap[source] = source
         defer { parentMap = innerParentMap }
 
-        return LazyGraph<(name: String, previous: String?), Empty> { (node, _) in
-            graph[node]!.map { ($0, node) }
+        struct Vertex: Hashable {
+            let name: String
+            let previous: String?
         }
-        .searchFirst(
-            from: (source, nil),
-            strategy: .bfs().visitEachNodeOnce(by: \.name)
-        ) { visit in
+        
+        let graph = LazyIncidenceGraph(neighbors: { node in
+            graph[node.name]!.map { Vertex(name: $0, previous: node.previous) }
+        })
+        return graph
+        .search(
+            from: Vertex(name: source, previous: nil),
+            using: .bfs()
+        )
+        .map(\.currentVertex)
+        .first { visit in
             innerParentMap[visit.name] = visit.previous
             return visit.name == sink
         } != nil

@@ -40,24 +40,36 @@ public final class AoC_2024_Day20 {
         solve(max: max) { $0 == saves }
     }
 
-    private lazy var shortestPath = LazyGraph { [walls] in $0.neighbors.filter { !walls.contains($0) } }
-        .weighted(constant: 1 as UInt)
-        .shortestPath(from: start, to: end, using: .dijkstra())!.path
+    private lazy var shortestPath = LazyIncidenceGraph(neighbors: { [walls] (pos: Position) in pos.neighbors.filter { !walls.contains($0) } })
+        .withEdgeProperty(for: Weight.self) { _, _ in 1 }
+        .shortestPath(from: start, to: end, using: .dijkstra(weight: .property(\.weight)))!
+        .vertices
 
-    private lazy var offsets = shortestPath.enumerated().keyed(by: \.element).mapValues(\.offset)
+    private lazy var offsets: [Position: Int] = {
+        Dictionary(uniqueKeysWithValues: shortestPath.enumerated().map { ($0.element, $0.offset) })
+    }()
 
     private func solve(max maxLength: Int, saveCondition: @escaping (Int) -> Bool) -> Int {
         shortestPath
             .combinations(ofCount: 2)
             .map { try! $0.elements() }
-            .count { [walls] p1, p2 in
+            .count { [walls] (p1: Position, p2: Position) in
                 let length = abs(p1.x - p2.x) + abs(p1.y - p2.y) - 1
                 guard length > 0, length < maxLength else { return false }
                 let saving = abs(offsets[p1]! - offsets[p2]!) - length - 1
                 guard saveCondition(saving) else { return false }
-                return LazyGraph { $0.neighbors.filter { walls.contains($0) || $0 == p2 } }
-                    .weighted(constant: 1 as UInt)
-                    .shortestPath(from: p1, to: p2, using: .aStar(heuristic: .manhattanDistance(of: \.coordinate))) != nil
+                let graph = LazyIncidenceGraph(neighbors: { (pos: Position) in
+                    pos.neighbors.filter { walls.contains($0) || $0 == p2 }
+                })
+                let path = graph.shortestPath(
+                    from: p1,
+                    to: p2,
+                    using: .aStar(
+                        weight: .uniform(1),
+                        heuristic: .distance(to: p2, using: .manhattan(\.coordinate))
+                    )
+                )
+                return path != nil
             }
     }
 
@@ -103,5 +115,16 @@ private struct Position: Hashable, CustomStringConvertible {
 
     var description: String {
         "(\(x),\(y))"
+    }
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue: Double = 0
+}
+
+private extension EdgeProperties {
+    var weight: Double {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
     }
 }

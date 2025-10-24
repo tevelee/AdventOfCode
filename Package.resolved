@@ -1,5 +1,5 @@
 {
-  "originHash" : "25b2390dcd3d3187c27c3ebcf3bbebad637cceba688b2d272780b2947663a47d",
+  "originHash" : "e9379779abd045e7b4a22d614dfda72aa64cf07260cc41d4598e379a783af8b4",
   "pins" : [
     {
       "identity" : "swift-algorithms",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/tevelee/swift-graphs.git",
       "state" : {
-        "revision" : "dfa3cb1a27dfc1e9a65e49f57f99eba62e3b9a54",
-        "version" : "0.3.0"
+        "revision" : "c1c6406d9af666f8433ffe8d8e1a51138df3ae55",
+        "version" : "0.4.4"
       }
     },
     {

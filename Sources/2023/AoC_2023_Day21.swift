@@ -41,12 +41,12 @@ public final class AoC_2023_Day21 {
     }
 
     private func availablePositions(for steps: Int, where condition: @escaping (Position) -> Bool) -> Int {
-        LazyGraph { [map] node in
-            Set(node.flatMap(map.neighbors).filter(condition))
-        }
-        .searchFirst(from: Set([startPosition]), strategy: .bfs(.trackDepth())) {
-            $0.depth == steps
-        }?.node.count ?? 0
+        LazyIncidenceGraph(neighbors: { [map] node in
+            [Set(node.flatMap(map.neighbors).filter(condition))]
+        })
+        .search(from: Set([startPosition]), using: .bfs())
+        .first { $0.depth() == steps }?
+        .currentVertex.count ?? 0
     }
 }
 

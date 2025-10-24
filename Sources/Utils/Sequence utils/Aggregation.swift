@@ -81,7 +81,7 @@ extension AsyncSequence {
         try await reduce(into: 1) { $0 *= property($1) }
     }
 
-    @inlinable public func count(where condition: @escaping @Sendable (Element) throws -> Bool) async throws -> Int {
+    @inlinable public func count(where condition: @escaping @Sendable (Element) throws -> Bool) async throws -> Int where Element: Sendable {
         try await filter(condition).count
     }
 

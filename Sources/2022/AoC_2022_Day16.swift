@@ -1,13 +1,25 @@
 import Utils
+import Algorithms
 import Graphs
 
 public final class AoC_2022_Day16 {
     private let valves: [String: Valve]
     private let initialValve = "AA"
 
-    private lazy var shortestPaths = ConnectedGraph(edges: valves.mapValues { valve in
-        Array(Set(valve.connections))
-    }).weighted(constant: 1).shortestPathsForAllPairs()
+    private lazy var graph = {
+        var graph = AdjacencyList()
+        let vertices = valves.map { valve, _ in
+            (valve, graph.addVertex { $0.label = valve })
+        }.keyed(by: \.0).mapValues(\.1)
+        for (key, valve) in valves {
+            for connection in Set(valve.connections) {
+                graph.addEdge(from: vertices[key]!, to: vertices[connection]!)
+            }
+        }
+        return graph
+    }()
+    
+    private lazy var shortestPaths = graph.shortestPathsForAllPairs(using: .floydWarshall(weight: .unit))
 
     public init(_ input: Input) throws {
         let valves: [Valve] = try input.wholeInput.lines.map { line in
@@ -50,8 +62,10 @@ public final class AoC_2022_Day16 {
                          timeRemaining: Int,
                          additionalActor: Bool = false) {
         maxPressureReleased = max(maxPressureReleased, totalPressureReleased)
-        for (valve, distance) in shortestPaths[currentValve]! {
-            let newTimeRemining = timeRemaining - distance - 1
+        let vertex = graph.vertices { $0.label == currentValve }.first!
+        for (valve, distance) in shortestPaths.distances[vertex]! {
+            let valve = graph[valve].label
+            let newTimeRemining = timeRemaining - distance.value - 1
             if !visitedValves.contains(valve), newTimeRemining > 0 {
                 let pressureReleased = newTimeRemining * valves[valve]!.flowRate
                 explore(valve: valve,
@@ -82,4 +96,35 @@ private struct Valve {
     let name: String
     let flowRate: Int
     let connections: Set<String>
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue = 0
+}
+
+private enum Label: VertexProperty {
+    static let defaultValue = ""
+}
+
+private extension EdgeProperties {
+    var weight: Int {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
+    }
+}
+
+private extension VertexProperties {
+    var label: String {
+        get { self[Label.self] }
+        set { self[Label.self] = newValue }
+    }
+}
+
+private extension Cost<UInt> {
+    var value: Int {
+        switch self {
+            case .finite(let value): Int(value)
+            case .infinite: 0
+        }
+    }
 }

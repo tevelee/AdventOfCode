@@ -35,20 +35,22 @@ public final class AoC_2022_Day24 {
     private lazy var path = shortestPath(from: State(position: startPosition), to: State(position: endPosition))
 
     private func shortestPath(from source: State, to destination: State) -> Int {
-        LazyGraph<State, Empty> { state in
+        let graph = LazyIncidenceGraph(neighbors: { (state: State) in
             self.possibleMoves(from: state, to: destination)
                 .filter { !self.hasBlizzard(at: $0, afterNumberOfMoves: state.numberOfMoves + 1) }
                 .map { State(position: $0, numberOfMoves: state.numberOfMoves + 1) }
+        })
+        .withEdgeProperty(for: Weight.self) { edge, _ in
+            Double(edge.source.position.distance(to: edge.destination.position) + edge.destination.numberOfMoves)
         }
-        .weighted { source, destination in
-            source.position.distance(to: destination.position) + destination.numberOfMoves
-        }
+        let path = graph
         .shortestPath(
             from: source,
             until: { $0.position == destination.position },
-            using: .aStar(heuristic: .manhattanDistance(of: \.position.coordinates, towards: destination))
+            using: .aStar(weight: .property(\.weight), heuristic: .distance(to: destination, using: .manhattan(\.position.coordinates)))
         )
-        .map { $0.path.count - 1 } ?? 0
+        return path
+        .map { $0.vertices.count - 1 } ?? 0
     }
 
     public func solvePart1() -> Int {
@@ -164,4 +166,15 @@ private enum Direction: Character, CustomStringConvertible {
     case up = "^"
 
     var description: String { String(rawValue) }
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue = 0.0
+}
+
+private extension EdgeProperties {
+    var weight: Double {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
+    }
 }

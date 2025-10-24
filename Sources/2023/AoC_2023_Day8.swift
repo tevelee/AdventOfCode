@@ -29,13 +29,19 @@ public final class AoC_2023_Day8 {
     }
 
     private func solve(start: String, until condition: @escaping (String) -> Bool) -> Int {
-        LazyGraph<(name: String, numberOfSteps: Int), Empty> { [self] (node: String, numberOfSteps: Int) in
-            let instruction = instructions[relativeIndex: numberOfSteps % instructions.count]
-            let routing = routes[node]!
-            return (instruction == "L" ? routing.left : routing.right, numberOfSteps + 1)
+        struct Vertex: Hashable {
+            let node: String
+            let numberOfSteps: Int
         }
-        .searchFirst(from: (start, 0), strategy: .dfs()) {
-            condition($0.name)
-        }?.numberOfSteps ?? 0
+        return LazyIncidenceGraph(neighbors: { [self] vertex in
+            let instruction = instructions[relativeIndex: vertex.numberOfSteps % instructions.count]
+            let routing = routes[vertex.node]!
+            return [
+                Vertex(node: instruction == "L" ? routing.left : routing.right, numberOfSteps: vertex.numberOfSteps + 1)
+            ]
+        })
+        .search(from: Vertex(node: start, numberOfSteps: 0), using: .dfs())
+        .first { condition($0.currentVertex.node) }?
+        .currentVertex.numberOfSteps ?? 0
     }
 }

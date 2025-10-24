@@ -27,27 +27,29 @@ public final class AoC_2024_Day16 {
         self.end = end
     }
 
-    private lazy var graph = LazyGraph { [walls] node -> [Node] in
+    private lazy var graph = LazyIncidenceGraph(neighbors: { [walls] (node: Node) in
         node.neighbors.filter { !walls.contains($0.position) }
-    }
-    .weighted { node1, node2 -> UInt in
-        node1.direction == node2.direction ? 1 : 1001
+    })
+    .withEdgeProperty(for: Weight.self) { edge, _ in
+        edge.source.direction == edge.destination.direction ? 1 : 1001
     }
 
     public func solvePart1() -> UInt {
-        graph.shortestPath(
+        guard let path = graph.shortestPath(
             from: Node(position: start, direction: .east),
-            until: { $0.position == end },
-            using: .dijkstra()
-        ).map(\.cost) ?? 0
+            until: { [end] in $0.position == end },
+            using: .dijkstra(weight: .property(\.weight))
+        ) else { return 0 }
+        return path.edges.reduce(0) { $0 + graph[$1].weight }
     }
 
     public func solvePart2() -> Int {
         let paths = graph.allShortestPaths(
             from: Node(position: start, direction: .east),
-            until: { $0.position == end }
+            until: { [end] in $0.position == end },
+            weight: .property(\.weight)
         )
-        return Set(paths.flatMap(\.path)).count - (paths.count + 1) / 2
+        return Set(paths.flatMap(\.vertices)).count - (paths.count + 1) / 2
     }
 }
 
@@ -87,5 +89,16 @@ private struct Position: Hashable {
             Node(position: Position(x: x, y: y + 1), direction: .south),
             Node(position: Position(x: x - 1, y: y), direction: .west),
         ]
+    }
+}
+
+private enum Weight: EdgeProperty {
+    static let defaultValue: UInt = 0
+}
+
+private extension EdgeProperties {
+    var weight: UInt {
+        get { self[Weight.self] }
+        set { self[Weight.self] = newValue }
     }
 }

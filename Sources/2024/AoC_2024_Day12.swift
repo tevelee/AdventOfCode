@@ -28,7 +28,7 @@ public final class AoC_2024_Day12 {
     }()
 
     private func itemsThatBelongToTheSameArea(_ position: Position) -> some Sequence<Position> {
-        LazyGraph(neighborNodes: grid.neighborsWithSameValue).traversal(from: position, strategy: .dfs().visitEachNodeOnce())
+        LazyIncidenceGraph(neighbors: grid.neighborsWithSameValue).traverse(from: position, using: .dfs()).vertices
     }
 }
 

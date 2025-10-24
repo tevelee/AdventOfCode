@@ -90,11 +90,11 @@ public final class AoC_2023_Day23 {
     }
 
     private func solve(_ neighbors: @escaping (Position) -> [Position]) -> Int {
-        LazyGraph { neighbors($0) }
-        .traversal(from: start, strategy: .dfs(.trackDepth()))
+        LazyIncidenceGraph(neighbors: neighbors)
+        .search(from: start, using: .dfs())
         .reduce(into: 0) { result, element in
-            if element.node == end {
-                result = max(result, element.depth)
+            if element.currentVertex == end {
+                result = max(result, Int(element.depth()))
             }
         }
     }
