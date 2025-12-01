@@ -18,6 +18,10 @@ import Algorithms
     return result >= 0 ? result : result + rhs
 }
 
+@inlinable public func floorDiv(_ x: Int, _ y: Int) -> Int {
+    (x - nonNegativeModulo(of: x, by: y)) / y
+}
+
 // MARK: LCM
 
 @_disfavoredOverload

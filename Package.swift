@@ -22,6 +22,23 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "AoC-2025",
+            dependencies: [
+                .target(name: "Utils"),
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
+            ],
+            path: "Sources/2025",
+            exclude: ["Tasks"]
+        ),
+        .testTarget(
+            name: "AoC-2025-Tests",
+            dependencies: ["AoC-2025"],
+            path: "Tests/2025",
+            resources: (1...25).map { .copy("Resources/2025_day\($0).txt") },
+            swiftSettings: [.swiftLanguageMode(.v6)]
+        ),
+
+        .target(
             name: "AoC-2024",
             dependencies: [
                 .target(name: "Utils"),

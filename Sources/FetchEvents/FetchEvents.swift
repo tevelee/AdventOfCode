@@ -46,15 +46,17 @@ struct FetchEvents: AsyncParsableCommand {
         authenticateSession()
         for year in start...end {
             for day in 1...25 {
-                print("\(year) day \(day)")
                 let id = ID(year: year, day: day)
+                if downloadInputs {
+                    if try await !downloadInput(for: id) {
+                        break
+                    }
+                }
                 try await bootstrap(for: id)
                 let html = try await fetchTask(for: id)
                 guard let converted = try convertTaskToMarkdown(html) else { break }
                 try writeTask(for: id, part1: converted.part1, part2: converted.part2)
-                if downloadInputs {
-                    try await downloadInput(for: id)
-                }
+                print("\(year) day \(day)")
             }
         }
         print("Finished")
@@ -95,19 +97,23 @@ struct FetchEvents: AsyncParsableCommand {
             URL(filePath: path).appending(components: "Tests", String(id.year), "Puzzle.swift"): puzzleFileTemplate(),
         ]
         for (file, template) in files {
-            if fileManager.fileExists(atPath: file.relativePath) {
-                continue
-            }
-            try fileManager.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
-            try Data(template.utf8).write(to: file)
+            try write(file: file, content: Data(template.utf8))
         }
     }
+    
+    private func write(file: URL, content: Data) throws {
+        if fileManager.fileExists(atPath: file.relativePath) {
+            return
+        }
+        try fileManager.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try content.write(to: file)
+    }
 
-    private func downloadInput(for id: ID) async throws {
+    private func downloadInput(for id: ID) async throws -> Bool {
         let fileURL = URL(filePath: path).appending(components: "Tests", String(id.year), "Resources", "\(id.year)_day\(id.day).txt")
         let fileSize = (try? fileManager.attributesOfItem(atPath: fileURL.path)[.size] as? Double) ?? 0
         if fileSize > 0 {
-            return
+            return true
         }
         guard let url = URL(string: "https://adventofcode.com/\(id.year)/day/\(id.day)/input") else {
             throw FetchError.invalidURL
@@ -117,7 +123,8 @@ struct FetchEvents: AsyncParsableCommand {
         if let string = String(data: data, encoding: .utf8), string.contains("Please log in to get your puzzle input.") {
             throw FetchError.invalidSession
         }
-        try data.write(to: fileURL)
+        try write(file: fileURL, content: data)
+        return data.isEmpty
     }
 
     private func writeTask(for id: ID, part1: String, part2: String?) throws {
