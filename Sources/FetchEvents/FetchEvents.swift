@@ -52,11 +52,11 @@ struct FetchEvents: AsyncParsableCommand {
                         break
                     }
                 }
+                print("\(year) day \(day)")
                 try await bootstrap(for: id)
                 let html = try await fetchTask(for: id)
                 guard let converted = try convertTaskToMarkdown(html) else { break }
                 try writeTask(for: id, part1: converted.part1, part2: converted.part2)
-                print("\(year) day \(day)")
             }
         }
         print("Finished")
@@ -120,11 +120,16 @@ struct FetchEvents: AsyncParsableCommand {
         }
         let request = URLRequest(url: url)
         let (data, _) = try await urlSession.data(for: request)
-        if let string = String(data: data, encoding: .utf8), string.contains("Please log in to get your puzzle input.") {
-            throw FetchError.invalidSession
+        if let string = String(data: data, encoding: .utf8) {
+            if string.contains("Please log in to get your puzzle input.") {
+                throw FetchError.invalidSession
+            }
+            if string.contains("Please don't repeatedly request this endpoint before it unlocks!") {
+                return false
+            }
         }
         try write(file: fileURL, content: data)
-        return data.isEmpty
+        return !data.isEmpty
     }
 
     private func writeTask(for id: ID, part1: String, part2: String?) throws {
