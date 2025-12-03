@@ -39,10 +39,6 @@ public final class AoC_2025_Day2 {
                 }
             }
             .prefix { $0 <= range.upperBound }
-            .map {
-                print($0)
-                return $0
-            }
             .sum()
         }
     }
