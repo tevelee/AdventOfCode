@@ -1,55 +1,60 @@
 import Utils
 
 public final class AoC_2025_Day4 {
-    private let grid: [[Bool]]
-    private let width: Int
-    private let height: Int
-    
+    private let positions: Set<Position>
+    private lazy var neighborMap: [Position: Set<Position>] = Dictionary(uniqueKeysWithValues: positions.map {
+        (key: $0, value: neighbors(of: $0))
+    })
+    private let threshold = 4
+
     public init(_ input: Input) throws {
-        grid = try input.wholeInput.lines.map { $0.map { $0 == "@" } }
-        guard let firstLine = grid.first else { throw ParseError("empty row") }
-        width = firstLine.count
-        height = grid.count
-    }
-    
-    public func solvePart1() -> Int {
-        grid.indices.sum { y in
-            grid[y].indices.count { x in
-                shouldRemove(x: x, y: y, in: grid)
+        positions = Set(try input.wholeInput.lines.enumerated().flatMap { y, line in
+            line.enumerated().compactMap { x, character -> Position? in
+                guard character == "@" else { return nil }
+                return Position(x: x, y: y)
             }
+        })
+    }
+
+    public func solvePart1() -> Int {
+        neighborMap.count {
+            $0.value.count < threshold
         }
     }
 
     public func solvePart2() -> Int {
-        var result = 0
-        var grid = grid
+        var neighborMap = neighborMap
         while true {
-            var count = 0
-            for y in grid.indices {
-                for x in grid[y].indices where shouldRemove(x: x, y: y, in: grid) {
-                    grid[y][x] = false
-                    count += 1
+            let positionsToRemove = neighborMap.filter {
+                $0.value.count < threshold
+            }
+            if positionsToRemove.isEmpty {
+                break
+            }
+            for (positionBeingRemoved, neighborsOfPositionBeingRemoved) in positionsToRemove {
+                neighborMap.removeValue(forKey: positionBeingRemoved)
+                for neighbor in neighborsOfPositionBeingRemoved {
+                    neighborMap[neighbor]?.remove(positionBeingRemoved)
                 }
             }
-            if count == 0 { break }
-            result += count
         }
-        return result
+        return positions.count - neighborMap.count
     }
     
-    private func shouldRemove(x: Int, y: Int, in grid: [[Bool]]) -> Bool {
-        if grid[y][x] {
-            neighbors(x: x, y: y, in: grid).count { grid[$0.y][$0.x] } <= 4
-        } else {
-            false
-        }
-    }
-
-    private func neighbors(x: Int, y: Int, in grid: [[Bool]]) -> [(x: Int, y: Int)] {
-        (max(0, y - 1) ... min(height - 1, y + 1)).flatMap { py in
-            (max(0, x - 1) ... min(width - 1, x + 1)).map { px in
-                (x: px, y: py)
+    private func neighbors(of position: Position) -> Set<Position> {
+        Set(
+            (-1 ... 1).flatMap { dy in
+                (-1 ... 1).map { dx in
+                    Position(x: position.x + dx, y: position.y + dy)
+                }
             }
-        }
+        )
+        .subtracting([position])
+        .intersection(positions)
     }
+}
+
+private struct Position: Hashable {
+    let x: Int
+    let y: Int
 }
