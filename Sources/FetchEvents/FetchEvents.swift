@@ -101,8 +101,8 @@ struct FetchEvents: AsyncParsableCommand {
         }
     }
     
-    private func write(file: URL, content: Data) throws {
-        if fileManager.fileExists(atPath: file.relativePath) {
+    private func write(file: URL, content: Data, overwrite: Bool = false) throws {
+        if !overwrite, fileManager.fileExists(atPath: file.relativePath) {
             return
         }
         try fileManager.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -112,7 +112,7 @@ struct FetchEvents: AsyncParsableCommand {
     private func downloadInput(for id: ID) async throws -> Bool {
         let fileURL = URL(filePath: path).appending(components: "Tests", String(id.year), "Resources", "\(id.year)_day\(id.day).txt")
         let fileSize = (try? fileManager.attributesOfItem(atPath: fileURL.path)[.size] as? Double) ?? 0
-        if fileSize > 0 {
+        guard fileSize == 0 else {
             return true
         }
         guard let url = URL(string: "https://adventofcode.com/\(id.year)/day/\(id.day)/input") else {
@@ -128,7 +128,7 @@ struct FetchEvents: AsyncParsableCommand {
                 return false
             }
         }
-        try write(file: fileURL, content: data)
+        try write(file: fileURL, content: data, overwrite: true)
         return !data.isEmpty
     }
 
