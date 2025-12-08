@@ -42,7 +42,7 @@ private struct Day8 {
     }
 
     @Suite(.tags(.live), .serialized)
-    struct Day7Live {
+    struct Day8Live {
         private let problem: CurrentPuzzle
         init() async throws {
             problem = try await CurrentPuzzle()
