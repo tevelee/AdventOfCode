@@ -7,7 +7,7 @@ extension Sequence {
     }
 
     @inlinable public func maxValue<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
-        try map(property).max()
+        try self.lazy.map(property).max()
     }
 
     @inlinable public func min<T: Comparable>(by property: (Element) throws -> T) rethrows -> Element? {
@@ -15,7 +15,7 @@ extension Sequence {
     }
 
     @inlinable public func minValue<T: Comparable, E>(of property: (Element) throws(E) -> T) throws(E) -> T? {
-        try map(property).min()
+        try self.lazy.map(property).min()
     }
 
     @inlinable public func minAndMax<T: Comparable>(of property: (Element) throws -> T) rethrows -> (min: Element, max: Element)? {

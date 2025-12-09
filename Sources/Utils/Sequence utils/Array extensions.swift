@@ -15,3 +15,13 @@ extension Array where Element: Hashable {
         }
     }
 }
+
+extension Sequence {
+    @inlinable public func allPairs() -> some Sequence<(Element, Element)> {
+        enumerated().lazy.flatMap { offset, first in
+            self.lazy.dropFirst(offset + 1).map { second in
+                (first, second)
+            }
+        }
+    }
+}

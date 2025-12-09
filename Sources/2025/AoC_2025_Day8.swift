@@ -10,12 +10,9 @@ public final class AoC_2025_Day8 {
     }
 
     private lazy var pairsSortedByDistances: some Sequence<(Int, Int)> = {
-        var pairs: [(distance: Int, pair: (Int, Int))] = []
-        for i in coordinates.indices {
-            for j in coordinates.indices.dropFirst(i + 1) {
-                let dist = coordinates[i].distance(to: coordinates[j])
-                pairs.append((dist, (i, j)))
-            }
+        var pairs: [(distance: Int, pair: (Int, Int))] = coordinates.indices.allPairs().map { i, j in
+            let dist = coordinates[i].distance(to: coordinates[j])
+            return (dist, (i, j))
         }
         pairs.sort { $0.distance < $1.distance }
         return pairs.lazy.map(\.pair)
