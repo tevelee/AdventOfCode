@@ -38,7 +38,7 @@ private struct Day10 {
         
         @Test("Day 10 Part 2")
         func part2() {
-            #expect(problem.solvePart2() == 0)
+            #expect(problem.solvePart2() == 20_002)
         }
     }
 }
