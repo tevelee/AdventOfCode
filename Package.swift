@@ -34,7 +34,7 @@ let package = Package(
             name: "AoC-2025-Tests",
             dependencies: ["AoC-2025"],
             path: "Tests/2025",
-            resources: (1...25).map { .copy("Resources/2025_day\($0).txt") },
+            resources: (1...12).map { .copy("Resources/2025_day\($0).txt") },
             swiftSettings: [.swiftLanguageMode(.v6)]
         ),
 
